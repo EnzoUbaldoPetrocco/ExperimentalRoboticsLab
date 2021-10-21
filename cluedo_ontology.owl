@@ -333,6 +333,7 @@
     <!-- http://www.emarolab.it/cluedo-ontology#Revolver -->
 
     <owl:NamedIndividual rdf:about="http://www.emarolab.it/cluedo-ontology#Revolver">
+    
         <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#WEAPON"/>
     </owl:NamedIndividual>
     
