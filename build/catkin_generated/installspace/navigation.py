@@ -9,7 +9,7 @@ import time
 ## goal positions are mapped as Points
 goal_pos = Point()
 actual_position = Point()
-
+sub_target = None
 
 
 
@@ -26,6 +26,7 @@ def go_to_point(msg):
 def main():
     global actual_position
     rospy.init_node('navigation') 
+
     actual_position.x = 0
     actual_position.y = 0
     rospy.spin()

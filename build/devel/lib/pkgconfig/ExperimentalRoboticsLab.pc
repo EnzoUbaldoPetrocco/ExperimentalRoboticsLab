@@ -3,6 +3,6 @@ prefix=/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/dev
 Name: ExperimentalRoboticsLab
 Description: Description of ExperimentalRoboticsLab
 Version: 0.0.0
-Cflags: 
+Cflags: -I/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/include
 Libs: -L${prefix}/lib 
 Requires: 
