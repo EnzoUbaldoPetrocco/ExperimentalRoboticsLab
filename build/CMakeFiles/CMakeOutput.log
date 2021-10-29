@@ -461,3 +461,31 @@ Parsed CXX implicit link information from above output:
   implicit fwks: []
 
 
+Determining if the include file pthread.h exists passed with the following output:
+Change Dir: /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_db076/fast && /usr/bin/make -f CMakeFiles/cmTC_db076.dir/build.make CMakeFiles/cmTC_db076.dir/build
+make[1]: Entering directory '/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_db076.dir/CheckIncludeFile.c.o
+/usr/bin/x86_64-linux-gnu-gcc-8    -o CMakeFiles/cmTC_db076.dir/CheckIncludeFile.c.o   -c /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_db076
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_db076.dir/link.txt --verbose=1
+/usr/bin/x86_64-linux-gnu-gcc-8      -rdynamic CMakeFiles/cmTC_db076.dir/CheckIncludeFile.c.o  -o cmTC_db076 
+make[1]: Leaving directory '/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the function pthread_create exists in the pthread passed with the following output:
+Change Dir: /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_4cc14/fast && /usr/bin/make -f CMakeFiles/cmTC_4cc14.dir/build.make CMakeFiles/cmTC_4cc14.dir/build
+make[1]: Entering directory '/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_4cc14.dir/CheckFunctionExists.c.o
+/usr/bin/x86_64-linux-gnu-gcc-8   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_4cc14.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_4cc14
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4cc14.dir/link.txt --verbose=1
+/usr/bin/x86_64-linux-gnu-gcc-8  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_4cc14.dir/CheckFunctionExists.c.o  -o cmTC_4cc14  -lpthread 
+make[1]: Leaving directory '/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/CMakeFiles/CMakeTmp'
+
+
+
