@@ -2,6 +2,7 @@
     "ros.distro": "noetic",
     "python.autoComplete.extraPaths": [
         "/home/enzo/Scrivania/ROS_RT2/ros_ws/devel/lib/python3/dist-packages",
-        "/opt/ros/noetic/lib/python3/dist-packages"
+        "/opt/ros/noetic/lib/python3/dist-packages",
+        "/home/enzo/Scrivania/ROS_RT2/ros_ws/src/"
     ]
 }
