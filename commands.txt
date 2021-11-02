@@ -1,0 +1,2 @@
+export PYTHONPATH=$PYTHONPATH:~/Scrivania/ROS_RT2/ros_ws/src/armor_py_api/scripts/armor_api
+roslaunch ExperimentalRoboticsLab basic.launch

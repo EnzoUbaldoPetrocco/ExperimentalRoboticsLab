@@ -6,7 +6,7 @@ from geometry_msgs.msg import Point
 import math
 import time
 import actionlib
-import ExperimentalRoboticsLab
+import ExperimentalRoboticsLab.msg
 
 ## goal positions are mapped as Points
 goal_pos = Point()

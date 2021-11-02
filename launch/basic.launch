@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Load the rooms, people and weapons for initialization-->
+  <param name="environment_description" textfile="$(find ExperimentalRoboticsLab)/parameters/cluedo_parameters.json"/>
+	 
+	
+   <node name="fsm" pkg="ExperimentalRoboticsLab" type ="fsm.py" output="screen"/>
+   
+   <node name="navigation" pkg="ExperimentalRoboticsLab" type="navigation.py" output="screen"/>
+
+   <node pkg="armor" type="execute" name="armor_service" args="it.emarolab.armor.ARMORMainService"/>
+   
+</launch>

@@ -13,15 +13,13 @@ from os.path import dirname, realpath
 from armor_py_api.scripts.armor_api.armor_client import ArmorClient
 
 
-def user_action():
-    return random.choice(['coin','push'])
 
-# define state Unlocked
+# define state Navigation
 class Navigation(smach.State):
     def __init__(self):
         # initialisation function, it should not wait
         smach.State.__init__(self, 
-                             outcomes=['navigating', 'investigating'],
+                             outcomes=['navigation', 'investigation'],
                              input_keys=['unlocked_counter_in'],
                              output_keys=['unlocked_counter_out'])
         
@@ -30,14 +28,14 @@ class Navigation(smach.State):
         time.sleep(5)
         rospy.loginfo('Executing state NAVIGATION (users = %f)'%userdata.navigation_counter_in)
         userdata.navigation_counter_out = userdata.navigation_counter_in + 1
-        return user_action()
+        return 'navigation'
     
 
-# define state Locked
+# define state Investigation
 class Investigation(smach.State):
     def __init__(self):
         smach.State.__init__(self, 
-                             outcomes=['navigating','investigating'],
+                             outcomes=['navigation','investigation'],
                              input_keys=['investigation_counter_in'],
                              output_keys=['investigation_counter_out'])
         self.sensor_input = 0
@@ -50,7 +48,7 @@ class Investigation(smach.State):
             if self.sensor_input < 5: 
                 rospy.loginfo('Executing state INVESTIGATION (users = %f)'%userdata.investigation_counter_in)
                 userdata.investigation_counter_out = userdata.investigation_counter_in + 1
-                return user_action()
+                return 'navigation'
             self.sensor_input += 1
             self.rate.sleep
 
@@ -73,13 +71,13 @@ def main():
     with fsm:
         # Add states to the container
         smach.StateMachine.add('NAVIGATION', Navigation(), 
-                               transitions={'navigating':'NAVIGATION', 
-                                            'investigating':'INVESTIGATING'},
+                               transitions={'navigation':'NAVIGATION', 
+                                            'investigation':'INVESTIGATION'},
                                remapping={'navigation_counter_in':'sm_counter',
                                           'navigation_counter_out':'sm_counter'})
         smach.StateMachine.add('INVESTIGATION', Investigation(), 
-                               transitions={'navigating':'NAVIGATION', 
-                                            'investigating':'INVESTIGATING'},
+                               transitions={'navigation':'NAVIGATION', 
+                                            'investigation':'INVESTIGATION'},
                                remapping={'investigation_counter_in':'sm_counter', 
                                           'investigation_counter_out':'sm_counter'})
         

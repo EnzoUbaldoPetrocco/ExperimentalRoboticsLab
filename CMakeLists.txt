@@ -14,6 +14,7 @@ find_package(catkin REQUIRED COMPONENTS
   message_generation
   actionlib
   actionlib_msgs
+  armor_py_api
 )
 
 ## System dependencies are found with CMake's conventions
