@@ -1,5 +1,40 @@
 {
-    "room":[],
-    "person":[],
-    "weapon":[]
+    "ID0":{
+        "where": [{
+            "name": "kitchen",
+            "x" : -5,
+            "y" : 5,
+            "theta" : 0
+        }],
+        "who":[{
+            "name": "Col. Mustard"
+        }],
+        "what":[{
+            "name": "Candlestick"
+        }]
+    },
+    "ID1":{
+        "where": [{
+            "name": "conservatory",
+            "x" : 5,
+            "y" : 5,
+            "theta" : 0
+        }],
+        "who":[],
+        "what":[{
+            "name": "Lead Pipe"
+        }]
+    },
+    "ID2":{
+        "where": [{
+            "name": "lounge",
+            "x" : -5,
+            "y" : -5,
+            "theta" : 0
+        }],
+        "who":[{
+            "name": "Prof. Plum"
+        }],
+        "what":[]
+    } 
 }

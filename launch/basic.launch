@@ -10,5 +10,7 @@
    <node name="navigation" pkg="ExperimentalRoboticsLab" type="navigation.py" output="screen"/>
 
    <node pkg="armor" type="execute" name="armor_service" args="it.emarolab.armor.ARMORMainService"/>
+
+   <node name="oracle" pkg="ExperimentalRoboticsLab" type="oracle.py" output="screen"/>
    
 </launch>

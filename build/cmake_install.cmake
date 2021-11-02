@@ -199,6 +199,10 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/ExperimentalRoboticsLab" TYPE PROGRAM FILES "/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/catkin_generated/installspace/navigation.py")
 endif()
 
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/ExperimentalRoboticsLab" TYPE PROGRAM FILES "/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/catkin_generated/installspace/oracle.py")
+endif()
+
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/gtest/cmake_install.cmake")

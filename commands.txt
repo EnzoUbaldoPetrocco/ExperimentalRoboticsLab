@@ -1,2 +1,39 @@
 export PYTHONPATH=$PYTHONPATH:~/Scrivania/ROS_RT2/ros_ws/src/armor_py_api/scripts/armor_api
 roslaunch ExperimentalRoboticsLab basic.launch
+
+Tests:
+    Rooms:
+        kitchen: [-5,5]
+        conservatory:[5,5]
+        lounge:[-5,-5]
+    Weapons:
+        Candlestick
+        Lead Pipe
+    Persons:
+        Col. Mustard
+        Mrs. Peacock
+        Prof. Plum
+Rooms:
+kitchen: [-5,5]
+ballroom:[0,5]
+conservatory:[5,5]
+billiard room:[5,2]
+library:[5,-1]
+study:[5,-5]
+hall:[0,-5]
+lounge:[-5,-5]
+dining room:[-5,0]
+Persons:
+Rev. Green
+Prof. Plum
+Col. Mustard
+Mrs. Peacock
+Miss. Scarlett
+Mrs. White
+Weapons:
+Candlestick
+Dagger
+Lead Pipe
+Revolver
+Rope
+Spanner
