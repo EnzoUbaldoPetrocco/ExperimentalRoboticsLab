@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 
+import actionlib
 import roslib
 import rospy
 from rospy.impl.tcpros_service import Service, ServiceProxy
@@ -12,26 +13,42 @@ from geometry_msgs.msg import Point
 from os.path import dirname, realpath
 from armor_client import ArmorClient
 import ExperimentalRoboticsLab.msg
+import ExperimentalRoboticsLab.msg._PositionAction
 
-def arrived_to_the_point(msg):
-    global reached
-    reached = msg.result
-    
+reached = False
+random_position_client = None
 
 # define state Navigation
 class Navigation(smach.State):
     def __init__(self):
         # initialisation function, it should not wait
         smach.State.__init__(self, 
-                             outcomes=['navigation', 'investigation'],
-                             input_keys=['navigation_counter_in'],
-                             output_keys=['navigation_counter_out'])
-        
+                             outcomes=['navigation', 'investigation'])
+        Navigation.before_navigation()
+    
+    def arrived_to_the_point(msg):
+        global reached
+        reached = msg.result
+    
+    def choosing_random_position():
+        position = ExperimentalRoboticsLab.msg.PositionGoal()
+        position.x = 5*random.random()
+        position.y = 5*random.random()
+        position.theta = 0
+        return position
+
+    def before_navigation():
+        goal = Navigation.choosing_random_position()
+        random_position_client.send_goal(goal)
+        rospy.sleep(1)
+
     def execute(self, userdata):
         # function called when exiting from the node, it can be blacking
-        time.sleep(5)
-        rospy.loginfo('Executing state NAVIGATION (users = %f)'%userdata.navigation_counter_in)
-        userdata.navigation_counter_out = userdata.navigation_counter_in + 1
+        global reached
+        while reached == False:
+            time.sleep(1)
+        reached = False
+        Navigation.before_navigation()
         return 'navigation'
     
 
@@ -39,28 +56,22 @@ class Navigation(smach.State):
 class Investigation(smach.State):
     def __init__(self):
         smach.State.__init__(self, 
-                             outcomes=['navigation','investigation'],
-                             input_keys=['investigation_counter_in'],
-                             output_keys=['investigation_counter_out'])
-        self.sensor_input = 0
-        self.rate = rospy.Rate(200)  # Loop at 200 Hz
+                             outcomes=['navigation','investigation'])
 
     def execute(self, userdata):
         # simulate that we have to get 5 data samples to compute the outcome
         while not rospy.is_shutdown():  
             time.sleep(1)
-            if self.sensor_input < 5: 
-                rospy.loginfo('Executing state INVESTIGATION (users = %f)'%userdata.investigation_counter_in)
-                userdata.investigation_counter_out = userdata.investigation_counter_in + 1
-                return 'navigation'
-            self.sensor_input += 1
-            self.rate.sleep
+            
 
         
 
 def main():
+    global random_position_client
     rospy.init_node('fsm')
-    rospy.Subscriber('/go_to_point/result', ExperimentalRoboticsLab.msg.PositionActionResult, arrived_to_the_point)
+
+    random_position_client = actionlib.SimpleActionClient("/go_to_point", ExperimentalRoboticsLab.msg.PositionAction)
+    rospy.Subscriber('/go_to_point/result', ExperimentalRoboticsLab.msg.PositionActionResult, Navigation.arrived_to_the_point)
     # getting path to file
     file_path = dirname(realpath(__file__))
     file_path_size = len(file_path)
@@ -73,26 +84,22 @@ def main():
     
     # Create a SMACH state machine
     fsm = smach.StateMachine(outcomes=['container_interface'])
-    fsm.userdata.sm_counter = 0
 
     # Open the container
     with fsm:
         # Add states to the container
         smach.StateMachine.add('NAVIGATION', Navigation(), 
                                transitions={'navigation':'NAVIGATION', 
-                                            'investigation':'INVESTIGATION'},
-                               remapping={'navigation_counter_in':'sm_counter',
-                                          'navigation_counter_out':'sm_counter'})
+                                            'investigation':'INVESTIGATION'})
         smach.StateMachine.add('INVESTIGATION', Investigation(), 
                                transitions={'navigation':'NAVIGATION', 
-                                            'investigation':'INVESTIGATION'},
-                               remapping={'investigation_counter_in':'sm_counter', 
-                                          'investigation_counter_out':'sm_counter'})
+                                            'investigation':'INVESTIGATION'})
         
 
      # Create and start the introspection server for visualization
     sis = smach_ros.IntrospectionServer('server_name', fsm, '/SM_ROOT')
     sis.start()
+
 
 
     # Execute the state machine
