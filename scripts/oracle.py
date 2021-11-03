@@ -85,73 +85,41 @@ def send_hint(req):
         }
     hint_already_sent = False
     while hint_already_sent == False:
-        print('\nIm in the while loop of send hint')
         index = random.randint(0,len(environment_description)-1)
         index_string = "ID"+ str(index)
-        print('\nIndex_string: ' + index_string)
         hypothesis = environment_description[index_string]
-        print('\nHypotesis')
-        print(hypothesis)
         type = random_select_type()
-        print('\nType:')
-        print(type)
         hints = hypothesis[type]
-        print('\nHints:')
-        print(hints)
         if len(hints)>0:
             if len(hints)==1:
                 hint = hints[0]
             else:
                 hint = hints[random.randint(0, len(hints)-1)]
-            print('\nHint:')
-            print(hint)
             if check_hint(hint, hints_sent_list):
                 hint_already_sent = True
-                print('\nHint_sent inside if')
-        print(hint_already_sent)
-        print('\nHint_sent')
-        print(hint_already_sent)
         #time.sleep(3)
-    print(hint["name"])
     update_hint = {
         "id" : index_string,
         "name" : hint["name"]
     }
-    print("\nupdate_hint: ")
-    print(update_hint)
     hints_sent_list.append(update_hint)
-    print('\nhints_sent_list: ')
-    print(hints_sent_list)
     json_stored = {
         "hints_sent_list" : hints_sent_list
     }
     hint_sent_string = json.dumps(json_stored)
-    print('\nhints_sent_string: ')
-    print(hint_sent_string)
     rospy.set_param('/hint_sent', hint_sent_string)
-    #res = Hint(
-    #    type= type,
-    #    name= hint["name"],
-    #    x = 0,
-    #    y = 0,
-    #    theta = 0
-    #)
     res = {
         "type" : type,
         "name" : hint["name"],
         "x" : 0,
         "y" : 0,
-        "theta" : 0
+        "theta" : 0,
+        "id" : index_string
     }
     if type == "where":
-        #res.x = hint["x"]
-        #res.y = hint["y"]
-        #res.theta = hint["theta"]
         res["x"] = hint["x"]
         res["y"] = hint["y"]
         res["theta"] = hint["theta"]
-    print('\nres')
-    print(res)
     return res
 
 
