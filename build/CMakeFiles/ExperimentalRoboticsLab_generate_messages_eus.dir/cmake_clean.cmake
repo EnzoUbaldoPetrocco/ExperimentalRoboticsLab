@@ -8,6 +8,7 @@ file(REMOVE_RECURSE
   "devel/share/roseus/ros/ExperimentalRoboticsLab/msg/PositionFeedback.l"
   "devel/share/roseus/ros/ExperimentalRoboticsLab/msg/PositionGoal.l"
   "devel/share/roseus/ros/ExperimentalRoboticsLab/msg/PositionResult.l"
+  "devel/share/roseus/ros/ExperimentalRoboticsLab/srv/Hint.l"
 )
 
 # Per-language clean rules from dependency scanning.

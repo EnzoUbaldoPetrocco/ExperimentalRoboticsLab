@@ -8,6 +8,8 @@ file(REMOVE_RECURSE
   "devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionGoal.py"
   "devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionResult.py"
   "devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/__init__.py"
+  "devel/lib/python3/dist-packages/ExperimentalRoboticsLab/srv/_Hint.py"
+  "devel/lib/python3/dist-packages/ExperimentalRoboticsLab/srv/__init__.py"
 )
 
 # Per-language clean rules from dependency scanning.

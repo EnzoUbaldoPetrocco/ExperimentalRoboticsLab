@@ -34,7 +34,11 @@
         }],
         "who":[{
             "name": "Prof. Plum"
-        }],
+        },
+        {
+            "name": "Mrs. Peacock"
+        }
+    ],
         "what":[]
     } 
 }

@@ -39,55 +39,61 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 112,
-				"parent" : 3
-			},
-			{
-				"command" : 3,
-				"file" : 0,
-				"line" : 127,
-				"parent" : 3
-			},
-			{
-				"command" : 3,
-				"file" : 0,
-				"line" : 121,
-				"parent" : 3
-			},
-			{
-				"command" : 3,
-				"file" : 0,
-				"line" : 131,
-				"parent" : 3
-			},
-			{
-				"command" : 3,
-				"file" : 0,
 				"line" : 123,
 				"parent" : 3
 			},
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 119,
+				"line" : 138,
 				"parent" : 3
 			},
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 474,
+				"line" : 132,
 				"parent" : 3
 			},
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 125,
+				"line" : 142,
 				"parent" : 3
 			},
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 129,
+				"line" : 134,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 144,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 130,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 519,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 136,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 140,
 				"parent" : 3
 			}
 		]
@@ -112,18 +118,22 @@
 		},
 		{
 			"backtrace" : 9,
-			"id" : "_ExperimentalRoboticsLab_generate_messages_check_deps_PositionAction::@6890427a1f51a3e7e1df"
+			"id" : "_ExperimentalRoboticsLab_generate_messages_check_deps_Hint::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 10,
-			"id" : "actionlib_msgs_generate_messages_cpp::@6890427a1f51a3e7e1df"
+			"id" : "_ExperimentalRoboticsLab_generate_messages_check_deps_PositionAction::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 11,
-			"id" : "_ExperimentalRoboticsLab_generate_messages_check_deps_PositionActionFeedback::@6890427a1f51a3e7e1df"
+			"id" : "actionlib_msgs_generate_messages_cpp::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 12,
+			"id" : "_ExperimentalRoboticsLab_generate_messages_check_deps_PositionActionFeedback::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 13,
 			"id" : "_ExperimentalRoboticsLab_generate_messages_check_deps_PositionResult::@6890427a1f51a3e7e1df"
 		}
 	],
@@ -154,7 +164,8 @@
 				5,
 				6,
 				7,
-				8
+				8,
+				9
 			]
 		}
 	],
@@ -212,6 +223,12 @@
 			"backtrace" : 0,
 			"isGenerated" : true,
 			"path" : "build/devel/include/ExperimentalRoboticsLab/PositionFeedback.h.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/devel/include/ExperimentalRoboticsLab/Hint.h.rule",
 			"sourceGroupIndex" : 1
 		}
 	],

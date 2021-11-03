@@ -13,11 +13,13 @@ from geometry_msgs.msg import Point
 import ExperimentalRoboticsLab.msg
 import ExperimentalRoboticsLab.msg._PositionAction
 import json
+from ExperimentalRoboticsLab.srv import Hint
 
 #people=['Col.Mustard', 'Miss.Scarlett', 'Mrs.Peacock', 'Mrs.White', 'Prof.Plum', 'Rev.Green']
 #places=['Ballroom', 'Biliard_Room', 'Conservatory', 'Dining_Room', 'Hall', 'Kitchen', 'Library', 'Lounge','Study']
 #weapons=['Candlestick', 'Dagger','LeadPipe', 'Revolver', 'Rope', 'Spanner']
 solution = None
+
 
 def initialization(environment_description):
     global solution
@@ -35,16 +37,39 @@ def initialization(environment_description):
             completed_solution_found = True
     print(solution)
 
+def random_select_type():
+    integer = random.randint(0,2)
+    if integer == 0:
+        return "who"
+    if integer == 1:
+        return "what"
+    return "where"
+
+def send_hint(req):
+    global environment_description
+    hint_sent_string = rospy.get_param('/hint_sent')
+    hint_sent = json.loads(hint_sent_string)
+    hint_already_sent = False
+    while hint_already_sent == False:
+        index = random.randint(0,len(environment_description)-1)
+        index_string = "ID"+ str(index)
+        hypothesis = environment_description[index_string]
+        type = random_select_type()
+
+    return 
+
+
 def main():
-    global random_position_client, solution
+    global random_position_client, solution, environment_description
     rospy.init_node('oracle')
     
     environment_description_string = rospy.get_param('/environment_description')
     environment_description = json.loads(environment_description_string)
     initialization(environment_description)
     
+    hint_server = rospy.Service('send_hint', Hint, send_hint)
 
-    # Wait for ctrl-c to stop the application
+    # Wait for ctrl-c to stop the application 
     rospy.spin()
    
 

@@ -60,45 +60,46 @@ CMakeFiles/ExperimentalRoboticsLab_generate_messages_nodejs: devel/share/gennode
 CMakeFiles/ExperimentalRoboticsLab_generate_messages_nodejs: devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionGoal.js
 CMakeFiles/ExperimentalRoboticsLab_generate_messages_nodejs: devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionResult.js
 CMakeFiles/ExperimentalRoboticsLab_generate_messages_nodejs: devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionFeedback.js
+CMakeFiles/ExperimentalRoboticsLab_generate_messages_nodejs: devel/share/gennodejs/ros/ExperimentalRoboticsLab/srv/Hint.js
 
 
 devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionAction.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
 devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionAction.js: devel/share/ExperimentalRoboticsLab/msg/PositionAction.msg
-devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionAction.js: devel/share/ExperimentalRoboticsLab/msg/PositionActionGoal.msg
-devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionAction.js: devel/share/ExperimentalRoboticsLab/msg/PositionResult.msg
-devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionAction.js: /opt/ros/noetic/share/actionlib_msgs/msg/GoalStatus.msg
-devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionAction.js: devel/share/ExperimentalRoboticsLab/msg/PositionGoal.msg
-devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionAction.js: devel/share/ExperimentalRoboticsLab/msg/PositionActionResult.msg
-devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionAction.js: /opt/ros/noetic/share/actionlib_msgs/msg/GoalID.msg
-devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionAction.js: devel/share/ExperimentalRoboticsLab/msg/PositionFeedback.msg
 devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionAction.js: devel/share/ExperimentalRoboticsLab/msg/PositionActionFeedback.msg
+devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionAction.js: devel/share/ExperimentalRoboticsLab/msg/PositionGoal.msg
+devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionAction.js: devel/share/ExperimentalRoboticsLab/msg/PositionFeedback.msg
+devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionAction.js: devel/share/ExperimentalRoboticsLab/msg/PositionActionGoal.msg
+devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionAction.js: /opt/ros/noetic/share/actionlib_msgs/msg/GoalID.msg
+devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionAction.js: devel/share/ExperimentalRoboticsLab/msg/PositionActionResult.msg
+devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionAction.js: devel/share/ExperimentalRoboticsLab/msg/PositionResult.msg
 devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionAction.js: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionAction.js: /opt/ros/noetic/share/actionlib_msgs/msg/GoalStatus.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Javascript code from ExperimentalRoboticsLab/PositionAction.msg"
 	catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg/PositionAction.msg -IExperimentalRoboticsLab:/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg -Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p ExperimentalRoboticsLab -o /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg
 
 devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionActionGoal.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
 devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionActionGoal.js: devel/share/ExperimentalRoboticsLab/msg/PositionActionGoal.msg
+devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionActionGoal.js: /opt/ros/noetic/share/std_msgs/msg/Header.msg
 devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionActionGoal.js: devel/share/ExperimentalRoboticsLab/msg/PositionGoal.msg
 devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionActionGoal.js: /opt/ros/noetic/share/actionlib_msgs/msg/GoalID.msg
-devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionActionGoal.js: /opt/ros/noetic/share/std_msgs/msg/Header.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Javascript code from ExperimentalRoboticsLab/PositionActionGoal.msg"
 	catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg/PositionActionGoal.msg -IExperimentalRoboticsLab:/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg -Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p ExperimentalRoboticsLab -o /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg
 
 devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionActionResult.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
 devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionActionResult.js: devel/share/ExperimentalRoboticsLab/msg/PositionActionResult.msg
-devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionActionResult.js: /opt/ros/noetic/share/actionlib_msgs/msg/GoalID.msg
-devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionActionResult.js: devel/share/ExperimentalRoboticsLab/msg/PositionResult.msg
-devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionActionResult.js: /opt/ros/noetic/share/actionlib_msgs/msg/GoalStatus.msg
 devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionActionResult.js: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionActionResult.js: /opt/ros/noetic/share/actionlib_msgs/msg/GoalStatus.msg
+devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionActionResult.js: devel/share/ExperimentalRoboticsLab/msg/PositionResult.msg
+devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionActionResult.js: /opt/ros/noetic/share/actionlib_msgs/msg/GoalID.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Javascript code from ExperimentalRoboticsLab/PositionActionResult.msg"
 	catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg/PositionActionResult.msg -IExperimentalRoboticsLab:/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg -Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p ExperimentalRoboticsLab -o /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg
 
 devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionActionFeedback.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
 devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionActionFeedback.js: devel/share/ExperimentalRoboticsLab/msg/PositionActionFeedback.msg
-devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionActionFeedback.js: devel/share/ExperimentalRoboticsLab/msg/PositionFeedback.msg
-devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionActionFeedback.js: /opt/ros/noetic/share/actionlib_msgs/msg/GoalID.msg
-devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionActionFeedback.js: /opt/ros/noetic/share/actionlib_msgs/msg/GoalStatus.msg
 devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionActionFeedback.js: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionActionFeedback.js: /opt/ros/noetic/share/actionlib_msgs/msg/GoalStatus.msg
+devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionActionFeedback.js: /opt/ros/noetic/share/actionlib_msgs/msg/GoalID.msg
+devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionActionFeedback.js: devel/share/ExperimentalRoboticsLab/msg/PositionFeedback.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Javascript code from ExperimentalRoboticsLab/PositionActionFeedback.msg"
 	catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg/PositionActionFeedback.msg -IExperimentalRoboticsLab:/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg -Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p ExperimentalRoboticsLab -o /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg
 
@@ -117,6 +118,11 @@ devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionFeedback.js: devel
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating Javascript code from ExperimentalRoboticsLab/PositionFeedback.msg"
 	catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg/PositionFeedback.msg -IExperimentalRoboticsLab:/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg -Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p ExperimentalRoboticsLab -o /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg
 
+devel/share/gennodejs/ros/ExperimentalRoboticsLab/srv/Hint.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
+devel/share/gennodejs/ros/ExperimentalRoboticsLab/srv/Hint.js: ../srv/Hint.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating Javascript code from ExperimentalRoboticsLab/Hint.srv"
+	catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/srv/Hint.srv -IExperimentalRoboticsLab:/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg -Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p ExperimentalRoboticsLab -o /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/gennodejs/ros/ExperimentalRoboticsLab/srv
+
 ExperimentalRoboticsLab_generate_messages_nodejs: CMakeFiles/ExperimentalRoboticsLab_generate_messages_nodejs
 ExperimentalRoboticsLab_generate_messages_nodejs: devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionAction.js
 ExperimentalRoboticsLab_generate_messages_nodejs: devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionActionGoal.js
@@ -125,6 +131,7 @@ ExperimentalRoboticsLab_generate_messages_nodejs: devel/share/gennodejs/ros/Expe
 ExperimentalRoboticsLab_generate_messages_nodejs: devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionGoal.js
 ExperimentalRoboticsLab_generate_messages_nodejs: devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionResult.js
 ExperimentalRoboticsLab_generate_messages_nodejs: devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionFeedback.js
+ExperimentalRoboticsLab_generate_messages_nodejs: devel/share/gennodejs/ros/ExperimentalRoboticsLab/srv/Hint.js
 ExperimentalRoboticsLab_generate_messages_nodejs: CMakeFiles/ExperimentalRoboticsLab_generate_messages_nodejs.dir/build.make
 
 .PHONY : ExperimentalRoboticsLab_generate_messages_nodejs
