@@ -29,13 +29,14 @@ def initialization(environment_description):
         index = random.randint(0,len(environment_description)-1)
         index_string = "ID"+ str(index)
         solution = environment_description[index_string]
-        print(solution)
+        #print(solution)
         condition_who = len(solution["who"]) == 1
         condition_where = len(solution["where"]) == 1
         condition_what = len(solution["what"]) == 1
         if condition_where and condition_what and condition_who:
             completed_solution_found = True
-    print(solution)
+    #print(solution)
+    print("\nA murdered has happened")
 
 def random_select_type():
     integer = random.randint(0,2)
@@ -45,8 +46,19 @@ def random_select_type():
         return "what"
     return "where"
 
+def check_hint(hint, hint_sent):
+    if len(hint)>0:
+        i = 0
+        while i<len(hint_sent):
+            if hint["name"] == hint_sent[i]:
+                return True
+            i = i + 1
+        return False
+    return False
+
 def send_hint(req):
     global environment_description
+    print('\nIm in the send hint')
     hint_sent_string = rospy.get_param('/hint_sent')
     hint_sent = json.loads(hint_sent_string)
     hint_already_sent = False
@@ -55,8 +67,19 @@ def send_hint(req):
         index_string = "ID"+ str(index)
         hypothesis = environment_description[index_string]
         type = random_select_type()
-
-    return 
+        hint = hypothesis[type]
+        if check_hint(hint, hint_sent):
+            hint_already_sent = True
+    hint_already_sent.update(hint["name"])
+    res = Hint()
+    res.type = type
+    res.name= hint["name"]
+    if type == "where":
+        res.x = hint["x"]
+        res.y = hint["y"]
+        res.theta = hint["theta"]
+    print(res)
+    return res
 
 
 def main():
@@ -67,7 +90,7 @@ def main():
     environment_description = json.loads(environment_description_string)
     initialization(environment_description)
     
-    hint_server = rospy.Service('send_hint', Hint, send_hint)
+    hint_server = rospy.Service('/send_hint', Hint, send_hint)
 
     # Wait for ctrl-c to stop the application 
     rospy.spin()
