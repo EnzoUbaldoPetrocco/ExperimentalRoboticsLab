@@ -52,13 +52,13 @@ class Navigation(smach.State):
     def before_navigation():
         goal = Navigation.choosing_random_position()
         random_position_client.send_goal(goal)
-        rospy.sleep(1)
+        rospy.sleep(5)
 
     def execute(self, userdata):
         # function called when exiting from the node, it can be blacking
         global reached
         while reached == False:
-            time.sleep(1)
+            time.sleep(10)
         reached = False
         Navigation.before_navigation()
         return 'navigation'

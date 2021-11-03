@@ -15,16 +15,18 @@ import ExperimentalRoboticsLab.msg
 import ExperimentalRoboticsLab.msg._PositionAction
 import json
 from ExperimentalRoboticsLab.srv import Hint
-
+from ExperimentalRoboticsLab.srv import TrySolution
 #people=['Col.Mustard', 'Miss.Scarlett', 'Mrs.Peacock', 'Mrs.White', 'Prof.Plum', 'Rev.Green']
 #places=['Ballroom', 'Biliard_Room', 'Conservatory', 'Dining_Room', 'Hall', 'Kitchen', 'Library', 'Lounge','Study']
 #weapons=['Candlestick', 'Dagger','LeadPipe', 'Revolver', 'Rope', 'Spanner']
 solution = None
 environment_description = None
 n_hints = 0
+solution_complete_of_id = None
 
 def initialization(environment_description):
-    global solution, n_hints
+    global solution, n_hints, solution_complete_of_id
+
     random.seed(datetime.now())
     completed_solution_found = False
     while completed_solution_found == False:
@@ -37,6 +39,10 @@ def initialization(environment_description):
         condition_what = len(solution["what"]) == 1
         if condition_where and condition_what and condition_who:
             completed_solution_found = True
+        solution_complete_of_id = {
+            "id": index_string,
+            "solution" : solution
+        }
     n_hints = 0
     for i in environment_description:
         for j in environment_description[i]["where"]:
@@ -81,7 +87,9 @@ def send_hint(req):
             "name" : "",
             "x" : 0,
             "y" : 0,
-            "theta" : 0
+            "theta" : 0,
+            "id" : ""
+
         }
     hint_already_sent = False
     while hint_already_sent == False:
@@ -122,6 +130,13 @@ def send_hint(req):
         res["theta"] = hint["theta"]
     return res
 
+def check_if_solution_is_correct(msg):
+    if msg.id == solution_complete_of_id["id"]:
+        print ("The solution is correct, congratulations")
+        return True
+    else:
+        print("Try again")
+        return False
 
 def main():
     global random_position_client, solution, environment_description
@@ -132,7 +147,7 @@ def main():
     initialization(environment_description)
     
     hint_server = rospy.Service('/send_hint', Hint, send_hint)
-
+    game_server = rospy.Service('/ask_solution', TrySolution ,check_if_solution_is_correct)
     # Wait for ctrl-c to stop the application 
     rospy.spin()
    

@@ -61,46 +61,47 @@ CMakeFiles/ExperimentalRoboticsLab_generate_messages_py: devel/lib/python3/dist-
 CMakeFiles/ExperimentalRoboticsLab_generate_messages_py: devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionResult.py
 CMakeFiles/ExperimentalRoboticsLab_generate_messages_py: devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionFeedback.py
 CMakeFiles/ExperimentalRoboticsLab_generate_messages_py: devel/lib/python3/dist-packages/ExperimentalRoboticsLab/srv/_Hint.py
+CMakeFiles/ExperimentalRoboticsLab_generate_messages_py: devel/lib/python3/dist-packages/ExperimentalRoboticsLab/srv/_TrySolution.py
 CMakeFiles/ExperimentalRoboticsLab_generate_messages_py: devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/__init__.py
 CMakeFiles/ExperimentalRoboticsLab_generate_messages_py: devel/lib/python3/dist-packages/ExperimentalRoboticsLab/srv/__init__.py
 
 
 devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionAction.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
 devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionAction.py: devel/share/ExperimentalRoboticsLab/msg/PositionAction.msg
-devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionAction.py: devel/share/ExperimentalRoboticsLab/msg/PositionActionFeedback.msg
-devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionAction.py: devel/share/ExperimentalRoboticsLab/msg/PositionGoal.msg
-devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionAction.py: devel/share/ExperimentalRoboticsLab/msg/PositionFeedback.msg
-devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionAction.py: devel/share/ExperimentalRoboticsLab/msg/PositionActionGoal.msg
-devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionAction.py: /opt/ros/noetic/share/actionlib_msgs/msg/GoalID.msg
-devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionAction.py: devel/share/ExperimentalRoboticsLab/msg/PositionActionResult.msg
 devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionAction.py: devel/share/ExperimentalRoboticsLab/msg/PositionResult.msg
-devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionAction.py: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionAction.py: devel/share/ExperimentalRoboticsLab/msg/PositionActionResult.msg
 devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionAction.py: /opt/ros/noetic/share/actionlib_msgs/msg/GoalStatus.msg
+devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionAction.py: /opt/ros/noetic/share/actionlib_msgs/msg/GoalID.msg
+devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionAction.py: devel/share/ExperimentalRoboticsLab/msg/PositionActionFeedback.msg
+devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionAction.py: devel/share/ExperimentalRoboticsLab/msg/PositionActionGoal.msg
+devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionAction.py: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionAction.py: devel/share/ExperimentalRoboticsLab/msg/PositionFeedback.msg
+devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionAction.py: devel/share/ExperimentalRoboticsLab/msg/PositionGoal.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Python from MSG ExperimentalRoboticsLab/PositionAction"
 	catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg/PositionAction.msg -IExperimentalRoboticsLab:/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg -Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p ExperimentalRoboticsLab -o /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg
 
 devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionActionGoal.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
 devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionActionGoal.py: devel/share/ExperimentalRoboticsLab/msg/PositionActionGoal.msg
-devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionActionGoal.py: /opt/ros/noetic/share/std_msgs/msg/Header.msg
 devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionActionGoal.py: devel/share/ExperimentalRoboticsLab/msg/PositionGoal.msg
+devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionActionGoal.py: /opt/ros/noetic/share/std_msgs/msg/Header.msg
 devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionActionGoal.py: /opt/ros/noetic/share/actionlib_msgs/msg/GoalID.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Python from MSG ExperimentalRoboticsLab/PositionActionGoal"
 	catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg/PositionActionGoal.msg -IExperimentalRoboticsLab:/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg -Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p ExperimentalRoboticsLab -o /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg
 
 devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionActionResult.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
 devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionActionResult.py: devel/share/ExperimentalRoboticsLab/msg/PositionActionResult.msg
-devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionActionResult.py: /opt/ros/noetic/share/std_msgs/msg/Header.msg
-devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionActionResult.py: /opt/ros/noetic/share/actionlib_msgs/msg/GoalStatus.msg
 devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionActionResult.py: devel/share/ExperimentalRoboticsLab/msg/PositionResult.msg
 devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionActionResult.py: /opt/ros/noetic/share/actionlib_msgs/msg/GoalID.msg
+devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionActionResult.py: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionActionResult.py: /opt/ros/noetic/share/actionlib_msgs/msg/GoalStatus.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Python from MSG ExperimentalRoboticsLab/PositionActionResult"
 	catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg/PositionActionResult.msg -IExperimentalRoboticsLab:/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg -Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p ExperimentalRoboticsLab -o /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg
 
 devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionActionFeedback.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
 devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionActionFeedback.py: devel/share/ExperimentalRoboticsLab/msg/PositionActionFeedback.msg
+devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionActionFeedback.py: /opt/ros/noetic/share/actionlib_msgs/msg/GoalID.msg
 devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionActionFeedback.py: /opt/ros/noetic/share/std_msgs/msg/Header.msg
 devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionActionFeedback.py: /opt/ros/noetic/share/actionlib_msgs/msg/GoalStatus.msg
-devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionActionFeedback.py: /opt/ros/noetic/share/actionlib_msgs/msg/GoalID.msg
 devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionActionFeedback.py: devel/share/ExperimentalRoboticsLab/msg/PositionFeedback.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Python from MSG ExperimentalRoboticsLab/PositionActionFeedback"
 	catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg/PositionActionFeedback.msg -IExperimentalRoboticsLab:/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg -Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p ExperimentalRoboticsLab -o /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg
@@ -125,6 +126,11 @@ devel/lib/python3/dist-packages/ExperimentalRoboticsLab/srv/_Hint.py: ../srv/Hin
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating Python code from SRV ExperimentalRoboticsLab/Hint"
 	catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/gensrv_py.py /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/srv/Hint.srv -IExperimentalRoboticsLab:/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg -Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p ExperimentalRoboticsLab -o /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/lib/python3/dist-packages/ExperimentalRoboticsLab/srv
 
+devel/lib/python3/dist-packages/ExperimentalRoboticsLab/srv/_TrySolution.py: /opt/ros/noetic/lib/genpy/gensrv_py.py
+devel/lib/python3/dist-packages/ExperimentalRoboticsLab/srv/_TrySolution.py: ../srv/TrySolution.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Generating Python code from SRV ExperimentalRoboticsLab/TrySolution"
+	catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/gensrv_py.py /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/srv/TrySolution.srv -IExperimentalRoboticsLab:/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg -Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p ExperimentalRoboticsLab -o /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/lib/python3/dist-packages/ExperimentalRoboticsLab/srv
+
 devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/__init__.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
 devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/__init__.py: devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionAction.py
 devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/__init__.py: devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionActionGoal.py
@@ -134,7 +140,8 @@ devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/__init__.py: devel/l
 devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/__init__.py: devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionResult.py
 devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/__init__.py: devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionFeedback.py
 devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/__init__.py: devel/lib/python3/dist-packages/ExperimentalRoboticsLab/srv/_Hint.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Generating Python msg __init__.py for ExperimentalRoboticsLab"
+devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/__init__.py: devel/lib/python3/dist-packages/ExperimentalRoboticsLab/srv/_TrySolution.py
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Generating Python msg __init__.py for ExperimentalRoboticsLab"
 	catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg --initpy
 
 devel/lib/python3/dist-packages/ExperimentalRoboticsLab/srv/__init__.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
@@ -146,7 +153,8 @@ devel/lib/python3/dist-packages/ExperimentalRoboticsLab/srv/__init__.py: devel/l
 devel/lib/python3/dist-packages/ExperimentalRoboticsLab/srv/__init__.py: devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionResult.py
 devel/lib/python3/dist-packages/ExperimentalRoboticsLab/srv/__init__.py: devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionFeedback.py
 devel/lib/python3/dist-packages/ExperimentalRoboticsLab/srv/__init__.py: devel/lib/python3/dist-packages/ExperimentalRoboticsLab/srv/_Hint.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Generating Python srv __init__.py for ExperimentalRoboticsLab"
+devel/lib/python3/dist-packages/ExperimentalRoboticsLab/srv/__init__.py: devel/lib/python3/dist-packages/ExperimentalRoboticsLab/srv/_TrySolution.py
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Generating Python srv __init__.py for ExperimentalRoboticsLab"
 	catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/lib/python3/dist-packages/ExperimentalRoboticsLab/srv --initpy
 
 ExperimentalRoboticsLab_generate_messages_py: CMakeFiles/ExperimentalRoboticsLab_generate_messages_py
@@ -158,6 +166,7 @@ ExperimentalRoboticsLab_generate_messages_py: devel/lib/python3/dist-packages/Ex
 ExperimentalRoboticsLab_generate_messages_py: devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionResult.py
 ExperimentalRoboticsLab_generate_messages_py: devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionFeedback.py
 ExperimentalRoboticsLab_generate_messages_py: devel/lib/python3/dist-packages/ExperimentalRoboticsLab/srv/_Hint.py
+ExperimentalRoboticsLab_generate_messages_py: devel/lib/python3/dist-packages/ExperimentalRoboticsLab/srv/_TrySolution.py
 ExperimentalRoboticsLab_generate_messages_py: devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/__init__.py
 ExperimentalRoboticsLab_generate_messages_py: devel/lib/python3/dist-packages/ExperimentalRoboticsLab/srv/__init__.py
 ExperimentalRoboticsLab_generate_messages_py: CMakeFiles/ExperimentalRoboticsLab_generate_messages_py.dir/build.make

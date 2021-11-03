@@ -8,6 +8,7 @@ file(REMOVE_RECURSE
   "devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionGoal.js"
   "devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionResult.js"
   "devel/share/gennodejs/ros/ExperimentalRoboticsLab/srv/Hint.js"
+  "devel/share/gennodejs/ros/ExperimentalRoboticsLab/srv/TrySolution.js"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -8,6 +8,7 @@ file(REMOVE_RECURSE
   "devel/share/common-lisp/ros/ExperimentalRoboticsLab/msg/PositionGoal.lisp"
   "devel/share/common-lisp/ros/ExperimentalRoboticsLab/msg/PositionResult.lisp"
   "devel/share/common-lisp/ros/ExperimentalRoboticsLab/srv/Hint.lisp"
+  "devel/share/common-lisp/ros/ExperimentalRoboticsLab/srv/TrySolution.lisp"
 )
 
 # Per-language clean rules from dependency scanning.
