@@ -58,7 +58,7 @@ class Navigation(smach.State):
         # function called when exiting from the node, it can be blacking
         global reached
         while reached == False:
-            time.sleep(5)
+            time.sleep(10)
         reached = False
         Navigation.before_navigation()
         return 'navigation'

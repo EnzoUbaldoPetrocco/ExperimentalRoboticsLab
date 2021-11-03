@@ -21,9 +21,10 @@ from ExperimentalRoboticsLab.srv import Hint
 #weapons=['Candlestick', 'Dagger','LeadPipe', 'Revolver', 'Rope', 'Spanner']
 solution = None
 environment_description = None
+n_hints = 0
 
 def initialization(environment_description):
-    global solution
+    global solution, n_hints
     random.seed(datetime.now())
     completed_solution_found = False
     while completed_solution_found == False:
@@ -36,6 +37,17 @@ def initialization(environment_description):
         condition_what = len(solution["what"]) == 1
         if condition_where and condition_what and condition_who:
             completed_solution_found = True
+    n_hints = 0
+    for i in environment_description:
+        for j in environment_description[i]["where"]:
+            n_hints = n_hints +1
+        for j in environment_description[i]["who"]:
+            n_hints = n_hints +1
+        for j in environment_description[i]["what"]:
+            n_hints = n_hints +1
+    #print("\nNumber of hints")
+    #print(n_hints)
+        
     #print(solution)
     #print("\nA murdered has happened")
 
@@ -59,55 +71,63 @@ def check_hint(hint, hint_sent):
 
 def send_hint(req):
     global environment_description
-    #print('\nIm in the send hint')
+    print('\nIm in the send hint')
     hint_sent_string = rospy.get_param('/hint_sent')
     hint_sent = json.loads(hint_sent_string)
     hints_sent_list = hint_sent["hints_sent_list"]
+    if len(hints_sent_list) == n_hints:
+        return {
+            "type" : "",
+            "name" : "",
+            "x" : 0,
+            "y" : 0,
+            "theta" : 0
+        }
     hint_already_sent = False
     while hint_already_sent == False:
-        #print('\nIm in the while loop of send hint')
+        print('\nIm in the while loop of send hint')
         index = random.randint(0,len(environment_description)-1)
         index_string = "ID"+ str(index)
-        #print('\nIndex_string: ' + index_string)
+        print('\nIndex_string: ' + index_string)
         hypothesis = environment_description[index_string]
-        #print('\nHypotesis')
-        #print(hypothesis)
+        print('\nHypotesis')
+        print(hypothesis)
         type = random_select_type()
-        #print('\nType:')
-        #print(type)
+        print('\nType:')
+        print(type)
         hints = hypothesis[type]
-        #print('\nHints:')
-        #print(hints)
+        print('\nHints:')
+        print(hints)
         if len(hints)>0:
             if len(hints)==1:
                 hint = hints[0]
             else:
-                hint = hints[random.randint(0, len(hints))]
-            #print('\nHint:')
-            #print(hint)
+                hint = hints[random.randint(0, len(hints)-1)]
+            print('\nHint:')
+            print(hint)
             if check_hint(hint, hints_sent_list):
                 hint_already_sent = True
-                #print('\nHint_sent inside if')
-        #print(hint_already_sent)
-        #print('\nHint_sent')
-        #print(hint_already_sent)
-        time.sleep(5)
-    #print(hint["name"])
+                print('\nHint_sent inside if')
+        print(hint_already_sent)
+        print('\nHint_sent')
+        print(hint_already_sent)
+        #time.sleep(3)
+    print(hint["name"])
     update_hint = {
         "id" : index_string,
         "name" : hint["name"]
     }
-    #print("\nupdate_hint: ")
-    #print(update_hint)
+    print("\nupdate_hint: ")
+    print(update_hint)
     hints_sent_list.append(update_hint)
-    #print('\nhints_sent_list: ')
-    #print(hints_sent_list)
+    print('\nhints_sent_list: ')
+    print(hints_sent_list)
     json_stored = {
         "hints_sent_list" : hints_sent_list
     }
     hint_sent_string = json.dumps(json_stored)
-    #print('\nhints_sent_string: ')
-    #print(hint_sent_string)
+    print('\nhints_sent_string: ')
+    print(hint_sent_string)
     rospy.set_param('/hint_sent', hint_sent_string)
     #res = Hint(
     #    type= type,
