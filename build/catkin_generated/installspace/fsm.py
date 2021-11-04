@@ -10,19 +10,7 @@ import time
 import random
 from datetime import datetime
 from geometry_msgs.msg import Point
-from os.path import dirname, realpath
-import sys
-# getting path to file
-file_path = dirname(realpath(__file__))
-file_path_size = len(file_path)
-package_directory = file_path[:file_path_size-7]
-# cutting scripts part which contains 7 character and replacing it with cluedo_ontology.owl
-ontology_path = package_directory+"cluedo_ontology.owl"
-src_directory = package_directory[:len(package_directory)-len("ExperimentalRoboticsLab")-1]
-armor_api_path = src_directory+ "armor_py_api/scripts/armor_api"
-sys.path.append(armor_api_path)
-print(armor_api_path)
-from armor_client import ArmorClient
+
 import ExperimentalRoboticsLab.msg
 import ExperimentalRoboticsLab.msg._PositionAction
 import json
@@ -85,10 +73,6 @@ def main():
     random_position_client = actionlib.SimpleActionClient("/go_to_point", ExperimentalRoboticsLab.msg.PositionAction)
     rospy.Subscriber('/go_to_point/result', ExperimentalRoboticsLab.msg.PositionActionResult, Navigation.arrived_to_the_point)
     
-    armor_client = ArmorClient("client", "reference")
-    armor_client.utils.load_ref_from_file(ontology_path, "http://www.emarolab.it/cluedo-ontology",
-                                True, "PELLET", True)  # initializing with buffered manipulation and reasoning
-    armor_client.utils.mount_on_ref()
     
     # Create a SMACH state machine
     fsm = smach.StateMachine(outcomes=['container_interface'])

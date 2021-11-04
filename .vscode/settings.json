@@ -5,13 +5,15 @@
         "/opt/ros/noetic/lib/python3/dist-packages",
         "/home/enzo/Scrivania/ROS_RT2/ros_ws/src/",
         "/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/srv/",
-        "/home/enzo/Scrivania/ROS_RT2/ros_ws/src/armor_py_api/"
+        "/home/enzo/Scrivania/ROS_RT2/ros_ws/src/armor_py_api/",
+        "/home/enzo/Scrivania/ROS_RT2/ros_ws/src/armor_py_api/scripts/armor_api/"
     ],
     "python.analysis.extraPaths": [
         "/home/enzo/Scrivania/ROS_RT2/ros_ws/devel/lib/python3/dist-packages",
         "/opt/ros/noetic/lib/python3/dist-packages",
         "/home/enzo/Scrivania/ROS_RT2/ros_ws/src/",
         "/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/srv/",
-        "/home/enzo/Scrivania/ROS_RT2/ros_ws/src/armor_py_api/"
+        "/home/enzo/Scrivania/ROS_RT2/ros_ws/src/armor_py_api/",
+        "/home/enzo/Scrivania/ROS_RT2/ros_ws/src/armor_py_api/scripts/armor_api/"
     ]
 }

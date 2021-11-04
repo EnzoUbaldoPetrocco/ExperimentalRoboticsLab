@@ -23,6 +23,8 @@ study:[5,-5]
 hall:[0,-5]
 lounge:[-5,-5]
 dining room:[-5,0]
+Special Room:
+oracle_room : [0,0]
 Persons:
 Rev. Green
 Prof. Plum
