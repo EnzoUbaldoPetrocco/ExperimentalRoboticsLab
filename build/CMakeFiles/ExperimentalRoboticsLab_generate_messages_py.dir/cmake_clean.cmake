@@ -9,6 +9,7 @@ file(REMOVE_RECURSE
   "devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/_PositionResult.py"
   "devel/lib/python3/dist-packages/ExperimentalRoboticsLab/msg/__init__.py"
   "devel/lib/python3/dist-packages/ExperimentalRoboticsLab/srv/_Hint.py"
+  "devel/lib/python3/dist-packages/ExperimentalRoboticsLab/srv/_Investigate.py"
   "devel/lib/python3/dist-packages/ExperimentalRoboticsLab/srv/_TrySolution.py"
   "devel/lib/python3/dist-packages/ExperimentalRoboticsLab/srv/__init__.py"
 )

@@ -60,6 +60,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate services in the 'srv' folder
  add_service_files(
    FILES
+   Investigate.srv
    Hint.srv
    TrySolution.srv
 #   Service2.srv

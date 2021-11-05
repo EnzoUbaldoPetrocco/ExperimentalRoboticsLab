@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/ExperimentalRoboticsLab_generate_messages_cpp"
   "devel/include/ExperimentalRoboticsLab/Hint.h"
+  "devel/include/ExperimentalRoboticsLab/Investigate.h"
   "devel/include/ExperimentalRoboticsLab/PositionAction.h"
   "devel/include/ExperimentalRoboticsLab/PositionActionFeedback.h"
   "devel/include/ExperimentalRoboticsLab/PositionActionGoal.h"

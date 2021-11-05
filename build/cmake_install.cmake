@@ -130,6 +130,7 @@ endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ExperimentalRoboticsLab/srv" TYPE FILE FILES
+    "/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/srv/Investigate.srv"
     "/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/srv/Hint.srv"
     "/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/srv/TrySolution.srv"
     )

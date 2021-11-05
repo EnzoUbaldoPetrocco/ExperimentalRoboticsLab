@@ -78,17 +78,6 @@ list_install_components/fast: list_install_components
 
 .PHONY : list_install_components/fast
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
@@ -100,6 +89,17 @@ install/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
 	/usr/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
 
 # Special rule for the target install/local
 install/local: preinstall
@@ -231,6 +231,19 @@ _ExperimentalRoboticsLab_generate_messages_check_deps_TrySolution: cmake_check_b
 _ExperimentalRoboticsLab_generate_messages_check_deps_TrySolution/fast:
 	$(MAKE) -f CMakeFiles/_ExperimentalRoboticsLab_generate_messages_check_deps_TrySolution.dir/build.make CMakeFiles/_ExperimentalRoboticsLab_generate_messages_check_deps_TrySolution.dir/build
 .PHONY : _ExperimentalRoboticsLab_generate_messages_check_deps_TrySolution/fast
+
+#=============================================================================
+# Target rules for targets named _ExperimentalRoboticsLab_generate_messages_check_deps_Investigate
+
+# Build rule for target.
+_ExperimentalRoboticsLab_generate_messages_check_deps_Investigate: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _ExperimentalRoboticsLab_generate_messages_check_deps_Investigate
+.PHONY : _ExperimentalRoboticsLab_generate_messages_check_deps_Investigate
+
+# fast build rule for target.
+_ExperimentalRoboticsLab_generate_messages_check_deps_Investigate/fast:
+	$(MAKE) -f CMakeFiles/_ExperimentalRoboticsLab_generate_messages_check_deps_Investigate.dir/build.make CMakeFiles/_ExperimentalRoboticsLab_generate_messages_check_deps_Investigate.dir/build
+.PHONY : _ExperimentalRoboticsLab_generate_messages_check_deps_Investigate/fast
 
 #=============================================================================
 # Target rules for targets named ExperimentalRoboticsLab_generate_messages_cpp
@@ -877,13 +890,14 @@ help:
 	@echo "... depend"
 	@echo "... install/strip"
 	@echo "... list_install_components"
-	@echo "... edit_cache"
 	@echo "... ExperimentalRoboticsLab_generate_messages_py"
 	@echo "... ExperimentalRoboticsLab_gennodejs"
 	@echo "... install"
 	@echo "... ExperimentalRoboticsLab_genlisp"
 	@echo "... ExperimentalRoboticsLab_generate_messages_eus"
 	@echo "... _ExperimentalRoboticsLab_generate_messages_check_deps_TrySolution"
+	@echo "... edit_cache"
+	@echo "... _ExperimentalRoboticsLab_generate_messages_check_deps_Investigate"
 	@echo "... ExperimentalRoboticsLab_generate_messages_cpp"
 	@echo "... _ExperimentalRoboticsLab_generate_messages_check_deps_PositionGoal"
 	@echo "... _ExperimentalRoboticsLab_generate_messages_check_deps_PositionActionGoal"
