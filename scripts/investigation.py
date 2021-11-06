@@ -9,6 +9,7 @@ import actionlib
 import ExperimentalRoboticsLab.msg
 from ExperimentalRoboticsLab.srv import Hint
 from ExperimentalRoboticsLab.srv import Investigate
+import json
 from os.path import dirname, realpath
 import sys
 # getting path to file
@@ -39,27 +40,61 @@ def check_hypothesis_not_exist(hyp_id):
             return False
     return True
 
+def get_weapons_with_id(hyp_id):
+    res = []
+    for i in weapons:
+        if i['id'] == hyp_id:
+            res.append[i['name']]
+    return res
+
+def get_persons_with_id(hyp_id):
+    res = []
+    for i in persons:
+        if i['id'] == hyp_id:
+            res.append[i['name']]
+    return res
+
+def get_places_with_id(hyp_id):
+    res = []
+    for i in places:
+        if i['id'] == hyp_id:
+            res.append[i['name']]
+    return res
+
+def add_hypothesis(hyp_id):
+    weapons_id = get_weapons_with_id(hyp_id)
+    persons_id = get_persons_with_id(hyp_id)
+    places_id = get_places_with_id(hyp_id)
+    for i in weapons_id:
+        armor_client.call('ADD', 'OBJECTPROP', 'IND', ['what',hyp_id,i])
+    for i in persons_id:
+        armor_client.call('ADD', 'OBJECTPROP', 'IND', ['who',hyp_id,i])
+    for i in places_id:
+        armor_client.call('ADD', 'OBJECTPROP', 'IND', ['what',hyp_id,i])
+    
+
 def manage_add_hint_wrt_hypothesis(hyp_id):
     global hypotheses
     if check_hypothesis_not_exist(hyp_id):
         hypotheses.append(hyp_id)
 
+
 def disjoint_person(ind):
     res = None
     for i in persons:
-        res = armor_client.call("DISJOINT", "IND", "", [ind, i])
+        res = armor_client.call("DISJOINT", "IND", "", [ind, i['name']])
     return res
 
 def disjoint_weapon(ind):
     res = None
     for i in weapons:
-        res = armor_client.call("DISJOINT", "IND", "", [ind, i])
+        res = armor_client.call("DISJOINT", "IND", "", [ind, i['name']])
     return res
 
 def disjoint_place(ind):
     res = None
     for i in places:
-        res = armor_client.call("DISJOINT", "IND", "", [ind, i])
+        res = armor_client.call("DISJOINT", "IND", "", [ind, i['name']])
     return res
 
 def add_person(msg):
@@ -70,7 +105,10 @@ def add_person(msg):
     if res == False:
         return False
     res = disjoint_person(msg.name)
-    persons.append(msg.name)
+    persons.append({
+        'name':msg.name,
+        'id': msg.id
+        })
     return res
 
 def add_weapon(msg):
@@ -81,7 +119,10 @@ def add_weapon(msg):
     if res == False:
         return False
     res = disjoint_weapon(msg.name)
-    weapons.append(msg.name)
+    weapons.append({
+        'name':msg.name,
+        'id': msg.id
+        })
     return res
 
 def add_place(msg):
@@ -92,7 +133,10 @@ def add_place(msg):
     if res == False:
         return False
     res = disjoint_place(msg.name)
-    places.append(msg.name)
+    places.append({
+        'name':msg.name,
+        'id': msg.id
+        })
     return res
 
 # Add a new ind
@@ -110,20 +154,55 @@ def add_hint(msg):
     if msg.type == "what":
         return add_weapon(msg)
     armor_client.call("REASON", "", "", [])
+    add_hypothesis(msg.id)
     return True
    
+def query_hp_completeness():
+    query = armor_client.call("QUERY", "IND", "CLASS", ['COMPLETED'])
+    print(query)
+    return query
+
+def query_hp_inconsistent():
+    query = armor_client.call("QUERY", "IND", "CLASS", ['INCONSISTENT'])
+    print(query)
+    return query
+
+def retrieve_consistent_hp():
+    complete_hps = []
+    complete_hps = query_hp_completeness().queried_objects
+    print(complete_hps)
+    if complete_hps == []:
+        return complete_hps
+    inconsistent_hps = query_hp_inconsistent().queried_objects
+    print(inconsistent_hps)
+    for i in complete_hps:
+        for j in inconsistent_hps:
+            if i == j:
+                complete_hps.remove(i)
+    return complete_hps
+
 def investigate(msg):
     print('\nInvestigating...')
     rospy.wait_for_service('/send_hint')
     hint = hint_client()
     add_hint(hint)
-    res = {
-        "id" : "",
-        "where" : "",
-        "who" : "", 
-        "what" : ""
-    }
-    return res
+    # TODO: write in the file the consistent hypotheses
+    file_hypotheses_string = rospy.get_param('/consistent_hypotheses')
+    file_hypotheses = json.loads(file_hypotheses_string)
+    complete_hps = retrieve_consistent_hp()
+    for i in complete_hps:
+        print(i)
+    
+    file_hypotheses_string = json.dumps(file_hypotheses)
+    rospy.set_param('/consistent_hypotheses', file_hypotheses_string)
+
+    #res = {
+    #    "id" : "",
+    #    "where" : "",
+    #    "who" : "", 
+    #    "what" : ""
+    #}
+    return True
 
 def main():
     global armor_client, hint_client

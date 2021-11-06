@@ -35,7 +35,7 @@ def check_hypothesis_not_exist(hyp_id):
     if hypotheses == []:
         return True
     for i in hypotheses:
-        if hypotheses[i] == hyp_id:
+        if i == hyp_id:
             return False
     return True
 
@@ -45,18 +45,21 @@ def manage_add_hint_wrt_hypothesis(hyp_id):
         hypotheses.append(hyp_id)
 
 def disjoint_person(ind):
+    res = None
     for i in persons:
-        res = armor_client.call("DISJOINT", "IND", "", [ind, persons[i]])
+        res = armor_client.call("DISJOINT", "IND", "", [ind, i])
     return res
 
 def disjoint_weapon(ind):
+    res = None
     for i in weapons:
-        res = armor_client.call("DISJOINT", "IND", "", [ind, weapons[i]])
+        res = armor_client.call("DISJOINT", "IND", "", [ind, i])
     return res
 
 def disjoint_place(ind):
-    for i in disjoint_place:
-        res = armor_client.call("DISJOINT", "IND", "", [ind, places[i]])
+    res = None
+    for i in places:
+        res = armor_client.call("DISJOINT", "IND", "", [ind, i])
     return res
 
 def add_person(msg):
@@ -96,6 +99,7 @@ def add_place(msg):
 def add_hint(msg):
     global weapons, persons, places
     print("add hint")
+    print(msg)
     manage_add_hint_wrt_hypothesis(msg.id)
     if msg.id=='' or msg.id=="" or msg.name=='' or msg.name=="":
         return False
@@ -106,19 +110,29 @@ def add_hint(msg):
     if msg.type == "what":
         return add_weapon(msg)
     armor_client.call("REASON", "", "", [])
+    return True
    
 def investigate(msg):
-    return True
+    print('\nInvestigating...')
+    rospy.wait_for_service('/send_hint')
+    hint = hint_client()
+    add_hint(hint)
+    res = {
+        "id" : "",
+        "where" : "",
+        "who" : "", 
+        "what" : ""
+    }
+    return res
 
 def main():
-    global armor_client
+    global armor_client, hint_client
     rospy.init_node('investigation') 
     armor_client = ArmorClient("client", "reference")
     armor_client.utils.load_ref_from_file(ontology_path, "http://www.emarolab.it/cluedo-ontology",
                                 True, "PELLET", True)  # initializing with buffered manipulation and reasoning
     armor_client.utils.mount_on_ref()
     armor_client.utils.set_log_to_terminal(True)
-
     hint_client = rospy.ServiceProxy('/send_hint', Hint)
     investigate_service = rospy.Service('/investigate', Investigate, investigate)
     rospy.spin()
