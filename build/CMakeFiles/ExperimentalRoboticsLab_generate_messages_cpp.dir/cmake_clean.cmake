@@ -9,6 +9,7 @@ file(REMOVE_RECURSE
   "devel/include/ExperimentalRoboticsLab/PositionFeedback.h"
   "devel/include/ExperimentalRoboticsLab/PositionGoal.h"
   "devel/include/ExperimentalRoboticsLab/PositionResult.h"
+  "devel/include/ExperimentalRoboticsLab/RandomPlace.h"
   "devel/include/ExperimentalRoboticsLab/TrySolution.h"
 )
 

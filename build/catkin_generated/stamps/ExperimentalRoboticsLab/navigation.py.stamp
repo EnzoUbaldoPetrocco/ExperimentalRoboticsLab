@@ -1,6 +1,5 @@
 #! /usr/bin/env python
 
-import roslib
 import rospy
 from geometry_msgs.msg import Point
 import math
@@ -36,8 +35,6 @@ def main():
     actual_position.x = 0
     actual_position.y = 0
     rospy.spin()
-
-
 
 if __name__ == '__main__':
     main()

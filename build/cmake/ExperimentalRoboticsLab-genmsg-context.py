@@ -1,7 +1,7 @@
 # generated from genmsg/cmake/pkg-genmsg.context.in
 
 messages_str = "/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg/PositionAction.msg;/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg/PositionActionGoal.msg;/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg/PositionActionResult.msg;/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg/PositionActionFeedback.msg;/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg/PositionGoal.msg;/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg/PositionResult.msg;/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg/PositionFeedback.msg"
-services_str = "/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/srv/Investigate.srv;/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/srv/Hint.srv;/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/srv/TrySolution.srv"
+services_str = "/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/srv/Investigate.srv;/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/srv/Hint.srv;/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/srv/TrySolution.srv;/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/srv/RandomPlace.srv"
 pkg_name = "ExperimentalRoboticsLab"
 dependencies_str = "actionlib_msgs"
 langs = "gencpp;geneus;genlisp;gennodejs;genpy"

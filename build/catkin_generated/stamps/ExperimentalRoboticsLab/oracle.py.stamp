@@ -1,17 +1,11 @@
 #! /usr/bin/env python
 
-import actionlib
-import roslib
 import rospy
 from rospy.core import loginfo
 from rospy.impl.tcpros_service import Service, ServiceProxy
-import smach
-import smach_ros
-import time
 import random
 from datetime import datetime
 from geometry_msgs.msg import Point
-import ExperimentalRoboticsLab.msg
 import ExperimentalRoboticsLab.msg._PositionAction
 import json
 from ExperimentalRoboticsLab.srv import Hint

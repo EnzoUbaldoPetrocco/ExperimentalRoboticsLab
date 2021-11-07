@@ -17,5 +17,7 @@
    <node name="oracle" pkg="ExperimentalRoboticsLab" type="oracle.py" output="screen"/>
 
    <node name="investigation" pkg="ExperimentalRoboticsLab" type="investigation.py" output="screen"/>
+
+   <node name="random_place" pkg="ExperimentalRoboticsLab" type="random_place.py" output="screen"/>
    
 </launch>

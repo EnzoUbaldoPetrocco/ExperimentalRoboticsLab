@@ -9,6 +9,7 @@ file(REMOVE_RECURSE
   "devel/share/common-lisp/ros/ExperimentalRoboticsLab/msg/PositionResult.lisp"
   "devel/share/common-lisp/ros/ExperimentalRoboticsLab/srv/Hint.lisp"
   "devel/share/common-lisp/ros/ExperimentalRoboticsLab/srv/Investigate.lisp"
+  "devel/share/common-lisp/ros/ExperimentalRoboticsLab/srv/RandomPlace.lisp"
   "devel/share/common-lisp/ros/ExperimentalRoboticsLab/srv/TrySolution.lisp"
 )
 

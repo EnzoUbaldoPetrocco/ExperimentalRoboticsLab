@@ -9,6 +9,7 @@ file(REMOVE_RECURSE
   "devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionResult.js"
   "devel/share/gennodejs/ros/ExperimentalRoboticsLab/srv/Hint.js"
   "devel/share/gennodejs/ros/ExperimentalRoboticsLab/srv/Investigate.js"
+  "devel/share/gennodejs/ros/ExperimentalRoboticsLab/srv/RandomPlace.js"
   "devel/share/gennodejs/ros/ExperimentalRoboticsLab/srv/TrySolution.js"
 )
 

@@ -63,48 +63,49 @@ CMakeFiles/ExperimentalRoboticsLab_generate_messages_cpp: devel/include/Experime
 CMakeFiles/ExperimentalRoboticsLab_generate_messages_cpp: devel/include/ExperimentalRoboticsLab/Investigate.h
 CMakeFiles/ExperimentalRoboticsLab_generate_messages_cpp: devel/include/ExperimentalRoboticsLab/Hint.h
 CMakeFiles/ExperimentalRoboticsLab_generate_messages_cpp: devel/include/ExperimentalRoboticsLab/TrySolution.h
+CMakeFiles/ExperimentalRoboticsLab_generate_messages_cpp: devel/include/ExperimentalRoboticsLab/RandomPlace.h
 
 
 devel/include/ExperimentalRoboticsLab/PositionAction.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
 devel/include/ExperimentalRoboticsLab/PositionAction.h: devel/share/ExperimentalRoboticsLab/msg/PositionAction.msg
-devel/include/ExperimentalRoboticsLab/PositionAction.h: devel/share/ExperimentalRoboticsLab/msg/PositionResult.msg
-devel/include/ExperimentalRoboticsLab/PositionAction.h: devel/share/ExperimentalRoboticsLab/msg/PositionActionFeedback.msg
+devel/include/ExperimentalRoboticsLab/PositionAction.h: /opt/ros/noetic/share/actionlib_msgs/msg/GoalID.msg
 devel/include/ExperimentalRoboticsLab/PositionAction.h: devel/share/ExperimentalRoboticsLab/msg/PositionGoal.msg
-devel/include/ExperimentalRoboticsLab/PositionAction.h: devel/share/ExperimentalRoboticsLab/msg/PositionActionGoal.msg
+devel/include/ExperimentalRoboticsLab/PositionAction.h: devel/share/ExperimentalRoboticsLab/msg/PositionFeedback.msg
+devel/include/ExperimentalRoboticsLab/PositionAction.h: devel/share/ExperimentalRoboticsLab/msg/PositionActionFeedback.msg
 devel/include/ExperimentalRoboticsLab/PositionAction.h: /opt/ros/noetic/share/std_msgs/msg/Header.msg
 devel/include/ExperimentalRoboticsLab/PositionAction.h: /opt/ros/noetic/share/actionlib_msgs/msg/GoalStatus.msg
-devel/include/ExperimentalRoboticsLab/PositionAction.h: /opt/ros/noetic/share/actionlib_msgs/msg/GoalID.msg
-devel/include/ExperimentalRoboticsLab/PositionAction.h: devel/share/ExperimentalRoboticsLab/msg/PositionFeedback.msg
+devel/include/ExperimentalRoboticsLab/PositionAction.h: devel/share/ExperimentalRoboticsLab/msg/PositionResult.msg
 devel/include/ExperimentalRoboticsLab/PositionAction.h: devel/share/ExperimentalRoboticsLab/msg/PositionActionResult.msg
+devel/include/ExperimentalRoboticsLab/PositionAction.h: devel/share/ExperimentalRoboticsLab/msg/PositionActionGoal.msg
 devel/include/ExperimentalRoboticsLab/PositionAction.h: /opt/ros/noetic/share/gencpp/msg.h.template
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating C++ code from ExperimentalRoboticsLab/PositionAction.msg"
 	cd /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab && /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg/PositionAction.msg -IExperimentalRoboticsLab:/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg -Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p ExperimentalRoboticsLab -o /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/include/ExperimentalRoboticsLab -e /opt/ros/noetic/share/gencpp/cmake/..
 
 devel/include/ExperimentalRoboticsLab/PositionActionGoal.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
 devel/include/ExperimentalRoboticsLab/PositionActionGoal.h: devel/share/ExperimentalRoboticsLab/msg/PositionActionGoal.msg
+devel/include/ExperimentalRoboticsLab/PositionActionGoal.h: /opt/ros/noetic/share/std_msgs/msg/Header.msg
 devel/include/ExperimentalRoboticsLab/PositionActionGoal.h: /opt/ros/noetic/share/actionlib_msgs/msg/GoalID.msg
 devel/include/ExperimentalRoboticsLab/PositionActionGoal.h: devel/share/ExperimentalRoboticsLab/msg/PositionGoal.msg
-devel/include/ExperimentalRoboticsLab/PositionActionGoal.h: /opt/ros/noetic/share/std_msgs/msg/Header.msg
 devel/include/ExperimentalRoboticsLab/PositionActionGoal.h: /opt/ros/noetic/share/gencpp/msg.h.template
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating C++ code from ExperimentalRoboticsLab/PositionActionGoal.msg"
 	cd /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab && /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg/PositionActionGoal.msg -IExperimentalRoboticsLab:/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg -Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p ExperimentalRoboticsLab -o /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/include/ExperimentalRoboticsLab -e /opt/ros/noetic/share/gencpp/cmake/..
 
 devel/include/ExperimentalRoboticsLab/PositionActionResult.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
 devel/include/ExperimentalRoboticsLab/PositionActionResult.h: devel/share/ExperimentalRoboticsLab/msg/PositionActionResult.msg
-devel/include/ExperimentalRoboticsLab/PositionActionResult.h: /opt/ros/noetic/share/actionlib_msgs/msg/GoalID.msg
-devel/include/ExperimentalRoboticsLab/PositionActionResult.h: devel/share/ExperimentalRoboticsLab/msg/PositionResult.msg
 devel/include/ExperimentalRoboticsLab/PositionActionResult.h: /opt/ros/noetic/share/std_msgs/msg/Header.msg
 devel/include/ExperimentalRoboticsLab/PositionActionResult.h: /opt/ros/noetic/share/actionlib_msgs/msg/GoalStatus.msg
+devel/include/ExperimentalRoboticsLab/PositionActionResult.h: /opt/ros/noetic/share/actionlib_msgs/msg/GoalID.msg
+devel/include/ExperimentalRoboticsLab/PositionActionResult.h: devel/share/ExperimentalRoboticsLab/msg/PositionResult.msg
 devel/include/ExperimentalRoboticsLab/PositionActionResult.h: /opt/ros/noetic/share/gencpp/msg.h.template
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating C++ code from ExperimentalRoboticsLab/PositionActionResult.msg"
 	cd /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab && /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg/PositionActionResult.msg -IExperimentalRoboticsLab:/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg -Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p ExperimentalRoboticsLab -o /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/include/ExperimentalRoboticsLab -e /opt/ros/noetic/share/gencpp/cmake/..
 
 devel/include/ExperimentalRoboticsLab/PositionActionFeedback.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
 devel/include/ExperimentalRoboticsLab/PositionActionFeedback.h: devel/share/ExperimentalRoboticsLab/msg/PositionActionFeedback.msg
-devel/include/ExperimentalRoboticsLab/PositionActionFeedback.h: /opt/ros/noetic/share/actionlib_msgs/msg/GoalID.msg
-devel/include/ExperimentalRoboticsLab/PositionActionFeedback.h: devel/share/ExperimentalRoboticsLab/msg/PositionFeedback.msg
 devel/include/ExperimentalRoboticsLab/PositionActionFeedback.h: /opt/ros/noetic/share/std_msgs/msg/Header.msg
 devel/include/ExperimentalRoboticsLab/PositionActionFeedback.h: /opt/ros/noetic/share/actionlib_msgs/msg/GoalStatus.msg
+devel/include/ExperimentalRoboticsLab/PositionActionFeedback.h: devel/share/ExperimentalRoboticsLab/msg/PositionFeedback.msg
+devel/include/ExperimentalRoboticsLab/PositionActionFeedback.h: /opt/ros/noetic/share/actionlib_msgs/msg/GoalID.msg
 devel/include/ExperimentalRoboticsLab/PositionActionFeedback.h: /opt/ros/noetic/share/gencpp/msg.h.template
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating C++ code from ExperimentalRoboticsLab/PositionActionFeedback.msg"
 	cd /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab && /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg/PositionActionFeedback.msg -IExperimentalRoboticsLab:/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg -Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p ExperimentalRoboticsLab -o /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/include/ExperimentalRoboticsLab -e /opt/ros/noetic/share/gencpp/cmake/..
@@ -148,6 +149,13 @@ devel/include/ExperimentalRoboticsLab/TrySolution.h: /opt/ros/noetic/share/gencp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Generating C++ code from ExperimentalRoboticsLab/TrySolution.srv"
 	cd /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab && /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/srv/TrySolution.srv -IExperimentalRoboticsLab:/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg -Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p ExperimentalRoboticsLab -o /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/include/ExperimentalRoboticsLab -e /opt/ros/noetic/share/gencpp/cmake/..
 
+devel/include/ExperimentalRoboticsLab/RandomPlace.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
+devel/include/ExperimentalRoboticsLab/RandomPlace.h: ../srv/RandomPlace.srv
+devel/include/ExperimentalRoboticsLab/RandomPlace.h: /opt/ros/noetic/share/gencpp/msg.h.template
+devel/include/ExperimentalRoboticsLab/RandomPlace.h: /opt/ros/noetic/share/gencpp/srv.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Generating C++ code from ExperimentalRoboticsLab/RandomPlace.srv"
+	cd /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab && /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/srv/RandomPlace.srv -IExperimentalRoboticsLab:/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/share/ExperimentalRoboticsLab/msg -Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p ExperimentalRoboticsLab -o /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ExperimentalRoboticsLab/build/devel/include/ExperimentalRoboticsLab -e /opt/ros/noetic/share/gencpp/cmake/..
+
 ExperimentalRoboticsLab_generate_messages_cpp: CMakeFiles/ExperimentalRoboticsLab_generate_messages_cpp
 ExperimentalRoboticsLab_generate_messages_cpp: devel/include/ExperimentalRoboticsLab/PositionAction.h
 ExperimentalRoboticsLab_generate_messages_cpp: devel/include/ExperimentalRoboticsLab/PositionActionGoal.h
@@ -159,6 +167,7 @@ ExperimentalRoboticsLab_generate_messages_cpp: devel/include/ExperimentalRobotic
 ExperimentalRoboticsLab_generate_messages_cpp: devel/include/ExperimentalRoboticsLab/Investigate.h
 ExperimentalRoboticsLab_generate_messages_cpp: devel/include/ExperimentalRoboticsLab/Hint.h
 ExperimentalRoboticsLab_generate_messages_cpp: devel/include/ExperimentalRoboticsLab/TrySolution.h
+ExperimentalRoboticsLab_generate_messages_cpp: devel/include/ExperimentalRoboticsLab/RandomPlace.h
 ExperimentalRoboticsLab_generate_messages_cpp: CMakeFiles/ExperimentalRoboticsLab_generate_messages_cpp.dir/build.make
 
 .PHONY : ExperimentalRoboticsLab_generate_messages_cpp

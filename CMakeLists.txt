@@ -63,6 +63,7 @@ find_package(catkin REQUIRED COMPONENTS
    Investigate.srv
    Hint.srv
    TrySolution.srv
+   RandomPlace.srv
 #   Service2.srv
  )
 
@@ -167,6 +168,7 @@ include_directories(
 ## in contrast to setup.py, you can choose the destination
  catkin_install_python(PROGRAMS
    scripts/fsm.py scripts/navigation.py scripts/oracle.py scripts/investigation.py
+   scripts/random_place.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
 

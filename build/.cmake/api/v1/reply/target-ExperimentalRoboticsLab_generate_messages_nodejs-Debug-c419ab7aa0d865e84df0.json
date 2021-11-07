@@ -23,7 +23,7 @@
 			{
 				"command" : 2,
 				"file" : 2,
-				"line" : 77,
+				"line" : 78,
 				"parent" : 0
 			},
 			{
@@ -39,73 +39,79 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 145,
+				"line" : 495,
 				"parent" : 3
 			},
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 170,
+				"line" : 522,
 				"parent" : 3
 			},
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 166,
+				"line" : 520,
 				"parent" : 3
 			},
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 160,
+				"line" : 516,
 				"parent" : 3
 			},
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 154,
+				"line" : 510,
 				"parent" : 3
 			},
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 164,
+				"line" : 504,
 				"parent" : 3
 			},
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 156,
+				"line" : 687,
 				"parent" : 3
 			},
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 168,
+				"line" : 514,
 				"parent" : 3
 			},
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 152,
+				"line" : 506,
 				"parent" : 3
 			},
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 609,
+				"line" : 518,
 				"parent" : 3
 			},
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 158,
+				"line" : 502,
 				"parent" : 3
 			},
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 162,
+				"line" : 508,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 512,
 				"parent" : 3
 			}
 		]
@@ -114,51 +120,55 @@
 	[
 		{
 			"backtrace" : 5,
-			"id" : "_ExperimentalRoboticsLab_generate_messages_check_deps_TrySolution::@6890427a1f51a3e7e1df"
+			"id" : "_ExperimentalRoboticsLab_generate_messages_check_deps_RandomPlace::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 6,
-			"id" : "_ExperimentalRoboticsLab_generate_messages_check_deps_Investigate::@6890427a1f51a3e7e1df"
+			"id" : "_ExperimentalRoboticsLab_generate_messages_check_deps_TrySolution::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 7,
-			"id" : "_ExperimentalRoboticsLab_generate_messages_check_deps_PositionGoal::@6890427a1f51a3e7e1df"
+			"id" : "_ExperimentalRoboticsLab_generate_messages_check_deps_Investigate::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 8,
-			"id" : "_ExperimentalRoboticsLab_generate_messages_check_deps_PositionActionGoal::@6890427a1f51a3e7e1df"
+			"id" : "_ExperimentalRoboticsLab_generate_messages_check_deps_PositionGoal::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 9,
-			"id" : "_ExperimentalRoboticsLab_generate_messages_check_deps_PositionFeedback::@6890427a1f51a3e7e1df"
+			"id" : "_ExperimentalRoboticsLab_generate_messages_check_deps_PositionActionGoal::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 10,
-			"id" : "_ExperimentalRoboticsLab_generate_messages_check_deps_PositionActionResult::@6890427a1f51a3e7e1df"
+			"id" : "actionlib_msgs_generate_messages_nodejs::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 11,
-			"id" : "_ExperimentalRoboticsLab_generate_messages_check_deps_Hint::@6890427a1f51a3e7e1df"
+			"id" : "_ExperimentalRoboticsLab_generate_messages_check_deps_PositionFeedback::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 12,
-			"id" : "_ExperimentalRoboticsLab_generate_messages_check_deps_PositionAction::@6890427a1f51a3e7e1df"
+			"id" : "_ExperimentalRoboticsLab_generate_messages_check_deps_PositionActionResult::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 13,
-			"id" : "actionlib_msgs_generate_messages_cpp::@6890427a1f51a3e7e1df"
+			"id" : "_ExperimentalRoboticsLab_generate_messages_check_deps_Hint::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 14,
-			"id" : "_ExperimentalRoboticsLab_generate_messages_check_deps_PositionActionFeedback::@6890427a1f51a3e7e1df"
+			"id" : "_ExperimentalRoboticsLab_generate_messages_check_deps_PositionAction::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 15,
+			"id" : "_ExperimentalRoboticsLab_generate_messages_check_deps_PositionActionFeedback::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 16,
 			"id" : "_ExperimentalRoboticsLab_generate_messages_check_deps_PositionResult::@6890427a1f51a3e7e1df"
 		}
 	],
-	"id" : "ExperimentalRoboticsLab_generate_messages_cpp::@6890427a1f51a3e7e1df",
-	"name" : "ExperimentalRoboticsLab_generate_messages_cpp",
+	"id" : "ExperimentalRoboticsLab_generate_messages_nodejs::@6890427a1f51a3e7e1df",
+	"name" : "ExperimentalRoboticsLab_generate_messages_nodejs",
 	"paths" : 
 	{
 		"build" : ".",
@@ -187,7 +197,8 @@
 				8,
 				9,
 				10,
-				11
+				11,
+				12
 			]
 		}
 	],
@@ -196,73 +207,79 @@
 		{
 			"backtrace" : 4,
 			"isGenerated" : true,
-			"path" : "build/CMakeFiles/ExperimentalRoboticsLab_generate_messages_cpp",
+			"path" : "build/CMakeFiles/ExperimentalRoboticsLab_generate_messages_nodejs",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "build/CMakeFiles/ExperimentalRoboticsLab_generate_messages_cpp.rule",
+			"path" : "build/CMakeFiles/ExperimentalRoboticsLab_generate_messages_nodejs.rule",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "build/devel/include/ExperimentalRoboticsLab/PositionAction.h.rule",
+			"path" : "build/devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionAction.js.rule",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "build/devel/include/ExperimentalRoboticsLab/PositionActionGoal.h.rule",
+			"path" : "build/devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionActionGoal.js.rule",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "build/devel/include/ExperimentalRoboticsLab/PositionActionResult.h.rule",
+			"path" : "build/devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionActionResult.js.rule",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "build/devel/include/ExperimentalRoboticsLab/PositionActionFeedback.h.rule",
+			"path" : "build/devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionActionFeedback.js.rule",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "build/devel/include/ExperimentalRoboticsLab/PositionGoal.h.rule",
+			"path" : "build/devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionGoal.js.rule",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "build/devel/include/ExperimentalRoboticsLab/PositionResult.h.rule",
+			"path" : "build/devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionResult.js.rule",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "build/devel/include/ExperimentalRoboticsLab/PositionFeedback.h.rule",
+			"path" : "build/devel/share/gennodejs/ros/ExperimentalRoboticsLab/msg/PositionFeedback.js.rule",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "build/devel/include/ExperimentalRoboticsLab/Investigate.h.rule",
+			"path" : "build/devel/share/gennodejs/ros/ExperimentalRoboticsLab/srv/Investigate.js.rule",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "build/devel/include/ExperimentalRoboticsLab/Hint.h.rule",
+			"path" : "build/devel/share/gennodejs/ros/ExperimentalRoboticsLab/srv/Hint.js.rule",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "build/devel/include/ExperimentalRoboticsLab/TrySolution.h.rule",
+			"path" : "build/devel/share/gennodejs/ros/ExperimentalRoboticsLab/srv/TrySolution.js.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/devel/share/gennodejs/ros/ExperimentalRoboticsLab/srv/RandomPlace.js.rule",
 			"sourceGroupIndex" : 1
 		}
 	],

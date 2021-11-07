@@ -8,7 +8,7 @@ import smach
 import smach_ros
 import time
 import random
-import datetime
+from datetime import datetime
 from geometry_msgs.msg import Point
 
 import ExperimentalRoboticsLab.msg

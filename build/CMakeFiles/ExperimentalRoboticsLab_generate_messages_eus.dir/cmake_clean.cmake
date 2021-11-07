@@ -10,6 +10,7 @@ file(REMOVE_RECURSE
   "devel/share/roseus/ros/ExperimentalRoboticsLab/msg/PositionResult.l"
   "devel/share/roseus/ros/ExperimentalRoboticsLab/srv/Hint.l"
   "devel/share/roseus/ros/ExperimentalRoboticsLab/srv/Investigate.l"
+  "devel/share/roseus/ros/ExperimentalRoboticsLab/srv/RandomPlace.l"
   "devel/share/roseus/ros/ExperimentalRoboticsLab/srv/TrySolution.l"
 )
 
