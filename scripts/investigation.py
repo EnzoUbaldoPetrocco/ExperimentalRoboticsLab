@@ -1,12 +1,7 @@
 #! /usr/bin/env python
 
-import roslib
 import rospy
 from geometry_msgs.msg import Point
-import math
-import time
-import actionlib
-import ExperimentalRoboticsLab.msg
 from ExperimentalRoboticsLab.srv import Hint
 from ExperimentalRoboticsLab.srv import Investigate
 import json
