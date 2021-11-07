@@ -42,23 +42,28 @@ def check_hypothesis_not_exist(hyp_id):
 
 def get_weapons_with_id(hyp_id):
     res = []
+    print('\nweapons')
+    print(weapons)
     for i in weapons:
+        print('\ni')
+        print(i)
         if i['id'] == hyp_id:
-            res.append[i['name']]
+            res.append(i['name'])
     return res
 
 def get_persons_with_id(hyp_id):
+    print('\get persons with id')
     res = []
     for i in persons:
         if i['id'] == hyp_id:
-            res.append[i['name']]
+            res.append(i['name'])
     return res
 
 def get_places_with_id(hyp_id):
     res = []
     for i in places:
         if i['id'] == hyp_id:
-            res.append[i['name']]
+            res.append(i['name'])
     return res
 
 def add_hypothesis(hyp_id):
@@ -77,6 +82,7 @@ def manage_add_hint_wrt_hypothesis(hyp_id):
     global hypotheses
     if check_hypothesis_not_exist(hyp_id):
         hypotheses.append(hyp_id)
+        print(hypotheses)
 
 
 def disjoint_person(ind):
@@ -139,12 +145,16 @@ def add_place(msg):
         })
     return res
 
+def reason():
+    armor_client.call("REASON", "", "", [])
+
 # Add a new ind
 def add_hint(msg):
     global weapons, persons, places
-    print("add hint")
+    print("\nadd hint")
     print(msg)
     manage_add_hint_wrt_hypothesis(msg.id)
+    reason()
     if msg.id=='' or msg.id=="" or msg.name=='' or msg.name=="":
         return False
     if msg.type == "who":
@@ -153,33 +163,76 @@ def add_hint(msg):
         return add_place(msg)
     if msg.type == "what":
         return add_weapon(msg)
-    armor_client.call("REASON", "", "", [])
-    add_hypothesis(msg.id)
+    reason()
+    #add_hypothesis(msg.id)
     return True
    
 def query_hp_completeness():
     query = armor_client.call("QUERY", "IND", "CLASS", ['COMPLETED'])
-    print(query)
-    return query
+    queried = query.queried_objects
+    return queried
 
 def query_hp_inconsistent():
     query = armor_client.call("QUERY", "IND", "CLASS", ['INCONSISTENT'])
-    print(query)
-    return query
+    queried = query.queried_objects
+    return queried
 
 def retrieve_consistent_hp():
+    print('\nretrieve consistent hp')
     complete_hps = []
-    complete_hps = query_hp_completeness().queried_objects
+    complete_hps = query_hp_completeness()
+    print('\n complete hps')
     print(complete_hps)
     if complete_hps == []:
         return complete_hps
-    inconsistent_hps = query_hp_inconsistent().queried_objects
+    inconsistent_hps = query_hp_inconsistent()
+    print('\ninconsistent hps')
     print(inconsistent_hps)
+    if inconsistent_hps == []:
+        return complete_hps
     for i in complete_hps:
         for j in inconsistent_hps:
             if i == j:
                 complete_hps.remove(i)
+    print('\ncomplete hps final')
+    print(complete_hps)
     return complete_hps
+
+def retrieve_hypothesis(id):
+    object = {'id': '','where' : '', 'what': '', 'who': '' }
+    weap = get_weapons_with_id(id)
+    print('\nweap')
+    print(weap)
+    pla = get_places_with_id(id)
+    per = get_persons_with_id(id)
+    if len(weap)==1 and len(pla)==1 and len(per)==1:
+        object = {
+            'id': id,
+            'where' : pla[0],
+            'what' : weap[0],
+            'who' : per[0]
+        }
+    return object
+        
+
+def create_json_hypothesis(id, file):
+    print('\ncreate_json_hypothesis')
+    print('file: ')
+    print(file)
+    print('\nhypotheses ')
+    print(file['hypotheses'])
+    for i in file['hypotheses']:
+        print('\ncreate_json_hypothesis')
+        print(i)
+        if i['id'] == id:
+            return file
+    hp_object_to_append = retrieve_hypothesis(id)
+    print('hp_object_to_append')
+    print(hp_object_to_append)
+    hypotheses = file['hypotheses']
+    hypotheses.append(hp_object_to_append)
+    file['hypotheses'] = hypotheses
+    return file
 
 def investigate(msg):
     print('\nInvestigating...')
@@ -190,8 +243,15 @@ def investigate(msg):
     file_hypotheses_string = rospy.get_param('/consistent_hypotheses')
     file_hypotheses = json.loads(file_hypotheses_string)
     complete_hps = retrieve_consistent_hp()
+    if complete_hps == []:
+        print('\nconsistent hypotheses list is empty')
+        return True
     for i in complete_hps:
         print(i)
+        id = i.split('#')[1][:3]
+        print(id)
+        file_hypotheses = create_json_hypothesis(id, file_hypotheses)
+        print(file_hypotheses)
     
     file_hypotheses_string = json.dumps(file_hypotheses)
     rospy.set_param('/consistent_hypotheses', file_hypotheses_string)
