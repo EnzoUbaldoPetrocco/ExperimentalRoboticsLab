@@ -3,14 +3,14 @@
 import actionlib
 import roslib
 import rospy
-from rospy.impl.tcpros_service import Service, ServiceProxy
+from rospy.impl.tcpros_service import Service, ServiceProxy, wait_for_service
 import smach
 import smach_ros
 import time
 import random
 from datetime import datetime
 from geometry_msgs.msg import Point
-
+from ExperimentalRoboticsLab.srv import RandomPlace
 import ExperimentalRoboticsLab.msg
 import ExperimentalRoboticsLab.msg._PositionAction
 import json
@@ -31,10 +31,13 @@ class Navigation(smach.State):
         reached = msg.result
     
     def choosing_random_position():
+        global random_client
         position = ExperimentalRoboticsLab.msg.PositionGoal()
-        position.x = 5*random.random()
-        position.y = 5*random.random()
-        position.theta = 0
+        rospy.wait_for_service('/random_place_service')
+        rnd_place = random_client()
+        position.x = rnd_place.x
+        position.y = rnd_place.y
+        position.theta = rnd_place.theta
         return position
 
     def before_navigation():
@@ -46,7 +49,7 @@ class Navigation(smach.State):
         # function called when exiting from the node, it can be blacking
         global reached
         while reached == False:
-            time.sleep(50)
+            time.sleep(5)
         reached = False
         Navigation.before_navigation()
         return 'navigation'
@@ -67,9 +70,10 @@ class Investigation(smach.State):
         
 
 def main():
-    global random_position_client, file_path
+    global random_position_client, file_path, random_client
     rospy.init_node('fsm')
 
+    random_client = rospy.ServiceProxy('/random_place_service', RandomPlace)
     random_position_client = actionlib.SimpleActionClient("/go_to_point", ExperimentalRoboticsLab.msg.PositionAction)
     rospy.Subscriber('/go_to_point/result', ExperimentalRoboticsLab.msg.PositionActionResult, Navigation.arrived_to_the_point)
     
