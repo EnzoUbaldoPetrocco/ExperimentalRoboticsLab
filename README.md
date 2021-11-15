@@ -1,5 +1,5 @@
 # ExperimentalRoboticsLab
-This repository represents the assignment of experimental robotics lab
+This repository represents the assignment of Experimental Robotics Lab course
 
 ## Introduction
 The assignment concerns a robot that has to move randomly in a Cluedo Environment, enter in the rooms, where it receives some hints. Through the hints the robot must reason and generate hypotheses which have to be consistent, must go to the oracle that knows which hypothesis is the truth and ask him. If the robot has guessed the hypothesis the robot won, else the robot continues to play.
@@ -39,5 +39,5 @@ Many possible improvements can be achieved:
 - The investiganti node could be splitted in two parts: one for treating with a general reasoner, one for treating to armor in particular, this could increase modularity and flexibility.
 
 ## Author
-The author of this repository is [Enzo Ubaldo Petrocco](https://github.com/EnzoUbaldoPetrocco/ExperimentalRoboticsLab), i'm a student of robotics engineering in the University of Genova (s4530363); if you have some issues please contact me:
+The author of this repository is [Enzo Ubaldo Petrocco](https://github.com/EnzoUbaldoPetrocco/ExperimentalRoboticsLab): i'm a student of robotics engineering in the University of Genova (s4530363); if you have some issues please contact me:
 - email: enzopetrocco@hotmail.it
