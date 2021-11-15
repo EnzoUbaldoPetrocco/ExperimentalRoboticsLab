@@ -173,7 +173,8 @@ def retrieve_hypothesis(id):
             'id': id,
             'where' : pla[0],
             'what' : weap[0],
-            'who' : per[0]
+            'who' : per[0],
+            'tried' : False
         }
     return object   
 

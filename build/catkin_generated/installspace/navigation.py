@@ -17,12 +17,10 @@ result = ExperimentalRoboticsLab.msg.PositionResult()
 
 def go_to_point(msg):
     global actual_position, action_position
-    #print('Received the goal')
     goal_pos.x = msg.x
     goal_pos.y = msg.y
     distance = math.sqrt(pow(goal_pos.x-actual_position.x, 2)+pow(goal_pos.y-actual_position.y, 2))
-    #print('\nWaiting for reaching the target')
-    time.sleep(distance * 0.5)
+    time.sleep(distance * 0.1)
     actual_position.x = goal_pos.x
     actual_position.y = goal_pos.y
     action_position.set_succeeded(result)

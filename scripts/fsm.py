@@ -44,6 +44,7 @@ class Navigation(smach.State):
     def execute(self, userdata):
         global reached
         goal = Navigation.choosing_random_position()
+        print("\nGoing to [" + str(goal.x) + "," + str(goal.y) + "] with orientation " +  str(goal.theta) + "\n")
         random_position_client.send_goal(goal)
         # function called when exiting from the node, it can be blacking
         while reached == False:
@@ -60,12 +61,17 @@ class Investigation(smach.State):
 
     def execute(self, userdata):
         rospy.wait_for_service('/investigate')
+        print("\nInvestigating...\n")
         investigate_client()
         consistent_hypotheses_string = rospy.get_param('consistent_hypotheses')
         consistent_hypotheses_file = json.loads(consistent_hypotheses_string)
         consistent_hypotheses = consistent_hypotheses_file['hypotheses']
+
         next_step = None
-        if len(consistent_hypotheses) == 0:
+        shall_go = False
+        for i in consistent_hypotheses:
+            shall_go = shall_go and i['tried']
+        if len(consistent_hypotheses) == 0 or shall_go==True:
             next_step = 'navigation'
         else:
             next_step = 'go_to_oracle'
@@ -84,6 +90,7 @@ class GoToOracle(smach.State):
         return position
     def execute(self, userdata):
         global reached
+        print("\nI am going to speak with the oracle\n")
         goal = GoToOracle.position_of_the_oracle() 
         random_position_client.send_goal(goal)
         while reached == False:
@@ -98,17 +105,24 @@ class Assert(smach.State):
 
     def execute(self, userdata):
         global reached
+        print("\nI am telling to the oracle my hypotheses\n")
         consistent_hypotheses_string = rospy.get_param('consistent_hypotheses')
         consistent_hypotheses_file = json.loads(consistent_hypotheses_string)
         consistent_hypotheses = consistent_hypotheses_file['hypotheses']
         if consistent_hypotheses == []:
             return 'navigation'
         for i in consistent_hypotheses:
-            print(i)
+            #print(i)
             end = ask_solution_client(i['id'], i['who'], i['where'], i['what'])
-            print(end)
-            if end.found == True:
+            #print(end)
+            if end.found == True and i['tried'] == False:
+                print("\nIt was " + i['who'] + " with a " + i["what"] + " in the " + i["where"] + "\n")
                 return 'finished'
+            i['tried'] = True
+        print(consistent_hypotheses_file)
+        print("\n")
+        consistent_hypotheses_string = json.dumps(consistent_hypotheses_file)
+        rospy.set_param('consistent_hypotheses', consistent_hypotheses_string)
         return 'navigation'
         
 class Finished(smach.State):
@@ -130,7 +144,7 @@ def main():
     rospy.Subscriber('/go_to_point/result', ExperimentalRoboticsLab.msg.PositionActionResult, Navigation.arrived_to_the_point)
     investigate_client = rospy.ServiceProxy('/investigate', Investigate)
     ask_solution_client = rospy.ServiceProxy('/ask_solution', TrySolution)
-    
+    rospy.sleep(1)
     # Create a SMACH state machine
     fsm = smach.StateMachine(outcomes=['finish'])
 
@@ -165,8 +179,9 @@ def main():
 
      # Create and start the introspection server for visualization
     sis = smach_ros.IntrospectionServer('server_name', fsm, '/SM_ROOT')
+    rospy.sleep(2)
     sis.start()
-
+    rospy.sleep(2)
 
 
     # Execute the state machine

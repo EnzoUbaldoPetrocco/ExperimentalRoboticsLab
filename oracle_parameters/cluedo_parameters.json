@@ -40,5 +40,70 @@
         }
     ],
         "what":[]
-    } 
+    },
+    "ID3":{
+        "where": [{
+            "name": "Billiard Room",
+            "x" : 5,
+            "y" : 2,
+            "theta" : 0
+        }],
+        "who":[{
+            "name": "Miss Scarlett"
+        }],
+        "what":[{
+            "name": "Dagger"
+        }]
+    },
+    "ID4":{
+        "where": [{
+            "name": "library",
+            "x" : 5,
+            "y" : -1,
+            "theta" : 0
+        }],
+        "who":[],
+        "what":[{
+            "name": "Revolver"
+        }]
+    },
+    "ID5":{
+        "where": [{
+            "name": "study",
+            "x" : 5,
+            "y" : -5,
+            "theta" : 0
+        }],
+        "who":[{
+            "name": "Rev Green"
+        }
+    ],
+        "what":[{
+            "name" : "Rope"
+        }]
+    },
+    "ID6":{
+        "where": [{
+            "name": "hall",
+            "x" : 0,
+            "y" : -5,
+            "theta" : 0
+        }],
+        "who":[],
+        "what":[]
+    },
+    "ID7":{
+        "where": [{
+            "name": "Dining Room",
+            "x" : 0,
+            "y" : -5,
+            "theta" : 0
+        }],
+        "who":[{
+            "name" : "Mrs. White"
+        }],
+        "what":[{
+            "name" : "Spanner"
+        }]
+    }
 }

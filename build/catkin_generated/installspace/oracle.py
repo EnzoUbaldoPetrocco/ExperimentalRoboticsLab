@@ -71,7 +71,6 @@ def check_hint(hint, hint_sent):
 
 def send_hint(req):
     global environment_description
-    print('\nIm in the send hint')
     hint_sent_string = rospy.get_param('/hint_sent')
     hint_sent = json.loads(hint_sent_string)
     hints_sent_list = hint_sent["hints_sent_list"]
@@ -110,6 +109,7 @@ def send_hint(req):
     }
     hint_sent_string = json.dumps(json_stored)
     rospy.set_param('/hint_sent', hint_sent_string)
+    print('\nMaybe ' + hint["name"] + '\n')
     res = {
         "type" : type,
         "name" : hint["name"],

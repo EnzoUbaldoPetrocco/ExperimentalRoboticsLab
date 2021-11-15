@@ -109,6 +109,7 @@ def send_hint(req):
     }
     hint_sent_string = json.dumps(json_stored)
     rospy.set_param('/hint_sent', hint_sent_string)
+    print('\nMaybe ' + hint["name"] + '\n')
     res = {
         "type" : type,
         "name" : hint["name"],
