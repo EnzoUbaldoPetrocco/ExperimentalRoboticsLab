@@ -1,24 +1,66 @@
 #! /usr/bin/env python
 
+
+## @package ExperimentalRoboticsLab
+# \oracle.py
+# \brief node implementing the oracle behavior
+# \author  Enzo Ubaldo Petrocco
+# \version 1.0
+# \date November 2021
+# \details
+#
+# Publishes to:<BR>
+#   None
+#
+# ServiceServer:<BR>
+#   /send_hint (ExperimentalRoboticsLab.srv.Hint)
+#   /ask_solution (ExperimentalRoboticsLab.srv.TrySolution)
+#
+# ServiceCline:<BR>
+#   None
+#
+# ActionServer:<BR>
+#   None
+#
+#
+# Description:
+#
+# oracle.py is a script which takes part in the initialization of the 
+# environment setting, among the possible ones, the right hypothesis
+# Since it is the only one that knows the solution, also it tells the
+# robot if it is the right one or not.
+##
+
 import rospy
 from rospy.core import loginfo
 from rospy.impl.tcpros_service import Service, ServiceProxy
 import random
 from datetime import datetime
 from geometry_msgs.msg import Point
-import ExperimentalRoboticsLab.msg._PositionAction
 import json
 from ExperimentalRoboticsLab.srv import Hint
 from ExperimentalRoboticsLab.srv import TrySolution
 #people=['Col.Mustard', 'Miss.Scarlett', 'Mrs.Peacock', 'Mrs.White', 'Prof.Plum', 'Rev.Green']
 #places=['Ballroom', 'Biliard_Room', 'Conservatory', 'Dining_Room', 'Hall', 'Kitchen', 'Library', 'Lounge','Study']
 #weapons=['Candlestick', 'Dagger','LeadPipe', 'Revolver', 'Rope', 'Spanner']
+## solution saved locally
 solution = None
+## json which containts all the possible hypotheses
 environment_description = None
+## number of hints
 n_hints = 0
+## the id of the solution
 solution_complete_of_id = None
 
+## initialization of the environment
 def initialization(environment_description):
+    """!
+    /initialization function
+    This function is called at the beginning
+    of the program, since it must select one of the possible solutions
+    randomly.
+    /param environment_description (json)
+    """
     global solution, n_hints, solution_complete_of_id
 
     random.seed(datetime.now())
@@ -51,7 +93,13 @@ def initialization(environment_description):
     #print(solution)
     #print("\nA murdered has happened")
 
+## random_select_type
 def random_select_type():
+    """!
+    /random_select_type it selects a type
+    for the generation of the random hint
+    also this is done randomly
+    """
     integer = random.randint(0,2)
     if integer == 0:
         return "who"
@@ -59,7 +107,14 @@ def random_select_type():
         return "what"
     return "where"
 
+## check_hint
 def check_hint(hint, hint_sent):
+    """!
+    /check_hint function
+    It checks if the hint is a well formed hint
+    and checks if the hint is already sent
+    /return bool
+    """
     if len(hint)>0:
         i = 0
         while i<len(hint_sent) and hint_sent[i] is not None:
@@ -69,7 +124,15 @@ def check_hint(hint, hint_sent):
         return True
     return False
 
+## send_hint
 def send_hint(req):
+    """!
+    /send_hint callback
+    It is a callback that send a random hint
+    among all possible hints
+    /param req
+    /return hint object (Hint)
+    """
     global environment_description
     hint_sent_string = rospy.get_param('/hint_sent')
     hint_sent = json.loads(hint_sent_string)
@@ -124,7 +187,15 @@ def send_hint(req):
         res["theta"] = hint["theta"]
     return res
 
+## check_if_solution_is_correct
 def check_if_solution_is_correct(msg):
+    """!
+    /check_if_solution_is_correct callback
+    This function responde to the robot if the solution
+    that he sent is correct
+    /param msg (string)
+    /return bool
+    """
     if msg.id == solution_complete_of_id["id"]:
         print ("The solution is correct, congratulations")
         return True
@@ -132,7 +203,13 @@ def check_if_solution_is_correct(msg):
         print("Try again")
         return False
 
+## main function
 def main():
+    """!
+    /main function
+    This function initialize the oracle node and 
+    gets the environment description which describes all the hypotheses
+    """
     global random_position_client, solution, environment_description
     rospy.init_node('oracle')
     
