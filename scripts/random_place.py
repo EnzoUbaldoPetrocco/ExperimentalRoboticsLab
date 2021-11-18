@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 
 ## @package ExperimentalRoboticsLab
-# \random_place.py
+# \file random_place.py
 # \brief node implementing the oracle behavior
 # \author  Enzo Ubaldo Petrocco
 # \version 1.0

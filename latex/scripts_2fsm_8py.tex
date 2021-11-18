@@ -1,0 +1,83 @@
+\hypertarget{scripts_2fsm_8py}{}\doxysection{scripts/fsm.py File Reference}
+\label{scripts_2fsm_8py}\index{scripts/fsm.py@{scripts/fsm.py}}
+
+
+node implementing the finite state machined  
+
+
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classfsm_1_1_navigation}{fsm.\+Navigation}}
+\begin{DoxyCompactList}\small\item\em define state \mbox{\hyperlink{classfsm_1_1_navigation}{Navigation}} \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfsm_1_1_investigation}{fsm.\+Investigation}}
+\begin{DoxyCompactList}\small\item\em define state \mbox{\hyperlink{classfsm_1_1_investigation}{Investigation}} \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfsm_1_1_go_to_oracle}{fsm.\+Go\+To\+Oracle}}
+\begin{DoxyCompactList}\small\item\em define state \mbox{\hyperlink{classfsm_1_1_go_to_oracle}{Go\+To\+Oracle}} \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfsm_1_1_assert}{fsm.\+Assert}}
+\begin{DoxyCompactList}\small\item\em define state \mbox{\hyperlink{classfsm_1_1_assert}{Assert}} \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfsm_1_1_finished}{fsm.\+Finished}}
+\begin{DoxyCompactList}\small\item\em define state \mbox{\hyperlink{classfsm_1_1_finished}{Finished}} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bfseries fsm.\+main} ()
+\begin{DoxyCompactList}\small\item\em Main function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+node implementing the finite state machined 
+
+\begin{DoxyAuthor}{Author}
+Enzo Ubaldo Petrocco 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+November 2021
+\end{DoxyDate}
+Publishes to\+:~\newline
+ None
+
+Service\+Server\+:~\newline
+
+
+Service\+Cline\+:~\newline
+ /random\+\_\+place\+\_\+service (Experimental\+Robotics\+Lab.\+srv.\+Random\+Place) /investigate (Experimental\+Robotics\+Lab.\+srv.\+Investigate) /ask\+\_\+solution (Experimental\+Robotics\+Lab.\+srv.\+Try\+Solution)
+
+Action\+Server\+:~\newline
+ /go\+\_\+to\+\_\+point (Experimental\+Robotics\+Lab.\+action.\+Position\+Action)
+
+Description\+:
+
+fsm.\+py is a script which manages a state machine which represents the actions that a robot must do in order to play Cluedo in a fictitious environment. The F\+SM has 5 states\+: Navigation\+: the robot navigates through an environment thanks to the random position which has been given by a custom service, possible outcomes are\+:
+\begin{DoxyItemize}
+\item investigation
+\item navigation Investigation\+: the robot investigates thanks to armor client, in order to know if there is a consistent hypothesis, possible outcomes are\+:
+\item navigation
+\item investigation
+\item go\+\_\+to\+\_\+oracle Go\+To\+Oracle\+: the robot goes to the oracle; even if in this implementation the only outcome is assert, in theory the possible outcomes are\+:
+\item navigation
+\item investigation
+\item go\+\_\+to\+\_\+oracle\+\_\+
+\item assert Assert\+: the robot asks if among the consistent hypotheses it has there is the correct one, possible outcomes are\+:
+\item navigation
+\item investigation
+\item go\+\_\+to\+\_\+oracle
+\item assert
+\item finished Finished\+: the robot has won 
+\end{DoxyItemize}
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{build_2catkin__generated_2installspace_2fsm_8py_ada531077ea75ae58686c827c374883b1}\label{build_2catkin__generated_2installspace_2fsm_8py_ada531077ea75ae58686c827c374883b1}} 
+\index{fsm.py@{fsm.py}!main@{main}}
+\index{main@{main}!fsm.py@{fsm.py}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily def fsm.\+main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Main function. 
+
+/main function It initialize the node fsm, then the clients and actions needed, also the fsm with smach then it waits /param userdata () 

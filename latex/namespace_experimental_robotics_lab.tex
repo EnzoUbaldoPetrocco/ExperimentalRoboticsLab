@@ -1,0 +1,158 @@
+\hypertarget{namespace_experimental_robotics_lab}{}\doxysection{Experimental\+Robotics\+Lab Namespace Reference}
+\label{namespace_experimental_robotics_lab}\index{ExperimentalRoboticsLab@{ExperimentalRoboticsLab}}
+
+
+node implementing the finite state machined  
+
+
+
+
+\doxysubsection{Detailed Description}
+node implementing the finite state machined 
+
+node implementing the oracle behavior
+
+node implementing the navigation part of the robot
+
+node implementing the investigation part of the robot
+
+\textbackslash{}fsm.py \begin{DoxyAuthor}{Author}
+Enzo Ubaldo Petrocco 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+November 2021
+\end{DoxyDate}
+Publishes to\+:~\newline
+ None
+
+Service\+Server\+:~\newline
+
+
+Service\+Cline\+:~\newline
+ /random\+\_\+place\+\_\+service (Experimental\+Robotics\+Lab.\+srv.\+Random\+Place) /investigate (Experimental\+Robotics\+Lab.\+srv.\+Investigate) /ask\+\_\+solution (Experimental\+Robotics\+Lab.\+srv.\+Try\+Solution)
+
+Action\+Server\+:~\newline
+ /go\+\_\+to\+\_\+point (Experimental\+Robotics\+Lab.\+action.\+Position\+Action)
+
+Description\+:
+
+fsm.\+py is a script which manages a state machine which represents the actions that a robot must do in order to play Cluedo in a fictitious environment. The F\+SM has 5 states\+: Navigation\+: the robot navigates through an environment thanks to the random position which has been given by a custom service, possible outcomes are\+:
+\begin{DoxyItemize}
+\item investigation
+\item navigation Investigation\+: the robot investigates thanks to armor client, in order to know if there is a consistent hypothesis, possible outcomes are\+:
+\item navigation
+\item investigation
+\item go\+\_\+to\+\_\+oracle Go\+To\+Oracle\+: the robot goes to the oracle; even if in this implementation the only outcome is assert, in theory the possible outcomes are\+:
+\item navigation
+\item investigation
+\item go\+\_\+to\+\_\+oracle\+\_\+
+\item assert Assert\+: the robot asks if among the consistent hypotheses it has there is the correct one, possible outcomes are\+:
+\item navigation
+\item investigation
+\item go\+\_\+to\+\_\+oracle
+\item assert
+\item finished Finished\+: the robot has won
+\end{DoxyItemize}
+
+\textbackslash{}investigation.py \begin{DoxyAuthor}{Author}
+Enzo Ubaldo Petrocco 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+November 2021
+\end{DoxyDate}
+Publishes to\+:~\newline
+ None
+
+Service\+Server\+:~\newline
+ /investigate (Experimental\+Robotics\+Lab.\+srv.\+Investigate)
+
+Service\+Cline\+:~\newline
+ /armor\+\_\+client (Armor client is given through armor\+\_\+api\+\_\+scripts) /send\+\_\+hint (Experimental\+Robotics\+Lab.\+srv.\+Hint)
+
+Action\+Server\+:~\newline
+ None
+
+Description\+:
+
+investigate.\+py is a script which manages the communication between the armor client and the robot. It asks the oracle for a hint and then reason in order to get complete hypotheses, if it get them, it writes them in a file\+: \textquotesingle{}consistent\+\_\+hypotheses.\+json\textquotesingle{}
+
+\textbackslash{}navigation.py \begin{DoxyAuthor}{Author}
+Enzo Ubaldo Petrocco 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+November 2021
+\end{DoxyDate}
+Publishes to\+:~\newline
+ None
+
+Service\+Server\+:~\newline
+ None
+
+Service\+Cline\+:~\newline
+ None
+
+Action\+Server\+:~\newline
+ /go\+\_\+to\+\_\+point (Experimental\+Robotics\+Lab.\+msg.\+Position\+Action)
+
+Description\+:
+
+navigation.\+py is a script which manages the navigation to a point of the robot It starts from \mbox{[}0,0\mbox{]}, then it goes for the point which has been asked to reached when it gets this, it sets \textquotesingle{}succeded\textquotesingle{} to the result
+
+\textbackslash{}oracle.py \begin{DoxyAuthor}{Author}
+Enzo Ubaldo Petrocco 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+November 2021
+\end{DoxyDate}
+Publishes to\+:~\newline
+ None
+
+Service\+Server\+:~\newline
+ /send\+\_\+hint (Experimental\+Robotics\+Lab.\+srv.\+Hint) /ask\+\_\+solution (Experimental\+Robotics\+Lab.\+srv.\+Try\+Solution)
+
+Service\+Cline\+:~\newline
+ None
+
+Action\+Server\+:~\newline
+ None
+
+Description\+:
+
+oracle.\+py is a script which takes part in the initialization of the environment setting, among the possible ones, the right hypothesis Since it is the only one that knows the solution, also it tells the robot if it is the right one or not.
+
+\textbackslash{}random\+\_\+place.py \begin{DoxyAuthor}{Author}
+Enzo Ubaldo Petrocco 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+November 2021
+\end{DoxyDate}
+Publishes to\+:~\newline
+ None
+
+Service\+Server\+:~\newline
+ /random\+\_\+place\+\_\+service (Experimental\+Robotics\+Lab.\+srv.\+Random\+Place)
+
+Service\+Cline\+:~\newline
+ None
+
+Action\+Server\+:~\newline
+ None
+
+Description\+:
+
+random\+\_\+place.\+py is a scripts that simply generates a random place (x,y,theta), which will become the new robot target. 

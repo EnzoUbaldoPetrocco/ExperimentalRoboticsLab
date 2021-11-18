@@ -2,7 +2,7 @@
 
 
 ## @package ExperimentalRoboticsLab
-# \oracle.py
+# \file oracle.py
 # \brief node implementing the oracle behavior
 # \author  Enzo Ubaldo Petrocco
 # \version 1.0

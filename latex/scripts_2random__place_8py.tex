@@ -1,0 +1,66 @@
+\hypertarget{scripts_2random__place_8py}{}\doxysection{scripts/random\+\_\+place.py File Reference}
+\label{scripts_2random__place_8py}\index{scripts/random\_place.py@{scripts/random\_place.py}}
+
+
+node implementing the oracle behavior  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bfseries random\+\_\+place.\+random\+\_\+place} (msg)
+\begin{DoxyCompactList}\small\item\em random\+\_\+place \end{DoxyCompactList}\item 
+def {\bfseries random\+\_\+place.\+main} ()
+\begin{DoxyCompactList}\small\item\em main \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+node implementing the oracle behavior 
+
+\begin{DoxyAuthor}{Author}
+Enzo Ubaldo Petrocco 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+November 2021
+\end{DoxyDate}
+Publishes to\+:~\newline
+ None
+
+Service\+Server\+:~\newline
+ /random\+\_\+place\+\_\+service (Experimental\+Robotics\+Lab.\+srv.\+Random\+Place)
+
+Service\+Cline\+:~\newline
+ None
+
+Action\+Server\+:~\newline
+ None
+
+Description\+:
+
+random\+\_\+place.\+py is a scripts that simply generates a random place (x,y,theta), which will become the new robot target. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{build_2catkin__generated_2installspace_2random__place_8py_a2b38e518946ad16761a6a6a1e4f27a6b}\label{build_2catkin__generated_2installspace_2random__place_8py_a2b38e518946ad16761a6a6a1e4f27a6b}} 
+\index{random\_place.py@{random\_place.py}!main@{main}}
+\index{main@{main}!random\_place.py@{random\_place.py}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily def random\+\_\+place.\+main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+main 
+
+/main function This function initialize the node and the random\+\_\+place\+\_\+service \mbox{\Hypertarget{build_2catkin__generated_2installspace_2random__place_8py_a544210ddf15412a8f9550e9b26719155}\label{build_2catkin__generated_2installspace_2random__place_8py_a544210ddf15412a8f9550e9b26719155}} 
+\index{random\_place.py@{random\_place.py}!random\_place@{random\_place}}
+\index{random\_place@{random\_place}!random\_place.py@{random\_place.py}}
+\doxysubsubsection{\texorpdfstring{random\_place()}{random\_place()}}
+{\footnotesize\ttfamily def random\+\_\+place.\+random\+\_\+place (\begin{DoxyParamCaption}\item[{msg}]{ }\end{DoxyParamCaption})}
+
+
+
+random\+\_\+place 
+
+/random\+\_\+place callback This callback simply select a random index, using this it returns a Pose (x,y,theta) 

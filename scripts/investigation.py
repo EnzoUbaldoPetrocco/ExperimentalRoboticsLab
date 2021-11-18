@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 
 ## @package ExperimentalRoboticsLab
-# \investigation.py
+# \file investigation.py
 # \brief node implementing the investigation part of the robot
 # \author  Enzo Ubaldo Petrocco
 # \version 1.0

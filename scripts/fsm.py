@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 
 ## @package ExperimentalRoboticsLab
-# \fsm.py
+# \file fsm.py
 # \brief node implementing the finite state machined
 # \author  Enzo Ubaldo Petrocco
 # \version 1.0

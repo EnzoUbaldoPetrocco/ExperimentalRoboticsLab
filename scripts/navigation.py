@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 
 ## @package ExperimentalRoboticsLab
-# \navigation.py
+# \file navigation.py
 # \brief node implementing the navigation part of the robot
 # \author  Enzo Ubaldo Petrocco
 # \version 1.0
