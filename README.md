@@ -6,14 +6,17 @@ The assignment concerns a robot that has to move randomly in a Cluedo Environmen
 
 ## Diagrams
 Component diagram:
+
 ![Component diagram](https://user-images.githubusercontent.com/48513075/142313128-79114576-d12c-440f-b708-89f265e6ec3d.jpg)
+
+
 Sequence diagram:
 
 ![Sequence diagram](https://user-images.githubusercontent.com/48513075/142313898-8d2a956a-f888-4b72-b59d-f9262063f341.jpg)
 
 ## Video
 Example of the working with a video:
-file:///home/enzo/Scrivania/VideoEnzo-2021-11-17_22.25.28.mkv
+![Video](https://unigeit-my.sharepoint.com/:f:/r/personal/s4530363_studenti_unige_it/Documents/videoo?csf=1&web=1&e=GhLmLU)
 
 
 
