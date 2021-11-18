@@ -16,7 +16,7 @@ Sequence diagram:
 
 ## Video
 Example of the working with a video:
-![Video](https://unigeit-my.sharepoint.com/:f:/r/personal/s4530363_studenti_unige_it/Documents/videoo?csf=1&web=1&e=VhPgTc)
+![Video](https://unigeit-my.sharepoint.com/:f:/g/personal/s4530363_studenti_unige_it/Evgh67vVc89EnqRuW1RhmTUBw8b1sSGz_1oKpHSLzuI49g?e=etqFqy)
 
 
 
