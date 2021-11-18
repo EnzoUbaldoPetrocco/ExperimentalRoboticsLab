@@ -6,7 +6,13 @@ The assignment concerns a robot that has to move randomly in a Cluedo Environmen
 
 ## Installation
 In order to install this package you should have [Armor][https://github.com/EmaroLab/armor], but the package 'armor_py_api' must be replace with the one which can be found in the branch 'armor_api' of this repository.
-In order to install this package also Smach and Java libraries (olde)
+In order to not have problems with docker, replace: armor_api.armor_exceptions with armor_api anywhere in armor_api folder in armor_py_api.
+In order to launch the program:
+
+```
+roslaunch ExperimentalRoboticsLab basic.launch
+```
+
 
 ## Assumptions, working hypotheses and environment
 
