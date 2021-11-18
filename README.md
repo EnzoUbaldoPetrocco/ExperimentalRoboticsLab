@@ -5,6 +5,9 @@ This repository represents the assignment of Experimental Robotics Lab course
 The assignment concerns a robot that has to move randomly in a Cluedo Environment, enter in the rooms, where it receives some hints. Through the hints the robot must reason and generate hypotheses which have to be consistent, must go to the oracle that knows which hypothesis is the truth and ask him. If the robot has guessed the hypothesis the robot won, else the robot continues to play.
 
 ## Diagrams
+Component diagram:
+![Component diagram](https://user-images.githubusercontent.com/48513075/142313128-79114576-d12c-440f-b708-89f265e6ec3d.jpg)
+Sequence diagram:
 
 
 
