@@ -1,5 +1,11 @@
 <?xml version="1.0"?>
 <launch>
+
+<arg name="model" default="$(find ExperimentalRoboticsLab)/urdf/m2wr_arm.xacro" />
+
+  <!-- Load the URDF into the ROS Parameter Server -->
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
+
 	
 
   <arg name="gazebo_gui" default="true"/>
@@ -45,7 +51,13 @@
 
   <node name="simulation" pkg ="ExperimentalRoboticsLab" type="simulation" output="screen" /> 
 	
+  <!-- start RViz -->
+  <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" ></node>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" /> 
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find ExperimentalRoboticsLab)/config/sim.rviz" /> 
 	
+
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+	args="-urdf -model m2wr -param robot_description -z 0.05"/> 
 
 </launch>

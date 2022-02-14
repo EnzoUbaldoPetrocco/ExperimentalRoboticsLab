@@ -14,6 +14,7 @@ find_package(catkin REQUIRED COMPONENTS
   visualization_msgs
   gazebo_msgs
   message_generation
+  moveit_ros_planning_interface
 )
 
 ## System dependencies are found with CMake's conventions
