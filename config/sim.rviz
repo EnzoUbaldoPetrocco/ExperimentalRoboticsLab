@@ -100,12 +100,12 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        laser:
+        grip_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        left_grip_link:
+        laser:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -120,11 +120,7 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        right_grip_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
+        
       Name: RobotModel
       Robot Description: robot_description
       TF Prefix: ""

@@ -51,13 +51,10 @@
 
   <node name="simulation" pkg ="ExperimentalRoboticsLab" type="simulation" output="screen" /> 
 	
-  <!-- start RViz -->
   <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" ></node>
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find ExperimentalRoboticsLab)/config/sim.rviz" /> 
+  
 	
 
-  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
-	args="-urdf -model m2wr_arm -param robot_description -z 0.05"/> 
 
 <rosparam file="$(find ExperimentalRoboticsLab)/config/motors_config,yaml" command="load" ns="/m2wr" />
 <node name="controller_spawner" pkg="controller_manager" type="spawner" output="screen" args="--namespace=/m2wr
@@ -66,11 +63,18 @@ joint1_position_controller
 joint2_position_controller
 joint3_position_controller
 joint4_position_controller
+grip_position_controller
 --shutdown-timeout 3">
 </node>
-<node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher">
+<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
 <remap from="joint_states" to="m2wr/joint_states"/>
 </node>
 
+
+  <!-- start RViz -->
+<node name="rviz" pkg="rviz" type="rviz" args="-d $(find ExperimentalRoboticsLab)/config/sim.rviz" /> 
+
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+	args="-urdf -model m2wr_arm -param robot_description -z 0.05"/> 
 
 </launch>

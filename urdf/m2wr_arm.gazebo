@@ -30,12 +30,10 @@
   </gazebo>
 
 
-      <gazebo reference="right_grip_link">
+      <gazebo reference="grip_link">
     <material>Gazebo/White</material>
   </gazebo>
-        <gazebo reference="left_grip_link">
-    <material>Gazebo/White</material>
-  </gazebo>
+       
 
  
   <gazebo>

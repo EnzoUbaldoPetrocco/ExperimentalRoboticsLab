@@ -280,7 +280,7 @@
   </joint>
 
 
-<link name="right_grip_link">
+<link name="grip_link">
   	<inertial>
   		<mass value="0.01"/>
   		<origin xyz="0 0 0" rpy="0 0 0" />
@@ -301,42 +301,14 @@
   	</visual>
   </link>
 
-  <joint name="right_grip_joint" type="prismatic">
+  <joint name="grip_joint" type="prismatic">
   	<axis xyz="1 0 0"/>
   	<limit effort="1000.0" lower="-0.04" upper="0.035" velocity="6.5"/>
   	<origin rpy="0 0 0" xyz="-0.015 0 0.0"/>
   	<parent link="arm_link_04"/>
-  	<child link="right_grip_link"/>
+  	<child link="grip_link"/>
   </joint>
 
-  <link name="left_grip_link">
-  	<inertial>
-  		<mass value="0.01"/>
-  		<origin xyz="0 0 0" rpy="0 0 0" />
-  		<inertia ixx="0.000010279" ixy="0" ixz="0" iyy="0.000010279" iyz="0" izz="0.000007225"/>
-  	</inertial>
-  	<collision>
-  	  <origin xyz="0.06 0.048 0.04" rpy="0 3.1415 -1.57"/>
-      <geometry>
-        <box size="0.06 0.02 0.08"/>
-      </geometry>
-  	</collision>
-  	<visual>
-  	  <origin xyz="0.06 0.048 0.04" rpy="0 3.1415 -1.57"/>
-      <geometry>
-        <box size="0.06 0.02 0.08"/>
-      </geometry>
-      <material name="white" />
-  	</visual>
-  </link>
-
-  <joint name="left_grip_joint" type="prismatic">
-  	<axis xyz="1 0 0"/>
-  	<limit effort="1000.0" upper="0.04" lower="-0.035" velocity="6.5"/>
-  	<origin rpy="0 0 0" xyz="-0.015 0 0.0"/>
-  	<parent link="arm_link_04"/>
-  	<child link="left_grip_link"/>
-  </joint>
 
 
 <transmission name="arm_joint_01_trans">
@@ -378,6 +350,18 @@
 <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
 </joint>
 <actuator name="motor4">
+<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+<mechanicalInterface>1</mechanicalInterface>
+</actuator>
+</transmission>
+
+
+<transmission name="grip_joint_trans">
+<type>transmission_interface/SimpleTransmission</type>
+<joint name="grip_joint">
+<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+</joint>
+<actuator name="motor5">
 <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
 <mechanicalInterface>1</mechanicalInterface>
 </actuator>
