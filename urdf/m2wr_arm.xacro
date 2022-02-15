@@ -287,13 +287,13 @@
   		<inertia ixx="0.000010279" ixy="0" ixz="0" iyy="0.000010279" iyz="0" izz="0.000007225"/>
   	</inertial>
   	<collision>
-  	  <origin xyz="-0.032 0.048 0.04" rpy="0 3.1415 -1.57"/>
+  	  <origin xyz="0 0.048 0.04" rpy="0 3.1415 -1.57"/>
       <geometry>
         <box size="0.06 0.02 0.08"/>
       </geometry>
   	</collision>
   	<visual>
-  	  <origin xyz="-0.032 0.048 0.04" rpy="0 3.1415 -1.57"/>
+  	  <origin xyz="0 0.048 0.04" rpy="0 3.1415 -1.57"/>
       <geometry>
         <box size="0.06 0.02 0.08"/>
       </geometry>
