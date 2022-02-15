@@ -62,6 +62,14 @@
     </plugin>
   </gazebo>
 
+  <gazebo>
+<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+<robotNamespace>m2wr</robotNamespace>
+<robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+<legacyModeNS>true</legacyModeNS>
+</plugin>
+</gazebo>
+
   <gazebo reference="laser">
     <sensor type="ray" name="head_hokuyo_sensor">
       <pose>0 0 0 0 0 0</pose>
