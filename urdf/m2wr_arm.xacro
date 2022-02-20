@@ -214,7 +214,7 @@
   </link>
 
   <joint name="arm_joint_02" type="revolute">
-  	<axis xyz="1 0 0"/>
+  	<axis xyz="0 0 1"/>
   	<limit effort="1000.0" lower="-1.8" upper="1.8" velocity="0.3"/>
   	<origin rpy="1.57 0 0" xyz="0 0 0.18"/>
   	<parent link="arm_link_01"/>
@@ -243,7 +243,7 @@
   </link>
 
   <joint name="arm_joint_03" type="revolute">
-  	<axis xyz="-1 0 0"/>
+  	<axis xyz="0 0 1"/>
   	<limit effort="1000.0" lower="-1.8" upper="1.8" velocity="0.3"/>
   	<origin rpy="-1.57 0 0" xyz="0 0 0"/>
   	<parent link="arm_link_02"/>
