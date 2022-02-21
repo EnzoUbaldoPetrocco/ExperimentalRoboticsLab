@@ -280,7 +280,7 @@
   </joint>
 
 
-<link name="grip_link">
+<link name="cluedo_link">
   	<inertial>
   		<mass value="0.0075"/>
   		<origin xyz="0 0 0" rpy="0 0 0" />
@@ -301,12 +301,12 @@
   	</visual>
   </link>
 
-  <joint name="grip_joint" type="prismatic">
+  <joint name="cluedo_joint" type="prismatic">
   	<axis xyz="1 0 0"/>
   	<limit effort="1000.0" lower="-0.04" upper="0.035" velocity="6.5"/>
   	<origin rpy="0 0 0" xyz="0 0 0"/>
   	<parent link="arm_link_04"/>
-  	<child link="grip_link"/>
+  	<child link="cluedo_link"/>
   </joint>
 
 
@@ -356,9 +356,9 @@
 </transmission>
 
 
-<transmission name="grip_joint_trans">
+<transmission name="cluedo_joint_trans">
 <type>transmission_interface/SimpleTransmission</type>
-<joint name="grip_joint">
+<joint name="cluedo_joint">
 <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
 </joint>
 <actuator name="motor5">

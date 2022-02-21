@@ -27,7 +27,7 @@
   </gazebo>
 
 
-      <gazebo reference="grip_link">
+      <gazebo reference="cluedo_link">
     <material>Gazebo/White</material>
   </gazebo>
        
@@ -143,14 +143,14 @@
 </plugin>
 </gazebo>
 
-<gazebo reference="grip_joint">
+<gazebo reference="cluedo_joint">
 <provideFeedback>true</provideFeedback>
 </gazebo>
 <gazebo>
 <plugin name="ft_sensor" filename="libgazebo_ros_ft_sensor.so">
 <updateRate>100.0</updateRate>
 <topicName>ft_sensor_topic</topicName>
-<jointName>grip_joint</jointName>
+<jointName>cluedo_joint</jointName>
 </plugin>
 </gazebo>
 

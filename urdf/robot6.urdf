@@ -52,7 +52,7 @@
     <gazebo reference="arm_link_04">
         <material>Gazebo/Red</material>
     </gazebo>
-    <gazebo reference="grip_link">
+    <gazebo reference="cluedo_link">
         <material>Gazebo/White</material>
     </gazebo>
     <gazebo>
@@ -156,14 +156,14 @@
             <jointName>arm_joint_04</jointName>
         </plugin>
     </gazebo>
-    <gazebo reference="grip_joint">
+    <gazebo reference="cluedo_joint">
         <provideFeedback>true</provideFeedback>
     </gazebo>
     <gazebo>
         <plugin filename="libgazebo_ros_ft_sensor.so" name="ft_sensor">
             <updateRate>100.0</updateRate>
             <topicName>ft_sensor_topic</topicName>
-            <jointName>grip_joint</jointName>
+            <jointName>cluedo_joint</jointName>
         </plugin>
     </gazebo>
     <link name="base_link">
@@ -443,7 +443,7 @@
         <parent link="arm_link_03" />
         <child link="arm_link_04" />
     </joint>
-    <link name="grip_link">
+    <link name="cluedo_link">
         
 <inertial>
             <mass value="0.0075" />
@@ -465,12 +465,12 @@
             <material name="white" />
         </visual>
     </link>
-    <joint name="grip_joint" type="prismatic">
+    <joint name="cluedo_joint" type="prismatic">
         <axis xyz="1 0 0" />
         <limit effort="1000.0" lower="-0.04" upper="0.035" velocity="6.5" />
         <origin rpy="0 0 0" xyz="0 0 0" />
         <parent link="arm_link_04" />
-        <child link="grip_link" />
+        <child link="cluedo_link" />
     </joint>
     
 <transmission name="arm_joint_01_trans">
@@ -513,9 +513,9 @@
             <mechanicalInterface>1</mechanicalInterface>
         </actuator>
     </transmission>
-    <transmission name="grip_joint_trans">
+    <transmission name="cluedo_joint_trans">
         <type>transmission_interface/SimpleTransmission</type>
-        <joint name="grip_joint">
+        <joint name="cluedo_joint">
             <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         </joint>
         <actuator name="motor5">
@@ -583,12 +583,12 @@
             <mechanicalReduction>1</mechanicalReduction>
         </actuator>
     </transmission>
-    <transmission name="trans_grip_joint">
+    <transmission name="trans_cluedo_joint">
         <type>transmission_interface/SimpleTransmission</type>
-        <joint name="grip_joint">
+        <joint name="cluedo_joint">
             <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         </joint>
-        <actuator name="grip_joint_motor">
+        <actuator name="cluedo_joint_motor">
             <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
             <mechanicalReduction>1</mechanicalReduction>
         </actuator>
