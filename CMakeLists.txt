@@ -15,6 +15,8 @@ find_package(catkin REQUIRED COMPONENTS
   gazebo_msgs
   message_generation
   moveit_ros_planning_interface
+  actionlib
+  actionlib_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -65,15 +67,17 @@ add_service_files(
  )
 
 ## Generate actions in the 'action' folder
-# add_action_files(
-#   FILES
+ add_action_files(
+    FILES
+    Position.action
 #   Action1.action
 #   Action2.action
-# )
+ )
 
 ## Generate added messages and services with any dependencies listed here
  generate_messages(
    DEPENDENCIES
+   actionlib_msgs
 #   std_msgs
  )
 
@@ -163,10 +167,11 @@ add_dependencies(simulation ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTE
 
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
-# catkin_install_python(PROGRAMS
+ catkin_install_python(PROGRAMS
+ scripts/go_to_point.py
 #   scripts/my_python_script
-#   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-# )
+   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+ )
 
 ## Mark executables for installation
 ## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_executables.html
