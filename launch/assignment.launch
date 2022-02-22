@@ -63,7 +63,7 @@ joint1_position_controller
 joint2_position_controller
 joint3_position_controller
 joint4_position_controller
-cluedo_position_controller
+cluedo_joint_position_controller
 --shutdown-timeout 3">
 </node>
 <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
