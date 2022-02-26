@@ -6,15 +6,45 @@
 #include <moveit/robot_model/robot_model.h>
 #include <moveit/robot_state/robot_state.h>
 #include <string.h>
+#include <ExperimentalRoboticsLab/ErlOracle.h>
+#include <ExperimentalRoboticsLab/FindHint.h>
+#include <iostream>
+#include <stdlib.h>
+#include <time.h>
+#include <vector>
+
+std::vector<ExperimentalRoboticsLab::ErlOracle> oracle_msgs;
 
 class MyMoveIt{
   public:
   //members
+  bool found;
   //methods
   MyMoveIt();
   void move_to_the_pose(geometry_msgs::Pose pose);
   void move_to_custom_pose(std::string str);
+  void hint_found(const ExperimentalRoboticsLab::ErlOracle::ConstPtr& msg);
+  void find_hint(const ExperimentalRoboticsLab::FindHint::ConstPtr& msg);
 };
+void MyMoveIt::hint_found(const ExperimentalRoboticsLab::ErlOracle::ConstPtr& msg){
+  this->found = true;
+};
+
+void MyMoveIt::find_hint(const ExperimentalRoboticsLab::FindHint::ConstPtr& msg){
+  this->move_to_custom_pose("check");
+  sleep(10);
+  geometry_msgs::Pose pose;
+  pose.position.x = msg->x_pos;
+  pose.position.y = msg->y_pos;
+  pose.position.z = msg->z_pos;
+  pose.orientation.x = msg->x_quat;
+  pose.orientation.y = msg->y_quat;
+  pose.orientation.z = msg->z_quat;
+  pose.orientation.w = msg->w_quat;
+  this->move_to_the_pose(pose);
+}
+
+
 MyMoveIt::MyMoveIt(){
   // We start by instantiating a
   // `RobotModelLoader`_
@@ -139,36 +169,13 @@ void MyMoveIt::move_to_the_pose(geometry_msgs::Pose pose){
 int main(int argc, char** argv)
 {
   ros::init(argc, argv, "my_moveit");
+  ros::NodeHandle nh;
+  MyMoveIt move_it = MyMoveIt();
+  ros::Subscriber sub_oracle_hint = nh.subscribe("/oracle_hint", 10, &MyMoveIt::hint_found, &move_it );
+  ros::Subscriber sub_find_hint = nh.subscribe("/find_hint", 10, &MyMoveIt::find_hint, &move_it );
   sleep(10);
   ros::AsyncSpinner spinner(1);
   spinner.start();
-  MyMoveIt move_it = MyMoveIt();
-
-  //kinematic_state->setToRandomPositions(joint_model_group);
-  //const Eigen::Isometry3d& pose1 = kinematic_state->getGlobalLinkTransform("arm_link_04");
-  geometry_msgs::Pose pose1;
-  pose1.orientation.w = 0.70;
-  pose1.orientation.x = -0.00;
-  pose1.orientation.y = 0.00;
-  pose1.orientation.z = -0.71;
-  pose1.position.x =  0.50;
-  pose1.position.y =  0.00;
-  pose1.position.z =  1.15;
-
-
-  move_it.move_to_the_pose(pose1);
-
-  sleep(10.0);
-  
-  move_it.move_to_custom_pose("check");
-  
-  sleep(10.0);
-	
-  move_it.move_to_custom_pose("home");
-
-  sleep(10.0);
-
-  move_it.move_to_custom_pose("zero");
 
   ros::shutdown();
   return 0;
