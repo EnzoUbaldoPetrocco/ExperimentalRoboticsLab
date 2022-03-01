@@ -42,6 +42,10 @@ void MyMoveIt::find_hint(const ExperimentalRoboticsLab::FindHint::ConstPtr& msg)
   pose.orientation.z = msg->z_quat;
   pose.orientation.w = msg->w_quat;
   this->move_to_the_pose(pose);
+  while(this->found == false){
+    sleep(1);
+  }
+  this->found = false;
 }
 
 

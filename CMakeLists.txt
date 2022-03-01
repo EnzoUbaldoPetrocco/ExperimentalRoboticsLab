@@ -64,6 +64,9 @@ find_package(catkin REQUIRED COMPONENTS
 add_service_files(
    FILES
    Oracle.srv
+   Hint.srv
+   Investigate.srv
+   Position.srv
 #   Service2.srv
  )
 
@@ -174,6 +177,12 @@ add_dependencies(simulation ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTE
 ## in contrast to setup.py, you can choose the destination
  catkin_install_python(PROGRAMS
  scripts/go_to_point.py
+#   scripts/my_python_script
+   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+ )
+
+  catkin_install_python(PROGRAMS
+ scripts/investigation.py
 #   scripts/my_python_script
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
