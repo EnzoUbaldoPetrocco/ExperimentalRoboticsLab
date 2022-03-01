@@ -1,8 +1,10 @@
 <?xml version="1.0"?>
 <launch>
+
 <!-- arguments -->
-<arg name="domain_path" default="$(find ExperimentalRoboticsLab)/PDDL_domain/domain.pddl" />
-<arg name="problem_path" default="$(find ExperimentalRoboticsLab)/PDDL_problem/problem.pddl" />
+<arg name="domain_path" default="$(find ExperimentalRoboticsLab)/PDDL/domain.pddl" />
+<arg name="problem_path" default="$(find ExperimentalRoboticsLab)/PDDL/problem.pddl" />
+
 <!-- knowledge base -->
 <node name="rosplan_knowledge_base" pkg="rosplan_knowledge_base" type="knowledgeBase" respawn="false"
 output="screen">
@@ -18,9 +20,9 @@ output="screen">
 <arg name="problem_topic" value="/rosplan_problem_interface/problem_instance" />
 <arg name="planner_topic" value="planner_output" />
 <arg name="domain_path" value="$(arg domain_path)" />
-<arg name="data_path" value="$(find ExperimentalRoboticsLab)/" />
+<arg name="data_path" value="$(find ExperimentalRoboticsLab)/PDDL" />
 <arg name="planner_command" value="timeout 10 $(find rosplan_planning_system)/common/bin/popf
-DOMAIN PROBLEM" />
+m2wr_cluedo" />
 </include>
 
 <node name="rosplan_parsing_interface" pkg="rosplan_planning_system" type="pddl_simple_plan_parser" respawn="false"
@@ -29,6 +31,7 @@ output="screen">
 <param name="planner_topic" value="/rosplan_planner_interface/planner_output" />
 <param name="plan_topic" value="complete_plan" />
 </node>
+
 <node name="rosplan_plan_dispatcher" pkg="rosplan_planning_system" type="pddl_simple_plan_dispatcher" respawn="false"
 output="screen">
 <param name="knowledge_base" value="rosplan_knowledge_base" />
@@ -42,16 +45,13 @@ output="screen">
 <group if="$(eval arg('simulating_actions') == 'true')">
 
 <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
-<arg name="pddl_action_name" value="go_to_point" />
+<arg name="pddl_action_name" value="navigation" />
 </include>
 <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
-<arg name="pddl_action_name" value="investigate" />
+<arg name="pddl_action_name" value="reason" />
 </include>
 <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
-<arg name="pddl_action_name" value="find_hint" />
-</include>
-<include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
-<arg name="pddl_action_name" value="replan" />
+<arg name="pddl_action_name" value="oracle" />
 </include>
 </group>
 
