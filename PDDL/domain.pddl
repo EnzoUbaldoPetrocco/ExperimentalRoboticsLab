@@ -1,10 +1,9 @@
 (define (domain m2wr_cluedo)
-    (:requirements :strips ::durative-actions)
+    (:requirements :strips :typing :durative-actions)
     (:types
         location
         hint
         hypothesis
-        response
         navigation_token
         game
     )
@@ -12,7 +11,6 @@
         (at ?loc - location)
         (hint_found ?hnt - hint)
         (consistent_hypothesis ?hyp - hypothesis)
-        (oracle_res ?res - response)
         (is_oracle ?loc - location)
         (proceed_investigate ?nav - navigation_token)
         (no_same_location ?from ?to - location)
@@ -21,66 +19,82 @@
     )
 
     (:durative-action navigation
-        :parameters (?nav - navigation ?from ?to- location)
+        :parameters (?nav - navigation ?from ?to - location ?hnt - hint)
         :duration (= ?duration 1)
-        :condition (and 
+        :condition 
             (at start (and
-                    (proceed_investigate ?nav - navigation_token)
-                    (no_same_location ?from ?to - location)
-                    (at ?from - location)
-            ))
+                    (proceed_investigate ?nav)
+                    (no_same_location ?from ?to)
+                    (at ?from)
+            )
         )
         :effect (and
             (at end (and
-                    (not (proceed_investigate ?nav - navigation_token))
-                    (hint_found ?hnt - hint)
-                    (at ?to - location)
-                    (not (at ?from - location))
+                    (not (proceed_investigate ?nav))
+                    (at ?to)
+                    (not (at ?from))
+            ))
+        )
+    )
+
+
+    (:durative-action find_hint
+        :parameters (?nav - navigation ?loc - location ?hnt - hint)
+        :duration (= ?duration 1)
+        :condition 
+            (at start (and
+                    (at ?loc)
+            )
+        )
+        :effect (and
+            (at end (and
+                    (hint_found ?hnt)
             ))
         )
     )
     
 
     (:durative-action reason
+    :parameters (?hnt - hint ?hyp - hypothesis ?loc - location ?nav - navigation_token)
     :duration (= ?duration 1)
-    :parameters (?hnt - hint)
-    :precondition (and 
+    :condition 
         (at start
-            (hint_found ?hnt - hint)
+            (and
+                (at ?loc)
+                (hint_found ?hnt )
+            )
         )
-        
-        )
-    :effect (and
-        (at end and(
-                (not (hint_found ?hnt - hint))
+    :effect 
+        (at end 
+            (and
+                (not (hint_found ?hnt ))
                 (consistent_hypothesis ?hyp)
-                )
+                (proceed_investigate ?nav)
             )
         )
     )
 
 
     (:durative-action oracle
+    :parameters (?from ?to - location ?hyp - hypothesis ?gm - game )
     :duration (= ?duration 1)
-    :parameters (?from ?to - location ?hyp - hypothesis ?gm - game)
-    :precondition (and
+    :condition (and
         (at start
-            and(
-                (no_same_location ?from ?to - location)
-                (at ?from - location)
-                (is_oracle ?loc - location)
-                (consistent_hypothesis ?hyp- hypothesis)
-            ))
-        )
-    :effect (and
-        (at end 
-            and(
-                (at ?to - location)
-                (not (at ?from - location))
-                (game_finished ?gm - game)
+            (and
+                (no_same_location ?from ?to)
+                (at ?from)
+                (is_oracle ?from)
+                (consistent_hypothesis ?hyp)
             )
-        ))
+        )
     )
-
-    
+    :effect 
+        (at end 
+            (and
+                (at ?to)
+                (not (at ?from))
+                (game_finished ?gm)
+            )
+        )
+    )
 )
