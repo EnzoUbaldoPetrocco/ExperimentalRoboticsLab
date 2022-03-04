@@ -19,7 +19,7 @@
     )
 
     (:durative-action navigation
-        :parameters (?nav - navigation ?from ?to - location ?hnt - hint)
+        :parameters (?nav - navigation_token ?from ?to - location ?hnt - hint)
         :duration (= ?duration 1)
         :condition 
             (at start (and
@@ -39,7 +39,7 @@
 
 
     (:durative-action find_hint
-        :parameters (?nav - navigation ?loc - location ?hnt - hint)
+        :parameters (?nav - navigation_token ?loc - location ?hnt - hint)
         :duration (= ?duration 1)
         :condition 
             (at start (and
@@ -76,14 +76,12 @@
 
 
     (:durative-action oracle
-    :parameters (?from ?to - location ?hyp - hypothesis ?gm - game )
+    :parameters (?loc - location ?hyp - hypothesis ?gm - game )
     :duration (= ?duration 1)
     :condition (and
         (at start
             (and
-                (no_same_location ?from ?to)
-                (at ?from)
-                (is_oracle ?from)
+                (is_oracle ?loc)
                 (consistent_hypothesis ?hyp)
             )
         )
@@ -91,8 +89,7 @@
     :effect 
         (at end 
             (and
-                (at ?to)
-                (not (at ?from))
+                (not (consistent_hypothesis ?hyp))
                 (game_finished ?gm)
             )
         )

@@ -1,23 +1,13 @@
-POPF, Release 2
-By releasing this code we imply no warranty as to its reliability
-and its use is entirely at your own risk.
-
-Usage: /home/enzo/Scrivania/ROS_RT2/ros_ws/src/ROSPlan/rosplan_planning_system/common/bin/popf [OPTIONS] domainfile problemfile [planfile, if -r specified]
-
-Options are: 
-
-	-citation	Display citation to relevant conference paper (ICAPS 2010);
-	-b		Disable best-first search - if EHC fails, abort;
-	-E		Skip EHC: go straight to best-first search;
-	-e		Use standard EHC instead of steepest descent;
-	-h		Disable helpful-action pruning;
-	-k		Disable compression-safe action detection;
-	-c		Disable the tie-breaking in RPG that favour actions that slot into the partial order earlier;
-	-S		Sort initial layer facts in RPG by availability order (only use if using -c);
-	-m		Disable the tie-breaking in search that favours plans with shorter makespans;
-	-F		Full FF helpful actions (rather than just those in the RP applicable in the current state);
-	-r		Read in a plan instead of planning;
-	-T		Rather than building a partial order, build a total-order
-	-n		Optimise, finding many solutions;
-	-v<n>		Verbose to degree n (n defaults to 1 if not specified).
-	-L<n>		LP verbose to degree n (n defaults to 1 if not specified).
+Number of literals: 9
+Constructing lookup tables: [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%] [90%] [100%] [110%] [120%] [130%] [140%] [150%] [160%] [170%] [180%]
+Post filtering unreachable actions:  [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%] [90%] [100%] [110%] [120%] [130%] [140%] [150%] [160%] [170%] [180%]
+[01;34mNo analytic limits found, not considering limit effects of goal-only operators[00m
+27% of the ground temporal actions in this problem are compression-safe
+Initial heuristic = 5.000
+b (4.000 | 1.000)b (2.000 | 2.001);;;; Solution Found
+; States evaluated: 6
+; Cost: 3.002
+; Time 0.00
+0.000: (find_hint nav marker1 hnt)  [1.000]
+1.001: (reason hnt hyp marker1 nav)  [1.000]
+2.002: (oracle oracle hyp gm)  [1.000]

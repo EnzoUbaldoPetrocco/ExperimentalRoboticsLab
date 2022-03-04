@@ -30,7 +30,7 @@ output="screen">
 <arg name="domain_path" value="$(arg domain_path)" />
 <arg name="data_path" value="$(find ExperimentalRoboticsLab)/PDDL" />
 <arg name="planner_command" value="timeout 10 $(find rosplan_planning_system)/common/bin/popf
-m2wr_cluedo" />
+DOMAIN PROBLEM" />
 </include>
 
 <node name="rosplan_parsing_interface" pkg="rosplan_planning_system" type="pddl_simple_plan_parser" respawn="false"
@@ -54,6 +54,9 @@ output="screen">
 
 <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
 <arg name="pddl_action_name" value="navigation" />
+</include>
+<include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
+<arg name="pddl_action_name" value="find_hint" />
 </include>
 <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
 <arg name="pddl_action_name" value="reason" />

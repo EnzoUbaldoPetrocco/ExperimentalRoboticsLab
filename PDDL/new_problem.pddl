@@ -27,6 +27,6 @@
 
 )
 (:goal (and
-    (hint_found hnt)
+    (game_finished gm)
 ))
 )
