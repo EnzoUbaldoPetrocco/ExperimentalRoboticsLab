@@ -10,6 +10,11 @@
 (:init
     (at marker1)
 
+    (not_at marker2)
+    (not_at marker3)
+    (not_at marker4)
+    (not_at oracle)
+
 
 
     (is_oracle oracle)
@@ -27,6 +32,7 @@
 
 )
 (:goal (and
+    (not_at marker1)
     (game_finished gm)
 ))
 )

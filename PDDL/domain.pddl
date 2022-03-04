@@ -1,5 +1,5 @@
 (define (domain m2wr_cluedo)
-    (:requirements :strips :typing :durative-actions)
+    (:requirements :strips :typing :durative-actions )
     (:types
         location
         hint
@@ -9,6 +9,7 @@
     )
     (:predicates
         (at ?loc - location)
+        (not_at ?loc - location)
         (hint_found ?hnt - hint)
         (consistent_hypothesis ?hyp - hypothesis)
         (is_oracle ?loc - location)
@@ -32,7 +33,9 @@
             (at end (and
                     (not (proceed_investigate ?nav))
                     (at ?to)
+                    (not_at ?from)
                     (not (at ?from))
+                    (not (not_at ?to))
             ))
         )
     )

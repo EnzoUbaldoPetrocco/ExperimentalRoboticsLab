@@ -10,6 +10,10 @@
 )
 (:init
     (at marker1) 
+    (not_at marker2)
+    (not_at marker3)
+    (not_at marker4)
+    (not_at oracle)
     (proceed_investigate nav)
     (no_same_location marker1 marker2)
     (no_same_location marker2 marker3)
@@ -20,8 +24,12 @@
     (no_same_location marker4 oracle)
     (is_oracle oracle)
 )
-(:goal
-    ;(consistent_hypothesis hyp)
+(:goal(
+    and
+    (not_at marker1)
     (game_finished gm )
+)
+    ;(consistent_hypothesis hyp)
+    
 )
 )
