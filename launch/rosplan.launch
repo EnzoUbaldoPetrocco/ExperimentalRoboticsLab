@@ -48,10 +48,10 @@ output="screen">
 <param name="action_feedback_topic" value="action_feedback" />
 </node>
 
+
 <!-- simulating actions -->
 <arg name="simulating_actions" default="true" />
 <group if="$(eval arg('simulating_actions') == 'true')">
-
 <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
 <arg name="pddl_action_name" value="navigation" />
 </include>
@@ -66,6 +66,36 @@ output="screen">
 </include>
 </group>
 
+
+<group if="$(eval arg('simulating_actions') == 'false')">
+<node name="rosplan_interface_navigation" pkg="my_rosplan_interface" type="navigationaction" respawn="false" output="screen">
+<param name="knowledge_base" value="rosplan_knowledge_base" />
+<param name="pddl_action_name" value="navigation" />
+<param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
+<param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
+</node>
+
+<node name="rosplan_interface_find_hint" pkg="my_rosplan_interface" type="find_hintaction" respawn="false" output="screen">
+<param name="knowledge_base" value="rosplan_knowledge_base" />
+<param name="pddl_action_name" value="find_hint" />
+<param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
+<param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
+</node>
+
+<node name="rosplan_interface_reason" pkg="my_rosplan_interface" type="reasonaction" respawn="false" output="screen">
+<param name="knowledge_base" value="rosplan_knowledge_base" />
+<param name="pddl_action_name" value="reason" />
+<param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
+<param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
+</node>
+
+<node name="rosplan_interface_oracle" pkg="my_rosplan_interface" type="oracleaction" respawn="false" output="screen">
+<param name="knowledge_base" value="rosplan_knowledge_base" />
+<param name="pddl_action_name" value="oracle" />
+<param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
+<param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
+</node>
+</group>
 
 
 </launch>
