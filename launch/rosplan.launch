@@ -48,12 +48,12 @@ output="screen">
 <param name="action_feedback_topic" value="action_feedback" />
 </node>
 
-
 <!-- simulating actions -->
 <arg name="simulating_actions" default="true" />
 <group if="$(eval arg('simulating_actions') == 'true')">
 <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
 <arg name="pddl_action_name" value="navigation" />
+<arg name="action_duration" value="0.001" />
 </include>
 <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
 <arg name="pddl_action_name" value="find_hint" />
