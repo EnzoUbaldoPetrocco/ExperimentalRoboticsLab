@@ -20,7 +20,7 @@
     )
 
     (:durative-action navigation
-        :parameters (?nav - navigation_token ?from ?to - location ?hnt - hint)
+        :parameters (?from ?to - location ?nav - navigation_token  ?hnt - hint)
         :duration (= ?duration 0.001)
         :condition 
             (at start (and

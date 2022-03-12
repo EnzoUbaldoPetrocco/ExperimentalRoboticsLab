@@ -178,9 +178,7 @@ int main(int argc, char** argv)
   ros::Subscriber sub_oracle_hint = nh.subscribe("/oracle_hint", 10, &MyMoveIt::hint_found, &move_it );
   ros::Subscriber sub_find_hint = nh.subscribe("/find_hint", 10, &MyMoveIt::find_hint, &move_it );
   sleep(10);
-  ros::AsyncSpinner spinner(1);
-  spinner.start();
+  ros::spin();
 
-  ros::shutdown();
   return 0;
 }

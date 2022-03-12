@@ -49,7 +49,7 @@ output="screen">
 </node>
 
 <!-- simulating actions -->
-<arg name="simulating_actions" default="true" />
+<arg name="simulating_actions" default="false" />
 <group if="$(eval arg('simulating_actions') == 'true')">
 <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
 <arg name="pddl_action_name" value="navigation" />

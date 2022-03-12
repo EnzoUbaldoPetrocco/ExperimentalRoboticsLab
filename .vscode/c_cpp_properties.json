@@ -14,7 +14,8 @@
                 "/home/enzo/Scrivania/ROS_RT2/ros_ws/src/occupancy_grid_utils/include/**",
                 "/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ROSPlan/rosplan_knowledge_base/include/**",
                 "/home/enzo/Scrivania/ROS_RT2/ros_ws/src/ROSPlan/rosplan_planning_system/include/**",
-                "/usr/include/**"
+                "/usr/include/**",
+                "/home/enzo/Scrivania/ROS_RT2/ros_ws/src"
             ],
             "name": "ROS",
             "configurationProvider": "ms-vscode.cmake-tools"

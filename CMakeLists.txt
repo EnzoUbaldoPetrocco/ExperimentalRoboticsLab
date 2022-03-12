@@ -17,6 +17,7 @@ find_package(catkin REQUIRED COMPONENTS
   moveit_ros_planning_interface
   actionlib
   actionlib_msgs
+  rosplan_planning_system
 )
 
 ## System dependencies are found with CMake's conventions
@@ -128,7 +129,8 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
+ include
+ 
   ${catkin_INCLUDE_DIRS}
 )
 
@@ -147,6 +149,10 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
  add_executable(simulation src/simulation.cpp)
  add_executable(my_moveit src/my_moveit.cpp)
+ add_executable(find_hint src/find_hint.cpp)
+ add_executable(navigation src/navigation.cpp)
+ add_executable(oracle src/oracle.cpp)
+ add_executable(reason src/reason.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -157,12 +163,29 @@ include_directories(
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 add_dependencies(simulation ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(reason ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(oracle ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(navigation ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(my_moveit ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(find_hint ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
  target_link_libraries(simulation
    ${catkin_LIBRARIES}
  )
   target_link_libraries(my_moveit
+   ${catkin_LIBRARIES}
+ )
+  target_link_libraries(find_hint
+   ${catkin_LIBRARIES}
+ )
+  target_link_libraries(navigation
+   ${catkin_LIBRARIES}
+ )
+  target_link_libraries(oracle
+   ${catkin_LIBRARIES}
+ )
+  target_link_libraries(reason
    ${catkin_LIBRARIES}
  )
 
