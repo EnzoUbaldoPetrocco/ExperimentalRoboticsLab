@@ -7,7 +7,7 @@
 
 <!-- knowledge base -->
 <node name="rosplan_knowledge_base" pkg="rosplan_knowledge_base" type="knowledgeBase" respawn="false"
-output="screen">
+output="log">
 <param name="domain_path" value="$(arg domain_path)" />
 <param name="problem_path" value="$(arg problem_path)" />
 <!-- conditional planning flags -->
@@ -34,14 +34,14 @@ DOMAIN PROBLEM" />
 </include>
 
 <node name="rosplan_parsing_interface" pkg="rosplan_planning_system" type="pddl_simple_plan_parser" respawn="false"
-output="screen">
+output="log">
 <param name="knowledge_base" value="rosplan_knowledge_base" />
 <param name="planner_topic" value="/rosplan_planner_interface/planner_output" />
 <param name="plan_topic" value="complete_plan" />
 </node>
 
 <node name="rosplan_plan_dispatcher" pkg="rosplan_planning_system" type="pddl_simple_plan_dispatcher" respawn="false"
-output="screen">
+output="log">
 <param name="knowledge_base" value="rosplan_knowledge_base" />
 <param name="plan_topic" value="/rosplan_parsing_interface/complete_plan" />
 <param name="action_dispatch_topic" value="action_dispatch" />
@@ -49,7 +49,7 @@ output="screen">
 </node>
 
 <!-- simulating actions -->
-<arg name="simulating_actions" default="false" />
+<!--arg name="simulating_actions" default="false" />
 <group if="$(eval arg('simulating_actions') == 'true')">
 <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
 <arg name="pddl_action_name" value="navigation" />
@@ -67,35 +67,38 @@ output="screen">
 </group>
 
 
-<group if="$(eval arg('simulating_actions') == 'false')">
-<node name="rosplan_interface_navigation" pkg="my_rosplan_interface" type="navigationaction" respawn="false" output="screen">
+<group if="$(eval arg('simulating_actions') == 'false')"-->
+<node name="rosplan_interface_navigation" pkg="ExperimentalRoboticsLab" type="navigation" respawn="false" output="screen">
 <param name="knowledge_base" value="rosplan_knowledge_base" />
 <param name="pddl_action_name" value="navigation" />
 <param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
 <param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
 </node>
 
-<node name="rosplan_interface_find_hint" pkg="my_rosplan_interface" type="find_hintaction" respawn="false" output="screen">
+<node name="rosplan_interface_find_hint" pkg="ExperimentalRoboticsLab" type="find_hint" respawn="false" output="screen">
 <param name="knowledge_base" value="rosplan_knowledge_base" />
 <param name="pddl_action_name" value="find_hint" />
 <param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
 <param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
 </node>
 
-<node name="rosplan_interface_reason" pkg="my_rosplan_interface" type="reasonaction" respawn="false" output="screen">
+<node name="rosplan_interface_reason" pkg="ExperimentalRoboticsLab" type="reason" respawn="false" output="screen">
 <param name="knowledge_base" value="rosplan_knowledge_base" />
 <param name="pddl_action_name" value="reason" />
 <param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
 <param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
 </node>
 
-<node name="rosplan_interface_oracle" pkg="my_rosplan_interface" type="oracleaction" respawn="false" output="screen">
+<node name="rosplan_interface_oracle" pkg="ExperimentalRoboticsLab" type="oracle" respawn="false" output="screen">
 <param name="knowledge_base" value="rosplan_knowledge_base" />
 <param name="pddl_action_name" value="oracle" />
 <param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
 <param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
 </node>
-</group>
+<!--/group-->
+
+
+<node name="rosplan_management" pkg="ExperimentalRoboticsLab" type="rosplan_management.py"  output="screen"/>
 
 
 </launch>

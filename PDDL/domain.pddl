@@ -1,5 +1,5 @@
 (define (domain m2wr_cluedo)
-    (:requirements :strips :typing :durative-actions )
+    (:requirements :strips :typing :durative-actions :disjunctive-preconditions )
     (:types
         location
         hint
@@ -25,7 +25,10 @@
         :condition 
             (at start (and
                     (proceed_investigate ?nav)
+                    ;(or 
                     (no_same_location ?from ?to)
+                    ;(no_same_location ?to ?from)
+                    ;)
                     (at ?from)
             )
         )

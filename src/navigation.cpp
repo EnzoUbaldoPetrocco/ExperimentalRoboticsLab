@@ -1,12 +1,19 @@
 //#include <unistd.h>
+#include <ros/ros.h>
 #include <actionlib/client/simple_action_client.h>
 #include <actionlib/client/terminal_state.h>
 #include <rosplan_interface/my_action_interface.h>
 #include <ExperimentalRoboticsLab/PositionAction.h>
+#include <iostream>
+#include <stdlib.h>
+#include <time.h>
+#include <vector>
+#include <string.h>
 
 namespace KCL_rosplan {
   MyActionInterface::MyActionInterface(ros::NodeHandle &nh) {
     // here the initialization
+  ROS_INFO("Navigation node initialized");
 
   }
   bool MyActionInterface::concreteCallback(const rosplan_dispatch_msgs::ActionDispatch::ConstPtr& msg) {

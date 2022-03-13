@@ -1,6 +1,4 @@
 #include <ros/ros.h>
-
-// MoveIt
 #include <moveit/move_group_interface/move_group_interface.h>
 #include <moveit/robot_model_loader/robot_model_loader.h>
 #include <moveit/robot_model/robot_model.h>
@@ -26,10 +24,20 @@ class MyMoveIt{
   void hint_found(const ExperimentalRoboticsLab::ErlOracle::ConstPtr& msg);
   void find_hint(const ExperimentalRoboticsLab::FindHint::ConstPtr& msg);
 };
+MyMoveIt::MyMoveIt(){
+  robot_model_loader::RobotModelLoader robot_model_loader("robot_description");
+  const moveit::core::RobotModelPtr& kinematic_model = robot_model_loader.getModel();
+  ROS_INFO("Model frame: %s", kinematic_model->getModelFrame().c_str());
+
+  moveit::core::RobotStatePtr kinematic_state(new moveit::core::RobotState(kinematic_model));
+  kinematic_state->setToDefaultValues();
+  const moveit::core::JointModelGroup* joint_model_group = kinematic_model->getJointModelGroup("arm");
+  moveit::planning_interface::MoveGroupInterface group("arm");
+  const std::vector<std::string>& joint_names = joint_model_group->getVariableNames();
+}
 void MyMoveIt::hint_found(const ExperimentalRoboticsLab::ErlOracle::ConstPtr& msg){
   this->found = true;
 };
-
 void MyMoveIt::find_hint(const ExperimentalRoboticsLab::FindHint::ConstPtr& msg){
   this->move_to_custom_pose("check");
   sleep(10);
@@ -47,55 +55,12 @@ void MyMoveIt::find_hint(const ExperimentalRoboticsLab::FindHint::ConstPtr& msg)
   }
   this->found = false;
 }
-
-
-MyMoveIt::MyMoveIt(){
-  // We start by instantiating a
-  // `RobotModelLoader`_
-  // object, which will look up
-  // the robot description on the ROS parameter server and construct a
-  // :moveit_core:`RobotModel` for us to use.
-  //
-  // .. _RobotModelLoader:
-  //     http://docs.ros.org/noetic/api/moveit_ros_planning/html/classrobot__model__loader_1_1RobotModelLoader.html
-  robot_model_loader::RobotModelLoader robot_model_loader("robot_description");
-  const moveit::core::RobotModelPtr& kinematic_model = robot_model_loader.getModel();
-  ROS_INFO("Model frame: %s", kinematic_model->getModelFrame().c_str());
-
-  // Using the :moveit_core:`RobotModel`, we can construct a
-  // :moveit_core:`RobotState` that maintains the configuration
-  // of the robot. We will set all joints in the state to their
-  // default values. We can then get a
-  // :moveit_core:`JointModelGroup`, which represents the robot
-  // model for a particular group, e.g. the "panda_arm" of the Panda
-  // robot.
-  moveit::core::RobotStatePtr kinematic_state(new moveit::core::RobotState(kinematic_model));
-  kinematic_state->setToDefaultValues();
-  const moveit::core::JointModelGroup* joint_model_group = kinematic_model->getJointModelGroup("arm");
-  moveit::planning_interface::MoveGroupInterface group("arm");
-  const std::vector<std::string>& joint_names = joint_model_group->getVariableNames();
-}
-
 void MyMoveIt::move_to_custom_pose(std::string str){
-  ROS_INFO("MyMoveIt::move_to_custom_pose"); // We start by instantiating a
-  // `RobotModelLoader`_
-  // object, which will look up
-  // the robot description on the ROS parameter server and construct a
-  // :moveit_core:`RobotModel` for us to use.
-  //
-  // .. _RobotModelLoader:
-  //     http://docs.ros.org/noetic/api/moveit_ros_planning/html/classrobot__model__loader_1_1RobotModelLoader.html
+  ROS_INFO("MyMoveIt::move_to_custom_pose"); 
   robot_model_loader::RobotModelLoader robot_model_loader("robot_description");
   const moveit::core::RobotModelPtr& kinematic_model = robot_model_loader.getModel();
   ROS_INFO("Model frame: %s", kinematic_model->getModelFrame().c_str());
 
-  // Using the :moveit_core:`RobotModel`, we can construct a
-  // :moveit_core:`RobotState` that maintains the configuration
-  // of the robot. We will set all joints in the state to their
-  // default values. We can then get a
-  // :moveit_core:`JointModelGroup`, which represents the robot
-  // model for a particular group, e.g. the "panda_arm" of the Panda
-  // robot.
   moveit::core::RobotStatePtr kinematic_state(new moveit::core::RobotState(kinematic_model));
   kinematic_state->setToDefaultValues();
   const moveit::core::JointModelGroup* joint_model_group = kinematic_model->getJointModelGroup("arm");
@@ -105,48 +70,25 @@ void MyMoveIt::move_to_custom_pose(std::string str){
 	group.setNamedTarget(str);
 	group.move();  
 };
-
 void MyMoveIt::move_to_the_pose(geometry_msgs::Pose pose){
   ROS_INFO("MyMoveIt::move_to_the_pose");
-   // We start by instantiating a
-  // `RobotModelLoader`_
-  // object, which will look up
-  // the robot description on the ROS parameter server and construct a
-  // :moveit_core:`RobotModel` for us to use.
-  //
-  // .. _RobotModelLoader:
-  //     http://docs.ros.org/noetic/api/moveit_ros_planning/html/classrobot__model__loader_1_1RobotModelLoader.html
+  
   robot_model_loader::RobotModelLoader robot_model_loader("robot_description");
   const moveit::core::RobotModelPtr& kinematic_model = robot_model_loader.getModel();
   ROS_INFO("Model frame: %s", kinematic_model->getModelFrame().c_str());
 
-  // Using the :moveit_core:`RobotModel`, we can construct a
-  // :moveit_core:`RobotState` that maintains the configuration
-  // of the robot. We will set all joints in the state to their
-  // default values. We can then get a
-  // :moveit_core:`JointModelGroup`, which represents the robot
-  // model for a particular group, e.g. the "panda_arm" of the Panda
-  // robot.
   moveit::core::RobotStatePtr kinematic_state(new moveit::core::RobotState(kinematic_model));
   kinematic_state->setToDefaultValues();
   const moveit::core::JointModelGroup* joint_model_group = kinematic_model->getJointModelGroup("arm");
   moveit::planning_interface::MoveGroupInterface group("arm");
   const std::vector<std::string>& joint_names = joint_model_group->getVariableNames();
 
-  // Inverse Kinematics
-  // ^^^^^^^^^^^^^^^^^^
-  // We can now solve inverse kinematics (IK) for the Panda robot.
-  // To solve IK, we will need the following:
-  //
-  //  * The desired pose of the end-effector 
-  //  * The timeout: 0.1 s
   group.setStartStateToCurrentState();
   group.setApproximateJointValueTarget(pose, "cluedo_link");
   std::vector<double> joint_values;
   double timeout = 0.1;
   bool found_ik = kinematic_state->setFromIK(joint_model_group, pose, timeout);
 
-  // Now, we can print out the IK solution (if found):
   if (found_ik)
   {
     kinematic_state->copyJointGroupPositions(joint_model_group, joint_values);
@@ -177,7 +119,6 @@ int main(int argc, char** argv)
   MyMoveIt move_it = MyMoveIt();
   ros::Subscriber sub_oracle_hint = nh.subscribe("/oracle_hint", 10, &MyMoveIt::hint_found, &move_it );
   ros::Subscriber sub_find_hint = nh.subscribe("/find_hint", 10, &MyMoveIt::find_hint, &move_it );
-  sleep(10);
   ros::spin();
 
   return 0;
