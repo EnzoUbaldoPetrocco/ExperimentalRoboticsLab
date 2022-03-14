@@ -13,7 +13,7 @@
 namespace KCL_rosplan {
   MyActionInterface::MyActionInterface(ros::NodeHandle &nh) {
     // here the initialization
-  ROS_INFO("Navigation node initialized");
+  
 
   }
   bool MyActionInterface::concreteCallback(const rosplan_dispatch_msgs::ActionDispatch::ConstPtr& msg) {

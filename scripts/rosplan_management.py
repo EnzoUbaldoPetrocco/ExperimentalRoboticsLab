@@ -11,7 +11,6 @@ from ExperimentalRoboticsLab.srv import *
 from ExperimentalRoboticsLab.msg import Replan
 
 def update_knowledge_predicate(is_positive, predicate_name, keys):
-    print(keys)
     '''Updates state of a predicate of my problem'''
     global update_knowledge_client
     update_req=rosplan_knowledge_msgs.srv.KnowledgeUpdateServiceRequest()
@@ -25,7 +24,6 @@ def update_knowledge_predicate(is_positive, predicate_name, keys):
         key_value.value=i.value
         update_req.knowledge.values.append(key_value)
     result=update_knowledge_client(update_req)
-    #print('predicate knowledge updated: ',predicate_name,key,value,is_positive)
 
 def update_knowledge_goal(is_positive, predicate_name,keys):
     '''Add a goal to my problem'''
@@ -41,7 +39,7 @@ def update_knowledge_goal(is_positive, predicate_name,keys):
         key_value.value=i.value
         update_req.knowledge.values.append(key_value)
     result=update_knowledge_client(update_req)
-    #print('goal knowledge updated: ',predicate_name,key,value,is_positive)
+    
 
 def update_knowledge_instance(name,instanceType):
     '''Add a instance to my problem'''
@@ -199,6 +197,8 @@ def initialize_goal():
     init_common_goal()
 
 def re_init(msg):
+    global clear_knowledge
+    clear_knowledge()
     init_common_goal()
     init_common_predicates()
     initialize_instances()
@@ -430,7 +430,7 @@ def running_rosplan_procedure():
     dispatchRes=dispatch_client()
 
 def main():
-    global update_knowledge_client, prob_gen_client, plan_client, parse_client, dispatch_client
+    global update_knowledge_client, prob_gen_client, plan_client, parse_client, dispatch_client, clear_knowledge
     rospy.init_node('rosplan_management',anonymous=True)
     replan = rospy.Subscriber('replan', Replan, re_init)
 
@@ -456,7 +456,6 @@ def main():
     initialize_instances()
     initialize_goal()
     running_rosplan_procedure()
-    print('rosplan initialization completed')
     
     rospy.spin()
 

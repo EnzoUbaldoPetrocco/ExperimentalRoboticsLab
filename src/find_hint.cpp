@@ -13,7 +13,7 @@
 namespace KCL_rosplan {
   MyActionInterface::MyActionInterface(ros::NodeHandle &nh) {
     // here the initialization
-
+  ROS_INFO("find_hint node initialized");
   }
   bool MyActionInterface::concreteCallback(const rosplan_dispatch_msgs::ActionDispatch::ConstPtr& msg) {
     // here the implementation of the action
