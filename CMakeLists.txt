@@ -58,6 +58,7 @@ find_package(catkin REQUIRED COMPONENTS
    FILES
    ErlOracle.msg
    FindHint.msg
+   Replan.msg
 #   Message2.msg
  )
 

@@ -432,7 +432,7 @@ def running_rosplan_procedure():
 def main():
     global update_knowledge_client, prob_gen_client, plan_client, parse_client, dispatch_client
     rospy.init_node('rosplan_management',anonymous=True)
-    replan = rospy.Service('replan', Replan, re_init )
+    replan = rospy.Subscriber('replan', Replan, re_init)
 
     # Wait for all services
     rospy.wait_for_service('rosplan_problem_interface/problem_generation_server')
