@@ -429,6 +429,9 @@ def running_rosplan_procedure():
     parse_client()
     dispatchRes=dispatch_client()
 
+def print_plan(msg):
+    print(msg)
+
 def main():
     global update_knowledge_client, prob_gen_client, plan_client, parse_client, dispatch_client, clear_knowledge
     rospy.init_node('rosplan_management',anonymous=True)
@@ -443,6 +446,8 @@ def main():
     rospy.wait_for_service('rosplan_knowledge_base/update')
     rospy.wait_for_service('rosplan_knowledge_base/clear')
 
+    rospy.Subscriber("/rosplan_planner_interface/planner_output", String, print_plan)
+
     prob_gen_client=rospy.ServiceProxy('rosplan_problem_interface/problem_generation_server', Empty)  
     plan_client=rospy.ServiceProxy('rosplan_planner_interface/planning_server',Empty) 
     parse_client=rospy.ServiceProxy('rosplan_parsing_interface/parse_plan',Empty)
@@ -450,7 +455,7 @@ def main():
     update_knowledge_client=rospy.ServiceProxy('rosplan_knowledge_base/update',rosplan_knowledge_msgs.srv.KnowledgeUpdateService) 
     clear_knowledge=rospy.ServiceProxy('rosplan_knowledge_base/clear',Empty) 
 
-
+    #rospy.wait_for_service('rosplan_knowledge_base/propositions', 'predicate')
     clear_knowledge()
     initialize_predicates()
     initialize_instances()

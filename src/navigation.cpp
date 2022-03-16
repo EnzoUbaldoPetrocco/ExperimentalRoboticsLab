@@ -2,7 +2,7 @@
 #include <ros/ros.h>
 #include <actionlib/client/simple_action_client.h>
 #include <actionlib/client/terminal_state.h>
-#include <rosplan_interface/my_action_interface.h>
+#include <rosplan_interface/navigation.h>
 #include <ExperimentalRoboticsLab/PositionAction.h>
 #include <iostream>
 #include <stdlib.h>
@@ -11,12 +11,12 @@
 #include <string.h>
 
 namespace KCL_rosplan {
-  MyActionInterface::MyActionInterface(ros::NodeHandle &nh) {
+  NavigationActionInterface::NavigationActionInterface(ros::NodeHandle &nh) {
     // here the initialization
   
 
   }
-  bool MyActionInterface::concreteCallback(const rosplan_dispatch_msgs::ActionDispatch::ConstPtr& msg) {
+  bool NavigationActionInterface::concreteCallback(const rosplan_dispatch_msgs::ActionDispatch::ConstPtr& msg) {
     // here the implementation of the action
     std::cout << "Going from: " << msg->parameters[0].value << " to: "<< msg->parameters[1].value << std::endl;
     actionlib::SimpleActionClient<ExperimentalRoboticsLab::PositionAction> ac("/go_to_point", true);
@@ -61,7 +61,7 @@ namespace KCL_rosplan {
 int main(int argc, char **argv) {
 ros::init(argc, argv, "rosplan_interface_navigation", ros::init_options::AnonymousName);
 ros::NodeHandle nh("~");
-KCL_rosplan::MyActionInterface my_aci(nh);
+KCL_rosplan::NavigationActionInterface my_aci(nh);
 my_aci.runActionInterface();
 return 0;
 }

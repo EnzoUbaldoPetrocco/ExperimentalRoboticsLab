@@ -27,6 +27,7 @@
     (no_same_location oracle marker1)
 
 
+
 )
 (:goal (and
     (not_at marker1)

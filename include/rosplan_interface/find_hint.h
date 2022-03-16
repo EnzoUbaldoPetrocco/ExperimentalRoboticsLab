@@ -3,13 +3,13 @@
 
 namespace KCL_rosplan {
 	
-	class MyActionInterface: public RPActionInterface
+	class FindHintActionInterface: public RPActionInterface
 		{
 		private:
 		
 		public:
 			/* constructor */
-			MyActionInterface(ros::NodeHandle &nh);
+			FindHintActionInterface(ros::NodeHandle &nh);
 			/* listen to and process action_dispatch topic */
 			bool concreteCallback(const rosplan_dispatch_msgs::ActionDispatch::ConstPtr& msg);
     };
