@@ -10,6 +10,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include <vector>
+#include <actionlib/server/simple_action_server.h>
+#include <ExperimentalRoboticsLab/HintAction.h>
 
 std::vector<ExperimentalRoboticsLab::ErlOracle> oracle_msgs;
 
@@ -22,7 +24,7 @@ class MyMoveIt{
   void move_to_the_pose(geometry_msgs::Pose pose);
   void move_to_custom_pose(std::string str);
   void hint_found(const ExperimentalRoboticsLab::ErlOracle::ConstPtr& msg);
-  void find_hint(const ExperimentalRoboticsLab::FindHint::ConstPtr& msg);
+  void find_hint(const ExperimentalRoboticsLab::HintGoalConstPtr& msg);
 };
 MyMoveIt::MyMoveIt(){
   robot_model_loader::RobotModelLoader robot_model_loader("robot_description");
@@ -38,9 +40,9 @@ MyMoveIt::MyMoveIt(){
 void MyMoveIt::hint_found(const ExperimentalRoboticsLab::ErlOracle::ConstPtr& msg){
   this->found = true;
 };
-void MyMoveIt::find_hint(const ExperimentalRoboticsLab::FindHint::ConstPtr& msg){
+void MyMoveIt::find_hint(const ExperimentalRoboticsLab::HintGoalConstPtr& msg){
   this->move_to_custom_pose("check");
-  sleep(10);
+  sleep(2);
   geometry_msgs::Pose pose;
   pose.position.x = msg->x_pos;
   pose.position.y = msg->y_pos;
@@ -110,6 +112,7 @@ void MyMoveIt::move_to_the_pose(geometry_msgs::Pose pose){
   moveit::planning_interface::MoveGroupInterface::Plan my_plan;
   group.plan(my_plan); 
   group.execute(my_plan);
+  
 };
 
 int main(int argc, char** argv)
@@ -118,7 +121,10 @@ int main(int argc, char** argv)
   ros::NodeHandle nh;
   MyMoveIt move_it = MyMoveIt();
   ros::Subscriber sub_oracle_hint = nh.subscribe("/oracle_hint", 10, &MyMoveIt::hint_found, &move_it );
-  ros::Subscriber sub_find_hint = nh.subscribe("/find_hint", 10, &MyMoveIt::find_hint, &move_it );
+  //ros::Subscriber sub_find_hint = nh.subscribe("/find_hint", 10, &MyMoveIt::find_hint, &move_it );
+
+  actionlib::SimpleActionServer<ExperimentalRoboticsLab::HintAction> sub_find_hint(nh, "/hint", boost::bind(&MyMoveIt::find_hint, move_it, _1 ), false);
+  sub_find_hint.start();
   ros::spin();
 
   return 0;

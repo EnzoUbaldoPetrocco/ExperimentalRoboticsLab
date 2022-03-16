@@ -1,7 +1,6 @@
 #! /usr/bin/env python
 
 import rospy
-
 import rosplan_dispatch_msgs.srv 
 import rosplan_knowledge_msgs.srv
 from std_msgs.msg import *
@@ -9,6 +8,7 @@ from std_srvs.srv import *
 import diagnostic_msgs.msg
 from ExperimentalRoboticsLab.srv import *
 from ExperimentalRoboticsLab.msg import Replan
+import time
 
 def update_knowledge_predicate(is_positive, predicate_name, keys):
     '''Updates state of a predicate of my problem'''
@@ -435,7 +435,7 @@ def print_plan(msg):
 def main():
     global update_knowledge_client, prob_gen_client, plan_client, parse_client, dispatch_client, clear_knowledge
     rospy.init_node('rosplan_management',anonymous=True)
-    replan = rospy.Subscriber('replan', Replan, re_init)
+    replan = rospy.Subscriber('/replan', Replan, re_init)
 
     # Wait for all services
     rospy.wait_for_service('rosplan_problem_interface/problem_generation_server')
@@ -455,11 +455,17 @@ def main():
     update_knowledge_client=rospy.ServiceProxy('rosplan_knowledge_base/update',rosplan_knowledge_msgs.srv.KnowledgeUpdateService) 
     clear_knowledge=rospy.ServiceProxy('rosplan_knowledge_base/clear',Empty) 
 
+    time.sleep(2)
+
     #rospy.wait_for_service('rosplan_knowledge_base/propositions', 'predicate')
     clear_knowledge()
+    time.sleep(1)
     initialize_predicates()
+    time.sleep(1)
     initialize_instances()
+    time.sleep(1)
     initialize_goal()
+    time.sleep(1)
     running_rosplan_procedure()
     
     rospy.spin()

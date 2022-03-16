@@ -76,6 +76,7 @@ add_service_files(
  add_action_files(
     FILES
     Position.action
+    Hint.action
 #   Action1.action
 #   Action2.action
  )
