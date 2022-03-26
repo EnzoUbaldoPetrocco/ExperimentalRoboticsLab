@@ -38,10 +38,11 @@ MyMoveIt::MyMoveIt(){
   const std::vector<std::string>& joint_names = joint_model_group->getVariableNames();
 }
 void MyMoveIt::hint_found(const ExperimentalRoboticsLab::ErlOracle::ConstPtr& msg){
+  ROS_INFO("Hint found");
   this->found = true;
 };
 void MyMoveIt::find_hint(const ExperimentalRoboticsLab::HintGoalConstPtr& msg){
-  this->move_to_custom_pose("check");
+  //this->move_to_custom_pose("check");
   sleep(2);
   geometry_msgs::Pose pose;
   pose.position.x = msg->x_pos;
@@ -52,10 +53,10 @@ void MyMoveIt::find_hint(const ExperimentalRoboticsLab::HintGoalConstPtr& msg){
   pose.orientation.z = msg->z_quat;
   pose.orientation.w = msg->w_quat;
   this->move_to_the_pose(pose);
-  while(this->found == false){
-    sleep(1);
-  }
-  this->found = false;
+  //while(this->found == false){
+  //  sleep(1);
+  //}
+  //this->found = false;
 }
 void MyMoveIt::move_to_custom_pose(std::string str){
   ROS_INFO("MyMoveIt::move_to_custom_pose"); 

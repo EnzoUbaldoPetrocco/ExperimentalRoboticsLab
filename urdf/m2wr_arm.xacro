@@ -143,13 +143,13 @@
   	<collision>
   	  <origin xyz="0 0 0.085" rpy="0 0 0"/>
       <geometry>
-        <box size="0.18 0.18 0.45"/>
+        <box size="0.18 0.18 0.47"/>
       </geometry>
   	</collision>
   	<visual>
   	  <origin xyz="0 0 0.085" rpy="0 0 0"/>
       <geometry>
-        <box size="0.18 0.18 0.45"/>
+        <box size="0.18 0.18 0.47"/>
       </geometry>
       <material name="red" />
   	</visual>
@@ -171,13 +171,13 @@
   	<collision>
   	  <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <cylinder radius="0.045" length="0.35"/>
+        <cylinder radius="0.045" length="0.38"/>
       </geometry>
   	</collision>
   	<visual>
   	  <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <cylinder radius="0.045" length="0.35"/>
+        <cylinder radius="0.045" length="0.38"/>
       </geometry>
       <material name="red" />
   	</visual>
@@ -201,13 +201,13 @@
   	<collision>
   	  <origin xyz="0 0.01 0" rpy="0 0 0"/>
       <geometry>
-        <cylinder radius="0.04" length="0.175"/>
+        <cylinder radius="0.04" length="0.2"/>
       </geometry>
   	</collision>
   	<visual>
   	  <origin xyz="0 0.01 0" rpy="0 0 0"/>
       <geometry>
-        <cylinder radius="0.04" length="0.175"/>
+        <cylinder radius="0.04" length="0.2"/>
       </geometry>
       <material name="red" />
   	</visual>
@@ -224,19 +224,19 @@
       <link name="arm_link_03">
   	<inertial>
   		<mass value="0.015"/>
-  		<origin xyz="0 0 0.15" rpy="0 0 0" />
+  		<origin xyz="0 0 0.175" rpy="0 0 0" />
   		<inertia ixx="0.000010279" ixy="0" ixz="0" iyy="0.000010279" iyz="0" izz="0.000007225"/>
   	</inertial>
   	<collision>
   	  <origin xyz="0 0 0.15" rpy="0 0 0"/>
       <geometry>
-        <cylinder radius="0.037" length="0.4"/>
+        <cylinder radius="0.037" length="0.62"/>
       </geometry>
   	</collision>
   	<visual>
   	  <origin xyz="0 0 0.15" rpy="0 0 0"/>
       <geometry>
-        <cylinder radius="0.037" length="0.4"/>
+        <cylinder radius="0.037" length="0.62"/>
       </geometry>
       <material name="red" />
   	</visual>
@@ -274,7 +274,7 @@
   <joint name="arm_joint_04" type="revolute">
   	<axis xyz="1 0 0"/>
   	<limit effort="1000.0" lower="-1.8" upper="1.8" velocity="0.75"/>
-  	<origin rpy="0 0 0" xyz="0 0 0.355"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.45"/>
   	<parent link="arm_link_03"/>
   	<child link="arm_link_04"/>
   </joint>

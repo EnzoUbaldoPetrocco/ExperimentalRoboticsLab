@@ -99,6 +99,7 @@ namespace KCL_rosplan {
        return true;
       }
       else{
+      ROS_INFO("Action (%s) failed: replanning!", msg->name.c_str());
       std_msgs::String message;
       message.data = msg->parameters[0].value;
       replan_pub.publish(message);

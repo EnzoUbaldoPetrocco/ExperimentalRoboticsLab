@@ -22,7 +22,7 @@
 
     (:durative-action navigation
         :parameters (?from ?to - location ?nav - navigation_token  ?hnt - hint)
-        :duration (= ?duration 0.01)
+        :duration (= ?duration 1)
         :condition 
             (at start (and
                     (proceed_investigate ?nav)
@@ -48,7 +48,7 @@
 
     (:durative-action find_hint
         :parameters (?loc - location ?hnt - hint)
-        :duration (= ?duration 0.01)
+        :duration (= ?duration 1)
         :condition 
             (at start (and
                     (at ?loc)
@@ -66,7 +66,7 @@
 
     (:durative-action reason
     :parameters (?hnt - hint ?hyp - hypothesis ?loc - location ?nav - navigation_token)
-    :duration (= ?duration 0.01)
+    :duration (= ?duration 1)
     :condition 
         (at start
             (and
@@ -87,7 +87,7 @@
 
     (:durative-action oracle
     :parameters (?loc - location ?hyp - hypothesis ?gm - game )
-    :duration (= ?duration 0.01)
+    :duration (= ?duration 1)
     :condition (and
         (at start
             (and

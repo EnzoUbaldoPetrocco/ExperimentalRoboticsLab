@@ -29,24 +29,24 @@ namespace KCL_rosplan {
 
     ac.waitForServer();
     if(msg->parameters[1].value == "marker1"){
-      goal.x = -2.2;
-      goal.y = 0.0;
-      goal.theta = 0;
+      goal.x = -2.4;
+      goal.y = 0.06; //shift dued to the chassis
+      goal.theta = 3.14/2;
     }
     else if (msg->parameters[1].value == "marker2"){
-      goal.x = 2.2;
-      goal.y = 0.0;
+      goal.x = 2.4;
+      goal.y = 0.06; //shift dued to the chassis
       goal.theta = 3.14/2;
     }
     else if (msg->parameters[1].value == "marker3"){
-      goal.x = 0.0;
-      goal.y = 2.2;
-      goal.theta = 3.14;
+      goal.x = -0.06; //shift dued to the chassis
+      goal.y = 2.4;
+      goal.theta = 0;
     }
     else if (msg->parameters[1].value == "marker4"){
-      goal.x = 0;
-      goal.y = -2.2;
-      goal.theta = 3.14*3/2;
+      goal.x = -0.06; //shift dued to the chassis
+      goal.y = -2.4;
+      goal.theta = 0;
     }
     else if (msg->parameters[1].value == "oracle"){
       goal.x = 0;
