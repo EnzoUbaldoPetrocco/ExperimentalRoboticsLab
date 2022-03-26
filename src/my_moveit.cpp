@@ -72,6 +72,7 @@ void MyMoveIt::move_to_custom_pose(std::string str){
   group.setStartStateToCurrentState();
 	group.setNamedTarget(str);
 	group.move();  
+  sleep(1);
 };
 void MyMoveIt::move_to_the_pose(geometry_msgs::Pose pose){
   ROS_INFO("MyMoveIt::move_to_the_pose");
@@ -113,7 +114,7 @@ void MyMoveIt::move_to_the_pose(geometry_msgs::Pose pose){
   moveit::planning_interface::MoveGroupInterface::Plan my_plan;
   group.plan(my_plan); 
   group.execute(my_plan);
-  
+  sleep(1);
 };
 
 int main(int argc, char** argv)

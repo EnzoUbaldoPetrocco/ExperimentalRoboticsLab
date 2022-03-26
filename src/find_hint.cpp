@@ -38,7 +38,7 @@ ExperimentalRoboticsLab::HintGoal define_goal(ExperimentalRoboticsLab::HintGoal 
     else if (str == "marker3"){
       goal.x_pos = 0.0;
       goal.y_pos = 3.0;
-      goal.z_pos = 0.75;
+      goal.z_pos = altitude;
       goal.x_quat = 0;
       goal.y_quat = 0;
       goal.z_quat = 0;
@@ -89,8 +89,9 @@ namespace KCL_rosplan {
        return true;
     }
     else {
-
+      sleep(1);
       goal = define_goal(goal, msg->parameters[0].value, 1.25);
+      sleep(1);
       ac.sendGoal(goal);
       ac.waitForResult();
 
