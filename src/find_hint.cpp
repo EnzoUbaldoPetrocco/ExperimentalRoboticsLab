@@ -17,6 +17,7 @@ ros::Publisher replan_pub;
 
 
 ExperimentalRoboticsLab::HintGoal define_goal(ExperimentalRoboticsLab::HintGoal goal ,std::string str, std::float_t altitude){
+  ROS_INFO("define goal with certain altitude");
   if(str == "marker1"){
       goal.x_pos = -3.0;
       goal.y_pos = 0.0;
@@ -76,7 +77,6 @@ namespace KCL_rosplan {
     // Here we need to move the arm to goal position, we can do many attempts because there exist 2 possible locations
      actionlib::SimpleActionClient<ExperimentalRoboticsLab::HintAction> ac("/hint", true);
     ExperimentalRoboticsLab::HintGoal goal;
-
     ac.waitForServer();
 
     goal = define_goal(goal, msg->parameters[0].value, 0.75);

@@ -12,13 +12,16 @@
 #include <vector>
 #include <actionlib/server/simple_action_server.h>
 #include <ExperimentalRoboticsLab/HintAction.h>
+#include <ExperimentalRoboticsLab/HintActionResult.h>
 
 std::vector<ExperimentalRoboticsLab::ErlOracle> oracle_msgs;
+
 
 class MyMoveIt{
   public:
   //members
   bool found;
+  actionlib::SimpleActionServer<ExperimentalRoboticsLab::HintAction>* sub_find_hintPtr;
   //methods
   MyMoveIt();
   void move_to_the_pose(geometry_msgs::Pose pose);
@@ -53,6 +56,11 @@ void MyMoveIt::find_hint(const ExperimentalRoboticsLab::HintGoalConstPtr& msg){
   pose.orientation.z = msg->z_quat;
   pose.orientation.w = msg->w_quat;
   this->move_to_the_pose(pose);
+  ros::NodeHandle nh;
+  actionlib::SimpleActionServer<ExperimentalRoboticsLab::HintAction> sub_find_hint(nh, "/hint", boost::bind(&MyMoveIt::find_hint, this, _1 ), false);
+  sub_find_hint.acceptNewGoal();
+  sub_find_hint.setSucceeded();
+  
   //while(this->found == false){
   //  sleep(1);
   //}
@@ -71,6 +79,10 @@ void MyMoveIt::move_to_custom_pose(std::string str){
   const std::vector<std::string>& joint_names = joint_model_group->getVariableNames();
   group.setStartStateToCurrentState();
 	group.setNamedTarget(str);
+  
+  group.setGoalOrientationTolerance(0.01);
+  group.setGoalPositionTolerance(0.01);
+
 	group.move();  
   sleep(1);
 };
@@ -126,6 +138,7 @@ int main(int argc, char** argv)
   //ros::Subscriber sub_find_hint = nh.subscribe("/find_hint", 10, &MyMoveIt::find_hint, &move_it );
 
   actionlib::SimpleActionServer<ExperimentalRoboticsLab::HintAction> sub_find_hint(nh, "/hint", boost::bind(&MyMoveIt::find_hint, move_it, _1 ), false);
+  move_it.sub_find_hintPtr = &sub_find_hint;
   sub_find_hint.start();
   ros::spin();
 

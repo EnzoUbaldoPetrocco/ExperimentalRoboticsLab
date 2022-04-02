@@ -309,13 +309,13 @@
         </inertial>
 
         <collision>
-            <origin rpy="0 0 0" xyz="0 0 0.085" />
+            <origin rpy="0 0 0" xyz="0 0 0.088" />
             <geometry>
                 <box size="0.18 0.18 0.47" />
             </geometry>
         </collision>
         <visual>
-            <origin rpy="0 0 0" xyz="0 0 0.085" />
+            <origin rpy="0 0 0" xyz="0 0 0.088" />
             <geometry>
                 <box size="0.18 0.18 0.47" />
             </geometry>
@@ -396,13 +396,13 @@
         <collision>
             <origin rpy="0 0 0" xyz="0 0 0.15" />
             <geometry>
-                <cylinder length="0.62" radius="0.037" />
+                <cylinder length="0.65" radius="0.036" />
             </geometry>
         </collision>
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0.15" />
             <geometry>
-                <cylinder length="0.62" radius="0.037" />
+                <cylinder length="0.65" radius="0.036" />
             </geometry>
             <material name="red" />
         </visual>
