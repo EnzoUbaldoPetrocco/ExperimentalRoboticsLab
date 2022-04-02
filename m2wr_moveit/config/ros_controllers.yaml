@@ -8,27 +8,27 @@ arm_controller:
     - cluedo_joint
   gains:
     arm_joint_01:
-      p: 12
-      d: 0
-      i: 0
-      i_clamp: 0
-    arm_joint_02:
       p: 15
       d: 0
       i: 0
       i_clamp: 0
+    arm_joint_02:
+      p: 30
+      d: 0.01
+      i: 0.02
+      i_clamp: 0.02
     arm_joint_03:
-      p: 12
+      p: 25
       d: 0
-      i: 0
-      i_clamp: 0
+      i: 0.1
+      i_clamp: 0.1
     arm_joint_04:
-      p: 12
+      p: 20
       d: 0
-      i: 0.1
-      i_clamp: 0.1
+      i: 0.2
+      i_clamp: 0.2
     cluedo_joint:
-      p: 12
-      d: 0
-      i: 0.1
-      i_clamp: 0.1
+      p: 15
+      d: 0.01
+      i: 0.25
+      i_clamp: 0.25

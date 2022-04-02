@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: ExperimentalRoboticsLab
+    relative_path: urdf/m2wr_arm.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/m2wr.srdf
+  CONFIG:
+    author_name: Enzo Ubaldo Petrocco
+    author_email: enzopetrocco@hotmail.it
+    generated_timestamp: 1645612046
