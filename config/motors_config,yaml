@@ -28,5 +28,11 @@
     pid: {p: 1, i: 0.1, d: 0.1} 
 
 
+  arm_base_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: cluedo_joint
+    pid: {p: 1, i: 0.1, d: 0.1} 
+
+
 
 

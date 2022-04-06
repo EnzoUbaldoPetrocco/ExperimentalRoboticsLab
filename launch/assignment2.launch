@@ -50,7 +50,7 @@
 
 
 <!-- MoveIt-->
-<node name="my_moveit" pkg ="ExperimentalRoboticsLab" type="my_moveit" output="log" /> 
+<node name="my_moveit" pkg ="ExperimentalRoboticsLab" type="my_moveit" output="screen" /> 
 
 
 <!--ROSPlan-->
