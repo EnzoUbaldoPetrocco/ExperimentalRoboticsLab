@@ -36,6 +36,7 @@ import rospy
 from geometry_msgs.msg import Point
 from ExperimentalRoboticsLab.srv import Hint
 from ExperimentalRoboticsLab.srv import Investigate
+from ExperimentalRoboticsLab.msg import ErlOracle
 import json
 from os.path import dirname, realpath
 import sys
@@ -80,12 +81,12 @@ def get_weapons_with_id(hyp_id):
         It gets the weapons from the local list with id
         identical to hyp_id
         /param hyp_id (string)
-        /return weapon object({id,name})
+        /return weapon object({id,value})
         """
     res = []
     for i in weapons:
-        if i['id'] == hyp_id:
-            res.append(i['name'])
+        if i['ID'] == hyp_id:
+            res.append(i['value'])
     return res
 ## Function that gets the persons with id
 def get_persons_with_id(hyp_id):
@@ -94,12 +95,12 @@ def get_persons_with_id(hyp_id):
         It gets the persons from the local list with id
         identical to hyp_id
         /param hyp_id (string)
-        /return person object ({id, name})
+        /return person object ({id, value})
         """
     res = []
     for i in persons:
-        if i['id'] == hyp_id:
-            res.append(i['name'])
+        if i['ID'] == hyp_id:
+            res.append(i['value'])
     return res
 ## Function that gets the places with id
 def get_places_with_id(hyp_id):
@@ -108,12 +109,12 @@ def get_places_with_id(hyp_id):
         It gets the places from the local list with id
         identical to hyp_id
         /param hyp_id (string)
-        /return place object ({id,name})
+        /return place object ({id,value})
         """
     res = []
     for i in places:
-        if i['id'] == hyp_id:
-            res.append(i['name'])
+        if i['ID'] == hyp_id:
+            res.append(i['value'])
     return res
 ## Manage add hint function w.r.t. hypothesis 
 def manage_add_hint_wrt_hypothesis(hyp_id):
@@ -136,7 +137,7 @@ def disjoint_person(ind):
     """
     res = None
     for i in persons:
-        res = armor_client.call("DISJOINT", "IND", "", [ind, i['name']])
+        res = armor_client.call("DISJOINT", "IND", "", [ind, i['value']])
     return res
 ## Disjoint weapon in armor
 def disjoint_weapon(ind):
@@ -148,7 +149,7 @@ def disjoint_weapon(ind):
     """
     res = None
     for i in weapons:
-        res = armor_client.call("DISJOINT", "IND", "", [ind, i['name']])
+        res = armor_client.call("DISJOINT", "IND", "", [ind, i['value']])
     return res
 ## Disjoint place in armor
 def disjoint_place(ind):
@@ -160,25 +161,25 @@ def disjoint_place(ind):
     """
     res = None
     for i in places:
-        res = armor_client.call("DISJOINT", "IND", "", [ind, i['name']])
+        res = armor_client.call("DISJOINT", "IND", "", [ind, i['value']])
     return res
 ## Add person in armor
 def add_person(msg):
     """!
     /add_person function
     The function adds to armor the person defined in the message
-    /param msg ({id, name, type})
+    /param msg ({ID, value, key})
     """
-    res = armor_client.call("ADD", "OBJECTPROP", "IND", ["who", msg.id, msg.name])
+    res = armor_client.call("ADD", "OBJECTPROP", "IND", ["who", msg.ID, msg.value])
     if res == False:
         return False
-    res = armor_client.call("ADD", "IND", "CLASS", [msg.name, "PERSON"])
+    res = armor_client.call("ADD", "IND", "CLASS", [msg.value, "PERSON"])
     if res == False:
         return False
-    res = disjoint_person(msg.name)
+    res = disjoint_person(msg.value)
     persons.append({
-        'name':msg.name,
-        'id': msg.id
+        'value':msg.value,
+        'ID': msg.ID
         })
     return res
 ## Add weapon in armor
@@ -186,18 +187,18 @@ def add_weapon(msg):
     """!
     /add_weapon function
     The function adds to armor the weapon defined in the message
-    /param msg ({id, name, type})
+    /param msg ({id, value, key})
     """
-    res = armor_client.call("ADD", "OBJECTPROP", "IND", ["what", msg.id, msg.name])
+    res = armor_client.call("ADD", "OBJECTPROP", "IND", ["what", msg.ID, msg.value])
     if res == False:
         return False
-    res = armor_client.call("ADD", "IND", "CLASS", [msg.name, "WEAPON"])
+    res = armor_client.call("ADD", "IND", "CLASS", [msg.value, "WEAPON"])
     if res == False:
         return False
-    res = disjoint_weapon(msg.name)
+    res = disjoint_weapon(msg.value)
     weapons.append({
-        'name':msg.name,
-        'id': msg.id
+        'value':msg.value,
+        'ID': msg.ID
         })
     return res
 ## Add place in armor
@@ -205,18 +206,18 @@ def add_place(msg):
     """!
     /add_place function
     The function adds to armor the place defined in the message
-    /param msg ({id, name, type})
+    /param msg ({ID, value, key})
     """
-    res = armor_client.call("ADD", "OBJECTPROP", "IND", ["where", msg.id, msg.name])
+    res = armor_client.call("ADD", "OBJECTPROP", "IND", ["where", msg.ID, msg.value])
     if res == False:
         return False
-    res = armor_client.call("ADD", "IND", "CLASS", [msg.name, "PLACE"])
+    res = armor_client.call("ADD", "IND", "CLASS", [msg.value, "PLACE"])
     if res == False:
         return False
-    res = disjoint_place(msg.name)
+    res = disjoint_place(msg.value)
     places.append({
-        'name':msg.name,
-        'id': msg.id
+        'value':msg.value,
+        'ID': msg.ID
         })
     return res
 ## Reason function
@@ -232,18 +233,18 @@ def add_hint(msg):
     """!
     /add_hint callback
     The function manages the add function in armor
-    /param msg ({id, name, type})
+    /param msg ({ID, value, key})
     """
     global weapons, persons, places
-    manage_add_hint_wrt_hypothesis(msg.id)
+    manage_add_hint_wrt_hypothesis(msg.ID)
     reason()
-    if msg.id=='' or msg.id=="" or msg.name=='' or msg.name=="":
+    if msg.ID<0 or msg.ID>6 or (msg.ID is None) or msg.key=='' or msg.key=="" or msg.value=="" or msg.vale=='':
         return False
-    if msg.type == "who":
+    if msg.key == "who":
         return add_person(msg)
-    if msg.type == "where":
+    if msg.key == "where":
         return add_place(msg)
-    if msg.type == "what":
+    if msg.key == "what":
         return add_weapon(msg)
     reason()
     return True
@@ -302,7 +303,7 @@ def retrieve_hypothesis(id):
     per = get_persons_with_id(id)
     if len(weap)==1 and len(pla)==1 and len(per)==1:
         object = {
-            'id': id,
+            'ID': id,
             'where' : pla[0],
             'what' : weap[0],
             'who' : per[0],
@@ -319,7 +320,7 @@ def create_json_hypothesis(id, file):
     /return file
     """
     for i in file['hypotheses']:
-        if i['id'] == id:
+        if i['ID'] == id:
             return file
     hp_object_to_append = retrieve_hypothesis(id)
     hypotheses = file['hypotheses']
@@ -336,12 +337,10 @@ def investigate(msg):
     /param msg ()
     /returns True
     """
-    rospy.wait_for_service('/send_hint')
-    hint = hint_client()
-    add_hint(hint)
+    global file_hypotheses
     # TODO: write in the file the consistent hypotheses
-    file_hypotheses_string = rospy.get_param('/consistent_hypotheses')
-    file_hypotheses = json.loads(file_hypotheses_string)
+    #file_hypotheses_string = rospy.get_param('/consistent_hypotheses')
+    #file_hypotheses = json.loads(file_hypotheses_string)
     complete_hps = retrieve_consistent_hp()
     if complete_hps == []:
         return True
@@ -349,8 +348,14 @@ def investigate(msg):
         id = i.split('#')[1][:3]
         file_hypotheses = create_json_hypothesis(id, file_hypotheses)
     
-    file_hypotheses_string = json.dumps(file_hypotheses)
-    rospy.set_param('/consistent_hypotheses', file_hypotheses_string)
+    #file_hypotheses_string = json.dumps(file_hypotheses)
+    #rospy.set_param('/consistent_hypotheses', file_hypotheses_string)
+    return True
+
+def oracle_hint(msg):
+    
+    print(msg)
+    add_hint(msg)
     return True
 ## Main
 def main():
@@ -360,7 +365,7 @@ def main():
     where armor clients is initialized and also hint client
     and investigate service are initialized.
     """
-    global armor_client, hint_client
+    global armor_client, hint_client, file_hypotheses
     rospy.init_node('investigation') 
     armor_client = ArmorClient("client", "reference")
     armor_client.utils.load_ref_from_file(ontology_path, "http://www.emarolab.it/cluedo-ontology",
@@ -369,6 +374,10 @@ def main():
     armor_client.utils.set_log_to_terminal(True)
     hint_client = rospy.ServiceProxy('/send_hint', Hint)
     investigate_service = rospy.Service('/investigate', Investigate, investigate)
+    oracle_hint_sub = rospy.Subscriber('/oracle_hint', ErlOracle, oracle_hint)
+
+    file_hypotheses = json.loads('{"hypotheses" : []}')
+
     rospy.spin()
 
 if __name__ == '__main__':

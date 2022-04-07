@@ -156,7 +156,7 @@
   </link>
 
   <joint name="arm_base_to_base" type="prismatic">
-    <limit effort="1000.0" lower="0" upper="0.25" velocity="2"/>
+    <limit effort="1000.0" lower="0" upper="0.27" velocity="2"/>
   	<origin rpy="0 -1.57 0" xyz="0 0 0.15"/>
   	<parent link="base_link"/>
   	<child link="arm_base_link"/>
@@ -231,13 +231,13 @@
   	<collision>
   	  <origin xyz="0 0 0.21" rpy="0 0 0"/>
       <geometry>
-        <cylinder radius="0.036" length="0.67"/>
+        <cylinder radius="0.036" length="0.7"/>
       </geometry>
   	</collision>
   	<visual>
   	  <origin xyz="0 0 0.21" rpy="0 0 0"/>
       <geometry>
-        <cylinder radius="0.036" length="0.67"/>
+        <cylinder radius="0.036" length="0.7"/>
       </geometry>
       <material name="red" />
   	</visual>
@@ -275,7 +275,7 @@
   <joint name="arm_joint_04" type="revolute">
   	<axis xyz="1 0 0"/>
   	<limit effort="1000.0" lower="-1.8" upper="1.8" velocity="0.75"/>
-  	<origin rpy="0 0 0" xyz="0 0 0.55"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.57"/>
   	<parent link="arm_link_03"/>
   	<child link="arm_link_04"/>
   </joint>

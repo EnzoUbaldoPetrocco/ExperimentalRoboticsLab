@@ -3,6 +3,9 @@
 
 <node name="simulation" pkg ="ExperimentalRoboticsLab" type="simulation" output="log" /> 
 <node name="goToPoint" pkg ="ExperimentalRoboticsLab" type="go_to_point.py" output="log" />
+
+<include file="$(dirname)/investigation.launch">
+</include>
 <!--node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" ></node-->
 
 <arg name="model" default="$(find ExperimentalRoboticsLab)/urdf/robot6.urdf" />
