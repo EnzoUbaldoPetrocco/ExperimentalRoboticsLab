@@ -62,10 +62,6 @@ void MyMoveIt::find_hint(const ExperimentalRoboticsLab::HintGoalConstPtr& msg){
   pose.orientation.z = msg->z_quat;
   pose.orientation.w = msg->w_quat;
   this->move_to_the_pose(pose);
-  //ros::NodeHandle nh;
-  //actionlib::SimpleActionServer<ExperimentalRoboticsLab::HintAction> sub_find_hint(nh, "/hint", boost::bind(&MyMoveIt::find_hint, this, _1 ), false);
-  //sub_find_hint.acceptNewGoal();
-  //sub_find_hint.setSucceeded();
   sleep(2);
   if(found == true){
     sub_find_hint.setSucceeded();

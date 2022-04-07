@@ -36,7 +36,7 @@ namespace KCL_rosplan {
     else if (msg->parameters[1].value == "marker2"){
       goal.x = 2.4;
       goal.y = 0.1; //shift dued to the chassis
-      goal.theta = 3.14/2;
+      goal.theta = -3.14/2;
     }
     else if (msg->parameters[1].value == "marker3"){
       goal.x = -0.1; //shift dued to the chassis
