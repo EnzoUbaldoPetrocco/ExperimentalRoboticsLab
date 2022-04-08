@@ -198,6 +198,20 @@ def initialize_goal():
 
 def re_init(msg):
     global clear_knowledge
+
+    rospy.wait_for_service('/rosplan_plan_dispatcher/cancel_dispatch')
+    #cancel current dispatch
+    try:
+        cancel_dispatch = rospy.ServiceProxy('/rosplan_plan_dispatcher/cancel_dispatch', Empty)
+        ok=cancel_dispatch()
+        if ok:
+            print('dispatch cancelled')
+    
+    except rospy.ServiceException as e:
+        print("Service call failed: %s"%e)
+    
+    #return True
+
     clear_knowledge()
     init_common_goal()
     init_common_predicates()
@@ -233,6 +247,12 @@ def re_init(msg):
         predicate.value = 'oracle'
         predicates.append(predicate)
         update_knowledge_predicate(True, 'not_at', predicates)
+        predicates = []
+        predicate = diagnostic_msgs.msg.KeyValue()
+        predicate.key= 'loc'
+        predicate.value = 'marker1'
+        predicates.append(predicate)
+        update_knowledge_goal(True, 'not_at', predicates)
         predicates = []
         predicate = diagnostic_msgs.msg.KeyValue()
         predicate.key= 'loc'
@@ -275,6 +295,12 @@ def re_init(msg):
         predicate.key= 'loc'
         predicate.value = 'marker2'
         predicates.append(predicate)
+        predicates = []
+        predicate = diagnostic_msgs.msg.KeyValue()
+        predicate.key= 'loc'
+        predicate.value = 'marker2'
+        predicates.append(predicate)
+        update_knowledge_goal(True, 'not_at', predicates)
     elif msg.at == "marker3":
         predicates = []
         predicate = diagnostic_msgs.msg.KeyValue()
@@ -311,6 +337,12 @@ def re_init(msg):
         predicate.key= 'loc'
         predicate.value = 'marker3'
         predicates.append(predicate)
+        predicates = []
+        predicate = diagnostic_msgs.msg.KeyValue()
+        predicate.key= 'loc'
+        predicate.value = 'marker3'
+        predicates.append(predicate)
+        update_knowledge_goal(True, 'not_at', predicates)
     elif msg.at == "marker4":
         predicates = []
         predicate = diagnostic_msgs.msg.KeyValue()
@@ -347,6 +379,12 @@ def re_init(msg):
         predicate.key= 'loc'
         predicate.value = 'marker4'
         predicates.append(predicate)
+        predicates = []
+        predicate = diagnostic_msgs.msg.KeyValue()
+        predicate.key= 'loc'
+        predicate.value = 'marker4'
+        predicates.append(predicate)
+        update_knowledge_goal(True, 'not_at', predicates)
     elif msg.at == "oracle":
         predicates = []
         predicate = diagnostic_msgs.msg.KeyValue()
@@ -383,6 +421,12 @@ def re_init(msg):
         predicate.key= 'loc'
         predicate.value = 'oracle'
         predicates.append(predicate)
+        predicates = []
+        predicate = diagnostic_msgs.msg.KeyValue()
+        predicate.key= 'loc'
+        predicate.value = 'oracle'
+        predicates.append(predicate)
+        update_knowledge_goal(True, 'not_at', predicates)
     elif msg.at == "":
         predicates = []
         predicate = diagnostic_msgs.msg.KeyValue()
@@ -463,6 +507,7 @@ def main():
     clear_knowledge=rospy.ServiceProxy('rosplan_knowledge_base/clear',Empty) 
 
     time.sleep(10)
+
 
     #rospy.wait_for_service('rosplan_knowledge_base/propositions', 'predicate')
     clear_knowledge()

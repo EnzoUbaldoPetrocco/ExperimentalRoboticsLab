@@ -238,7 +238,7 @@ def add_hint(msg):
     global weapons, persons, places
     manage_add_hint_wrt_hypothesis(msg.ID)
     reason()
-    if msg.ID<0 or msg.ID>6 or (msg.ID is None) or msg.key=='' or msg.key=="" or msg.value=="" or msg.vale=='':
+    if msg.ID<0 or msg.ID>6 or (msg.ID is None) or msg.key=='' or msg.key=="" or msg.value=="" or msg.value=='':
         return False
     if msg.key == "who":
         return add_person(msg)

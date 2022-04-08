@@ -11,7 +11,7 @@
 #include <string.h>
 #include <ExperimentalRoboticsLab/Replan.h>
 #include <std_msgs/String.h>
-
+#include <ExperimentalRoboticsLab/CustomTargetAction.h>
 ros::Publisher replan_pub;
 
 namespace KCL_rosplan {
@@ -23,6 +23,12 @@ namespace KCL_rosplan {
     // here the implementation of the action
     std::cout << "Going from: " << msg->parameters[0].value << " to: "<< msg->parameters[1].value << std::endl;
     
+    actionlib::SimpleActionClient<ExperimentalRoboticsLab::CustomTargetAction> ac_pose("/custom_pose", true);
+    ExperimentalRoboticsLab::CustomTargetGoal goal_pose;
+    ac_pose.waitForServer();
+    goal_pose.pose = "home";
+    ac_pose.sendGoal(goal_pose);
+    ac_pose.waitForResult();
   
     actionlib::SimpleActionClient<ExperimentalRoboticsLab::PositionAction> ac("/go_to_point", true);
     ExperimentalRoboticsLab::PositionGoal goal;

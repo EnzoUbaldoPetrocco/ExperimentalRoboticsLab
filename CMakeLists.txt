@@ -77,6 +77,7 @@ add_service_files(
     FILES
     Position.action
     Hint.action
+    CustomTarget.action
 #   Action1.action
 #   Action2.action
  )

@@ -75,7 +75,7 @@ namespace KCL_rosplan {
     // here the implementation of the action
     std::cout << "Reaching cluedo_joint position in order to find the hint. " << std::endl;
     // Here we need to move the arm to goal position, we can do many attempts because there exist 2 possible locations
-     actionlib::SimpleActionClient<ExperimentalRoboticsLab::HintAction> ac("/hint", true);
+    actionlib::SimpleActionClient<ExperimentalRoboticsLab::HintAction> ac("/hint", true);
     ExperimentalRoboticsLab::HintGoal goal;
     ac.waitForServer();
 

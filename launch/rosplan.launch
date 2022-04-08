@@ -3,7 +3,7 @@
 
 <!-- arguments -->
 <arg name="domain_path" default="$(find ExperimentalRoboticsLab)/PDDL/domain.pddl" />
-<arg name="problem_path" default="$(find ExperimentalRoboticsLab)/PDDL/problem.pddl" />
+<arg name="problem_path" default="$(find ExperimentalRoboticsLab)/PDDL/new_problem.pddl" />
 
 <!-- knowledge base -->
 <node name="rosplan_knowledge_base" pkg="rosplan_knowledge_base" type="knowledgeBase" respawn="false"

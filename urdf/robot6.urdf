@@ -390,18 +390,18 @@
         
 <inertial>
             <mass value="0.015" />
-            <origin rpy="0 0 0" xyz="0 0 0.21" />
+            <origin rpy="0 0 0" xyz="0 0 0.3" />
             <inertia ixx="0.000010279" ixy="0" ixz="0" iyy="0.000010279" iyz="0" izz="0.000007225" />
         </inertial>
 
         <collision>
-            <origin rpy="0 0 0" xyz="0 0 0.21" />
+            <origin rpy="0 0 0" xyz="0 0 0.3" />
             <geometry>
                 <cylinder length="0.7" radius="0.036" />
             </geometry>
         </collision>
         <visual>
-            <origin rpy="0 0 0" xyz="0 0 0.21" />
+            <origin rpy="0 0 0" xyz="0 0 0.3" />
             <geometry>
                 <cylinder length="0.7" radius="0.036" />
             </geometry>
@@ -419,18 +419,18 @@
         
 <inertial>
             <mass value="0.0125" />
-            <origin rpy="0 0 0" xyz="0 0 0.04" />
+            <origin rpy="0 0 0" xyz="0 0 0.045" />
             <inertia ixx="0.000010279" ixy="0" ixz="0" iyy="0.000010279" iyz="0" izz="0.000007225" />
         </inertial>
 
         <collision>
-            <origin rpy="0 0 1.57" xyz="0 0 0.04" />
+            <origin rpy="0 0 1.57" xyz="0 0 0.045" />
             <geometry>
                 <box size="0.034 0.2 0.08" />
             </geometry>
         </collision>
         <visual>
-            <origin rpy="0 0 1.57" xyz="0 0 0.04" />
+            <origin rpy="0 0 1.57" xyz="0 0 0.045" />
             <geometry>
                 <box size="0.034 0.2 0.08" />
             </geometry>
@@ -440,7 +440,7 @@
     <joint name="arm_joint_04" type="revolute">
         <axis xyz="1 0 0" />
         <limit effort="1000.0" lower="-1.8" upper="1.8" velocity="0.75" />
-        <origin rpy="0 0 0" xyz="0 0 0.57" />
+        <origin rpy="0 0 0" xyz="0 0 0.65" />
         <parent link="arm_link_03" />
         <child link="arm_link_04" />
     </joint>
