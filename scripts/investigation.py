@@ -347,13 +347,12 @@ def investigate(msg):
     for i in complete_hps:
         id = i.split('#')[1][:3]
         file_hypotheses = create_json_hypothesis(id, file_hypotheses)
-    
+    print(file_hypotheses)
     #file_hypotheses_string = json.dumps(file_hypotheses)
     #rospy.set_param('/consistent_hypotheses', file_hypotheses_string)
     return True
 
 def oracle_hint(msg):
-    
     print(msg)
     add_hint(msg)
     return True
