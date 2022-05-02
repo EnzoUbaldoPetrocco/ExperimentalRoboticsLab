@@ -13,5 +13,6 @@ In particular: you have a robot, which must find hints, like it is playing clued
 ## Working hypothesis and environment
 
 ## Authors and contacts
-The Author of this repository is Enzo Ubaldo Petrocco (enzopetrocco@hotmail.it)
+The author of this repository is [Enzo Ubaldo Petrocco](https://github.com/EnzoUbaldoPetrocco/ExperimentalRoboticsLab): i'm a student of robotics engineering in the University of Genova (s4530363); if you have some issues please contact me:
+- email: enzopetrocco@hotmail.it 
 
