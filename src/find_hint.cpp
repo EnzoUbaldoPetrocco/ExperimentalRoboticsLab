@@ -12,6 +12,7 @@
 #include <string.h>
 #include <ExperimentalRoboticsLab/Replan.h>
 #include <std_msgs/String.h>
+#include <ExperimentalRoboticsLab/CustomTargetAction.h>
 
 ros::Publisher replan_pub;
 
@@ -74,6 +75,13 @@ namespace KCL_rosplan {
   bool FindHintActionInterface::concreteCallback(const rosplan_dispatch_msgs::ActionDispatch::ConstPtr& msg) {
     // here the implementation of the action
     std::cout << "Reaching cluedo_joint position in order to find the hint. " << std::endl;
+
+    actionlib::SimpleActionClient<ExperimentalRoboticsLab::CustomTargetAction> ac_pose("/custom_pose", true);
+    ExperimentalRoboticsLab::CustomTargetGoal goal_pose;
+    ac_pose.waitForServer();
+    goal_pose.pose = "home";
+    ac_pose.sendGoal(goal_pose);
+    ac_pose.waitForResult();
     // Here we need to move the arm to goal position, we can do many attempts because there exist 2 possible locations
     actionlib::SimpleActionClient<ExperimentalRoboticsLab::HintAction> ac("/hint", true);
     ExperimentalRoboticsLab::HintGoal goal;

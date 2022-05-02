@@ -9,6 +9,10 @@
 #include <time.h>
 #include <vector>
 #include <string.h>
+#include <ExperimentalRoboticsLab/Replan.h>
+#include <std_msgs/String.h>
+
+ros::Publisher replan_pub;
 
 namespace KCL_rosplan {
   OracleActionInterface::OracleActionInterface(ros::NodeHandle &nh) {
@@ -30,6 +34,8 @@ int main(int argc, char **argv) {
 ros::init(argc, argv, "rosplan_interface_oracle", ros::init_options::AnonymousName);
 ros::NodeHandle nh("~");
 KCL_rosplan::OracleActionInterface my_aci(nh);
+
+replan_pub = nh.advertise<ExperimentalRoboticsLab::Replan>("/replan", 10 );
 my_aci.runActionInterface();
 return 0;
 }

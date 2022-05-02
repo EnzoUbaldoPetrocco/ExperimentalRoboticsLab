@@ -35,29 +35,29 @@ namespace KCL_rosplan {
 
     ac.waitForServer();
     if(msg->parameters[1].value == "marker1"){
-      goal.x = -2.35;
-      goal.y = 0.1; //shift dued to the chassis
-      goal.theta = 3.14/2;
-    }
-    else if (msg->parameters[1].value == "marker2"){
-      goal.x = 2.35;
-      goal.y = 0.1; //shift dued to the chassis
+      goal.x = -2.28;
+      goal.y = 0; 
       goal.theta = -3.14/2;
     }
+    else if (msg->parameters[1].value == "marker2"){
+      goal.x = 2.28;
+      goal.y = 0; 
+      goal.theta = 3.14/2;
+    }
     else if (msg->parameters[1].value == "marker3"){
-      goal.x = -0.1; //shift dued to the chassis
-      goal.y = 2.35;
-      goal.theta = 0;
+      goal.x = 0; 
+      goal.y = 2.28;
+      goal.theta = 3.14;
     }
     else if (msg->parameters[1].value == "marker4"){
-      goal.x = -0.1; //shift dued to the chassis
-      goal.y = -2.35;
+      goal.x = 0; 
+      goal.y = -2.28;
       goal.theta = 0;
     }
     else if (msg->parameters[1].value == "oracle"){
       goal.x = 0;
       goal.y = 0;
-      goal.theta = 0;
+      goal.theta = 3.14/2;
     }
     
     //std::cout << "Debug" <<std::endl;

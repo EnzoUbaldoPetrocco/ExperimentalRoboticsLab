@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 
+from matplotlib.style import available
 import rospy
 import rosplan_dispatch_msgs.srv 
 import rosplan_knowledge_msgs.srv
@@ -9,6 +10,7 @@ import diagnostic_msgs.msg
 from ExperimentalRoboticsLab.srv import *
 from ExperimentalRoboticsLab.msg import Replan
 import time
+
 
 def update_knowledge_predicate(is_positive, predicate_name, keys):
     '''Updates state of a predicate of my problem'''

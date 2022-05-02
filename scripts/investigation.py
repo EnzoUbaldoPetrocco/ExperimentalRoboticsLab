@@ -59,6 +59,41 @@ persons = []
 places = []
 hypotheses = []
 
+available_person = {"missScarlett", "colonelMustard", "mrsWhite", "mrGreen", "mrsPeacock", "profPlum"}
+available_weapon = {"candlestick", "dagger", "leadPipe", "revolver", "rope", "spanner"}
+available_place = {"conservatory", "lounge", "kitchen", "library", "hall", "study", "bathroom", "diningRoom", "billiardRoom"}
+available_key = {"who", "what", "where"}
+
+def check_value_person(value):
+    for i in available_person:
+        if i==value:
+            return True
+    return False
+
+def check_value_weapon(value):
+    for i in available_weapon:
+        if i==value:
+            return True
+    return False
+
+def check_value_place(value):
+    for i in available_place:
+        if i==value:
+            return True
+    return False
+
+def check_values(value):
+    b = check_value_person(value) or check_value_weapon(value) or check_value_place(value)
+    return b
+
+def check_key(value):
+    for i in available_key:
+        if i==value:
+            return True
+    return False
+
+
+
 ## Function that check if an hypothesis does not exists
 def check_hypothesis_not_exist(hyp_id):
     """!
@@ -170,7 +205,9 @@ def add_person(msg):
     The function adds to armor the person defined in the message
     /param msg ({ID, value, key})
     """
-    res = armor_client.call("ADD", "OBJECTPROP", "IND", ["who", msg.ID, msg.value])
+    print(msg.ID)
+    print(msg.value)
+    res = armor_client.call("ADD", "OBJECTPROP", "IND", ["who", str(msg.ID), msg.value])
     if res == False:
         return False
     res = armor_client.call("ADD", "IND", "CLASS", [msg.value, "PERSON"])
@@ -189,7 +226,9 @@ def add_weapon(msg):
     The function adds to armor the weapon defined in the message
     /param msg ({id, value, key})
     """
-    res = armor_client.call("ADD", "OBJECTPROP", "IND", ["what", msg.ID, msg.value])
+    print(msg.ID)
+    print(msg.value)
+    res = armor_client.call("ADD", "OBJECTPROP", "IND", ["what", str(msg.ID), msg.value])
     if res == False:
         return False
     res = armor_client.call("ADD", "IND", "CLASS", [msg.value, "WEAPON"])
@@ -208,7 +247,10 @@ def add_place(msg):
     The function adds to armor the place defined in the message
     /param msg ({ID, value, key})
     """
-    res = armor_client.call("ADD", "OBJECTPROP", "IND", ["where", msg.ID, msg.value])
+    print(msg.ID)
+    print(msg.value)
+    
+    res = armor_client.call("ADD", "OBJECTPROP", "IND", ["where", str(msg.ID), msg.value])
     if res == False:
         return False
     res = armor_client.call("ADD", "IND", "CLASS", [msg.value, "PLACE"])
@@ -238,7 +280,7 @@ def add_hint(msg):
     global weapons, persons, places
     manage_add_hint_wrt_hypothesis(msg.ID)
     reason()
-    if msg.ID<0 or msg.ID>6 or (msg.ID is None) or msg.key=='' or msg.key=="" or msg.value=="" or msg.value=='':
+    if msg.ID<0 or msg.ID>6 or (not(check_key(msg.key))) or (not(check_values(msg.value))):
         return False
     if msg.key == "who":
         return add_person(msg)
@@ -347,6 +389,7 @@ def investigate(msg):
     for i in complete_hps:
         id = i.split('#')[1][:3]
         file_hypotheses = create_json_hypothesis(id, file_hypotheses)
+    print('investigation finished, printed consistent hypotheses')
     print(file_hypotheses)
     #file_hypotheses_string = json.dumps(file_hypotheses)
     #rospy.set_param('/consistent_hypotheses', file_hypotheses_string)
