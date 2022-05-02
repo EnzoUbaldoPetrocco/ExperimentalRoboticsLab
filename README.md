@@ -11,8 +11,10 @@ From an architectural point of view the software is structured as follows, a bet
 
 - UserInterface component: this component asks to the user to play the game, when done it let the robot launching rosplan and starts the game. Rosplan Management and User Interface components communicate each other thanks to a custom action UserInterfaceAction.
 - Rosplan component: this component is launched by Rosplan Management when User Interface asks him to generate a plan from the domain and problem described by the Rosplan Management component through services. This component is responsible for launching the 4 actions Navigation, Find Hint, Reason and Oracle, which in this part are described as component.
+Each of the previous 4 actions/components mentioned before has a some general properties that may be interesting to be outlined: 
+1. **The action can fail in its aim**, in fact it's impossibile that these actions let the program finish in a single plan, this is due from the fact that a complete hypothesis is made by 3 hints, so a service toward rosplan management must be performed in order to replan if something fails. 
+2. **Every action is decouples the problem and the other components**, in order to not write too specific code, and in order to perform flexibility concept, every nodes link the rosplan, which can be changed in order to perform other types of plans, and Go To Point, My MoveIt and Investigation components, which are more general.
 
-Pippo pluto e paperino
 ## Installation and Running Procedure
 
 ## A Sample of the scenario
