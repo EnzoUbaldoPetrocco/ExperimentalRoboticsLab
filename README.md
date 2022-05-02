@@ -5,6 +5,7 @@ Also some little changes have been made, but the main concept has been maintaine
 In particular: you have a robot, which must find hints, like it is playing cluedo game, it must reason about possible complete hypotheses and then, it must ask to the oracle if the hypothesis is correct. If it is not, the robot must go on and keep playing until it finds the solution.
 
 ## Software structure
+![class_diagram_ass_2 drawio](https://user-images.githubusercontent.com/48513075/166212498-4f037c05-1af0-49e5-a24b-03066e0ed9e3.png)
 
 ## Installation and Running Procedure
 
