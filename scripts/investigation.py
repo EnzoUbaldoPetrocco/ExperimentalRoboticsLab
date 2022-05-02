@@ -396,6 +396,10 @@ def investigate(msg):
     return True
 
 def oracle_hint(msg):
+    """!
+    /oracle hint function
+    This function is a callback for get oracle hint
+    """
     print(msg)
     add_hint(msg)
     return True

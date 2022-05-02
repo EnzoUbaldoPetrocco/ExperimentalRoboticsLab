@@ -12,6 +12,7 @@ From an architectural point of view the software is structured as follows, a bet
 - UserInterface component: this component asks to the user to play the game, when done it let the robot launching rosplan and starts the game. Rosplan Management and User Interface components communicate each other thanks to a custom action UserInterfaceAction.
 - Rosplan component: this component is launched by Rosplan Management when User Interface asks him to generate a plan from the domain and problem described by the Rosplan Management component through services. This component is responsible for launching the 4 actions Navigation, Find Hint, Reason and Oracle, which in this part are described as component.
 
+Pippo pluto e paperino
 ## Installation and Running Procedure
 
 ## A Sample of the scenario
