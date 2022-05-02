@@ -6,7 +6,8 @@ In particular: you have a robot, which must find hints, like it is playing clued
 
 ## Software structure
 From an architectural point of view the software is structured as follows, a better explanation of services, actions, ... is explained below the picture, this is done because of readability of the component diagram.
-![class_diagram_ass_2 drawio](https://user-images.githubusercontent.com/48513075/166214452-e6c7a5bf-adf2-4239-92ba-cda7e8d5a8be.png)
+
+![class_diagram_ass_2 drawio (2)](https://user-images.githubusercontent.com/48513075/166264792-902c78d4-b3b1-4d31-9056-ff45079da4a8.png)
 
 
 - UserInterface component: this component asks to the user to play the game, when done it let the robot launching rosplan and starts the game. Rosplan Management and User Interface components communicate each other thanks to a custom action UserInterfaceAction.
