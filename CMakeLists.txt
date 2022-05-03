@@ -78,6 +78,7 @@ add_service_files(
     Position.action
     Hint.action
     CustomTarget.action
+    Command.action
 #   Action1.action
 #   Action2.action
  )
@@ -215,6 +216,12 @@ add_dependencies(find_hint ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED
 
  catkin_install_python(PROGRAMS
  scripts/rosplan_management.py
+#   scripts/my_python_script
+   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+ )
+
+ catkin_install_python(PROGRAMS
+ scripts/user_interface.py
 #   scripts/my_python_script
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
