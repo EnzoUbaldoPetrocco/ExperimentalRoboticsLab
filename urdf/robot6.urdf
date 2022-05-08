@@ -323,7 +323,7 @@
         </visual>
     </link>
     <joint name="arm_base_to_base" type="prismatic">
-        <limit effort="1000.0" lower="0" upper="0.32" velocity="2" />
+        <limit effort="1000.0" lower="0" upper="0.32" velocity="2.2" />
         <origin rpy="0 -1.57 0" xyz="0 0 0.15" />
         <parent link="base_link" />
         <child link="arm_base_link" />
@@ -339,21 +339,21 @@
         <collision>
             <origin rpy="0 0 0" xyz="0 0 0" />
             <geometry>
-                <cylinder length="0.6" radius="0.045" />
+                <cylinder length="0.36" radius="0.045" />
             </geometry>
         </collision>
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0" />
             <geometry>
-                <cylinder length="0.6" radius="0.045" />
+                <cylinder length="0.36" radius="0.045" />
             </geometry>
             <material name="red" />
         </visual>
     </link>
     <joint name="arm_joint_01" type="revolute">
         <axis xyz="0 0 1" />
-        <limit effort="1000.0" lower="-6.28" upper="6.28" velocity="0.5" />
-        <origin rpy="0 1.57 0" xyz="0.48 0 0.1" />
+        <limit effort="1000.0" lower="-6.28" upper="6.28" velocity="0.55" />
+        <origin rpy="0 1.57 0" xyz="0.28 0 0.1" />
         <parent link="arm_base_link" />
         <child link="arm_link_01" />
     </joint>
@@ -368,21 +368,21 @@
         <collision>
             <origin rpy="0 0 0" xyz="0 0 0" />
             <geometry>
-                <cylinder length="0.6" radius="0.04" />
+                <cylinder length="0.5" radius="0.04" />
             </geometry>
         </collision>
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0" />
             <geometry>
-                <cylinder length="0.6" radius="0.04" />
+                <cylinder length="0.5" radius="0.04" />
             </geometry>
             <material name="red" />
         </visual>
     </link>
     <joint name="arm_joint_02" type="revolute">
         <axis xyz="0 0 1" />
-        <limit effort="1000.0" lower="-6.28" upper="6.28" velocity="0.3" />
-        <origin rpy="1.57 0 0" xyz="0 0.3 0.3" />
+        <limit effort="1000.0" lower="-6.28" upper="6.28" velocity="0.4" />
+        <origin rpy="2 0 0" xyz="0 0.17 0.3" />
         <parent link="arm_link_01" />
         <child link="arm_link_02" />
     </joint>
@@ -390,28 +390,28 @@
         
 <inertial>
             <mass value="0.008" />
-            <origin rpy="0 0 0" xyz="0 0 0.38" />
+            <origin rpy="0 0 0" xyz="0 0 0.32" />
             <inertia ixx="0.000010279" ixy="0" ixz="0" iyy="0.000010279" iyz="0" izz="0.000007225" />
         </inertial>
 
         <collision>
-            <origin rpy="0 0 0" xyz="0 0 0.38" />
+            <origin rpy="0 0 0" xyz="0 0 0.32" />
             <geometry>
-                <cylinder length="0.68" radius="0.035" />
+                <cylinder length="0.55" radius="0.035" />
             </geometry>
         </collision>
         <visual>
-            <origin rpy="0 0 0" xyz="0 0 0.38" />
+            <origin rpy="0 0 0" xyz="0 0 0.32" />
             <geometry>
-                <cylinder length="0.68" radius="0.035" />
+                <cylinder length="0.55" radius="0.035" />
             </geometry>
             <material name="red" />
         </visual>
     </link>
     <joint name="arm_joint_03" type="revolute">
         <axis xyz="0 0 1" />
-        <limit effort="1000.0" lower="-6.28" upper="6.28" velocity="0.3" />
-        <origin rpy="-1.57 0 0" xyz="0 0 -0.25" />
+        <limit effort="1000.0" lower="-6.28" upper="6.28" velocity="0.4" />
+        <origin rpy="-1.57 0 0" xyz="0 0 -0.22" />
         <parent link="arm_link_02" />
         <child link="arm_link_03" />
     </joint>
@@ -419,18 +419,18 @@
         
 <inertial>
             <mass value="0.007" />
-            <origin rpy="0 0 0" xyz="0 0 0.045" />
+            <origin rpy="0 0 0" xyz="0 0 0.047" />
             <inertia ixx="0.000010279" ixy="0" ixz="0" iyy="0.000010279" iyz="0" izz="0.000007225" />
         </inertial>
 
         <collision>
-            <origin rpy="0 0 1.57" xyz="0 0 0.045" />
+            <origin rpy="0 0 1.57" xyz="0 0 0.047" />
             <geometry>
                 <box size="0.034 0.2 0.08" />
             </geometry>
         </collision>
         <visual>
-            <origin rpy="0 0 1.57" xyz="0 0 0.045" />
+            <origin rpy="0 0 1.57" xyz="0 0 0.047" />
             <geometry>
                 <box size="0.034 0.2 0.08" />
             </geometry>
@@ -439,8 +439,8 @@
     </link>
     <joint name="arm_joint_04" type="revolute">
         <axis xyz="1 0 0" />
-        <limit effort="1000.0" lower="-6.28" upper="6.28" velocity="0.75" />
-        <origin rpy="0 0 0" xyz="0 0 0.7" />
+        <limit effort="1000.0" lower="-6.28" upper="6.28" velocity="0.77" />
+        <origin rpy="0 0 0" xyz="0 0 0.58" />
         <parent link="arm_link_03" />
         <child link="arm_link_04" />
     </joint>
@@ -468,7 +468,7 @@
     </link>
     <joint name="cluedo_joint" type="prismatic">
         <axis xyz="1 0 0" />
-        <limit effort="1000.0" lower="-0.04" upper="0.035" velocity="6.5" />
+        <limit effort="1000.0" lower="-0.04" upper="0.035" velocity="6.6" />
         <origin rpy="0 0 0" xyz="0 0 0" />
         <parent link="arm_link_04" />
         <child link="cluedo_link" />

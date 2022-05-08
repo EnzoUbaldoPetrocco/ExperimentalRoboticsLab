@@ -69,6 +69,7 @@ add_service_files(
    Hint.srv
    Investigate.srv
    Position.srv
+   Command.srv
 #   Service2.srv
  )
 
@@ -78,7 +79,7 @@ add_service_files(
     Position.action
     Hint.action
     CustomTarget.action
-    Command.action
+    
 #   Action1.action
 #   Action2.action
  )

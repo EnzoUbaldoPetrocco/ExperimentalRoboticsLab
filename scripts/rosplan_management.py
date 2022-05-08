@@ -10,7 +10,9 @@ import diagnostic_msgs.msg
 from ExperimentalRoboticsLab.srv import *
 from ExperimentalRoboticsLab.msg import Replan
 import time
+from ExperimentalRoboticsLab.srv import Command
 
+stop = True
 
 def update_knowledge_predicate(is_positive, predicate_name, keys):
     '''Updates state of a predicate of my problem'''
@@ -259,8 +261,6 @@ def init_no_same_location(case):
         predicate2.value = 'marker2'
         predicates.append(predicate2)
         update_knowledge_predicate(True, 'no_same_location', predicates)
-
-
 
 def init_common_predicates():
     predicates = []
@@ -591,10 +591,20 @@ def running_rosplan_procedure():
 def print_plan(msg):
     print(msg)
 
+def take_command(msg):
+    global stop
+    if msg.command=="stop":
+        fake_msg = 0
+        fake_msg.at = "oracle"
+        re_init()
+    if msg.command=="start":
+        stop = False
+
 def main():
-    global update_knowledge_client, prob_gen_client, plan_client, parse_client, dispatch_client, clear_knowledge
+    global update_knowledge_client, prob_gen_client, plan_client, parse_client, dispatch_client, clear_knowledge, ui_server
     rospy.init_node('rosplan_management',anonymous=True)
     replan = rospy.Subscriber('/replan', Replan, re_init)
+    ui_server = rospy.Service('/user_interface', Command, take_command)
 
     # Wait for all services
     rospy.wait_for_service('rosplan_problem_interface/problem_generation_server')

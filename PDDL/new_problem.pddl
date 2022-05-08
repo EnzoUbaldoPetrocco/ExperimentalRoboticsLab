@@ -8,9 +8,9 @@
     gm - game
 )
 (:init
-    (at marker2)
+    (at marker1)
 
-    (not_at marker1)
+    (not_at marker2)
     (not_at marker3)
     (not_at marker4)
     (not_at oracle)
@@ -21,16 +21,16 @@
 
     (proceed_investigate nav)
 
-    (no_same_location marker2 marker1)
-    (no_same_location marker2 marker3)
-    (no_same_location marker2 marker4)
-    (no_same_location marker2 oracle)
+    (no_same_location marker1 marker2)
+    (no_same_location marker1 marker3)
+    (no_same_location marker1 marker4)
+    (no_same_location marker1 oracle)
 
 
 
 )
 (:goal (and
     (game_finished gm)
-    (not_at marker2)
+    (not_at marker1)
 ))
 )

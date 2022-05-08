@@ -35,23 +35,23 @@ namespace KCL_rosplan {
 
     ac.waitForServer();
     if(msg->parameters[1].value == "marker1"){
-      goal.x = -2.28;
+      goal.x = -2.3;
       goal.y = 0; 
       goal.theta = -3.14/2;
     }
     else if (msg->parameters[1].value == "marker2"){
-      goal.x = 2.28;
+      goal.x = 2.3;
       goal.y = 0; 
       goal.theta = 3.14/2;
     }
     else if (msg->parameters[1].value == "marker3"){
       goal.x = 0; 
-      goal.y = 2.28;
+      goal.y = 2.3;
       goal.theta = 3.14;
     }
     else if (msg->parameters[1].value == "marker4"){
       goal.x = 0; 
-      goal.y = -2.28;
+      goal.y = -2.3;
       goal.theta = 0;
     }
     else if (msg->parameters[1].value == "oracle"){

@@ -64,6 +64,7 @@ void MyMoveIt::hint_found(const ExperimentalRoboticsLab::ErlOracle::ConstPtr& ms
 void MyMoveIt::find_hint(const ExperimentalRoboticsLab::HintGoalConstPtr& msg){
   //this->move_to_custom_pose("check");
   sleep(2);
+  /**
   geometry_msgs::Pose pose;
   pose.position.x = msg->x_pos;
   pose.position.y = msg->y_pos;
@@ -73,6 +74,8 @@ void MyMoveIt::find_hint(const ExperimentalRoboticsLab::HintGoalConstPtr& msg){
   pose.orientation.z = msg->z_quat;
   pose.orientation.w = msg->w_quat;
   this->move_to_the_pose(pose);
+  **/
+  this->move_to_custom_pose(msg->pose);
   sleep(2);
   if(found == true){
     sub_find_hint.setSucceeded();
@@ -100,8 +103,8 @@ void MyMoveIt::move_to_custom_pose(std::string str){
   group.setStartStateToCurrentState();
 	group.setNamedTarget(str);
   
-  group.setGoalOrientationTolerance(0.001);
-  group.setGoalPositionTolerance(0.001);
+  group.setGoalOrientationTolerance(0.1);
+  group.setGoalPositionTolerance(0.1);
 
 	group.move();  
   sleep(1);
@@ -122,7 +125,7 @@ void MyMoveIt::move_to_the_pose(geometry_msgs::Pose pose){
   group.setStartStateToCurrentState();
   group.setApproximateJointValueTarget(pose, "cluedo_link");
   std::vector<double> joint_values;
-  double timeout = 1.5;
+  double timeout = 1;
   bool found_ik = kinematic_state->setFromIK(joint_model_group, pose, timeout);
 
   if (found_ik)
@@ -139,8 +142,8 @@ void MyMoveIt::move_to_the_pose(geometry_msgs::Pose pose){
   }
   group.setJointValueTarget(joint_values);
   group.setStartStateToCurrentState();
-  group.setGoalOrientationTolerance(0.0001);
-  group.setGoalPositionTolerance(0.0001);
+  group.setGoalOrientationTolerance(3.14*2);
+  group.setGoalPositionTolerance(0.2);
 
   // Plan and execute
   moveit::planning_interface::MoveGroupInterface::Plan my_plan;

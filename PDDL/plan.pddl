@@ -8,7 +8,7 @@ b (7.000 | 1.000)b (6.000 | 1.000)b (4.000 | 2.001)b (2.000 | 3.002);;;; Solutio
 ; States evaluated: 9
 ; Cost: 4.003
 ; Time 0.00
-0.000: (navigation marker2 marker1 nav hnt)  [1.000]
-1.001: (find_hint marker1 hnt)  [1.000]
-2.002: (reason hnt hyp marker1 nav)  [1.000]
+0.000: (navigation marker1 marker2 nav hnt)  [1.000]
+1.001: (find_hint marker2 hnt)  [1.000]
+2.002: (reason hnt hyp marker2 nav)  [1.000]
 3.003: (oracle oracle hyp gm)  [1.000]
