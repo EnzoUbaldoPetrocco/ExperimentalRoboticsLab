@@ -12,6 +12,7 @@
 #include <ExperimentalRoboticsLab/Replan.h>
 #include <std_msgs/String.h>
 #include <ExperimentalRoboticsLab/CustomTargetAction.h>
+#include <random.h>
 ros::Publisher replan_pub;
 
 namespace KCL_rosplan {
@@ -34,30 +35,26 @@ namespace KCL_rosplan {
     ExperimentalRoboticsLab::PositionGoal goal;
 
     ac.waitForServer();
-    if(msg->parameters[1].value == "marker1"){
+    int location = rand()%4;
+    if(location == 0){
       goal.x = -2.3;
       goal.y = 0; 
       goal.theta = -3.14/2;
     }
-    else if (msg->parameters[1].value == "marker2"){
+    else if (location == 1){
       goal.x = 2.3;
       goal.y = 0; 
       goal.theta = 3.14/2;
     }
-    else if (msg->parameters[1].value == "marker3"){
+    else if (location == 2){
       goal.x = 0; 
       goal.y = 2.3;
       goal.theta = 3.14;
     }
-    else if (msg->parameters[1].value == "marker4"){
+    else if (location == 3){
       goal.x = 0; 
       goal.y = -2.3;
       goal.theta = 0;
-    }
-    else if (msg->parameters[1].value == "oracle"){
-      goal.x = 0;
-      goal.y = 0;
-      goal.theta = 3.14/2;
     }
     
     //std::cout << "Debug" <<std::endl;

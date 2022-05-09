@@ -98,6 +98,7 @@ output="log">
 <!--/group-->
 
 
+
 <node name="rosplan_management" pkg="ExperimentalRoboticsLab" type="rosplan_management.py"  output="screen"/>
 
 

@@ -10,9 +10,12 @@ import diagnostic_msgs.msg
 from ExperimentalRoboticsLab.srv import *
 from ExperimentalRoboticsLab.msg import Replan
 import time
-from ExperimentalRoboticsLab.srv import Command
 
 stop = True
+
+class FakeMsg:
+    def __init__(self, at):
+        self.at = at
 
 def update_knowledge_predicate(is_positive, predicate_name, keys):
     '''Updates state of a predicate of my problem'''
@@ -55,212 +58,27 @@ def update_knowledge_instance(name,instanceType):
     update_req.knowledge.instance_type=instanceType
     result=update_knowledge_client(update_req)
 
-def init_no_same_location(case):
-    if case == "marker1" or case=="":
-        predicates = []
-        predicate1 = diagnostic_msgs.msg.KeyValue()
-        predicate2 = diagnostic_msgs.msg.KeyValue()
-        predicate1.key= 'from'
-        predicate1.value = 'marker1'
-        predicates.append(predicate1)
-        predicate2.key= 'to'
-        predicate2.value = 'marker2'
-        predicates.append(predicate2)
-        update_knowledge_predicate(True, 'no_same_location', predicates)
-        predicates = []
-        predicate1 = diagnostic_msgs.msg.KeyValue()
-        predicate2 = diagnostic_msgs.msg.KeyValue()
-        predicate1.key= 'from'
-        predicate1.value = 'marker1'
-        predicates.append(predicate1)
-        predicate2.key= 'to'
-        predicate2.value = 'marker3'
-        predicates.append(predicate2)
-        update_knowledge_predicate(True, 'no_same_location', predicates)
-        predicates = []
-        predicate1 = diagnostic_msgs.msg.KeyValue()
-        predicate2 = diagnostic_msgs.msg.KeyValue()
-        predicate1.key= 'from'
-        predicate1.value = 'marker1'
-        predicates.append(predicate1)
-        predicate2.key= 'to'
-        predicate2.value = 'marker4'
-        predicates.append(predicate2)
-        update_knowledge_predicate(True, 'no_same_location', predicates)
-        predicates = []
-        predicate1 = diagnostic_msgs.msg.KeyValue()
-        predicate2 = diagnostic_msgs.msg.KeyValue()
-        predicate1.key= 'from'
-        predicate1.value = 'marker1'
-        predicates.append(predicate1)
-        predicate2.key= 'to'
-        predicate2.value = 'oracle'
-        predicates.append(predicate2)
-        update_knowledge_predicate(True, 'no_same_location', predicates)
-    if case == "marker2":
-        predicates = []
-        predicate1 = diagnostic_msgs.msg.KeyValue()
-        predicate2 = diagnostic_msgs.msg.KeyValue()
-        predicate1.key= 'from'
-        predicate1.value = 'marker2'
-        predicates.append(predicate1)
-        predicate2.key= 'to'
-        predicate2.value = 'marker1'
-        predicates.append(predicate2)
-        update_knowledge_predicate(True, 'no_same_location', predicates)
-        predicates = []
-        predicate1 = diagnostic_msgs.msg.KeyValue()
-        predicate2 = diagnostic_msgs.msg.KeyValue()
-        predicate1.key= 'from'
-        predicate1.value = 'marker2'
-        predicates.append(predicate1)
-        predicate2.key= 'to'
-        predicate2.value = 'marker3'
-        predicates.append(predicate2)
-        update_knowledge_predicate(True, 'no_same_location', predicates)
-        predicates = []
-        predicate1 = diagnostic_msgs.msg.KeyValue()
-        predicate2 = diagnostic_msgs.msg.KeyValue()
-        predicate1.key= 'from'
-        predicate1.value = 'marker2'
-        predicates.append(predicate1)
-        predicate2.key= 'to'
-        predicate2.value = 'marker4'
-        predicates.append(predicate2)
-        update_knowledge_predicate(True, 'no_same_location', predicates)
-        predicates = []
-        predicate1 = diagnostic_msgs.msg.KeyValue()
-        predicate2 = diagnostic_msgs.msg.KeyValue()
-        predicate1.key= 'from'
-        predicate1.value = 'marker2'
-        predicates.append(predicate1)
-        predicate2.key= 'to'
-        predicate2.value = 'oracle'
-        predicates.append(predicate2)
-        update_knowledge_predicate(True, 'no_same_location', predicates)
-    if case == "marker3":
-        predicates = []
-        predicate1 = diagnostic_msgs.msg.KeyValue()
-        predicate2 = diagnostic_msgs.msg.KeyValue()
-        predicate1.key= 'from'
-        predicate1.value = 'marker3'
-        predicates.append(predicate1)
-        predicate2.key= 'to'
-        predicate2.value = 'marker1'
-        predicates.append(predicate2)
-        update_knowledge_predicate(True, 'no_same_location', predicates)
-        predicates = []
-        predicate1 = diagnostic_msgs.msg.KeyValue()
-        predicate2 = diagnostic_msgs.msg.KeyValue()
-        predicate1.key= 'from'
-        predicate1.value = 'marker3'
-        predicates.append(predicate1)
-        predicate2.key= 'to'
-        predicate2.value = 'marker2'
-        predicates.append(predicate2)
-        update_knowledge_predicate(True, 'no_same_location', predicates)
-        predicates = []
-        predicate1 = diagnostic_msgs.msg.KeyValue()
-        predicate2 = diagnostic_msgs.msg.KeyValue()
-        predicate1.key= 'from'
-        predicate1.value = 'marker3'
-        predicates.append(predicate1)
-        predicate2.key= 'to'
-        predicate2.value = 'marker4'
-        predicates.append(predicate2)
-        update_knowledge_predicate(True, 'no_same_location', predicates)
-        predicates = []
-        predicate1 = diagnostic_msgs.msg.KeyValue()
-        predicate2 = diagnostic_msgs.msg.KeyValue()
-        predicate1.key= 'from'
-        predicate1.value = 'marker3'
-        predicates.append(predicate1)
-        predicate2.key= 'to'
-        predicate2.value = 'oracle'
-        predicates.append(predicate2)
-        update_knowledge_predicate(True, 'no_same_location', predicates)
-    if case == "marker4":
-        predicates = []
-        predicate1 = diagnostic_msgs.msg.KeyValue()
-        predicate2 = diagnostic_msgs.msg.KeyValue()
-        predicate1.key= 'from'
-        predicate1.value = 'marker4'
-        predicates.append(predicate1)
-        predicate2.key= 'to'
-        predicate2.value = 'marker1'
-        predicates.append(predicate2)
-        update_knowledge_predicate(True, 'no_same_location', predicates)
-        predicates = []
-        predicate1 = diagnostic_msgs.msg.KeyValue()
-        predicate2 = diagnostic_msgs.msg.KeyValue()
-        predicate1.key= 'from'
-        predicate1.value = 'marker4'
-        predicates.append(predicate1)
-        predicate2.key= 'to'
-        predicate2.value = 'marker3'
-        predicates.append(predicate2)
-        update_knowledge_predicate(True, 'no_same_location', predicates)
-        predicates = []
-        predicate1 = diagnostic_msgs.msg.KeyValue()
-        predicate2 = diagnostic_msgs.msg.KeyValue()
-        predicate1.key= 'from'
-        predicate1.value = 'marker4'
-        predicates.append(predicate1)
-        predicate2.key= 'to'
-        predicate2.value = 'marker2'
-        predicates.append(predicate2)
-        update_knowledge_predicate(True, 'no_same_location', predicates)
-        predicates = []
-        predicate1 = diagnostic_msgs.msg.KeyValue()
-        predicate2 = diagnostic_msgs.msg.KeyValue()
-        predicate1.key= 'from'
-        predicate1.value = 'marker4'
-        predicates.append(predicate1)
-        predicate2.key= 'to'
-        predicate2.value = 'oracle'
-        predicates.append(predicate2)
-        update_knowledge_predicate(True, 'no_same_location', predicates)
-    if case == "oracle":
-        predicates = []
-        predicate1 = diagnostic_msgs.msg.KeyValue()
-        predicate2 = diagnostic_msgs.msg.KeyValue()
-        predicate1.key= 'from'
-        predicate1.value = 'oracle'
-        predicates.append(predicate1)
-        predicate2.key= 'to'
-        predicate2.value = 'marker1'
-        predicates.append(predicate2)
-        update_knowledge_predicate(True, 'no_same_location', predicates)
-        predicates = []
-        predicate1 = diagnostic_msgs.msg.KeyValue()
-        predicate2 = diagnostic_msgs.msg.KeyValue()
-        predicate1.key= 'from'
-        predicate1.value = 'oracle'
-        predicates.append(predicate1)
-        predicate2.key= 'to'
-        predicate2.value = 'marker3'
-        predicates.append(predicate2)
-        update_knowledge_predicate(True, 'no_same_location', predicates)
-        predicates = []
-        predicate1 = diagnostic_msgs.msg.KeyValue()
-        predicate2 = diagnostic_msgs.msg.KeyValue()
-        predicate1.key= 'from'
-        predicate1.value = 'oracle'
-        predicates.append(predicate1)
-        predicate2.key= 'to'
-        predicate2.value = 'marker4'
-        predicates.append(predicate2)
-        update_knowledge_predicate(True, 'no_same_location', predicates)
-        predicates = []
-        predicate1 = diagnostic_msgs.msg.KeyValue()
-        predicate2 = diagnostic_msgs.msg.KeyValue()
-        predicate1.key= 'from'
-        predicate1.value = 'oracle'
-        predicates.append(predicate1)
-        predicate2.key= 'to'
-        predicate2.value = 'marker2'
-        predicates.append(predicate2)
-        update_knowledge_predicate(True, 'no_same_location', predicates)
+def init_no_same_location():
+    predicates = []
+    predicate1 = diagnostic_msgs.msg.KeyValue()
+    predicate2 = diagnostic_msgs.msg.KeyValue()
+    predicate1.key= 'from'
+    predicate1.value = 'marker1'
+    predicates.append(predicate1)
+    predicate2.key= 'to'
+    predicate2.value = 'marker2'
+    predicates.append(predicate2)
+    update_knowledge_predicate(True, 'no_same_location', predicates)
+    predicates = []
+    predicate1 = diagnostic_msgs.msg.KeyValue()
+    predicate2 = diagnostic_msgs.msg.KeyValue()
+    predicate1.key= 'from'
+    predicate1.value = 'marker1'
+    predicates.append(predicate1)
+    predicate2.key= 'to'
+    predicate2.value = 'oracle'
+    predicates.append(predicate2)
+    update_knowledge_predicate(True, 'no_same_location', predicates)
 
 def init_common_predicates():
     predicates = []
@@ -300,29 +118,15 @@ def initialize_predicates():
     predicates = []
     predicate = diagnostic_msgs.msg.KeyValue()
     predicate.key= 'loc'
-    predicate.value = 'marker3'
-    predicates.append(predicate)
-    update_knowledge_predicate(True, 'not_at', predicates)
-    predicates = []
-    predicate = diagnostic_msgs.msg.KeyValue()
-    predicate.key= 'loc'
-    predicate.value = 'marker4'
-    predicates.append(predicate)
-    update_knowledge_predicate(True, 'not_at', predicates)
-    predicates = []
-    predicate = diagnostic_msgs.msg.KeyValue()
-    predicate.key= 'loc'
     predicate.value = 'oracle'
     predicates.append(predicate)
     update_knowledge_predicate(True, 'not_at', predicates)
-    init_no_same_location("marker1")
+    init_no_same_location()
     init_common_predicates()
     
 def initialize_instances():
     update_knowledge_instance('marker1','location')
     update_knowledge_instance('marker2','location')
-    update_knowledge_instance('marker3','location')
-    update_knowledge_instance('marker4','location')
     update_knowledge_instance('oracle','location')
     update_knowledge_instance('nav','navigation_token')
     update_knowledge_instance('hnt','hint')
@@ -339,7 +143,7 @@ def initialize_goal():
     init_common_goal()
 
 def re_init(msg):
-    global clear_knowledge
+    global clear_knowledge, stop
 
     rospy.wait_for_service('/rosplan_plan_dispatcher/cancel_dispatch')
     #cancel current dispatch
@@ -351,225 +155,44 @@ def re_init(msg):
     
     except rospy.ServiceException as e:
         print("Service call failed: %s"%e)
-    
-    #return True
 
+
+    
     clear_knowledge()
     init_common_goal()
     init_common_predicates()
     initialize_instances()
-    init_no_same_location(msg.at)
-    if msg.at == "marker1" or msg.at=="":
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'marker1'
-        predicates.append(predicate)
-        update_knowledge_predicate(True, 'at', predicates)
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'marker2'
-        predicates.append(predicate)
-        update_knowledge_predicate(True, 'not_at', predicates)
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'marker3'
-        predicates.append(predicate)
-        update_knowledge_predicate(True, 'not_at', predicates)
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'marker4'
-        predicates.append(predicate)
-        update_knowledge_predicate(True, 'not_at', predicates)
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'oracle'
-        predicates.append(predicate)
-        update_knowledge_predicate(True, 'not_at', predicates)
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'marker1'
-        predicates.append(predicate)
-        update_knowledge_goal(True, 'not_at', predicates)
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'marker1'
-        predicates.append(predicate)
-        update_knowledge_goal(True, 'not_at', predicates)
-    elif msg.at == "marker2":
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'marker2'
-        predicates.append(predicate)
-        update_knowledge_predicate(True, 'at', predicates)
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'marker1'
-        predicates.append(predicate)
-        update_knowledge_predicate(True, 'not_at', predicates)
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'marker3'
-        predicates.append(predicate)
-        update_knowledge_predicate(True, 'not_at', predicates)
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'marker4'
-        predicates.append(predicate)
-        update_knowledge_predicate(True, 'not_at', predicates)
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'oracle'
-        predicates.append(predicate)
-        update_knowledge_predicate(True, 'not_at', predicates)
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'marker2'
-        predicates.append(predicate)
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'marker2'
-        predicates.append(predicate)
-        update_knowledge_goal(True, 'not_at', predicates)
-    elif msg.at == "marker3":
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'marker3'
-        predicates.append(predicate)
-        update_knowledge_predicate(True, 'at', predicates)
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'marker1'
-        predicates.append(predicate)
-        update_knowledge_predicate(True, 'not_at', predicates)
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'marker2'
-        predicates.append(predicate)
-        update_knowledge_predicate(True, 'not_at', predicates)
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'marker4'
-        predicates.append(predicate)
-        update_knowledge_predicate(True, 'not_at', predicates)
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'oracle'
-        predicates.append(predicate)
-        update_knowledge_predicate(True, 'not_at', predicates)
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'marker3'
-        predicates.append(predicate)
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'marker3'
-        predicates.append(predicate)
-        update_knowledge_goal(True, 'not_at', predicates)
-    elif msg.at == "marker4":
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'marker4'
-        predicates.append(predicate)
-        update_knowledge_predicate(True, 'at', predicates)
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'marker1'
-        predicates.append(predicate)
-        update_knowledge_predicate(True, 'not_at', predicates)
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'marker2'
-        predicates.append(predicate)
-        update_knowledge_predicate(True, 'not_at', predicates)
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'marker3'
-        predicates.append(predicate)
-        update_knowledge_predicate(True, 'not_at', predicates)
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'oracle'
-        predicates.append(predicate)
-        update_knowledge_predicate(True, 'not_at', predicates)
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'marker4'
-        predicates.append(predicate)
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'marker4'
-        predicates.append(predicate)
-        update_knowledge_goal(True, 'not_at', predicates)
-    elif msg.at == "oracle":
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'oracle'
-        predicates.append(predicate)
-        update_knowledge_predicate(True, 'at', predicates)
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'marker1'
-        predicates.append(predicate)
-        update_knowledge_predicate(True, 'not_at', predicates)
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'marker2'
-        predicates.append(predicate)
-        update_knowledge_predicate(True, 'not_at', predicates)
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'marker3'
-        predicates.append(predicate)
-        update_knowledge_predicate(True, 'not_at', predicates)
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'marker4'
-        predicates.append(predicate)
-        update_knowledge_predicate(True, 'not_at', predicates)
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'oracle'
-        predicates.append(predicate)
-        predicates = []
-        predicate = diagnostic_msgs.msg.KeyValue()
-        predicate.key= 'loc'
-        predicate.value = 'oracle'
-        predicates.append(predicate)
-        update_knowledge_goal(True, 'not_at', predicates)
+    init_no_same_location()
+    predicates = []
+    predicate = diagnostic_msgs.msg.KeyValue()
+    predicate.key= 'loc'
+    predicate.value = 'marker1'
+    predicates.append(predicate)
+    update_knowledge_predicate(True, 'at', predicates)
+    predicates = []
+    predicate = diagnostic_msgs.msg.KeyValue()
+    predicate.key= 'loc'
+    predicate.value = 'marker2'
+    predicates.append(predicate)
+    update_knowledge_predicate(True, 'not_at', predicates)
+    predicates = []
+    predicate = diagnostic_msgs.msg.KeyValue()
+    predicate.key= 'loc'
+    predicate.value = 'oracle'
+    predicates.append(predicate)
+    update_knowledge_predicate(True, 'not_at', predicates)
+    predicates = []
+    predicate = diagnostic_msgs.msg.KeyValue()
+    predicate.key= 'loc'
+    predicate.value = 'marker1'
+    predicates.append(predicate)
+    update_knowledge_goal(True, 'not_at', predicates)
+    predicates = []
+    predicate = diagnostic_msgs.msg.KeyValue()
+    predicate.key= 'loc'
+    predicate.value = 'marker1'
+    predicates.append(predicate)
+    update_knowledge_goal(True, 'not_at', predicates)
     running_rosplan_procedure()
 
     
@@ -587,24 +210,32 @@ def running_rosplan_procedure():
     print("Dispatch the plan")
     dispatchRes=dispatch_client()
     print(dispatchRes)
+    return True
 
 def print_plan(msg):
     print(msg)
 
-def take_command(msg):
-    global stop
-    if msg.command=="stop":
-        fake_msg = 0
-        fake_msg.at = "oracle"
-        re_init()
-    if msg.command=="start":
-        stop = False
+def replan_callback(req):
+    """"Callback of replan_service"""
+    rospy.wait_for_service('/rosplan_plan_dispatcher/cancel_dispatch')
+    #cancel current dispatch
+    try:
+        cancel_dispatch = rospy.ServiceProxy('/rosplan_plan_dispatcher/cancel_dispatch', Empty)
+        ok=cancel_dispatch()
+        if ok:
+            print('dispatch cancelled')
+    
+    except rospy.ServiceException as e:
+        print("Service call failed: %s"%e)
+    
+    return True
+
+
 
 def main():
-    global update_knowledge_client, prob_gen_client, plan_client, parse_client, dispatch_client, clear_knowledge, ui_server
+    global update_knowledge_client, prob_gen_client, plan_client, parse_client, dispatch_client, clear_knowledge, ui_server, stop
     rospy.init_node('rosplan_management',anonymous=True)
     replan = rospy.Subscriber('/replan', Replan, re_init)
-    ui_server = rospy.Service('/user_interface', Command, take_command)
 
     # Wait for all services
     rospy.wait_for_service('rosplan_problem_interface/problem_generation_server')
@@ -624,9 +255,7 @@ def main():
     update_knowledge_client=rospy.ServiceProxy('rosplan_knowledge_base/update',rosplan_knowledge_msgs.srv.KnowledgeUpdateService) 
     clear_knowledge=rospy.ServiceProxy('rosplan_knowledge_base/clear',Empty) 
 
-    time.sleep(10)
-
-
+    time.sleep(20)
     #rospy.wait_for_service('rosplan_knowledge_base/propositions', 'predicate')
     clear_knowledge()
     time.sleep(1)

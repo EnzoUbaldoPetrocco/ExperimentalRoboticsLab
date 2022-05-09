@@ -49,14 +49,11 @@
 
 
   <!-- start RViz -->
-<node name="rviz" pkg="rviz" type="rviz" args="-d $(find ExperimentalRoboticsLab)/launch/moveit.rviz" /> 
+<node name="rviz" pkg="rviz" type="rviz" args="-d $(find ExperimentalRoboticsLab)/launch/moveit.rviz" output="log" /> 
 
 
 <!-- MoveIt-->
-<node name="my_moveit" pkg ="ExperimentalRoboticsLab" type="my_moveit" output="screen" /> 
-
-<!-- User Interface-->
-<node name="user_interface" pkg ="ExperimentalRoboticsLab" type="user_interface.py" output="screen" /> 
+<node name="my_moveit" pkg ="ExperimentalRoboticsLab" type="my_moveit" output="log" /> 
 
 <!--ROSPlan-->
 <include file="$(dirname)/rosplan.launch">

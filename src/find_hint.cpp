@@ -16,57 +16,6 @@
 
 ros::Publisher replan_pub;
 
-/**
-ExperimentalRoboticsLab::HintGoal define_goal(ExperimentalRoboticsLab::HintGoal goal ,std::string str, std::float_t altitude){
-  ROS_INFO("define goal with certain altitude");
-  if(str == "marker1"){
-      goal.x_pos = -3.0;
-      goal.y_pos = 0.0;
-      goal.z_pos = altitude;
-      goal.x_quat = 0;
-      goal.y_quat = 0;
-      goal.z_quat = 0;
-      goal.w_quat = 3.14;
-    }
-    else if (str == "marker2"){
-      goal.x_pos = 3.0;
-      goal.y_pos = 0.0;
-      goal.z_pos = altitude;
-      goal.x_quat = 0;
-      goal.y_quat = 0;
-      goal.z_quat = 0;
-      goal.w_quat = 3.14;
-    }
-    else if (str == "marker3"){
-      goal.x_pos = 0.0;
-      goal.y_pos = 3.0;
-      goal.z_pos = altitude;
-      goal.x_quat = 0;
-      goal.y_quat = 0;
-      goal.z_quat = 0;
-      goal.w_quat = 3.14/2;
-    }
-    else if (str == "marker4"){
-      goal.x_pos = 0.0;
-      goal.y_pos = -3.0;
-      goal.z_pos = altitude;
-      goal.x_quat = 0;
-      goal.y_quat = 0;
-      goal.z_quat = 0;
-      goal.w_quat = 3.14/2;
-    }
-    else if (str == "oracle"){
-      goal.x_pos = 0.0;
-      goal.y_pos = 1.0;
-      goal.z_pos = altitude;
-      goal.x_quat = 0;
-      goal.y_quat = 0;
-      goal.z_quat = 0;
-      goal.w_quat = 0;
-    }
-    return goal;
-}
-**/
 namespace KCL_rosplan {
   FindHintActionInterface::FindHintActionInterface(ros::NodeHandle &nh) {
     // here the initialization

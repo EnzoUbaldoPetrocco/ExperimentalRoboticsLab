@@ -69,7 +69,6 @@ add_service_files(
    Hint.srv
    Investigate.srv
    Position.srv
-   Command.srv
 #   Service2.srv
  )
 
@@ -221,11 +220,6 @@ add_dependencies(find_hint ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
 
- catkin_install_python(PROGRAMS
- scripts/user_interface.py
-#   scripts/my_python_script
-   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
- )
 
 ## Mark executables for installation
 ## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_executables.html
