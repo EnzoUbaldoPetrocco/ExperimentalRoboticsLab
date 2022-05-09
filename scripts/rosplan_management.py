@@ -143,12 +143,9 @@ def initialize_goal():
     init_common_goal()
 
 def re_init(msg):
-    global clear_knowledge, stop
-
-    rospy.wait_for_service('/rosplan_plan_dispatcher/cancel_dispatch')
+    global clear_knowledge, stop, cancel_dispatch
     #cancel current dispatch
     try:
-        cancel_dispatch = rospy.ServiceProxy('/rosplan_plan_dispatcher/cancel_dispatch', Empty)
         ok=cancel_dispatch()
         if ok:
             print('dispatch cancelled')
@@ -195,21 +192,27 @@ def re_init(msg):
     update_knowledge_goal(True, 'not_at', predicates)
     running_rosplan_procedure()
 
+    rospy.spin()
+
     
 def running_rosplan_procedure():
     global prob_gen_client, plan_client, parse_client, dispatch_client
     print("Generating the problem")
     prob_gen_client()
-    time.sleep(2)
+    time.sleep(3)
     print("Calling planning client")
     plan_client()
-    time.sleep(2)
+    time.sleep(3)
     print("Calling plan parsing client")
     parse_client()
-    time.sleep(2)
+    time.sleep(3)
     print("Dispatch the plan")
-    dispatchRes=dispatch_client()
-    print(dispatchRes)
+    try:
+        dispatchRes=dispatch_client()
+        print(dispatchRes)
+    except rospy.ServiceException as e:
+        print("Service call failed: %s"%e)
+    
     return True
 
 def print_plan(msg):
@@ -217,10 +220,8 @@ def print_plan(msg):
 
 def replan_callback(req):
     """"Callback of replan_service"""
-    rospy.wait_for_service('/rosplan_plan_dispatcher/cancel_dispatch')
     #cancel current dispatch
     try:
-        cancel_dispatch = rospy.ServiceProxy('/rosplan_plan_dispatcher/cancel_dispatch', Empty)
         ok=cancel_dispatch()
         if ok:
             print('dispatch cancelled')
@@ -233,7 +234,7 @@ def replan_callback(req):
 
 
 def main():
-    global update_knowledge_client, prob_gen_client, plan_client, parse_client, dispatch_client, clear_knowledge, ui_server, stop
+    global update_knowledge_client, prob_gen_client, plan_client, parse_client, dispatch_client, clear_knowledge, cancel_dispatch, stop
     rospy.init_node('rosplan_management',anonymous=True)
     replan = rospy.Subscriber('/replan', Replan, re_init)
 
@@ -245,6 +246,7 @@ def main():
     rospy.wait_for_service('rosplan_knowledge_base/update')
     rospy.wait_for_service('rosplan_knowledge_base/update')
     rospy.wait_for_service('rosplan_knowledge_base/clear')
+    rospy.wait_for_service('/rosplan_plan_dispatcher/cancel_dispatch')
 
     rospy.Subscriber("/rosplan_planner_interface/planner_output", String, print_plan)
 
@@ -254,17 +256,18 @@ def main():
     dispatch_client=rospy.ServiceProxy('rosplan_plan_dispatcher/dispatch_plan',rosplan_dispatch_msgs.srv.DispatchService) 
     update_knowledge_client=rospy.ServiceProxy('rosplan_knowledge_base/update',rosplan_knowledge_msgs.srv.KnowledgeUpdateService) 
     clear_knowledge=rospy.ServiceProxy('rosplan_knowledge_base/clear',Empty) 
+    cancel_dispatch = rospy.ServiceProxy('/rosplan_plan_dispatcher/cancel_dispatch', Empty)
 
     time.sleep(20)
     #rospy.wait_for_service('rosplan_knowledge_base/propositions', 'predicate')
     clear_knowledge()
-    time.sleep(1)
+    time.sleep(3)
     initialize_predicates()
-    time.sleep(1)
+    time.sleep(3)
     initialize_instances()
-    time.sleep(1)
+    time.sleep(3)
     initialize_goal()
-    time.sleep(1)
+    time.sleep(3)
     running_rosplan_procedure()
     
     rospy.spin()

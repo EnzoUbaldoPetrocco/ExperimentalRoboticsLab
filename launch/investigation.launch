@@ -3,8 +3,8 @@
 
 <param name="consistent_hypotheses" textfile="$(find ExperimentalRoboticsLab)/robot_parameters/consistent_hypotheses.json"/>
 
-<node pkg="armor" type="execute" name="armor_service" args="it.emarolab.armor.ARMORMainService"/>
+<!--node pkg="armor" type="execute" name="armor_service" args="it.emarolab.armor.ARMORMainService"/-->
 
- <node name="investigation" pkg="ExperimentalRoboticsLab" type="investigation.py" output="screen"/>
+<node name="investigation" pkg="ExperimentalRoboticsLab" type="investigation.py" output="screen"/>
 
 </launch>
