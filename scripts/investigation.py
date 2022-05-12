@@ -384,16 +384,18 @@ def investigate(msg):
     #file_hypotheses_string = rospy.get_param('/consistent_hypotheses')
     #file_hypotheses = json.loads(file_hypotheses_string)
     complete_hps = retrieve_consistent_hp()
+    IDs = []
     if complete_hps == []:
         return True
     for i in complete_hps:
         id = i.split('#')[1][:3]
         file_hypotheses = create_json_hypothesis(id, file_hypotheses)
+        IDs.append(id)
     print('investigation finished, printed consistent hypotheses')
     print(file_hypotheses)
     #file_hypotheses_string = json.dumps(file_hypotheses)
     #rospy.set_param('/consistent_hypotheses', file_hypotheses_string)
-    return True
+    return IDs
 
 def oracle_hint(msg):
     """!

@@ -1,2 +1,2 @@
 ---
-bool ok
+int32[] IDs

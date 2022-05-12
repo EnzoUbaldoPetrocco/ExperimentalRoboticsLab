@@ -192,7 +192,6 @@ def re_init(msg):
     update_knowledge_goal(True, 'not_at', predicates)
     running_rosplan_procedure()
 
-    rospy.spin()
 
     
 def running_rosplan_procedure():
@@ -213,7 +212,7 @@ def running_rosplan_procedure():
     except rospy.ServiceException as e:
         print("Service call failed: %s"%e)
     
-    return True
+    return dispatchRes
 
 def print_plan(msg):
     print(msg)
@@ -228,7 +227,7 @@ def replan_callback(req):
     
     except rospy.ServiceException as e:
         print("Service call failed: %s"%e)
-    
+    #running_rosplan_procedure()
     return True
 
 
@@ -236,7 +235,7 @@ def replan_callback(req):
 def main():
     global update_knowledge_client, prob_gen_client, plan_client, parse_client, dispatch_client, clear_knowledge, cancel_dispatch, stop
     rospy.init_node('rosplan_management',anonymous=True)
-    replan = rospy.Subscriber('/replan', Replan, re_init)
+    replan = rospy.Subscriber('/replan', Replan, replan_callback)
 
     # Wait for all services
     rospy.wait_for_service('rosplan_problem_interface/problem_generation_server')
@@ -258,19 +257,26 @@ def main():
     clear_knowledge=rospy.ServiceProxy('rosplan_knowledge_base/clear',Empty) 
     cancel_dispatch = rospy.ServiceProxy('/rosplan_plan_dispatcher/cancel_dispatch', Empty)
 
+    going_on= True
     time.sleep(20)
-    #rospy.wait_for_service('rosplan_knowledge_base/propositions', 'predicate')
-    clear_knowledge()
-    time.sleep(3)
-    initialize_predicates()
-    time.sleep(3)
-    initialize_instances()
-    time.sleep(3)
-    initialize_goal()
-    time.sleep(3)
-    running_rosplan_procedure()
+    while going_on:
+        time.sleep(3)
+        #rospy.wait_for_service('rosplan_knowledge_base/propositions', 'predicate')
+        clear_knowledge()
+        time.sleep(3)
+        initialize_instances()
+        time.sleep(3)
+        initialize_predicates()
+        time.sleep(3)
+        initialize_goal()
+        time.sleep(3)
+        response = running_rosplan_procedure()
+        if response.goal_achieved:
+            print('You won')
+            going_on = False
+        else:
+            print('Keep playing')
     
-    rospy.spin()
 
 
 if __name__ == '__main__':

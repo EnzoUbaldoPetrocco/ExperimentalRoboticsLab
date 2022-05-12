@@ -83,7 +83,7 @@ namespace KCL_rosplan {
 int main(int argc, char **argv) {
 ros::init(argc, argv, "rosplan_interface_find_hint", ros::init_options::AnonymousName);
 ros::NodeHandle nh("~");
-replan_pub = nh.advertise<ExperimentalRoboticsLab::Replan>("/replan", 10 );
+replan_pub = nh.advertise<ExperimentalRoboticsLab::Replan>("/replan", 100 );
 KCL_rosplan::FindHintActionInterface my_aci(nh);
 my_aci.runActionInterface();
 return 0;

@@ -24,7 +24,9 @@ namespace KCL_rosplan {
     // here the implementation of the action
     std::cout << "Reason about the hint. " << std::endl;
     ExperimentalRoboticsLab::Investigate srv;
-    if(investigate_client.call(srv)){
+    
+    investigate_client.call(srv);
+    if(srv.response.IDs.size() > 0 ){
       ROS_INFO("Action (%s) performed: completed!", msg->name.c_str());
       return true;
     }else{
@@ -40,7 +42,7 @@ namespace KCL_rosplan {
 int main(int argc, char **argv) {
 ros::init(argc, argv, "rosplan_interface_reason", ros::init_options::AnonymousName);
 ros::NodeHandle nh("~");
-replan_pub = nh.advertise<ExperimentalRoboticsLab::Replan>("/replan", 10 );
+replan_pub = nh.advertise<ExperimentalRoboticsLab::Replan>("/replan", 100 );
 ros::ServiceClient investigate_client = nh.serviceClient<ExperimentalRoboticsLab::Investigate>("/investigate");
 KCL_rosplan::ReasonActionInterface my_aci(nh);
 my_aci.runActionInterface();

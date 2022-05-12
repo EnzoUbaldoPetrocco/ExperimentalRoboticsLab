@@ -26,7 +26,7 @@
 
 )
 (:goal (and
-    (game_finished gm)
     (not_at marker1)
+    (game_finished gm)
 ))
 )
