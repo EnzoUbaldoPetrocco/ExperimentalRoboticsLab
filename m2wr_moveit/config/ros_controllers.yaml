@@ -14,27 +14,27 @@ arm_controller:
       i: 0
       i_clamp: 0
     arm_joint_02:
-      p: 50
-      d: 0.1
-      i: 0.09
-      i_clamp: 0.09
-    arm_joint_03:
-      p: 30
+      p: 46
       d: 0
-      i: 0.1
-      i_clamp: 0.1
-    arm_joint_04:
-      p: 27
-      d: 0.03
-      i: 0.2
-      i_clamp: 0.2
-    cluedo_joint:
-      p: 25
-      d: 0.03
-      i: 0.25
-      i_clamp: 0.25
-    arm_base_to_base:
+      i: 7
+      i_clamp: 7
+    arm_joint_03:
       p: 50
+      d: 0
+      i: 7.3
+      i_clamp: 7.3
+    arm_joint_04:
+      p: 43
+      d: 0.002
+      i: 0.45
+      i_clamp: 0.45
+    cluedo_joint:
+      p: 38
+      d: 0.40
+      i: 0.13
+      i_clamp: 0.13
+    arm_base_to_base:
+      p: 60
       d: 0.5
-      i: 0.001
-      i_clamp: 0.001
+      i: 1
+      i_clamp: 1
