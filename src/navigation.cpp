@@ -37,23 +37,23 @@ namespace KCL_rosplan {
     ac.waitForServer();
     int location = rand()%4;
     if(location == 0){
-      goal.x = -2.3;
+      goal.x = -2.25;
       goal.y = 0; 
       goal.theta = -3.14/2;
     }
     else if (location == 1){
-      goal.x = 2.3;
+      goal.x = 2.25;
       goal.y = 0; 
       goal.theta = 3.14/2;
     }
     else if (location == 2){
       goal.x = 0; 
-      goal.y = 2.3;
+      goal.y = 2.25;
       goal.theta = 3.14;
     }
     else if (location == 3){
       goal.x = 0; 
-      goal.y = -2.3;
+      goal.y = -2.25;
       goal.theta = 0;
     }
     

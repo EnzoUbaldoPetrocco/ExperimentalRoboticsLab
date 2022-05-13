@@ -30,7 +30,7 @@ import math
 
 
 
-    # robot state variables
+# robot state variables
 position_ = Point()
 feedback=ExperimentalRoboticsLab.msg.PositionFeedback()
 result=ExperimentalRoboticsLab.msg.PositionResult()
@@ -41,12 +41,12 @@ pub_ = None
 # parameters for control
 yaw_precision_ = math.pi / 9  # +/- 20 degree allowed
 yaw_precision_2_ = math.pi / 90  # +/- 2 degree allowed
-dist_precision_ = 0.1
-kp_a = -3.2 
+dist_precision_ = 0.08
+kp_a = -3.4
 kp_d = 0.4
 ub_a = 0.6
 lb_a = -0.5
-ub_d = 0.6
+ub_d = 0.8
 
 action=None
 
@@ -106,7 +106,7 @@ def go_straight_ahead(des_pos):
 
     if err_pos > dist_precision_:
         twist_msg = Twist()
-        twist_msg.linear.x = 0.6
+        twist_msg.linear.x = 0.8
         if twist_msg.linear.x > ub_d:
            twist_msg.linear.x = ub_d
 

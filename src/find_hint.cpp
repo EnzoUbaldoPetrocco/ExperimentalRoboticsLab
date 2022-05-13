@@ -1,4 +1,20 @@
-//#include <unistd.h>
+/**
+* \file find_hint.cpp
+* \brief move arm action
+* \author Enzo Ubaldo Petrocco
+* \version 1.0
+* \date 15/05/2022
+*
+* Publisher : <BR>
+*    /replan
+* ActionClient : <BR>
+*    /hint
+*
+* Description :
+*
+* move the robot cluedo link until it reaches the marker
+*
+*/
 #include <ros/ros.h>
 #include <actionlib/client/simple_action_client.h>
 #include <actionlib/client/terminal_state.h>
@@ -24,17 +40,6 @@ namespace KCL_rosplan {
   bool FindHintActionInterface::concreteCallback(const rosplan_dispatch_msgs::ActionDispatch::ConstPtr& msg) {
     // here the implementation of the action
     std::cout << "Reaching cluedo_joint position in order to find the hint. " << std::endl;
-    /**
-     * actionlib::SimpleActionClient<ExperimentalRoboticsLab::CustomTargetAction> ac_pose("/custom_pose", true);
-    ExperimentalRoboticsLab::CustomTargetGoal goal_pose;
-    ac_pose.waitForServer();
-    goal_pose.pose = "marker_under";
-    ac_pose.sendGoal(goal_pose);
-    ac_pose.waitForResult();
-    
-     * 
-     * 
-     * **/
     
     // Here we need to move the arm to goal position, we can do many attempts because there exist 2 possible locations
     actionlib::SimpleActionClient<ExperimentalRoboticsLab::HintAction> ac("/hint", true);
@@ -52,10 +57,8 @@ namespace KCL_rosplan {
        return true;
     }
     else {
-      sleep(1);
       //goal = define_goal(goal, msg->parameters[0].value, 1.25);<
       goal.pose = "marker_upper";
-      sleep(1);
       ac.sendGoal(goal);
       ac.waitForResult();
 

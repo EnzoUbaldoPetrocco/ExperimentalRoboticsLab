@@ -13,9 +13,12 @@
 #include <std_msgs/String.h>
 #include <ExperimentalRoboticsLab/Investigate.h>
 #include <ExperimentalRoboticsLab/Replan.h>
+#include <ExperimentalRoboticsLab/Oracle.h>
 
 ros::Publisher replan_pub;
 ros::ServiceClient investigate_client;
+ros::ServiceClient oracle_client;
+
 
 namespace KCL_rosplan {
   OracleActionInterface::OracleActionInterface(ros::NodeHandle &nh) {
@@ -41,9 +44,19 @@ namespace KCL_rosplan {
     if(srv.response.IDs.size() > 0 ){
 
       //Here i ask to the oracle if an ID is correct
-
-      ROS_INFO("Action (%s) performed: completed!", msg->name.c_str());
-      return true;
+      ExperimentalRoboticsLab::Oracle or_srv;
+      oracle_client.call(or_srv);
+      for(int i=0;i<srv.response.IDs.size()-1;i++){
+        if(srv.response.IDs[i]==or_srv.response.ID){
+          ROS_INFO("Action (%s) performed: completed!", msg->name.c_str());
+          return true;
+        }
+      }
+      std_msgs::String message;
+      message.data = msg->parameters[2].value;
+      replan_pub.publish(message);
+      return false;
+      
     }
     else{
       std_msgs::String message;
@@ -71,6 +84,7 @@ ros::NodeHandle nh("~");
 KCL_rosplan::OracleActionInterface my_aci(nh);
 replan_pub = nh.advertise<ExperimentalRoboticsLab::Replan>("/replan", 100 );
 ros::ServiceClient investigate_client = nh.serviceClient<ExperimentalRoboticsLab::Investigate>("/investigate");
+oracle_client = nh.serviceClient<ExperimentalRoboticsLab::Oracle>("/oracle_solution");
 my_aci.runActionInterface();
 return 0;
 }

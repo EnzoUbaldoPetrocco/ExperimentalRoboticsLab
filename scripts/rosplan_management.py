@@ -258,18 +258,18 @@ def main():
     cancel_dispatch = rospy.ServiceProxy('/rosplan_plan_dispatcher/cancel_dispatch', Empty)
 
     going_on= True
-    time.sleep(20)
+    time.sleep(18)
     while going_on:
-        time.sleep(3)
+        time.sleep(2)
         #rospy.wait_for_service('rosplan_knowledge_base/propositions', 'predicate')
         clear_knowledge()
-        time.sleep(3)
+        time.sleep(2)
         initialize_instances()
-        time.sleep(3)
+        time.sleep(2)
         initialize_predicates()
-        time.sleep(3)
+        time.sleep(2)
         initialize_goal()
-        time.sleep(3)
+        time.sleep(2)
         response = running_rosplan_procedure()
         if response.goal_achieved:
             print('You won')

@@ -62,19 +62,7 @@ void MyMoveIt::hint_found(const ExperimentalRoboticsLab::ErlOracle::ConstPtr& ms
   this->found = true;
 };
 void MyMoveIt::find_hint(const ExperimentalRoboticsLab::HintGoalConstPtr& msg){
-  //this->move_to_custom_pose("check");
-  sleep(2);
-  /**
-  geometry_msgs::Pose pose;
-  pose.position.x = msg->x_pos;
-  pose.position.y = msg->y_pos;
-  pose.position.z = msg->z_pos;
-  pose.orientation.x = msg->x_quat;
-  pose.orientation.y = msg->y_quat;
-  pose.orientation.z = msg->z_quat;
-  pose.orientation.w = msg->w_quat;
-  this->move_to_the_pose(pose);
-  **/
+  
   this->move_to_custom_pose(msg->pose);
   sleep(2);
   if(found == true){

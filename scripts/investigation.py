@@ -92,6 +92,30 @@ def check_key(value):
             return True
     return False
 
+def check_weapon_exists(w):
+    if len(weapons)==0:
+        return False
+    for i in weapons:
+        if i==w:
+            return True
+    return False
+
+def check_people_exists(p):
+    if len(persons)==0:
+        return False
+    for i in persons:
+        if i==p:
+            return True
+    return False
+
+
+def check_place_exists(p):
+    if len(places)==0:
+        return False
+    for i in places:
+        if i==p:
+            return True
+    return False
 
 
 ## Function that check if an hypothesis does not exists
@@ -283,10 +307,16 @@ def add_hint(msg):
     if msg.ID<0 or msg.ID>6 or (not(check_key(msg.key))) or (not(check_values(msg.value))):
         return False
     if msg.key == "who":
+        if check_people_exists(msg.value):
+            return True
         return add_person(msg)
     if msg.key == "where":
+        if check_place_exists(msg.value):
+            return True
         return add_place(msg)
     if msg.key == "what":
+        if check_weapon_exists(msg.value):
+            return True
         return add_weapon(msg)
     reason()
     return True
