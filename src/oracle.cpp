@@ -1,4 +1,25 @@
-//#include <unistd.h>
+/**
+* \file oracle.cpp
+* \brief oracle action
+* \author Enzo Ubaldo Petrocco
+* \version 1.0
+* \date 15/05/2022
+*
+* ActionServer : <BR>
+*    /go_to_point
+* ServiceClient: <BR>
+*   /investigate
+* Publisher: <BR>
+*   /replan
+* ServiceClient: <BR>
+*   /oracle_solution
+*
+* Description :
+* This node implements PDDL action/OracleActionInterface
+* where it tells the robot to move to oracle waypoint and 
+* and asks it if the hint is correct
+*
+**/
 #include <ros/ros.h>
 #include <actionlib/client/simple_action_client.h>
 #include <actionlib/client/terminal_state.h>
@@ -15,18 +36,17 @@
 #include <ExperimentalRoboticsLab/Replan.h>
 #include <ExperimentalRoboticsLab/Oracle.h>
 
+
+// Global Variables
 ros::Publisher replan_pub;
 ros::ServiceClient investigate_client;
 ros::ServiceClient oracle_client;
 
-
+/// NavigationActionInterface PDDL Navigation Action implementation 
 namespace KCL_rosplan {
   OracleActionInterface::OracleActionInterface(ros::NodeHandle &nh) {
-    // here the initialization
-
   }
   bool OracleActionInterface::concreteCallback(const rosplan_dispatch_msgs::ActionDispatch::ConstPtr& msg) {
-    // here the implementation of the action
     std::cout << "Oracle relations " << std::endl;
     
     actionlib::SimpleActionClient<ExperimentalRoboticsLab::PositionAction> ac("/go_to_point", true);
@@ -56,14 +76,13 @@ namespace KCL_rosplan {
       message.data = msg->parameters[2].value;
       replan_pub.publish(message);
       return false;
-      
     }
     else{
       std_msgs::String message;
       message.data = msg->parameters[2].value;
       replan_pub.publish(message);
       return false;
-    }
+      }
     }
     else {
       std_msgs::String message;
@@ -77,7 +96,7 @@ namespace KCL_rosplan {
   }
 }
 
-///This node move the robot to the correct waypoint
+///Main initialize node, node handle, replan, investigate and oracle_solution clients and Oracle Action Interface
 int main(int argc, char **argv) {
 ros::init(argc, argv, "rosplan_interface_oracle", ros::init_options::AnonymousName);
 ros::NodeHandle nh("~");

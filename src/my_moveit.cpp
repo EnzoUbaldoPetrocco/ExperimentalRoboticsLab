@@ -1,3 +1,23 @@
+/**
+* \file my_moveit.cpp
+* \brief move arm node
+* \author Enzo Ubaldo Petrocco
+* \version 1.0
+* \date 15/05/2022
+*
+* ActionServer : <BR>
+*    /hint
+* ActionServer : <BR>
+*    /custom_pose
+* Subscriber: <BR>
+*   /oracle_hint
+*
+* Description :
+* This node manages the actual arm movement in order to reach a custom pose,
+* or to reach a given pose
+*
+**/
+
 #include <ros/ros.h>
 #include <moveit/move_group_interface/move_group_interface.h>
 #include <moveit/robot_model_loader/robot_model_loader.h>
@@ -16,27 +36,30 @@
 #include <ExperimentalRoboticsLab/CustomTargetAction.h>
 #include <ExperimentalRoboticsLab/CustomTargetActionResult.h>
 
-
+// Global Variables
 std::vector<ExperimentalRoboticsLab::ErlOracle> oracle_msgs;
 
-
+/**
+ * MyMoveIt is the class that implements the interface 
+ * between moveit and the game implementation.
+ * 
+ **/
 class MyMoveIt{
   public:
-  //members
+  /// members
   bool found;
   actionlib::SimpleActionServer<ExperimentalRoboticsLab::HintAction> sub_find_hint;
   actionlib::SimpleActionServer<ExperimentalRoboticsLab::CustomTargetAction> sub_custom_pose;
   ros::NodeHandle nh;
-  //methods
-  
+  /// methods
   MyMoveIt(ros::NodeHandle nh);
-  
   void move_to_the_pose(geometry_msgs::Pose pose);
   void move_to_custom_pose(std::string str);
   void hint_found(const ExperimentalRoboticsLab::ErlOracle::ConstPtr& msg);
   void custom_pose_clbk(const ExperimentalRoboticsLab::CustomTargetGoalConstPtr& msg);
   void find_hint(const ExperimentalRoboticsLab::HintGoalConstPtr& msg);
 };
+/// Constructor of the class, where it initialize the subscriber to the actions, and the essential for moveit.
 MyMoveIt::MyMoveIt(ros::NodeHandle nh):
 sub_find_hint(nh, "/hint", boost::bind(&MyMoveIt::find_hint, this, _1 ), false),
 sub_custom_pose(nh, "/custom_pose", boost::bind(&MyMoveIt::custom_pose_clbk, this, _1 ), false)
@@ -52,15 +75,22 @@ sub_custom_pose(nh, "/custom_pose", boost::bind(&MyMoveIt::custom_pose_clbk, thi
   const std::vector<std::string>& joint_names = joint_model_group->getVariableNames();
 
 }
+/// This is simply a callback for using the function move_to_custom_pose. Since it is not trivial this function
+/// is used, then it has been preferred to discouple them. 
 void MyMoveIt::custom_pose_clbk(const ExperimentalRoboticsLab::CustomTargetGoalConstPtr& msg){
   this->move_to_custom_pose(msg->pose);
-  sub_custom_pose.setSucceeded();
+  
+    sub_custom_pose.setSucceeded();
+   
   
 };
+/// When the hint is found, a boolean variable is set to true
 void MyMoveIt::hint_found(const ExperimentalRoboticsLab::ErlOracle::ConstPtr& msg){
   ROS_INFO("Hint found");
   this->found = true;
 };
+/// This is simply a callback for using the function move_to_custom_pose. Since it is not trivial this function
+/// is used, then it has been preferred to discouple them. If the hint is found, the action succeed.
 void MyMoveIt::find_hint(const ExperimentalRoboticsLab::HintGoalConstPtr& msg){
   
   this->move_to_custom_pose(msg->pose);
@@ -72,11 +102,8 @@ void MyMoveIt::find_hint(const ExperimentalRoboticsLab::HintGoalConstPtr& msg){
   else{
     sub_find_hint.setAborted();
   }
-  //while(this->found == false){
-  //  sleep(1);
-  //}
-  //this->found = false;
 }
+/// This function implements the custom arm pose management
 void MyMoveIt::move_to_custom_pose(std::string str){
   ROS_INFO("MyMoveIt::move_to_custom_pose"); 
   robot_model_loader::RobotModelLoader robot_model_loader("robot_description");
@@ -97,6 +124,7 @@ void MyMoveIt::move_to_custom_pose(std::string str){
 	group.move();  
   sleep(1);
 };
+/// Thanks to this function a user can tell to the robot the pose the cluedo_link must reach
 void MyMoveIt::move_to_the_pose(geometry_msgs::Pose pose){
   ROS_INFO("MyMoveIt::move_to_the_pose");
   
@@ -139,7 +167,7 @@ void MyMoveIt::move_to_the_pose(geometry_msgs::Pose pose){
   group.execute(my_plan);
   sleep(1);
 };
-
+///Main function where a subscriber to the oracle hint, the node, nodehandle and servers are initialized
 int main(int argc, char** argv)
 {
   ros::init(argc, argv, "my_moveit");
@@ -148,11 +176,6 @@ int main(int argc, char** argv)
   ros::Subscriber sub_oracle_hint = nh.subscribe("/oracle_hint", 10, &MyMoveIt::hint_found, &move_it );
   move_it.sub_find_hint.start();
   move_it.sub_custom_pose.start();
-  //ros::Subscriber sub_find_hint = nh.subscribe("/find_hint", 10, &MyMoveIt::find_hint, &move_it );
-
-  //actionlib::SimpleActionServer<ExperimentalRoboticsLab::HintAction> sub_find_hint(nh, "/hint", boost::bind(&MyMoveIt::find_hint, move_it, _1 ), false);
-  //move_it.sub_find_hintPtr = &sub_find_hint;
-  //sub_find_hint.start();
   ros::spin();
 
   return 0;

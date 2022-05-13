@@ -30,26 +30,25 @@
 #include <std_msgs/String.h>
 #include <ExperimentalRoboticsLab/CustomTargetAction.h>
 
+
+// Global Variables
 ros::Publisher replan_pub;
 
+// Interface that implements FindHint PDDL action
 namespace KCL_rosplan {
   FindHintActionInterface::FindHintActionInterface(ros::NodeHandle &nh) {
-    // here the initialization
-  ROS_INFO("find_hint node initialized");
+  ROS_INFO("FindHintActionInterface initialized");
   }
   bool FindHintActionInterface::concreteCallback(const rosplan_dispatch_msgs::ActionDispatch::ConstPtr& msg) {
-    // here the implementation of the action
-    std::cout << "Reaching cluedo_joint position in order to find the hint. " << std::endl;
+    // Here the implementation of the action
+    std::cout << "Reaching cluedo_joint target position in order to find the hint. " << std::endl;
     
-    // Here we need to move the arm to goal position, we can do many attempts because there exist 2 possible locations
+    // Here we need to move the arm to goal position, we can do 2 attempts because there exist 2 possible locations
     actionlib::SimpleActionClient<ExperimentalRoboticsLab::HintAction> ac("/hint", true);
     ExperimentalRoboticsLab::HintGoal goal;
     ac.waitForServer();
-
-    //goal = define_goal(goal, msg->parameters[0].value, 0.75);
     goal.pose = "marker_under";
     std::cout << "Goal defined " << std::endl;
-    //std::cout << "Debug" <<std::endl;
     ac.sendGoal(goal);
     ac.waitForResult();
     if (ac.getState() == actionlib::SimpleClientGoalState::SUCCEEDED){
@@ -57,11 +56,9 @@ namespace KCL_rosplan {
        return true;
     }
     else {
-      //goal = define_goal(goal, msg->parameters[0].value, 1.25);<
       goal.pose = "marker_upper";
       ac.sendGoal(goal);
       ac.waitForResult();
-
       if (ac.getState() == actionlib::SimpleClientGoalState::SUCCEEDED){
       ROS_INFO("Action (%s) performed: completed!", msg->name.c_str());
        return true;
@@ -74,15 +71,10 @@ namespace KCL_rosplan {
       return false;
       }
     }
-    
-    // Here we need to get the hint and to reason
-    
-    ROS_INFO("Action (%s) performed: completed!", msg->name.c_str());
-    return true;
   }
 }
 
-///This node move the robot to the correct waypoint
+// In the main here we initialize the action interface and the replan published
 int main(int argc, char **argv) {
 ros::init(argc, argv, "rosplan_interface_find_hint", ros::init_options::AnonymousName);
 ros::NodeHandle nh("~");

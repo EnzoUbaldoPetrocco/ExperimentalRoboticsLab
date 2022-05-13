@@ -1,4 +1,21 @@
-//#include <unistd.h>
+/**
+* \file reason.cpp
+* \brief reason action
+* \author Enzo Ubaldo Petrocco
+* \version 1.0
+* \date 15/05/2022
+*
+* ServiceClient: <BR>
+*   /investigate
+* Publisher: <BR>
+*   /replan
+*
+* Description :
+* This node implements PDDL action/ReasonActionInterface
+* where it reason about the hints it received. If there is a consistent hypothesos
+* the action succeds.
+*
+**/
 #include <ros/ros.h>
 #include <actionlib/client/simple_action_client.h>
 #include <actionlib/client/terminal_state.h>
@@ -13,8 +30,11 @@
 #include <std_msgs/String.h>
 #include <ExperimentalRoboticsLab/Investigate.h>
 
+// Global Variables
 ros::ServiceClient investigate_client;
 ros::Publisher replan_pub;
+
+/// ReasonActionInterface PDDL Reason Action implementation 
 namespace KCL_rosplan {
   ReasonActionInterface::ReasonActionInterface(ros::NodeHandle &nh) {
     // here the initialization
@@ -38,7 +58,7 @@ namespace KCL_rosplan {
   }
 }
 
-///This node move the robot to the correct waypoint
+///Main initialize node, nodehandle, ReasonActionInterface, replan publisher and investigate client
 int main(int argc, char **argv) {
 ros::init(argc, argv, "rosplan_interface_reason", ros::init_options::AnonymousName);
 ros::NodeHandle nh("~");

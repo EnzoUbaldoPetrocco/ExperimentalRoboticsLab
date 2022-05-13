@@ -1,4 +1,20 @@
-//#include <unistd.h>
+/**
+* \file navigation.cpp
+* \brief navigation action
+* \author Enzo Ubaldo Petrocco
+* \version 1.0
+* \date 15/05/2022
+*
+* ActionServer : <BR>
+*    /go_to_point
+* Publisher: <BR>
+*   /replan
+*
+* Description :
+* This node implements PDDL action/NavigationActionInterface
+* where it tells the robot to move to a random waypoint
+*
+**/
 #include <ros/ros.h>
 #include <actionlib/client/simple_action_client.h>
 #include <actionlib/client/terminal_state.h>
@@ -13,8 +29,11 @@
 #include <std_msgs/String.h>
 #include <ExperimentalRoboticsLab/CustomTargetAction.h>
 #include <random.h>
+
+//Global Variables
 ros::Publisher replan_pub;
 
+/// NavigationActionInterface PDDL Navigation Action implementation 
 namespace KCL_rosplan {
   NavigationActionInterface::NavigationActionInterface(ros::NodeHandle &nh) {
     // here the initialization
@@ -57,7 +76,6 @@ namespace KCL_rosplan {
       goal.theta = 0;
     }
     
-    //std::cout << "Debug" <<std::endl;
     ac.sendGoal(goal);
     ac.waitForResult();
     if (ac.getState() == actionlib::SimpleClientGoalState::SUCCEEDED){
@@ -70,12 +88,10 @@ namespace KCL_rosplan {
       replan_pub.publish(message);
       return false;
     }
-    
-   
   }
 }
 
-///This node move the robot to the correct waypoint
+///In the main function are initialized the node, the node handle, the replan publisher and the NavigationActionInterface
 int main(int argc, char **argv) {
 ros::init(argc, argv, "rosplan_interface_navigation", ros::init_options::AnonymousName);
 ros::NodeHandle nh("~");

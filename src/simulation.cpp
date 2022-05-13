@@ -1,45 +1,64 @@
+/**
+* \file simulation.cpp
+* \brief simulation node
+* \author Carmine Tommaso Recchiuto
+* \version 1.0
+*
+* Publisher : <BR>
+*    /gazebo/link_states
+* ServiceServer: <BR>
+*   /oracle_solution
+* Publisher: <BR>
+*   /visualization_marker
+* Publisher: <BR>
+*   /oracle_hint
+*
+* Description :
+* This node implements marker for hint delivery, hints generation and,
+* in general, all it is needed for oracle simulation
+*
+**/
 #include <ros/ros.h>
 #include <gazebo_msgs/LinkStates.h>
 #include <visualization_msgs/MarkerArray.h>
 #include <ExperimentalRoboticsLab/ErlOracle.h>
 #include <ExperimentalRoboticsLab/Oracle.h>
-
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
 #include <vector>
 
-ros::Publisher oracle_pub;
 
+// Global Variables
+ros::Publisher oracle_pub;
 double markx[4];
 double marky[4];
 double markz[4];
-
 double lastmarkx = 0.0;
 double lastmarky = 0.0;
-
 const std::string key[3] = {"who", "what", "where"};
 const std::string person[6] = {"missScarlett", "colonelMustard", "mrsWhite", "mrGreen", "mrsPeacock", "profPlum"};
 const std::string object[6] = {"candlestick", "dagger", "leadPipe", "revolver", "rope", "spanner"};
 const std::string place[9] = {"conservatory", "lounge", "kitchen", "library", "hall", "study", "bathroom", "diningRoom", "billiardRoom"}; 
-
 int uIDs[3]={-1,-1,-1};
 int winID = -1;
- 
 std::vector<ExperimentalRoboticsLab::ErlOracle> oracle_msgs;
 
+/// This function returns distance from a target
 double distfromtarget (double x, double y, double z, double x1, double y1, double z1){
 	double dist = sqrt((x-x1)*(x-x1)+(y-y1)*(y-y1)+(z-z1)*(z-z1));
 	return dist;
 	
 }
 
+/// This callback implements oracle service and return the win hypothesis ID
 bool oracleService(ExperimentalRoboticsLab::Oracle::Request &req, ExperimentalRoboticsLab::Oracle::Response &res)
 	{
 		res.ID = winID;
 		return true;
 	}
 
+/// This callback generates hints
 void oracleCallback(const gazebo_msgs::LinkStates::ConstPtr& msg)
 {
    for(int i=0; i< msg->name.size(); i++){
@@ -99,6 +118,7 @@ void oracleCallback(const gazebo_msgs::LinkStates::ConstPtr& msg)
 	}
 } 
 
+/// In the main function are generated visualization marker, id solution, link states for gazebo.
 int main(int argc, char **argv)
 {
 
