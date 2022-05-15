@@ -5,7 +5,7 @@
 # \brief node implementing the investigation part of the robot
 # \author  Enzo Ubaldo Petrocco
 # \version 1.0
-# \date November 2021
+# \date 15/05/2022
 # \details
 #
 # Publishes to:<BR>
@@ -27,13 +27,12 @@
 # investigate.py is a script which manages the communication between the
 # armor client and the robot. 
 # It asks the oracle for a hint and then reason in order to get complete hypotheses,
-# if it get them, it writes them in a file: 'consistent_hypotheses.json'
+# if it get them, it send it to the node it asked for them
 # 
 # 
 ##
 
 import rospy
-from geometry_msgs.msg import Point
 from ExperimentalRoboticsLab.srv import Hint
 from ExperimentalRoboticsLab.srv import Investigate
 from ExperimentalRoboticsLab.msg import ErlOracle
@@ -63,61 +62,114 @@ available_person = {"missScarlett", "colonelMustard", "mrsWhite", "mrGreen", "mr
 available_weapon = {"candlestick", "dagger", "leadPipe", "revolver", "rope", "spanner"}
 available_place = {"conservatory", "lounge", "kitchen", "library", "hall", "study", "bathroom", "diningRoom", "billiardRoom"}
 available_key = {"who", "what", "where"}
-
+## Function that check if an person with the value given exists
 def check_value_person(value):
+    """!
+        /def check_value_person function
+        The function returns true if the value is an
+        admissible person value
+        /param value (string)
+        /return bool
+        """
     for i in available_person:
         if i==value:
             return True
     return False
-
+## Function that check if a weapon with the value given exists
 def check_value_weapon(value):
+    """!
+        /def check_value_weapon function
+        The function returns true if the value is an
+        admissible weapon value
+        /param value (string)
+        /return bool
+        """
     for i in available_weapon:
         if i==value:
             return True
     return False
-
+## Function that check if a place with the value given exists
 def check_value_place(value):
+    """!
+        /def check_value_place function
+        The function returns true if the value is an
+        admissible place value
+        /param value (string)
+        /return bool
+        """
     for i in available_place:
         if i==value:
             return True
     return False
-
+## Function that check if an object with the value given exists
 def check_values(value):
+    """!
+        /def check_values function
+        The function returns true if the value is an
+        admissible value
+        /param value (string)
+        /return bool
+        """
     b = check_value_person(value) or check_value_weapon(value) or check_value_place(value)
     return b
-
+## Function that check if the key is correct
 def check_key(value):
+    """!
+        /def check_key function
+        The function returns true if the value is an
+        admissible key value
+        /param value (string)
+        /return bool
+        """
     for i in available_key:
         if i==value:
             return True
     return False
-
+## Function that check if an weapon with the value given already exists
 def check_weapon_exists(w):
+    """!
+        /def check_key function
+        The function returns true if the value equal to
+        an existing weapon value
+        /param value (string)
+        /return bool
+        """
     if len(weapons)==0:
         return False
     for i in weapons:
         if i==w:
             return True
     return False
-
+## Function that check if an person with the value given already exists
 def check_people_exists(p):
+    """!
+        /def check_key function
+        The function returns true if the value equal to
+        an existing person value
+        /param value (string)
+        /return bool
+        """
     if len(persons)==0:
         return False
     for i in persons:
         if i==p:
             return True
     return False
-
-
+## Function that check if a place with the value given already exists
 def check_place_exists(p):
+    """!
+        /def check_key function
+        The function returns true if the value equal to
+        an existing place value
+        /param value (string)
+        /return bool
+        """
     if len(places)==0:
         return False
     for i in places:
         if i==p:
             return True
     return False
-
-
 ## Function that check if an hypothesis does not exists
 def check_hypothesis_not_exist(hyp_id):
     """!
@@ -293,7 +345,6 @@ def reason():
     The function calls reason armor client function
     """
     armor_client.call("REASON", "", "", [])
-
 ## Add a new ind
 def add_hint(msg):
     """!
@@ -405,7 +456,7 @@ def investigate(msg):
     /investigate callback
     This function ask for a hint, add the hint to armor,
     gets consistent hypotheses, adds consistent hypotheses which have
-    not been taken into account before and set them into a json file
+    not been taken into account before and returns it to the client
     /param msg ()
     /returns True
     """
@@ -426,7 +477,7 @@ def investigate(msg):
     #file_hypotheses_string = json.dumps(file_hypotheses)
     #rospy.set_param('/consistent_hypotheses', file_hypotheses_string)
     return IDs
-
+## oracle hint callback
 def oracle_hint(msg):
     """!
     /oracle hint function

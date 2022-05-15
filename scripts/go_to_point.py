@@ -1,23 +1,29 @@
 #! /usr/bin/env python
-
-
-"""go_to_point is a python script which provides the navigation part of the 
- robot. 
- It gets information from odometry, then it decides the action to take, and it 
- changes the status of the FSM.
- The possibile actions that can be taken are:
-    -preemption of the action
-    -fix yaw;
-    -go_straight_ahead;
-    -fix_final_yaw;
-    -done.
- They have their respective function.
- The only one that is different is the first (preemption of the action),thanks to action.is_preempt_requested,
-  which returns true if it is asked for a preemption of this action, if this is true, 
-  then the state is set equal to three and calls done(), which stops the robot. 
- Also there are: change_state to manage the current state and normalize_angle for calculation purpose.
- It provides the current state to the state_machine
- """
+## @package ExperimentalRoboticsLab
+# \file go_to_point.py
+# \brief node implementing the navigation part of the robot
+# \author  Carmine Tommaso Recchiuto, Enzo Ubaldo Petrocco
+# \version 1.0
+# \date 15/05/2022
+# \details
+#
+# Publishes to:<BR>
+#   /cmd_vel
+#
+# Subscriber:<BR>
+#   /odom
+#
+# ActionServer:<BR>
+#   /go_to_point
+#
+#
+# Description:
+#
+# This node is responsible for navigation algorithm. This algorithm is a 
+# naive algorithm, which does not implement obstacle avoidance. So it is 
+# performed only in a situation when you do not have obstacles
+# 
+##
 
 
 import rospy
