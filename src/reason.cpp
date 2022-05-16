@@ -63,7 +63,7 @@ int main(int argc, char **argv) {
 ros::init(argc, argv, "rosplan_interface_reason", ros::init_options::AnonymousName);
 ros::NodeHandle nh("~");
 replan_pub = nh.advertise<ExperimentalRoboticsLab::Replan>("/replan", 100 );
-ros::ServiceClient investigate_client = nh.serviceClient<ExperimentalRoboticsLab::Investigate>("/investigate");
+investigate_client = nh.serviceClient<ExperimentalRoboticsLab::Investigate>("/investigate");
 KCL_rosplan::ReasonActionInterface my_aci(nh);
 my_aci.runActionInterface();
 return 0;

@@ -34,15 +34,50 @@ Here below there is the flowchart explaining how the planning part works.
 ![flowchart drawio](https://user-images.githubusercontent.com/48513075/167388758-dde170b4-af95-4ef7-be8d-07c60f2e1a5d.png)
 
 #### Temporal Diagram
-![time_diagram](https://user-images.githubusercontent.com/48513075/168555773-af40413e-25ba-4717-8e1b-9bf7ecb61475.png)
-
+![TemporalDiagram drawio](https://user-images.githubusercontent.com/48513075/168557788-1fb6998d-a01f-48ce-9d5a-d9242645b80d.png)
+Temporal diagram is an example of the most lucky case, where rosplan node initialize the plan, the robot navigates until a waypoint, a hint is found, but there is no complet hypothesis, so a new plan is dispatched thanks to rosplan node. This happend two times.
+The third time find_hint node is executed, a complete hypothesis is found and it is the exact one. 
 
 ## Installation and Running Procedure
+### Installation
+Two packages must be installed and built in order to run the code: [assignment2](https://github.com/EnzoUbaldoPetrocco/ExperimentalRoboticsLab/tree/assignment2) and [m2wr_moveit](https://github.com/EnzoUbaldoPetrocco/ExperimentalRoboticsLab/tree/m2wr_moveit).
 
+the entire package ExperimentalRoboticsLab download from assignment2 must be pasted in the workspace, while only the package m2wr_moveit package of m2wr_moveit branch must be pasted in the workspace.
+Then ROS terminal source must be done.
+
+After this, build your workingspace with:
+```
+catkin_make
+```
+
+### Running Procedure
+In order to run the program, go inside the folder: ExperimentalRoboticsLab in the workspace and run:
+```
+./short.sh
+```
+Some terminals will open. Don't care about warnings in the fourth terminal opened.
 
 ## A Sample of the scenario
 
 ## Working hypothesis and environment
+### System's feature
+The system must play cluedo game in a simulated environment.
+System is capable of:
+- Perform a complete plan/replan procedure with a fixed domain and a fixed problem;
+- Perform arm movements until a custom pose and a reachable pose;
+- Perform navigation through a simulated environment, devoid of obstacles;
+- Perform reasoner part given an ontology structure.
+System in general is characterized also by:
+- Hints are objects with fields: 
+    1) ID: this tells the hypothesis the hint belongs to;
+    2) value: tells the value of the hint;
+    3) key: may be "where","who","what" and tells the type of hint;
+- Hints can be not well generated;
+- Every action can fail, so a replan strategy is implemented every time it is needed;
+- Hints can be at different altitudes.
+
+### System's limitations
+
 
 ## Authors and contacts
 The author of this repository is [Enzo Ubaldo Petrocco](https://github.com/EnzoUbaldoPetrocco/ExperimentalRoboticsLab): i'm a student of robotics engineering in the University of Genova (s4530363); if you have some issues please contact me:
