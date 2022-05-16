@@ -56,6 +56,7 @@ Note that some specifications/characteristics of the system are:
 - Armor has been used as the 'reasoner';
 - Rooms are mapped as specific Pose (x,y,theta);
 - Robot is a point;
+- The usage of json file as a way of exchanging information is not a proper way of passing information among nodes. But since the file does not change continously, it may be considered a weak limitation in terms of performance.
 
 ### Possible improvements
 Many possible improvements can be achieved: 
