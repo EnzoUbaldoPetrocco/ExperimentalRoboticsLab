@@ -48,11 +48,11 @@ pub_ = None
 yaw_precision_ = math.pi / 9  # +/- 20 degree allowed
 yaw_precision_2_ = math.pi / 90  # +/- 2 degree allowed
 dist_precision_ = 0.08
-kp_a = -3.4
+kp_a = -3.2
 kp_d = 0.4
 ub_a = 0.6
-lb_a = -0.5
-ub_d = 0.8
+lb_a = -0.6
+ub_d = 0.7
 
 action=None
 
@@ -74,12 +74,10 @@ def clbk_odom(msg):
     euler = transformations.euler_from_quaternion(quaternion)
     yaw_ = euler[2]
 
-
 def change_state(state):
     global state_
     state_ = state
     print ('State changed to [%s]' % state_)
-
 
 def normalize_angle(angle):
     if(math.fabs(angle) > math.pi):
@@ -102,7 +100,6 @@ def fix_yaw(des_pos):
         #print ('Yaw error: [%s]' % err_yaw)
         change_state(1)
 
-
 def go_straight_ahead(des_pos):
     desired_yaw = math.atan2(des_pos.y - position_.y, des_pos.x - position_.x)
     err_yaw = desired_yaw - yaw_
@@ -112,7 +109,7 @@ def go_straight_ahead(des_pos):
 
     if err_pos > dist_precision_:
         twist_msg = Twist()
-        twist_msg.linear.x = 0.8
+        twist_msg.linear.x = 0.7
         if twist_msg.linear.x > ub_d:
            twist_msg.linear.x = ub_d
 

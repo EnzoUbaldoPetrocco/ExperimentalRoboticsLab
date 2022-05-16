@@ -7,6 +7,7 @@ In particular: you have a robot, which must find hints, like it is playing clued
 ## Software structure
 From an architectural point of view the software is structured as follows, a better explanation of services, actions, ... is explained below the picture, this is done because of readability of the component diagram.
 
+#### Component diagram
 ![class_diagram_ass_2 drawio (2)](https://user-images.githubusercontent.com/48513075/166264792-902c78d4-b3b1-4d31-9056-ff45079da4a8.png)
 
 
@@ -14,23 +15,27 @@ From an architectural point of view the software is structured as follows, a bet
 Each of the previous 4 actions/components mentioned before has a some general properties that may be interesting to be outlined: 
 1. **The action can fail in its aim**, in fact it's impossibile that these actions let the program finish in a single plan, this is due from the fact that a complete hypothesis is made by 3 hints, so a service toward rosplan management must be performed in order to replan if something fails. The service is "/replan" service.
 2. **Every action decouples the problem and the other components**, in order to not write too specific code, and in order to perform flexibility concept, every nodes link the rosplan, which can be changed in order to perform other types of plans, and Go To Point, My MoveIt and Investigation components, which are more general and can be used in other contexts (as you can see, since Go To Point and Investigation come from previous assignment)
-- Rosplan Management component: this component is called from each action/component through "/replan" service. Every time it is called, this component must understand where the robot is and must make a new plan.
-- Navigation component: this component must perform the respective durative action of the pddl plan. At the beginning of the action the robot is at a waypoint, then it is at another one. In order to perform effectively the navigation, this node sends an action to the Go To Point component (alias go_to_point node), which will perform a navigation algorithm.
+- Rosplan Management component: this component can be called from each action/component through "/replan" service. Every time it is called, this component must make a new plan. When the robots simply plays, this component manages the dispatch of the actions.
+- Navigation component: this component must perform the respective durative action of the PDDL plan. At the beginning of the action the robot is at a waypoint, then it is at another one. In order to perform effectively the navigation, this node sends an action to the Go To Point component (alias go_to_point node), which will perform a navigation algorithm. The waypoint location is chosen randomly among the different possibilities.
 - Find Hint component: this component must perform the respective durative action of the pddl plan. At the beginning of the action the robot is at a waypoint with his arm in a custom pose, previously chosen in order to be as stable as possible (also this can be discussed as possible improvements). Then the component calls My MoveIt component, (the details are explained below), with a custom action HintAction twice (marker can be in 2 points), at the end of the action the robot cluedo joint must have found the hint.
 - Reason component: this component must perform the respective durative action of the pddl plan. At the beginning of the action the robot must reason about the hints he have. Notice that, as said before, at the beginning it is impossible to have complete hypotheses, so it is impossible to have consistent hypotheses, so this action will fail several times. This component calls Investigate component in order to know if there are consistent hypotheses. 
-- Oracle component: this component must perform the respective durative action of the pddl plan. At the beginning of the action the robot must perform a navigation to the oracle, through the GoToPoint component and then must ask to the Oracle (which is in the Simulation Component), 
+- Oracle component: this component must perform the respective durative action of the pddl plan. At the beginning of the action the robot must perform a navigation to the oracle, through the GoToPoint component and then must ask to the Oracle (which is in the Simulation Component).
 - GoToPoint component: this component must perform navigation action. The algorithm is such that the result can be shown through simulation in RViz and Gazebo environments, where also the physics of the robot is simulated. Here can be noticed, for example, the precision and limitations of the algorithm, which simply perform a rotation until correct angle is reached, and then moves on straightforward; for this reason this is not a suitable algorithm for obstacle avoidance.
 - My MoveIt component: this component must perform arm movements. One can choose if the robot must reach a custom pose or you can give a pose to the robot and then it reaches it with the cluedo link. There are 2 actions respectively CustomTargetAction, HintAction.
-- Investigation component: this component represent the link with the reasoner part. When it is needed it calls Armor, and asks him for consistent hypotheses. This component also add aumatically the hints into the owl file if they are well formed.
-- Armor component: this component represent the reasoner, hints correctly formed are stored in owl file and then the Armor reasoner is responsible for check for consistent hypotheses. 
-- MoveIt component: this component is responsible for IK, planning parts and . When it is asked for a target IK procedure is called, than planning procedure runs. After this, joints controller are used for reaching the target.
+- Investigation component: this component represent the link with the reasoner part. When it is needed, it calls Armor, and asks him for consistent hypotheses. This component also adds automatically the hints into the owl file, if they are well formed.
+- Armor component: this component represent the reasoner, hints correctly formed are stored in owl file and then, the Armor reasoner is responsible for check to consistent hypotheses. 
+- MoveIt component: this component is responsible for IK, planning parts and, when it is asked for a target, IK procedure is called, then planning procedure runs. After this, joints controller are used for reaching the target.
 - Simulation component: this component manages hints generation, check of the true consistent hypothesis, marker position in the rviz scenario.
-- MoveIt component: this component is generated by moveit setup assistant. And this manages controllers, launch file, simulation etc. In this package it is slightly modified, in order to use gazebo and rviz that have been already generated.
+- MoveIt component: this component is generated by moveit setup assistant. This manages controllers, launch file, simulation etc. In this package it is slightly modified, in order to use gazebo and rviz that have been already generated.
 - Armor component: this component uses reasoner and ontology of Armor. This is simply the Armor Server with its functionalities.
 
 #### Flowchart
 Here below there is the flowchart explaining how the planning part works.
 ![flowchart drawio](https://user-images.githubusercontent.com/48513075/167388758-dde170b4-af95-4ef7-be8d-07c60f2e1a5d.png)
+
+#### Temporal Diagram
+![time_diagram](https://user-images.githubusercontent.com/48513075/168555773-af40413e-25ba-4717-8e1b-9bf7ecb61475.png)
+
 
 ## Installation and Running Procedure
 

@@ -403,9 +403,11 @@ def retrieve_consistent_hp():
     complete_hps = query_hp_completeness()
     if complete_hps == []:
         return complete_hps
+    print('Complete hypotheses exist')
     inconsistent_hps = query_hp_inconsistent()
     if inconsistent_hps == []:
         return complete_hps
+    print('Inconsistent hypotheses exist')
     for i in complete_hps:
         for j in inconsistent_hps:
             if i == j:
@@ -461,13 +463,12 @@ def investigate(msg):
     /returns True
     """
     global file_hypotheses
-    # TODO: write in the file the consistent hypotheses
-    #file_hypotheses_string = rospy.get_param('/consistent_hypotheses')
-    #file_hypotheses = json.loads(file_hypotheses_string)
     complete_hps = retrieve_consistent_hp()
+    print('complete hypotheses are:')
+    print(complete_hps)
     IDs = []
     if complete_hps == []:
-        return True
+        return []
     for i in complete_hps:
         id = i.split('#')[1][:3]
         file_hypotheses = create_json_hypothesis(id, file_hypotheses)
