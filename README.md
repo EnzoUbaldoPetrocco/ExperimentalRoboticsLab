@@ -53,7 +53,6 @@ Note that some specifications/characteristics of the system are:
 - Navigation is simulated, the robot waits proportionally to the 'distance'. As distance angle is not taken into account;
 - Hints are always given with an hypothesis ID, which they belong to;
 - The correct hypothesis has been selected randomly by the oracle among preselected consistent hypotheses;
-- Armor has been used as the 'reasoner';
 - Rooms are mapped as specific Pose (x,y,theta);
 - Robot is a point;
 - The usage of json file as a way of exchanging information is not a proper way of passing information among nodes. But since the file does not change continously, it may be considered a weak limitation in terms of performance.
