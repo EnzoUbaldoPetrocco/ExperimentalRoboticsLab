@@ -77,6 +77,17 @@ System in general is characterized also by:
 - Hints can be at different altitudes.
 
 ### System's limitations
+- System is very slow, in order to minimize failures;
+- Navigation node does not perform obstacle avoidance;
+- Arm motion node does not perform obstacle avoidance;
+- Arm motion is slow, also due to the fact that PID control is not optimal, PID controllers are chosen thanks to trial and error;
+- Navigation is slow, this is due to the fact that robot must be stable and must not 'wheelie';
+- Robot chassis is not as small as possible (in order to reduce configuration space), in order to assure stability while arm is moving;
+- Arm is not efficient in its movements: between the two poses the robot passes through the home pose;
+- Replanning and ROSPlan are not efficient, also, sometimes it fails. Maybe the finite state machine is faster. On the contrary ROSPlan is more flexible;
+- Random waypoint approach may produce the same waypoint;
+- User Interface may help in start and restart the game.
+- Optimizations can be done: planner could use a function in order to know if at least 3 hints must be found before asking the reasoner.
 
 
 ## Authors and contacts

@@ -47,7 +47,6 @@ namespace KCL_rosplan {
   OracleActionInterface::OracleActionInterface(ros::NodeHandle &nh) {
   }
   bool OracleActionInterface::concreteCallback(const rosplan_dispatch_msgs::ActionDispatch::ConstPtr& msg) {
-    std::cout << "Oracle relations " << std::endl;
     
     actionlib::SimpleActionClient<ExperimentalRoboticsLab::PositionAction> ac("/go_to_point", true);
     ExperimentalRoboticsLab::PositionGoal goal;
@@ -69,6 +68,8 @@ namespace KCL_rosplan {
       for(int i=0;i<srv.response.IDs.size()-1;i++){
         if(srv.response.IDs[i]==or_srv.response.ID){
           ROS_INFO("Action (%s) performed: completed!", msg->name.c_str());
+          
+    std::cout << "You won " << std::endl;
           return true;
         }
       }

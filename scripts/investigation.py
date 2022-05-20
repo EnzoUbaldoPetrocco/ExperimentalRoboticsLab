@@ -34,7 +34,7 @@
 
 import rospy
 from ExperimentalRoboticsLab.srv import Hint
-from ExperimentalRoboticsLab.srv import Investigate
+from ExperimentalRoboticsLab.srv import Investigate, InvestigateResponse
 from ExperimentalRoboticsLab.msg import ErlOracle
 import json
 from os.path import dirname, realpath
@@ -57,6 +57,7 @@ weapons = []
 persons = []
 places = []
 hypotheses = []
+tried_hypotheses = []
 
 available_person = {"missScarlett", "colonelMustard", "mrsWhite", "mrGreen", "mrsPeacock", "profPlum"}
 available_weapon = {"candlestick", "dagger", "leadPipe", "revolver", "rope", "spanner"}
@@ -462,22 +463,27 @@ def investigate(msg):
     /param msg ()
     /returns True
     """
-    global file_hypotheses
+    global file_hypotheses, tried_hypotheses
     complete_hps = retrieve_consistent_hp()
-    print('complete hypotheses are:')
-    print(complete_hps)
     IDs = []
     if complete_hps == []:
         return []
     for i in complete_hps:
-        id = i.split('#')[1][:3]
-        file_hypotheses = create_json_hypothesis(id, file_hypotheses)
-        IDs.append(id)
-    print('investigation finished, printed consistent hypotheses')
-    print(file_hypotheses)
+        id = i.split('#')[1]
+        id = id.split('>')[0]
+        print(id)
+        #file_hypotheses = create_json_hypothesis(id, file_hypotheses)
+        IDs.append(int(id))    
+    
+    for i in tried_hypotheses:
+        for j in IDs:
+            if i==j:
+                IDs.remove(j)
+    for i in IDs:
+        tried_hypotheses.append(i)
     #file_hypotheses_string = json.dumps(file_hypotheses)
     #rospy.set_param('/consistent_hypotheses', file_hypotheses_string)
-    return IDs
+    return InvestigateResponse(IDs)
 ## oracle hint callback
 def oracle_hint(msg):
     """!

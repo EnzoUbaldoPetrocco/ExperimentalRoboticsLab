@@ -46,6 +46,7 @@ namespace KCL_rosplan {
     ExperimentalRoboticsLab::Investigate srv;
     
     investigate_client.call(srv);
+    
     if(srv.response.IDs.size() > 0 ){
       ROS_INFO("Action (%s) performed: completed!", msg->name.c_str());
       return true;
