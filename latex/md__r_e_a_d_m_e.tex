@@ -1,0 +1,77 @@
+This is the second assignment of the course, in this assignment I have had to implement some features of the robot in a cluedo game environment. In particular\+: planning part and robot description and his movements in an simulation environment. Also some little changes have been made, but the main concept has been maintained. In particular\+: you have a robot, which must find hints, like it is playing cluedo game, it must reason about possible complete hypotheses and then, it must ask to the oracle if the hypothesis is correct. If it is not, the robot must go on and keep playing until it finds the solution.\hypertarget{md__r_e_a_d_m_e_autotoc_md1}{}\doxysection{Software structure}\label{md__r_e_a_d_m_e_autotoc_md1}
+From an architectural point of view the software is structured as follows, a better explanation of services, actions, ... is explained below the picture, this is done because of readability of the component diagram.\hypertarget{md__r_e_a_d_m_e_autotoc_md2}{}\doxysubsubsection{Component diagram}\label{md__r_e_a_d_m_e_autotoc_md2}
+
+
+
+\begin{DoxyItemize}
+\item Rosplan component\+: this component is launched by Rosplan Management when program starts, it asks him to generate a plan from the domain and problem described by the Rosplan Management component through services. This component is responsible for launching the 4 actions Navigation, Find Hint, Reason and Oracle, which in this part are described as component. Each of the previous 4 actions/components mentioned before has a some general properties that may be interesting to be outlined\+:
+\end{DoxyItemize}
+\begin{DoxyEnumerate}
+\item {\bfseries{The action can fail in its aim}}, in fact it\textquotesingle{}s impossibile that these actions let the program finish in a single plan, this is due from the fact that a complete hypothesis is made by 3 hints, so a service toward rosplan management must be performed in order to replan if something fails. The service is \char`\"{}/replan\char`\"{} service.
+\item {\bfseries{Every action decouples the problem and the other components}}, in order to not write too specific code, and in order to perform flexibility concept, every nodes link the rosplan, which can be changed in order to perform other types of plans, and Go To Point, My Move\+It and Investigation components, which are more general and can be used in other contexts (as you can see, since Go To Point and Investigation come from previous assignment)
+\end{DoxyEnumerate}
+\begin{DoxyItemize}
+\item Rosplan Management component\+: this component can be called from each action/component through \char`\"{}/replan\char`\"{} service. Every time it is called, this component must make a new plan. When the robots simply plays, this component manages the dispatch of the actions.
+\item Navigation component\+: this component must perform the respective durative action of the P\+D\+DL plan. At the beginning of the action the robot is at a waypoint, then it is at another one. In order to perform effectively the navigation, this node sends an action to the Go To Point component (alias \mbox{\hyperlink{namespacego__to__point}{go\+\_\+to\+\_\+point}} node), which will perform a navigation algorithm. The waypoint location is chosen randomly among the different possibilities.
+\item Find Hint component\+: this component must perform the respective durative action of the pddl plan. At the beginning of the action the robot is at a waypoint with his arm in a custom pose, previously chosen in order to be as stable as possible (also this can be discussed as possible improvements). Then the component calls My Move\+It component, (the details are explained below), with a custom action Hint\+Action twice (marker can be in 2 points), at the end of the action the robot cluedo joint must have found the hint.
+\item Reason component\+: this component must perform the respective durative action of the pddl plan. At the beginning of the action the robot must reason about the hints he have. Notice that, as said before, at the beginning it is impossible to have complete hypotheses, so it is impossible to have consistent hypotheses, so this action will fail several times. This component calls Investigate component in order to know if there are consistent hypotheses.
+\item Oracle component\+: this component must perform the respective durative action of the pddl plan. At the beginning of the action the robot must perform a navigation to the oracle, through the Go\+To\+Point component and then must ask to the Oracle (which is in the Simulation Component).
+\item Go\+To\+Point component\+: this component must perform navigation action. The algorithm is such that the result can be shown through simulation in R\+Viz and Gazebo environments, where also the physics of the robot is simulated. Here can be noticed, for example, the precision and limitations of the algorithm, which simply perform a rotation until correct angle is reached, and then moves on straightforward; for this reason this is not a suitable algorithm for obstacle avoidance.
+\item My Move\+It component\+: this component must perform arm movements. One can choose if the robot must reach a custom pose or you can give a pose to the robot and then it reaches it with the cluedo link. There are 2 actions respectively Custom\+Target\+Action, Hint\+Action.
+\item Investigation component\+: this component represent the link with the reasoner part. When it is needed, it calls Armor, and asks him for consistent hypotheses. This component also adds automatically the hints into the owl file, if they are well formed.
+\item Armor component\+: this component represent the reasoner, hints correctly formed are stored in owl file and then, the Armor reasoner is responsible for check to consistent hypotheses.
+\item Move\+It component\+: this component is responsible for IK, planning parts and, when it is asked for a target, IK procedure is called, then planning procedure runs. After this, joints controller are used for reaching the target.
+\item Simulation component\+: this component manages hints generation, check of the true consistent hypothesis, marker position in the rviz scenario.
+\item Move\+It component\+: this component is generated by moveit setup assistant. This manages controllers, launch file, simulation etc. In this package it is slightly modified, in order to use gazebo and rviz that have been already generated.
+\item Armor component\+: this component uses reasoner and ontology of Armor. This is simply the Armor Server with its functionalities.
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md3}{}\doxysubsubsection{Flowchart}\label{md__r_e_a_d_m_e_autotoc_md3}
+Here below there is the flowchart explaining how the planning part works. \hypertarget{md__r_e_a_d_m_e_autotoc_md4}{}\doxysubsubsection{Temporal Diagram}\label{md__r_e_a_d_m_e_autotoc_md4}
+ Temporal diagram is an example of the most lucky case, where rosplan node initialize the plan, the robot navigates until a waypoint, a hint is found, but there is no complet hypothesis, so a new plan is dispatched thanks to rosplan node. This happend two times. The third time find\+\_\+hint node is executed, a complete hypothesis is found and it is the exact one.\hypertarget{md__r_e_a_d_m_e_autotoc_md5}{}\doxysection{Installation and Running Procedure}\label{md__r_e_a_d_m_e_autotoc_md5}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md6}{}\doxysubsection{Installation}\label{md__r_e_a_d_m_e_autotoc_md6}
+Two packages must be installed and built in order to run the code\+: \href{https://github.com/EnzoUbaldoPetrocco/ExperimentalRoboticsLab/tree/assignment2}{\texttt{ assignment2}} and \href{https://github.com/EnzoUbaldoPetrocco/ExperimentalRoboticsLab/tree/m2wr_moveit}{\texttt{ m2wr\+\_\+moveit}}.
+
+the entire package \mbox{\hyperlink{namespace_experimental_robotics_lab}{Experimental\+Robotics\+Lab}} download from assignment2 must be pasted in the workspace, while only the package m2wr\+\_\+moveit package of m2wr\+\_\+moveit branch must be pasted in the workspace. Then R\+OS terminal source must be done.
+
+After this, build your workingspace with\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{catkin\_make}
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md7}{}\doxysubsection{Running Procedure}\label{md__r_e_a_d_m_e_autotoc_md7}
+In order to run the program, go inside the folder\+: \mbox{\hyperlink{namespace_experimental_robotics_lab}{Experimental\+Robotics\+Lab}} in the workspace and run\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{./short.sh}
+\end{DoxyCode}
+
+
+Some terminals will open. Don\textquotesingle{}t care about warnings in the fourth terminal opened.\hypertarget{md__r_e_a_d_m_e_autotoc_md8}{}\doxysection{A Sample of the scenario}\label{md__r_e_a_d_m_e_autotoc_md8}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md9}{}\doxysection{Working hypothesis and environment}\label{md__r_e_a_d_m_e_autotoc_md9}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md10}{}\doxysubsection{System\textquotesingle{}s feature}\label{md__r_e_a_d_m_e_autotoc_md10}
+The system must play cluedo game in a simulated environment. System is capable of\+:
+\begin{DoxyItemize}
+\item Perform a complete plan/replan procedure with a fixed domain and a fixed problem;
+\item Perform arm movements until a custom pose and a reachable pose;
+\item Perform navigation through a simulated environment, devoid of obstacles;
+\item Perform reasoner part given an ontology structure. System in general is characterized also by\+:
+\item Hints are objects with fields\+: 1) ID\+: this tells the hypothesis the hint belongs to; 2) value\+: tells the value of the hint; 3) key\+: may be \char`\"{}where\char`\"{},\char`\"{}who\char`\"{},\char`\"{}what\char`\"{} and tells the type of hint;
+\item Hints can be not well generated;
+\item Every action can fail, so a replan strategy is implemented every time it is needed;
+\item Hints can be at different altitudes.
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md11}{}\doxysubsection{System\textquotesingle{}s limitations}\label{md__r_e_a_d_m_e_autotoc_md11}
+
+\begin{DoxyItemize}
+\item System is very slow, in order to minimize failures;
+\item Navigation node does not perform obstacle avoidance;
+\item Arm motion node does not perform obstacle avoidance;
+\item Arm motion is slow, also due to the fact that P\+ID control is not optimal, P\+ID controllers are chosen thanks to trial and error;
+\item Navigation is slow, this is due to the fact that robot must be stable and must not \textquotesingle{}wheelie\textquotesingle{};
+\item Robot chassis is not as small as possible (in order to reduce configuration space), in order to assure stability while arm is moving;
+\item Arm is not efficient in its movements\+: between the two poses the robot passes through the home pose;
+\item Replanning and R\+O\+S\+Plan are not efficient, also, sometimes it fails. Maybe the finite state machine is faster. On the contrary R\+O\+S\+Plan is more flexible;
+\item Random waypoint approach may produce the same waypoint;
+\item User Interface may help in start and restart the game.
+\item Optimizations can be done\+: planner could use a function in order to know if at least 3 hints must be found before asking the reasoner.
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md12}{}\doxysection{Authors and contacts}\label{md__r_e_a_d_m_e_autotoc_md12}
+The author of this repository is \href{https://github.com/EnzoUbaldoPetrocco/ExperimentalRoboticsLab}{\texttt{ Enzo Ubaldo Petrocco}}\+: i\textquotesingle{}m a student of robotics engineering in the University of Genova (s4530363); if you have some issues please contact me\+:
+\begin{DoxyItemize}
+\item email\+: \href{mailto:enzopetrocco@hotmail.it}{\texttt{ enzopetrocco@hotmail.\+it}} 
+\end{DoxyItemize}

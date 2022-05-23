@@ -58,13 +58,16 @@ namespace KCL_rosplan {
     ac.waitForResult();
     if (ac.getState() == actionlib::SimpleClientGoalState::SUCCEEDED){
       ExperimentalRoboticsLab::Investigate srv;
+    srv.request.investigate = true;
+    investigate_client.call(srv);
     
-      investigate_client.call(srv);
+    //ROS_INFO("Investigation generated ID: (%i) ", srv.response.IDs[0]);
     if(srv.response.IDs.size() > 0 ){
-
+      ROS_INFO("before disaster?");
       //Here i ask to the oracle if an ID is correct
       ExperimentalRoboticsLab::Oracle or_srv;
       oracle_client.call(or_srv);
+      ROS_INFO("Real ID: (%i) ", or_srv.response.ID);
       for(int i=0;i<srv.response.IDs.size()-1;i++){
         if(srv.response.IDs[i]==or_srv.response.ID){
           ROS_INFO("Action (%s) performed: completed!", msg->name.c_str());
@@ -103,7 +106,7 @@ ros::init(argc, argv, "rosplan_interface_oracle", ros::init_options::AnonymousNa
 ros::NodeHandle nh("~");
 KCL_rosplan::OracleActionInterface my_aci(nh);
 replan_pub = nh.advertise<ExperimentalRoboticsLab::Replan>("/replan", 100 );
-ros::ServiceClient investigate_client = nh.serviceClient<ExperimentalRoboticsLab::Investigate>("/investigate");
+investigate_client = nh.serviceClient<ExperimentalRoboticsLab::Investigate>("/investigate");
 oracle_client = nh.serviceClient<ExperimentalRoboticsLab::Oracle>("/oracle_solution");
 my_aci.runActionInterface();
 return 0;

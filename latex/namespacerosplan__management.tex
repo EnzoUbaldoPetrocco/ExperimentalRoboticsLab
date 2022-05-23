@@ -1,0 +1,182 @@
+\hypertarget{namespacerosplan__management}{}\doxysection{rosplan\+\_\+management Namespace Reference}
+\label{namespacerosplan__management}\index{rosplan\_management@{rosplan\_management}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacerosplan__management_a8b6c46f7ab1ada265f7402b0154d74be}{update\+\_\+knowledge\+\_\+predicate}} (is\+\_\+positive, predicate\+\_\+name, keys)
+\begin{DoxyCompactList}\small\item\em update\+\_\+knowledge\+\_\+predicate function \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacerosplan__management_a7cc439bb98903162d63825b95cab0c98}{update\+\_\+knowledge\+\_\+goal}} (is\+\_\+positive, predicate\+\_\+name, keys)
+\begin{DoxyCompactList}\small\item\em update\+\_\+knowledge\+\_\+goal function \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacerosplan__management_afc0d82b16c645fd7ac592976d6d1281d}{update\+\_\+knowledge\+\_\+instance}} (name, instance\+Type)
+\begin{DoxyCompactList}\small\item\em update\+\_\+knowledge\+\_\+instance function \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacerosplan__management_a35632b5b6f8422680862fb1e13e301b2}{init\+\_\+no\+\_\+same\+\_\+location}} ()
+\begin{DoxyCompactList}\small\item\em init\+\_\+no\+\_\+same\+\_\+location function \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacerosplan__management_afd0f250d8eda5b5f06e3d7321f9926e3}{init\+\_\+common\+\_\+predicates}} ()
+\begin{DoxyCompactList}\small\item\em initial\+\_\+common\+\_\+predicates function \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacerosplan__management_a9be2600a07401a520a915cbbc65e6959}{init\+\_\+common\+\_\+goal}} ()
+\begin{DoxyCompactList}\small\item\em initialize\+\_\+common\+\_\+goal function \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacerosplan__management_afa83b2459e5dfcf4b4fed2f082f9dc62}{initialize\+\_\+predicates}} ()
+\begin{DoxyCompactList}\small\item\em initialize\+\_\+predicates function \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacerosplan__management_a2f20c0a579bb3b965c0352248d18880a}{initialize\+\_\+instances}} ()
+\begin{DoxyCompactList}\small\item\em initialize\+\_\+instances function \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacerosplan__management_a783e8c3e0b16f60392fad2633b7b0be3}{initialize\+\_\+goal}} ()
+\begin{DoxyCompactList}\small\item\em initialize\+\_\+goal function \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacerosplan__management_a14084626b6246c8015a8bb7ceed7a5bf}{running\+\_\+rosplan\+\_\+procedure}} ()
+\begin{DoxyCompactList}\small\item\em /def running rosplan procedure The function generates the problem, calls planning client, calls plan parser and tries plan dispatcher /param /return dispatch\+Res response of the plan dispatcher \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacerosplan__management_a5979216fa98371afe946aa1b8bab8571}{print\+\_\+plan}} (msg)
+\begin{DoxyCompactList}\small\item\em print plan callback \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacerosplan__management_abce8888e6bc0d5b93d0e321c3f930302}{replan\+\_\+callback}} (req)
+\begin{DoxyCompactList}\small\item\em Callback that cancel current dispatch and returns true if it manages. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacerosplan__management_a5bb82526f4addd7b0ab2da8cf1b183eb}{main}} ()
+\begin{DoxyCompactList}\small\item\em Main Function where services are initialized and infinite loop runs. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{namespacerosplan__management_adbcce312ef017c2938d454d761a73404}{stop}} = True
+\begin{DoxyCompactList}\small\item\em Global variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacerosplan__management_a9be2600a07401a520a915cbbc65e6959}\label{namespacerosplan__management_a9be2600a07401a520a915cbbc65e6959}} 
+\index{rosplan\_management@{rosplan\_management}!init\_common\_goal@{init\_common\_goal}}
+\index{init\_common\_goal@{init\_common\_goal}!rosplan\_management@{rosplan\_management}}
+\doxysubsubsection{\texorpdfstring{init\_common\_goal()}{init\_common\_goal()}}
+{\footnotesize\ttfamily def rosplan\+\_\+management.\+init\+\_\+common\+\_\+goal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+initialize\+\_\+common\+\_\+goal function 
+
+/def init\+\_\+common\+\_\+goal The function initialize common goals /param /return \mbox{\Hypertarget{namespacerosplan__management_afd0f250d8eda5b5f06e3d7321f9926e3}\label{namespacerosplan__management_afd0f250d8eda5b5f06e3d7321f9926e3}} 
+\index{rosplan\_management@{rosplan\_management}!init\_common\_predicates@{init\_common\_predicates}}
+\index{init\_common\_predicates@{init\_common\_predicates}!rosplan\_management@{rosplan\_management}}
+\doxysubsubsection{\texorpdfstring{init\_common\_predicates()}{init\_common\_predicates()}}
+{\footnotesize\ttfamily def rosplan\+\_\+management.\+init\+\_\+common\+\_\+predicates (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+initial\+\_\+common\+\_\+predicates function 
+
+/def init\+\_\+common\+\_\+predicates The function initialize common predicates /param /return \mbox{\Hypertarget{namespacerosplan__management_a35632b5b6f8422680862fb1e13e301b2}\label{namespacerosplan__management_a35632b5b6f8422680862fb1e13e301b2}} 
+\index{rosplan\_management@{rosplan\_management}!init\_no\_same\_location@{init\_no\_same\_location}}
+\index{init\_no\_same\_location@{init\_no\_same\_location}!rosplan\_management@{rosplan\_management}}
+\doxysubsubsection{\texorpdfstring{init\_no\_same\_location()}{init\_no\_same\_location()}}
+{\footnotesize\ttfamily def rosplan\+\_\+management.\+init\+\_\+no\+\_\+same\+\_\+location (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+init\+\_\+no\+\_\+same\+\_\+location function 
+
+/def initialize no\+\_\+same\+\_\+location predicates The function initialize no\+\_\+same\+\_\+location predicates /param /return \mbox{\Hypertarget{namespacerosplan__management_a783e8c3e0b16f60392fad2633b7b0be3}\label{namespacerosplan__management_a783e8c3e0b16f60392fad2633b7b0be3}} 
+\index{rosplan\_management@{rosplan\_management}!initialize\_goal@{initialize\_goal}}
+\index{initialize\_goal@{initialize\_goal}!rosplan\_management@{rosplan\_management}}
+\doxysubsubsection{\texorpdfstring{initialize\_goal()}{initialize\_goal()}}
+{\footnotesize\ttfamily def rosplan\+\_\+management.\+initialize\+\_\+goal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+initialize\+\_\+goal function 
+
+/def initialize\+\_\+goal function The function update knowledge goal /param /return \mbox{\Hypertarget{namespacerosplan__management_a2f20c0a579bb3b965c0352248d18880a}\label{namespacerosplan__management_a2f20c0a579bb3b965c0352248d18880a}} 
+\index{rosplan\_management@{rosplan\_management}!initialize\_instances@{initialize\_instances}}
+\index{initialize\_instances@{initialize\_instances}!rosplan\_management@{rosplan\_management}}
+\doxysubsubsection{\texorpdfstring{initialize\_instances()}{initialize\_instances()}}
+{\footnotesize\ttfamily def rosplan\+\_\+management.\+initialize\+\_\+instances (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+initialize\+\_\+instances function 
+
+/def initialize\+\_\+instances The function updates knowledge instances /param /return \mbox{\Hypertarget{namespacerosplan__management_afa83b2459e5dfcf4b4fed2f082f9dc62}\label{namespacerosplan__management_afa83b2459e5dfcf4b4fed2f082f9dc62}} 
+\index{rosplan\_management@{rosplan\_management}!initialize\_predicates@{initialize\_predicates}}
+\index{initialize\_predicates@{initialize\_predicates}!rosplan\_management@{rosplan\_management}}
+\doxysubsubsection{\texorpdfstring{initialize\_predicates()}{initialize\_predicates()}}
+{\footnotesize\ttfamily def rosplan\+\_\+management.\+initialize\+\_\+predicates (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+initialize\+\_\+predicates function 
+
+/def initialize\+\_\+predicates function The function initialize predicates /param /return \mbox{\Hypertarget{namespacerosplan__management_a5bb82526f4addd7b0ab2da8cf1b183eb}\label{namespacerosplan__management_a5bb82526f4addd7b0ab2da8cf1b183eb}} 
+\index{rosplan\_management@{rosplan\_management}!main@{main}}
+\index{main@{main}!rosplan\_management@{rosplan\_management}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily def rosplan\+\_\+management.\+main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Main Function where services are initialized and infinite loop runs. 
+
+/def main function The function returns if theplan is completed /param /return \mbox{\Hypertarget{namespacerosplan__management_a5979216fa98371afe946aa1b8bab8571}\label{namespacerosplan__management_a5979216fa98371afe946aa1b8bab8571}} 
+\index{rosplan\_management@{rosplan\_management}!print\_plan@{print\_plan}}
+\index{print\_plan@{print\_plan}!rosplan\_management@{rosplan\_management}}
+\doxysubsubsection{\texorpdfstring{print\_plan()}{print\_plan()}}
+{\footnotesize\ttfamily def rosplan\+\_\+management.\+print\+\_\+plan (\begin{DoxyParamCaption}\item[{}]{msg }\end{DoxyParamCaption})}
+
+
+
+print plan callback 
+
+/def print plan function The function callback simply prints the plan /param /return \mbox{\Hypertarget{namespacerosplan__management_abce8888e6bc0d5b93d0e321c3f930302}\label{namespacerosplan__management_abce8888e6bc0d5b93d0e321c3f930302}} 
+\index{rosplan\_management@{rosplan\_management}!replan\_callback@{replan\_callback}}
+\index{replan\_callback@{replan\_callback}!rosplan\_management@{rosplan\_management}}
+\doxysubsubsection{\texorpdfstring{replan\_callback()}{replan\_callback()}}
+{\footnotesize\ttfamily def rosplan\+\_\+management.\+replan\+\_\+callback (\begin{DoxyParamCaption}\item[{}]{req }\end{DoxyParamCaption})}
+
+
+
+Callback that cancel current dispatch and returns true if it manages. 
+
+/def callback of /replan service The function returns true if it manages to cancel current dispatch /param req (Replan.\+msg) /return bool \mbox{\Hypertarget{namespacerosplan__management_a14084626b6246c8015a8bb7ceed7a5bf}\label{namespacerosplan__management_a14084626b6246c8015a8bb7ceed7a5bf}} 
+\index{rosplan\_management@{rosplan\_management}!running\_rosplan\_procedure@{running\_rosplan\_procedure}}
+\index{running\_rosplan\_procedure@{running\_rosplan\_procedure}!rosplan\_management@{rosplan\_management}}
+\doxysubsubsection{\texorpdfstring{running\_rosplan\_procedure()}{running\_rosplan\_procedure()}}
+{\footnotesize\ttfamily def rosplan\+\_\+management.\+running\+\_\+rosplan\+\_\+procedure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+/def running rosplan procedure The function generates the problem, calls planning client, calls plan parser and tries plan dispatcher /param /return dispatch\+Res response of the plan dispatcher 
+
+\mbox{\Hypertarget{namespacerosplan__management_a7cc439bb98903162d63825b95cab0c98}\label{namespacerosplan__management_a7cc439bb98903162d63825b95cab0c98}} 
+\index{rosplan\_management@{rosplan\_management}!update\_knowledge\_goal@{update\_knowledge\_goal}}
+\index{update\_knowledge\_goal@{update\_knowledge\_goal}!rosplan\_management@{rosplan\_management}}
+\doxysubsubsection{\texorpdfstring{update\_knowledge\_goal()}{update\_knowledge\_goal()}}
+{\footnotesize\ttfamily def rosplan\+\_\+management.\+update\+\_\+knowledge\+\_\+goal (\begin{DoxyParamCaption}\item[{}]{is\+\_\+positive,  }\item[{}]{predicate\+\_\+name,  }\item[{}]{keys }\end{DoxyParamCaption})}
+
+
+
+update\+\_\+knowledge\+\_\+goal function 
+
+/def check\+\_\+value\+\_\+weapon function The function adds a goal to the problem /param is\+\_\+positive (bool), predicate\+\_\+name (string), keys (object list) /return \mbox{\Hypertarget{namespacerosplan__management_afc0d82b16c645fd7ac592976d6d1281d}\label{namespacerosplan__management_afc0d82b16c645fd7ac592976d6d1281d}} 
+\index{rosplan\_management@{rosplan\_management}!update\_knowledge\_instance@{update\_knowledge\_instance}}
+\index{update\_knowledge\_instance@{update\_knowledge\_instance}!rosplan\_management@{rosplan\_management}}
+\doxysubsubsection{\texorpdfstring{update\_knowledge\_instance()}{update\_knowledge\_instance()}}
+{\footnotesize\ttfamily def rosplan\+\_\+management.\+update\+\_\+knowledge\+\_\+instance (\begin{DoxyParamCaption}\item[{}]{name,  }\item[{}]{instance\+Type }\end{DoxyParamCaption})}
+
+
+
+update\+\_\+knowledge\+\_\+instance function 
+
+/def check\+\_\+value\+\_\+weapon function The function adds a instance to the problem /param name (string), instance\+Type (string) /return \mbox{\Hypertarget{namespacerosplan__management_a8b6c46f7ab1ada265f7402b0154d74be}\label{namespacerosplan__management_a8b6c46f7ab1ada265f7402b0154d74be}} 
+\index{rosplan\_management@{rosplan\_management}!update\_knowledge\_predicate@{update\_knowledge\_predicate}}
+\index{update\_knowledge\_predicate@{update\_knowledge\_predicate}!rosplan\_management@{rosplan\_management}}
+\doxysubsubsection{\texorpdfstring{update\_knowledge\_predicate()}{update\_knowledge\_predicate()}}
+{\footnotesize\ttfamily def rosplan\+\_\+management.\+update\+\_\+knowledge\+\_\+predicate (\begin{DoxyParamCaption}\item[{}]{is\+\_\+positive,  }\item[{}]{predicate\+\_\+name,  }\item[{}]{keys }\end{DoxyParamCaption})}
+
+
+
+update\+\_\+knowledge\+\_\+predicate function 
+
+/def check\+\_\+value\+\_\+weapon function The function updates state of a predicate of the problem /param is\+\_\+positive (bool), predicate\+\_\+name (string), keys (object list) /return 
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespacerosplan__management_adbcce312ef017c2938d454d761a73404}\label{namespacerosplan__management_adbcce312ef017c2938d454d761a73404}} 
+\index{rosplan\_management@{rosplan\_management}!stop@{stop}}
+\index{stop@{stop}!rosplan\_management@{rosplan\_management}}
+\doxysubsubsection{\texorpdfstring{stop}{stop}}
+{\footnotesize\ttfamily bool rosplan\+\_\+management.\+stop = True}
+
+
+
+Global variables. 
+

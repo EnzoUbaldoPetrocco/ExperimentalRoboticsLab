@@ -31,6 +31,7 @@
 
 // Global Variables
 ros::Publisher oracle_pub;
+
 double markx[4];
 double marky[4];
 double markz[4];
@@ -55,6 +56,7 @@ double distfromtarget (double x, double y, double z, double x1, double y1, doubl
 bool oracleService(ExperimentalRoboticsLab::Oracle::Request &req, ExperimentalRoboticsLab::Oracle::Response &res)
 	{
 		res.ID = winID;
+		ROS_INFO("ID comparing");
 		return true;
 	}
 

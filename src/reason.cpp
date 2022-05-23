@@ -44,7 +44,7 @@ namespace KCL_rosplan {
     // here the implementation of the action
     std::cout << "Reason about the hint. " << std::endl;
     ExperimentalRoboticsLab::Investigate srv;
-    
+    srv.request.investigate = false;
     investigate_client.call(srv);
     
     if(srv.response.IDs.size() > 0 ){

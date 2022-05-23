@@ -404,11 +404,9 @@ def retrieve_consistent_hp():
     complete_hps = query_hp_completeness()
     if complete_hps == []:
         return complete_hps
-    print('Complete hypotheses exist')
     inconsistent_hps = query_hp_inconsistent()
     if inconsistent_hps == []:
         return complete_hps
-    print('Inconsistent hypotheses exist')
     for i in complete_hps:
         for j in inconsistent_hps:
             if i == j:
@@ -473,17 +471,19 @@ def investigate(msg):
         id = id.split('>')[0]
         print(id)
         #file_hypotheses = create_json_hypothesis(id, file_hypotheses)
-        IDs.append(int(id))    
-    
-    for i in tried_hypotheses:
-        for j in IDs:
-            if i==j:
-                IDs.remove(j)
-    for i in IDs:
-        tried_hypotheses.append(i)
+        IDs.append(int(id))  
+    if msg.investigate:
+        for i in tried_hypotheses:
+            for j in IDs:
+                if i==j:
+                    IDs.remove(j)
+        for i in IDs:
+            tried_hypotheses.append(i)
+    res = InvestigateResponse(IDs)
+    print(res)
     #file_hypotheses_string = json.dumps(file_hypotheses)
     #rospy.set_param('/consistent_hypotheses', file_hypotheses_string)
-    return InvestigateResponse(IDs)
+    return res
 ## oracle hint callback
 def oracle_hint(msg):
     """!

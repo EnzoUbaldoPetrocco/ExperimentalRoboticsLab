@@ -1,0 +1,102 @@
+\hypertarget{oracle_8cpp}{}\doxysection{src/oracle.cpp File Reference}
+\label{oracle_8cpp}\index{src/oracle.cpp@{src/oracle.cpp}}
+
+
+oracle action  
+
+
+{\ttfamily \#include $<$ros/ros.\+h$>$}\newline
+{\ttfamily \#include $<$actionlib/client/simple\+\_\+action\+\_\+client.\+h$>$}\newline
+{\ttfamily \#include $<$actionlib/client/terminal\+\_\+state.\+h$>$}\newline
+{\ttfamily \#include $<$rosplan\+\_\+interface/oracle.\+h$>$}\newline
+{\ttfamily \#include $<$Experimental\+Robotics\+Lab/\+Position\+Action.\+h$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$Experimental\+Robotics\+Lab/\+Replan.\+h$>$}\newline
+{\ttfamily \#include $<$std\+\_\+msgs/\+String.\+h$>$}\newline
+{\ttfamily \#include $<$Experimental\+Robotics\+Lab/\+Investigate.\+h$>$}\newline
+{\ttfamily \#include $<$Experimental\+Robotics\+Lab/\+Oracle.\+h$>$}\newline
+Include dependency graph for oracle.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{oracle_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespace_k_c_l__rosplan}{K\+C\+L\+\_\+rosplan}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_k_c_l__rosplan_1_1_navigation_action_interface}{Navigation\+Action\+Interface}} P\+D\+DL Navigation Action implementation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{oracle_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em Main initialize node, node handle, replan, investigate and oracle\+\_\+solution clients and Oracle Action Interface. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+ros\+::\+Publisher \mbox{\hyperlink{oracle_8cpp_a7510b060dff7e459937b3f7dce5ffe96}{replan\+\_\+pub}}
+\item 
+ros\+::\+Service\+Client \mbox{\hyperlink{oracle_8cpp_a9a93b076c73753bd5f7e400da2c294de}{investigate\+\_\+client}}
+\item 
+ros\+::\+Service\+Client \mbox{\hyperlink{oracle_8cpp_a4dd7226b4c62d390c7ff9eeb3fff6dfc}{oracle\+\_\+client}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+oracle action 
+
+\begin{DoxyAuthor}{Author}
+Enzo Ubaldo Petrocco 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+15/05/2022
+\end{DoxyDate}
+Action\+Server \+: ~\newline
+ /go\+\_\+to\+\_\+point Service\+Client\+: ~\newline
+ /investigate Publisher\+: ~\newline
+ /replan Service\+Client\+: ~\newline
+ /oracle\+\_\+solution
+
+Description \+: This node implements P\+D\+DL action/\+Oracle\+Action\+Interface where it tells the robot to move to oracle waypoint and and asks it if the hint is correct 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{oracle_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{oracle_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{oracle.cpp@{oracle.cpp}!main@{main}}
+\index{main@{main}!oracle.cpp@{oracle.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Main initialize node, node handle, replan, investigate and oracle\+\_\+solution clients and Oracle Action Interface. 
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{oracle_8cpp_a9a93b076c73753bd5f7e400da2c294de}\label{oracle_8cpp_a9a93b076c73753bd5f7e400da2c294de}} 
+\index{oracle.cpp@{oracle.cpp}!investigate\_client@{investigate\_client}}
+\index{investigate\_client@{investigate\_client}!oracle.cpp@{oracle.cpp}}
+\doxysubsubsection{\texorpdfstring{investigate\_client}{investigate\_client}}
+{\footnotesize\ttfamily ros\+::\+Service\+Client investigate\+\_\+client}
+
+\mbox{\Hypertarget{oracle_8cpp_a4dd7226b4c62d390c7ff9eeb3fff6dfc}\label{oracle_8cpp_a4dd7226b4c62d390c7ff9eeb3fff6dfc}} 
+\index{oracle.cpp@{oracle.cpp}!oracle\_client@{oracle\_client}}
+\index{oracle\_client@{oracle\_client}!oracle.cpp@{oracle.cpp}}
+\doxysubsubsection{\texorpdfstring{oracle\_client}{oracle\_client}}
+{\footnotesize\ttfamily ros\+::\+Service\+Client oracle\+\_\+client}
+
+\mbox{\Hypertarget{oracle_8cpp_a7510b060dff7e459937b3f7dce5ffe96}\label{oracle_8cpp_a7510b060dff7e459937b3f7dce5ffe96}} 
+\index{oracle.cpp@{oracle.cpp}!replan\_pub@{replan\_pub}}
+\index{replan\_pub@{replan\_pub}!oracle.cpp@{oracle.cpp}}
+\doxysubsubsection{\texorpdfstring{replan\_pub}{replan\_pub}}
+{\footnotesize\ttfamily ros\+::\+Publisher replan\+\_\+pub}
+

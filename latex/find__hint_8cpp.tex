@@ -1,0 +1,82 @@
+\hypertarget{find__hint_8cpp}{}\doxysection{src/find\+\_\+hint.cpp File Reference}
+\label{find__hint_8cpp}\index{src/find\_hint.cpp@{src/find\_hint.cpp}}
+
+
+move arm action  
+
+
+{\ttfamily \#include $<$ros/ros.\+h$>$}\newline
+{\ttfamily \#include $<$actionlib/client/simple\+\_\+action\+\_\+client.\+h$>$}\newline
+{\ttfamily \#include $<$actionlib/client/terminal\+\_\+state.\+h$>$}\newline
+{\ttfamily \#include $<$rosplan\+\_\+interface/find\+\_\+hint.\+h$>$}\newline
+{\ttfamily \#include $<$Experimental\+Robotics\+Lab/\+Position\+Action.\+h$>$}\newline
+{\ttfamily \#include $<$Experimental\+Robotics\+Lab/\+Hint\+Action.\+h$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$Experimental\+Robotics\+Lab/\+Replan.\+h$>$}\newline
+{\ttfamily \#include $<$std\+\_\+msgs/\+String.\+h$>$}\newline
+{\ttfamily \#include $<$Experimental\+Robotics\+Lab/\+Custom\+Target\+Action.\+h$>$}\newline
+Include dependency graph for find\+\_\+hint.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{find__hint_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespace_k_c_l__rosplan}{K\+C\+L\+\_\+rosplan}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_k_c_l__rosplan_1_1_navigation_action_interface}{Navigation\+Action\+Interface}} P\+D\+DL Navigation Action implementation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{find__hint_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+ros\+::\+Publisher \mbox{\hyperlink{find__hint_8cpp_a7510b060dff7e459937b3f7dce5ffe96}{replan\+\_\+pub}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+move arm action 
+
+\begin{DoxyAuthor}{Author}
+Enzo Ubaldo Petrocco 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+15/05/2022
+\end{DoxyDate}
+Publisher \+: ~\newline
+ /replan Action\+Client \+: ~\newline
+ /hint
+
+Description \+:
+
+move the robot cluedo link until it reaches the marker 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{find__hint_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{find__hint_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{find\_hint.cpp@{find\_hint.cpp}!main@{main}}
+\index{main@{main}!find\_hint.cpp@{find\_hint.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{find__hint_8cpp_a7510b060dff7e459937b3f7dce5ffe96}\label{find__hint_8cpp_a7510b060dff7e459937b3f7dce5ffe96}} 
+\index{find\_hint.cpp@{find\_hint.cpp}!replan\_pub@{replan\_pub}}
+\index{replan\_pub@{replan\_pub}!find\_hint.cpp@{find\_hint.cpp}}
+\doxysubsubsection{\texorpdfstring{replan\_pub}{replan\_pub}}
+{\footnotesize\ttfamily ros\+::\+Publisher replan\+\_\+pub}
+

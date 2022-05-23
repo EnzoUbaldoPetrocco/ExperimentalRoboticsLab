@@ -232,13 +232,13 @@ def running_rosplan_procedure():
     global prob_gen_client, plan_client, parse_client, dispatch_client
     print("Generating the problem")
     prob_gen_client()
-    time.sleep(3)
+    time.sleep(4)
     print("Calling planning client")
     plan_client()
-    time.sleep(3)
+    time.sleep(4)
     print("Calling plan parsing client")
     parse_client()
-    time.sleep(3)
+    time.sleep(4)
     print("Dispatch the plan")
     try:
         dispatchRes=dispatch_client()
@@ -310,16 +310,16 @@ def main():
     going_on= True
     time.sleep(15)
     while going_on:
-        time.sleep(2)
+        time.sleep(3)
         #rospy.wait_for_service('rosplan_knowledge_base/propositions', 'predicate')
         clear_knowledge()
-        time.sleep(2)
+        time.sleep(3)
         initialize_instances()
-        time.sleep(1)
+        time.sleep(2)
         initialize_predicates()
-        time.sleep(1)
+        time.sleep(2)
         initialize_goal()
-        time.sleep(1)
+        time.sleep(2)
         response = running_rosplan_procedure()
         if response.goal_achieved:
             print('You won')

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
 
-<node name="simulation" pkg ="ExperimentalRoboticsLab" type="simulation" output="log" /> 
+<node name="simulation" pkg ="ExperimentalRoboticsLab" type="simulation" output="screen" /> 
 <node name="goToPoint" pkg ="ExperimentalRoboticsLab" type="go_to_point.py" output="log" />
 
 </launch>
