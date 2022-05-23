@@ -53,6 +53,9 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate messages in the 'msg' folder
 # add_message_files(
 #   FILES
+    ErlOracle.msg
+    FindHint.msg 
+    Replan.msg 
 #   Message1.msg
 #   Message2.msg
 # )
@@ -64,6 +67,8 @@ find_package(catkin REQUIRED COMPONENTS
    Hint.srv
    TrySolution.srv
    RandomPlace.srv
+   Oracle.srv 
+   Marker.srv
 #   Service2.srv
  )
 

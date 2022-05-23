@@ -5,7 +5,7 @@
 # \brief node implementing the investigation part of the robot
 # \author  Enzo Ubaldo Petrocco
 # \version 1.0
-# \date November 2021
+# \date 15/05/2022
 # \details
 #
 # Publishes to:<BR>
@@ -27,15 +27,15 @@
 # investigate.py is a script which manages the communication between the
 # armor client and the robot. 
 # It asks the oracle for a hint and then reason in order to get complete hypotheses,
-# if it get them, it writes them in a file: 'consistent_hypotheses.json'
+# if it get them, it send it to the node it asked for them
 # 
 # 
 ##
 
 import rospy
-from geometry_msgs.msg import Point
 from ExperimentalRoboticsLab.srv import Hint
-from ExperimentalRoboticsLab.srv import Investigate
+from ExperimentalRoboticsLab.srv import Investigate, InvestigateResponse
+from ExperimentalRoboticsLab.msg import ErlOracle
 import json
 from os.path import dirname, realpath
 import sys
@@ -57,7 +57,120 @@ weapons = []
 persons = []
 places = []
 hypotheses = []
+tried_hypotheses = []
 
+available_person = {"missScarlett", "colonelMustard", "mrsWhite", "mrGreen", "mrsPeacock", "profPlum"}
+available_weapon = {"candlestick", "dagger", "leadPipe", "revolver", "rope", "spanner"}
+available_place = {"conservatory", "lounge", "kitchen", "library", "hall", "study", "bathroom", "diningRoom", "billiardRoom"}
+available_key = {"who", "what", "where"}
+## Function that check if an person with the value given exists
+def check_value_person(value):
+    """!
+        /def check_value_person function
+        The function returns true if the value is an
+        admissible person value
+        /param value (string)
+        /return bool
+        """
+    for i in available_person:
+        if i==value:
+            return True
+    return False
+## Function that check if a weapon with the value given exists
+def check_value_weapon(value):
+    """!
+        /def check_value_weapon function
+        The function returns true if the value is an
+        admissible weapon value
+        /param value (string)
+        /return bool
+        """
+    for i in available_weapon:
+        if i==value:
+            return True
+    return False
+## Function that check if a place with the value given exists
+def check_value_place(value):
+    """!
+        /def check_value_place function
+        The function returns true if the value is an
+        admissible place value
+        /param value (string)
+        /return bool
+        """
+    for i in available_place:
+        if i==value:
+            return True
+    return False
+## Function that check if an object with the value given exists
+def check_values(value):
+    """!
+        /def check_values function
+        The function returns true if the value is an
+        admissible value
+        /param value (string)
+        /return bool
+        """
+    b = check_value_person(value) or check_value_weapon(value) or check_value_place(value)
+    return b
+## Function that check if the key is correct
+def check_key(value):
+    """!
+        /def check_key function
+        The function returns true if the value is an
+        admissible key value
+        /param value (string)
+        /return bool
+        """
+    for i in available_key:
+        if i==value:
+            return True
+    return False
+## Function that check if an weapon with the value given already exists
+def check_weapon_exists(w):
+    """!
+        /def check_key function
+        The function returns true if the value equal to
+        an existing weapon value
+        /param value (string)
+        /return bool
+        """
+    if len(weapons)==0:
+        return False
+    for i in weapons:
+        if i==w:
+            return True
+    return False
+## Function that check if an person with the value given already exists
+def check_people_exists(p):
+    """!
+        /def check_key function
+        The function returns true if the value equal to
+        an existing person value
+        /param value (string)
+        /return bool
+        """
+    if len(persons)==0:
+        return False
+    for i in persons:
+        if i==p:
+            return True
+    return False
+## Function that check if a place with the value given already exists
+def check_place_exists(p):
+    """!
+        /def check_key function
+        The function returns true if the value equal to
+        an existing place value
+        /param value (string)
+        /return bool
+        """
+    if len(places)==0:
+        return False
+    for i in places:
+        if i==p:
+            return True
+    return False
 ## Function that check if an hypothesis does not exists
 def check_hypothesis_not_exist(hyp_id):
     """!
@@ -80,12 +193,12 @@ def get_weapons_with_id(hyp_id):
         It gets the weapons from the local list with id
         identical to hyp_id
         /param hyp_id (string)
-        /return weapon object({id,name})
+        /return weapon object({id,value})
         """
     res = []
     for i in weapons:
-        if i['id'] == hyp_id:
-            res.append(i['name'])
+        if i['ID'] == hyp_id:
+            res.append(i['value'])
     return res
 ## Function that gets the persons with id
 def get_persons_with_id(hyp_id):
@@ -94,12 +207,12 @@ def get_persons_with_id(hyp_id):
         It gets the persons from the local list with id
         identical to hyp_id
         /param hyp_id (string)
-        /return person object ({id, name})
+        /return person object ({id, value})
         """
     res = []
     for i in persons:
-        if i['id'] == hyp_id:
-            res.append(i['name'])
+        if i['ID'] == hyp_id:
+            res.append(i['value'])
     return res
 ## Function that gets the places with id
 def get_places_with_id(hyp_id):
@@ -108,12 +221,12 @@ def get_places_with_id(hyp_id):
         It gets the places from the local list with id
         identical to hyp_id
         /param hyp_id (string)
-        /return place object ({id,name})
+        /return place object ({id,value})
         """
     res = []
     for i in places:
-        if i['id'] == hyp_id:
-            res.append(i['name'])
+        if i['ID'] == hyp_id:
+            res.append(i['value'])
     return res
 ## Manage add hint function w.r.t. hypothesis 
 def manage_add_hint_wrt_hypothesis(hyp_id):
@@ -136,7 +249,7 @@ def disjoint_person(ind):
     """
     res = None
     for i in persons:
-        res = armor_client.call("DISJOINT", "IND", "", [ind, i['name']])
+        res = armor_client.call("DISJOINT", "IND", "", [ind, i['value']])
     return res
 ## Disjoint weapon in armor
 def disjoint_weapon(ind):
@@ -148,7 +261,7 @@ def disjoint_weapon(ind):
     """
     res = None
     for i in weapons:
-        res = armor_client.call("DISJOINT", "IND", "", [ind, i['name']])
+        res = armor_client.call("DISJOINT", "IND", "", [ind, i['value']])
     return res
 ## Disjoint place in armor
 def disjoint_place(ind):
@@ -160,25 +273,27 @@ def disjoint_place(ind):
     """
     res = None
     for i in places:
-        res = armor_client.call("DISJOINT", "IND", "", [ind, i['name']])
+        res = armor_client.call("DISJOINT", "IND", "", [ind, i['value']])
     return res
 ## Add person in armor
 def add_person(msg):
     """!
     /add_person function
     The function adds to armor the person defined in the message
-    /param msg ({id, name, type})
+    /param msg ({ID, value, key})
     """
-    res = armor_client.call("ADD", "OBJECTPROP", "IND", ["who", msg.id, msg.name])
+    print(msg.ID)
+    print(msg.value)
+    res = armor_client.call("ADD", "OBJECTPROP", "IND", ["who", str(msg.ID), msg.value])
     if res == False:
         return False
-    res = armor_client.call("ADD", "IND", "CLASS", [msg.name, "PERSON"])
+    res = armor_client.call("ADD", "IND", "CLASS", [msg.value, "PERSON"])
     if res == False:
         return False
-    res = disjoint_person(msg.name)
+    res = disjoint_person(msg.value)
     persons.append({
-        'name':msg.name,
-        'id': msg.id
+        'value':msg.value,
+        'ID': msg.ID
         })
     return res
 ## Add weapon in armor
@@ -186,18 +301,20 @@ def add_weapon(msg):
     """!
     /add_weapon function
     The function adds to armor the weapon defined in the message
-    /param msg ({id, name, type})
+    /param msg ({id, value, key})
     """
-    res = armor_client.call("ADD", "OBJECTPROP", "IND", ["what", msg.id, msg.name])
+    print(msg.ID)
+    print(msg.value)
+    res = armor_client.call("ADD", "OBJECTPROP", "IND", ["what", str(msg.ID), msg.value])
     if res == False:
         return False
-    res = armor_client.call("ADD", "IND", "CLASS", [msg.name, "WEAPON"])
+    res = armor_client.call("ADD", "IND", "CLASS", [msg.value, "WEAPON"])
     if res == False:
         return False
-    res = disjoint_weapon(msg.name)
+    res = disjoint_weapon(msg.value)
     weapons.append({
-        'name':msg.name,
-        'id': msg.id
+        'value':msg.value,
+        'ID': msg.ID
         })
     return res
 ## Add place in armor
@@ -205,18 +322,21 @@ def add_place(msg):
     """!
     /add_place function
     The function adds to armor the place defined in the message
-    /param msg ({id, name, type})
+    /param msg ({ID, value, key})
     """
-    res = armor_client.call("ADD", "OBJECTPROP", "IND", ["where", msg.id, msg.name])
+    print(msg.ID)
+    print(msg.value)
+    
+    res = armor_client.call("ADD", "OBJECTPROP", "IND", ["where", str(msg.ID), msg.value])
     if res == False:
         return False
-    res = armor_client.call("ADD", "IND", "CLASS", [msg.name, "PLACE"])
+    res = armor_client.call("ADD", "IND", "CLASS", [msg.value, "PLACE"])
     if res == False:
         return False
-    res = disjoint_place(msg.name)
+    res = disjoint_place(msg.value)
     places.append({
-        'name':msg.name,
-        'id': msg.id
+        'value':msg.value,
+        'ID': msg.ID
         })
     return res
 ## Reason function
@@ -226,24 +346,29 @@ def reason():
     The function calls reason armor client function
     """
     armor_client.call("REASON", "", "", [])
-
 ## Add a new ind
 def add_hint(msg):
     """!
     /add_hint callback
     The function manages the add function in armor
-    /param msg ({id, name, type})
+    /param msg ({ID, value, key})
     """
     global weapons, persons, places
-    manage_add_hint_wrt_hypothesis(msg.id)
+    manage_add_hint_wrt_hypothesis(msg.ID)
     reason()
-    if msg.id=='' or msg.id=="" or msg.name=='' or msg.name=="":
+    if msg.ID<0 or msg.ID>6 or (not(check_key(msg.key))) or (not(check_values(msg.value))):
         return False
-    if msg.type == "who":
+    if msg.key == "who":
+        if check_people_exists(msg.value):
+            return True
         return add_person(msg)
-    if msg.type == "where":
+    if msg.key == "where":
+        if check_place_exists(msg.value):
+            return True
         return add_place(msg)
-    if msg.type == "what":
+    if msg.key == "what":
+        if check_weapon_exists(msg.value):
+            return True
         return add_weapon(msg)
     reason()
     return True
@@ -302,7 +427,7 @@ def retrieve_hypothesis(id):
     per = get_persons_with_id(id)
     if len(weap)==1 and len(pla)==1 and len(per)==1:
         object = {
-            'id': id,
+            'ID': id,
             'where' : pla[0],
             'what' : weap[0],
             'who' : per[0],
@@ -319,7 +444,7 @@ def create_json_hypothesis(id, file):
     /return file
     """
     for i in file['hypotheses']:
-        if i['id'] == id:
+        if i['ID'] == id:
             return file
     hp_object_to_append = retrieve_hypothesis(id)
     hypotheses = file['hypotheses']
@@ -332,25 +457,41 @@ def investigate(msg):
     /investigate callback
     This function ask for a hint, add the hint to armor,
     gets consistent hypotheses, adds consistent hypotheses which have
-    not been taken into account before and set them into a json file
+    not been taken into account before and returns it to the client
     /param msg ()
     /returns True
     """
-    rospy.wait_for_service('/send_hint')
-    hint = hint_client()
-    add_hint(hint)
-    # TODO: write in the file the consistent hypotheses
-    file_hypotheses_string = rospy.get_param('/consistent_hypotheses')
-    file_hypotheses = json.loads(file_hypotheses_string)
+    global tried_hypotheses
     complete_hps = retrieve_consistent_hp()
+    IDs = []
     if complete_hps == []:
-        return True
+        return []
     for i in complete_hps:
-        id = i.split('#')[1][:3]
-        file_hypotheses = create_json_hypothesis(id, file_hypotheses)
-    
-    file_hypotheses_string = json.dumps(file_hypotheses)
-    rospy.set_param('/consistent_hypotheses', file_hypotheses_string)
+        id = i.split('#')[1]
+        id = id.split('>')[0]
+        print(id)
+        #file_hypotheses = create_json_hypothesis(id, file_hypotheses)
+        IDs.append(int(id))  
+    if msg.investigate:
+        for i in tried_hypotheses:
+            for j in IDs:
+                if i==j:
+                    IDs.remove(j)
+        for i in IDs:
+            tried_hypotheses.append(i)
+    res = InvestigateResponse(IDs)
+    print(res)
+    #file_hypotheses_string = json.dumps(file_hypotheses)
+    #rospy.set_param('/consistent_hypotheses', file_hypotheses_string)
+    return res
+## oracle hint callback
+def oracle_hint(msg):
+    """!
+    /oracle hint function
+    This function is a callback for get oracle hint
+    """
+    print(msg)
+    add_hint(msg)
     return True
 ## Main
 def main():
@@ -369,6 +510,9 @@ def main():
     armor_client.utils.set_log_to_terminal(True)
     hint_client = rospy.ServiceProxy('/send_hint', Hint)
     investigate_service = rospy.Service('/investigate', Investigate, investigate)
+    oracle_hint_sub = rospy.Subscriber('/oracle_hint', ErlOracle, oracle_hint)
+
+
     rospy.spin()
 
 if __name__ == '__main__':
