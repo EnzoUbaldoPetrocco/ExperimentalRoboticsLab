@@ -36,7 +36,6 @@ import rospy
 from ExperimentalRoboticsLab.srv import Hint
 from ExperimentalRoboticsLab.srv import Investigate, InvestigateResponse
 from ExperimentalRoboticsLab.msg import ErlOracle
-import json
 from os.path import dirname, realpath
 import sys
 # getting path to file
@@ -461,7 +460,7 @@ def investigate(msg):
     /param msg ()
     /returns True
     """
-    global file_hypotheses, tried_hypotheses
+    global tried_hypotheses
     complete_hps = retrieve_consistent_hp()
     IDs = []
     if complete_hps == []:
@@ -470,7 +469,6 @@ def investigate(msg):
         id = i.split('#')[1]
         id = id.split('>')[0]
         print(id)
-        #file_hypotheses = create_json_hypothesis(id, file_hypotheses)
         IDs.append(int(id))  
     if msg.investigate:
         for i in tried_hypotheses:
@@ -481,8 +479,6 @@ def investigate(msg):
             tried_hypotheses.append(i)
     res = InvestigateResponse(IDs)
     print(res)
-    #file_hypotheses_string = json.dumps(file_hypotheses)
-    #rospy.set_param('/consistent_hypotheses', file_hypotheses_string)
     return res
 ## oracle hint callback
 def oracle_hint(msg):
@@ -501,7 +497,7 @@ def main():
     where armor clients is initialized and also hint client
     and investigate service are initialized.
     """
-    global armor_client, hint_client, file_hypotheses
+    global armor_client, hint_client
     rospy.init_node('investigation') 
     armor_client = ArmorClient("client", "reference")
     armor_client.utils.load_ref_from_file(ontology_path, "http://www.emarolab.it/cluedo-ontology",
@@ -512,7 +508,6 @@ def main():
     investigate_service = rospy.Service('/investigate', Investigate, investigate)
     oracle_hint_sub = rospy.Subscriber('/oracle_hint', ErlOracle, oracle_hint)
 
-    file_hypotheses = json.loads('{"hypotheses" : []}')
 
     rospy.spin()
 

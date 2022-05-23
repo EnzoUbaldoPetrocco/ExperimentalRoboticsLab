@@ -68,11 +68,12 @@ namespace KCL_rosplan {
       ExperimentalRoboticsLab::Oracle or_srv;
       oracle_client.call(or_srv);
       ROS_INFO("Real ID: (%i) ", or_srv.response.ID);
-      for(int i=0;i<srv.response.IDs.size()-1;i++){
+      
+      for(int i=0;i<srv.response.IDs.size();i++){
         if(srv.response.IDs[i]==or_srv.response.ID){
           ROS_INFO("Action (%s) performed: completed!", msg->name.c_str());
           
-    std::cout << "You won " << std::endl;
+          std::cout << "You won " << std::endl;
           return true;
         }
       }
