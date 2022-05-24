@@ -58,6 +58,11 @@ In order to run the program, go inside the folder: ExperimentalRoboticsLab in th
 Some terminals will open. Don't care about warnings in the fourth terminal opened.
 
 ## A Sample of the scenario
+### Casual sample of navigation
+![Screenshot from 2022-05-19 18-11-47](https://user-images.githubusercontent.com/48513075/169991482-2209fea6-8db1-460b-a9a2-2a48daf17d91.png)
+
+### Conclusion
+![Screenshot from 2022-05-24 10-49-20](https://user-images.githubusercontent.com/48513075/169991240-0e46e07b-b97d-4378-bac8-82a8d652da37.png)
 
 ## Working hypothesis and environment
 ### System's feature
