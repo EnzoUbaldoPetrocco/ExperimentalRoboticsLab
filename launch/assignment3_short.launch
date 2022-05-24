@@ -2,6 +2,5 @@
 <launch>
 
 <node name="simulation" pkg ="ExperimentalRoboticsLab" type="simulation" output="screen" /> 
-<node name="goToPoint" pkg ="ExperimentalRoboticsLab" type="go_to_point.py" output="log" />
-
+<!--node pkg="armor" type="execute" name="armor_service" args="it.emarolab.armor.ARMORMainService"/-->
 </launch>

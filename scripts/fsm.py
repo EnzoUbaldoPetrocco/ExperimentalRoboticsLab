@@ -58,7 +58,6 @@
 
 import actionlib
 import rospy
-from rospy.impl.tcpros_service import Service, ServiceProxy, wait_for_service
 import smach
 import smach_ros
 import time
@@ -69,6 +68,10 @@ from ExperimentalRoboticsLab.srv import TrySolution
 import ExperimentalRoboticsLab.msg
 import ExperimentalRoboticsLab.msg._PositionAction
 import json
+from ExperimentalRoboticsLab.srv import *
+from std_msgs.msg import *
+from nav_msgs.msg import *
+from move_base_msgs.msg import *
 
 ## boolean global variable set to true when the robot reaches its target position
 reached = False
