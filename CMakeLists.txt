@@ -11,10 +11,13 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+  visualization_msgs
+  gazebo_msgs
   message_generation
+  moveit_ros_planning_interface
   actionlib
   actionlib_msgs
-  armor_py_api
+  rosplan_planning_system
 )
 
 ## System dependencies are found with CMake's conventions
@@ -52,11 +55,10 @@ find_package(catkin REQUIRED COMPONENTS
 
 ## Generate messages in the 'msg' folder
  add_message_files(
-    FILES
-    ErlOracle.msg
-    FindHint.msg 
-    Replan.msg 
-#   Message1.msg
+   FILES
+   ErlOracle.msg
+   FindHint.msg
+   Replan.msg
 #   Message2.msg
  )
 
@@ -146,6 +148,7 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/ExperimentalRoboticsLab_node.cpp)
+add_executable(simulation src/simulation.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -156,11 +159,14 @@ include_directories(
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-
+add_dependencies(simulation ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 ## Specify libraries to link a library or executable target against
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
+target_link_libraries(simulation
+   ${catkin_LIBRARIES}
+ )
 
 #############
 ## Install ##

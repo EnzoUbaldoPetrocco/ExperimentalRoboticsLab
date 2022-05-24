@@ -26,17 +26,17 @@ int uIDs[3]={-1,-1};
 int winID = -1;
  
 int markerID[30]; 
-erl2::ErlOracle oracle_msgs[30];
+ExperimentalRoboticsLab::ErlOracle oracle_msgs[30];
  
 
 
-bool oracleService(erl2::Oracle::Request &req, erl2::Oracle::Response &res)
+bool oracleService(ExperimentalRoboticsLab::Oracle::Request &req, ExperimentalRoboticsLab::Oracle::Response &res)
 	{
 		res.ID = winID;
 		return true;
 	}
 
-bool oracleCallback(exp_assignment3::Marker::Request &req, exp_assignment3::Marker::Response &res)
+bool oracleCallback(ExperimentalRoboticsLab::Marker::Request &req, ExperimentalRoboticsLab::Marker::Response &res)
 {
 	res.oracle_hint = oracle_msgs[req.markerId-11];
 	return true;
