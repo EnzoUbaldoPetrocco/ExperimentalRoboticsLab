@@ -1,5 +1,11 @@
 <?xml version="1.0"?>
 <launch>
+
+  <arg name="model" default="$(find ExperimentalRoboticsLab)/urdf/robot6.urdf" />
+
+    <!-- Load the URDF into the ROS Parameter Server -->
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
+
   <arg name="paused" default="false"/>
   <arg name="gazebo_gui" default="true"/>
 
