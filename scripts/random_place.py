@@ -39,12 +39,9 @@ from ExperimentalRoboticsLab.srv import RandomPlace
 # Note that this is not decoupled from the function itself.
 # This mechanisms could be better implemented simply using another file (also
 # a prexisting file) which contains this information
-places=[{'name' : 'Ballroom', 'x':0 , 'y':5, 'theta': pi }, {'name' : 'Biliard Room', 'x':5 , 'y':2, 'theta': pi/2 },
-{'name' : 'Conservatory', 'x':5 , 'y':5, 'theta': pi/3 }, {'name' : 'Ballroom', 'x':0 , 'y':5, 'theta': pi/4 },
-{'name' : 'Dining Room', 'x':-5 , 'y':0,  'theta': pi/5 }, {'name' : 'Ballroom', 'x':0 , 'y':5, 'theta': pi/6 },
-{'name' : 'Hall', 'x':0 , 'y':-5, 'theta': pi/9 }, {'name' : 'Kitchen', 'x':-5 , 'y':5, 'theta': pi/10 },
-{'name' : 'Library', 'x':5 , 'y':-1, 'theta': -pi/2 }, {'name' : 'Lounge', 'x':-5 , 'y':-5, 'theta': -pi },
-{'name' : 'Study', 'x':5 , 'y':-5, 'theta': -2*pi }]
+places=[{'name' : 'Room1', 'x':-4 , 'y':-3, 'theta': 0 }, {'name' : 'Room2', 'x':-4 , 'y':2, 'theta': 0 },
+{'name' : 'Room3', 'x':-4 , 'y':7, 'theta': 0 }, {'name' : 'Room4', 'x':5 , 'y':-7, 'theta': 0 },
+{'name' : 'Room5', 'x':5 , 'y':-3,  'theta': 0 }, {'name' : 'Room6', 'x':5 , 'y':1, 'theta': 0 }]
 
 ## random_place
 def random_place(msg):

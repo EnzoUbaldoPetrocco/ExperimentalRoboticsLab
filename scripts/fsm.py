@@ -72,6 +72,7 @@ from ExperimentalRoboticsLab.srv import *
 from std_msgs.msg import *
 from nav_msgs.msg import *
 from move_base_msgs.msg import *
+## GLOBAL VARIABLES
 
 ## boolean global variable set to true when the robot reaches its target position
 reached = False
