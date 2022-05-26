@@ -335,7 +335,7 @@
   
   <joint name="camera_joint" type="fixed">
 	    <axis xyz="0 1 0" />
-	    <origin xyz="0 0 0.05" rpy="0 0 0"/>
+	    <origin xyz="0 0.1 0.02" rpy="0 0 0"/>
 	    <parent link="cluedo_link"/>
 	    <child link="camera_link"/> 
 	 </joint>

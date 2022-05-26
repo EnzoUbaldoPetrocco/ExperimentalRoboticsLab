@@ -125,9 +125,10 @@ class Navigation(smach.State):
         print("\nGoing to [" + str(goal.x) + "," + str(goal.y) + "] with orientation " +  str(goal.theta) + "\n")
         random_position_client.send_goal(goal)
         # function called when exiting from the node, it can be blacking
-        while reached == False:
-            time.sleep(2)
-        reached = False
+        random_position_client.wait_for_result()
+        #while reached == False:
+        #    time.sleep(2)
+        #reached = False
         return 'investigation'
     
 

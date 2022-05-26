@@ -28,6 +28,7 @@
 # which will become the new robot target.
 ##
 
+from msilib import sequence
 import rospy
 from geometry_msgs.msg import Point
 import random
@@ -42,6 +43,8 @@ from ExperimentalRoboticsLab.srv import RandomPlace
 places=[{'name' : 'Room1', 'x':-4 , 'y':-3, 'theta': 0 }, {'name' : 'Room2', 'x':-4 , 'y':2, 'theta': 0 },
 {'name' : 'Room3', 'x':-4 , 'y':7, 'theta': 0 }, {'name' : 'Room4', 'x':5 , 'y':-7, 'theta': 0 },
 {'name' : 'Room5', 'x':5 , 'y':-3,  'theta': 0 }, {'name' : 'Room6', 'x':5 , 'y':1, 'theta': 0 }]
+## count of the sequence
+index = 0
 
 ## random_place
 def random_place(msg):
@@ -50,14 +53,17 @@ def random_place(msg):
     This callback simply select a random index,
     using this it returns a Pose (x,y,theta)
     """
-    random.seed(datetime.now())
-    index = random.randint(0,len(places)-1)
+    global index, places
+    
     res = {
         'x':places[index]['x'],
         'y': places[index]['y'],
         'name': places[index]['name'],
         'theta': places[index]['theta']
     }
+    index = index + 1
+    if index > (len(places)-1):
+        index = 0
     return res
 
 ## main
@@ -67,8 +73,18 @@ def main():
     This function initialize the node and the 
     random_place_service
     """
-    global actual_position, action_position
+    global actual_position, action_position, places, sequence_places, index
     rospy.init_node('random_place') 
+    sequence_places = places
+    index = 0
+    for i in range(15):
+    ## Choosing random sequence, when the callback is called the sequence is performed
+        random.seed(datetime.now())
+        index = random.randint(0,len(places)-1)
+        temp_place = sequence_places[index]
+        sequence_places.pop(index)
+        sequence_places.append(temp_place)
+
     random_place_service = rospy.Service('/random_place_service', RandomPlace, random_place)
     rospy.spin()
 
