@@ -39,7 +39,7 @@ from move_base_msgs.msg import *
 from tf import transformations
 import math
 from geometry_msgs.msg import *
-
+import numpy as np 
 
 ## goal positions are mapped as Points
 goal_pos = Point()
@@ -57,6 +57,24 @@ def euler_dist(point_1,point_2):
 	distance = math.sqrt((point_2.x - point_1.x)**2 + (point_2.y - point_1.y) **2)
 	return distance
 
+ 
+def get_quaternion_from_euler(roll, pitch, yaw):
+  """
+  Convert an Euler angle to a quaternion.
+   
+    /param roll: The roll (rotation around x-axis) angle in radians.
+    /param pitch: The pitch (rotation around y-axis) angle in radians.
+    /param yaw: The yaw (rotation around z-axis) angle in radians.
+ 
+    /return qx, qy, qz, qw: The orientation in quaternion [x,y,z,w] format
+  """
+  qx = np.sin(roll/2) * np.cos(pitch/2) * np.cos(yaw/2) - np.cos(roll/2) * np.sin(pitch/2) * np.sin(yaw/2)
+  qy = np.cos(roll/2) * np.sin(pitch/2) * np.cos(yaw/2) + np.sin(roll/2) * np.cos(pitch/2) * np.sin(yaw/2)
+  qz = np.cos(roll/2) * np.cos(pitch/2) * np.sin(yaw/2) - np.sin(roll/2) * np.sin(pitch/2) * np.cos(yaw/2)
+  qw = np.cos(roll/2) * np.cos(pitch/2) * np.cos(yaw/2) + np.sin(roll/2) * np.sin(pitch/2) * np.sin(yaw/2)
+ 
+  return [qx, qy, qz, qw]
+
 ## go_to_point callback 
 def go_to_point(msg):
     """!
@@ -73,7 +91,8 @@ def go_to_point(msg):
     room_pos.goal.target_pose.header.frame_id = "odom"
     room_pos.goal.target_pose.pose.position.x = msg.x
     room_pos.goal.target_pose.pose.position.y = msg.y
-    room_pos.goal.target_pose.pose.orientation.w = msg.theta
+    orientations = get_quaternion_from_euler(0,0,msg.theta)
+    room_pos.goal.target_pose.pose.orientation.w = orientations[3]
     
     move_base_client.wait_for_server()
     move_base_client.send_goal(room_pos.goal)

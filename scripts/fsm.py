@@ -152,16 +152,16 @@ class Investigation(smach.State):
         """
         rospy.wait_for_service('/investigate')
         print("\nInvestigating...\n")
-        investigate_client()
-        consistent_hypotheses_string = rospy.get_param('consistent_hypotheses')
-        consistent_hypotheses_file = json.loads(consistent_hypotheses_string)
-        consistent_hypotheses = consistent_hypotheses_file['hypotheses']
+        res = investigate_client()
+        #consistent_hypotheses_string = rospy.get_param('consistent_hypotheses')
+        #consistent_hypotheses_file = json.loads(consistent_hypotheses_string)
+        #consistent_hypotheses = consistent_hypotheses_file['hypotheses']
 
-        next_step = None
-        shall_go = False
-        for i in consistent_hypotheses:
-            shall_go = shall_go and i['tried']
-        if len(consistent_hypotheses) == 0 or shall_go==True:
+        #next_step = None
+        #shall_go = False
+        #for i in consistent_hypotheses:
+        #    shall_go = shall_go and i['tried']
+        if len(res.IDs) == 0 or shall_go==True:
             next_step = 'navigation'
         else:
             next_step = 'go_to_oracle'
