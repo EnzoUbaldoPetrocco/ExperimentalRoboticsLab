@@ -28,7 +28,6 @@
 # which will become the new robot target.
 ##
 
-from msilib import sequence
 import rospy
 from geometry_msgs.msg import Point
 import random
@@ -85,7 +84,7 @@ def main():
         sequence_places.pop(index)
         sequence_places.append(temp_place)
 
-    random_place_service = rospy.Service('/random_place_service', RandomPlace, random_place)
+    random_place_service = rospy.Service('/random_place', RandomPlace, random_place)
     rospy.spin()
 
 if __name__ == '__main__':

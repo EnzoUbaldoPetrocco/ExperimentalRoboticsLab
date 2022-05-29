@@ -106,7 +106,6 @@ class Navigation(smach.State):
         """
         global random_client
         position = ExperimentalRoboticsLab.msg.PositionGoal()
-        rospy.wait_for_service('/random_place_service')
         rnd_place = random_client()
         position.x = rnd_place.x
         position.y = rnd_place.y
@@ -150,7 +149,8 @@ class Investigation(smach.State):
         hints
         /param userdata ()
         """
-        rospy.wait_for_service('/investigate')
+        #rospy.wait_for_service('/investigate')
+        global investigate_client
         print("\nInvestigating...\n")
         res = investigate_client()
         #consistent_hypotheses_string = rospy.get_param('consistent_hypotheses')
@@ -161,7 +161,7 @@ class Investigation(smach.State):
         #shall_go = False
         #for i in consistent_hypotheses:
         #    shall_go = shall_go and i['tried']
-        if len(res.IDs) == 0 or shall_go==True:
+        if len(res.IDs) == 0 :#or shall_go==True:
             next_step = 'navigation'
         else:
             next_step = 'go_to_oracle'
@@ -228,14 +228,14 @@ class Assert(smach.State):
         consistent_hypotheses = consistent_hypotheses_file['hypotheses']
         if consistent_hypotheses == []:
             return 'navigation'
-        for i in consistent_hypotheses:
+        #for i in consistent_hypotheses:
             #print(i)
-            end = ask_solution_client(i['id'], i['who'], i['where'], i['what'])
+            #end = ask_solution_client(i['id'], i['who'], i['where'], i['what'])
             #print(end)
-            if end.found == True and i['tried'] == False:
-                print("\nIt was " + i['who'] + " with a " + i["what"] + " in the " + i["where"] + "\n")
-                return 'finished'
-            i['tried'] = True
+            #if end.found == True and i['tried'] == False:
+            #    print("\nIt was " + i['who'] + " with a " + i["what"] + " in the " + i["where"] + "\n")
+            #    return 'finished'
+            #i['tried'] = True
         print(consistent_hypotheses_file)
         print("\n")
         consistent_hypotheses_string = json.dumps(consistent_hypotheses_file)
@@ -269,15 +269,19 @@ def main():
         then it waits
         /param userdata ()
         """
-    global random_position_client, file_path, random_client, investigate_client, ask_solution_client
+    global random_position_client, file_path, random_client, investigate_client#, ask_solution_client
     rospy.init_node('fsm')
 
-    random_client = rospy.ServiceProxy('/random_place_service', RandomPlace)
+    random_client = rospy.ServiceProxy('/random_place', RandomPlace)
     random_position_client = actionlib.SimpleActionClient("/go_to_point", ExperimentalRoboticsLab.msg.PositionAction)
     rospy.Subscriber('/go_to_point/result', ExperimentalRoboticsLab.msg.PositionActionResult, Navigation.arrived_to_the_point)
     investigate_client = rospy.ServiceProxy('/investigate', Investigate)
-    ask_solution_client = rospy.ServiceProxy('/ask_solution', TrySolution)
-    rospy.sleep(1)
+    #ask_solution_client = rospy.ServiceProxy('/ask_solution', TrySolution)
+
+    random_client.wait_for_service()
+    investigate_client.wait_for_service()
+    #ask_solution_client.wait_for_service()
+    #rospy.sleep(1)
     # Create a SMACH state machine
     fsm = smach.StateMachine(outcomes=['finish'])
 
@@ -312,9 +316,9 @@ def main():
 
      # Create and start the introspection server for visualization
     sis = smach_ros.IntrospectionServer('server_name', fsm, '/SM_ROOT')
-    rospy.sleep(2)
+    #rospy.sleep(2)
     sis.start()
-    rospy.sleep(2)
+    #rospy.sleep(2)
 
 
     # Execute the state machine

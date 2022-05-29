@@ -42,7 +42,7 @@
 </include>
 
   <!-- start RViz -->
-<node name="rviz" pkg="rviz" type="rviz" args="-d $(find ExperimentalRoboticsLab)/launch/moveit.rviz" output="log" /> 
+<node name="rviz" pkg="rviz" type="rviz" args="-d $(find ExperimentalRoboticsLab)/config/sim.rviz" output="log" /> 
 
 
 <!-- MoveIt-->
