@@ -10,4 +10,4 @@ controller_list:
       - cluedo_joint
 initial:  # Define initial robot poses per group
   - group: arm
-    pose: home
+    pose: zero
