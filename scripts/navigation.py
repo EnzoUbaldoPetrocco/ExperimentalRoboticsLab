@@ -83,10 +83,9 @@ def go_to_point(msg):
     euclidian distance between start and goal
     /param msg (PositionAction)
     """
-    global actual_position, action_position, cmd_vel_pub, robot_pos
+    global actual_position, action_position, cmd_vel_pub, robot_pos, move_base_client
     goal_pos.x = msg.x
     goal_pos.y = msg.y
-    move_base_client = actionlib.SimpleActionClient('move_base', move_base_msgs.msg.MoveBaseAction)
     room_pos=move_base_msgs.msg.MoveBaseActionGoal()
     room_pos.goal.target_pose.header.frame_id = "odom"
     room_pos.goal.target_pose.pose.position.x = msg.x
@@ -94,7 +93,7 @@ def go_to_point(msg):
     orientations = get_quaternion_from_euler(0,0,msg.theta)
     room_pos.goal.target_pose.pose.orientation.w = orientations[3]
     
-    move_base_client.wait_for_server()
+    #
     move_base_client.send_goal(room_pos.goal)
     reached = False
     while reached == False:
@@ -119,7 +118,7 @@ def go_to_point(msg):
 
 def odom_clbk(odom_msg):
     global robot_pos
-    robot_pos = odom_msg.pose.pose.positio
+    robot_pos = odom_msg.pose.pose.position
 
 ## main function
 def main():
@@ -128,12 +127,15 @@ def main():
     This function initialize the node, the 
     simple action server /go_to_point and the initial position
     """
-    global actual_position, action_position, cmd_vel_pub
+    global actual_position, action_position, cmd_vel_pub, move_base_client
     rospy.init_node('navigation') 
     cmd_vel_pub = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
     odom_sub = rospy.Subscriber('odom', Odometry, odom_clbk)
     action_position = actionlib.SimpleActionServer('/go_to_point', ExperimentalRoboticsLab.msg.PositionAction, execute_cb = go_to_point, auto_start=False)
+    move_base_client = actionlib.SimpleActionClient('move_base', move_base_msgs.msg.MoveBaseAction)
+    move_base_client.wait_for_server()
     action_position.start()
+    print('Navigation node is ready')
     actual_position.x = 0
     actual_position.y = 0
     rospy.spin()

@@ -72,6 +72,7 @@ from ExperimentalRoboticsLab.srv import *
 from std_msgs.msg import *
 from nav_msgs.msg import *
 from move_base_msgs.msg import *
+from geometry_msgs.msg import *
 ## GLOBAL VARIABLES
 
 ## boolean global variable set to true when the robot reaches its target position
@@ -269,7 +270,7 @@ def main():
         then it waits
         /param userdata ()
         """
-    global random_position_client, file_path, random_client, investigate_client#, ask_solution_client
+    global random_position_client, file_path, random_client, investigate_client, random_position_client#, ask_solution_client
     rospy.init_node('fsm')
 
     random_client = rospy.ServiceProxy('/random_place', RandomPlace)
@@ -280,6 +281,7 @@ def main():
 
     random_client.wait_for_service()
     investigate_client.wait_for_service()
+    random_position_client.wait_for_server()
     #ask_solution_client.wait_for_service()
     #rospy.sleep(1)
     # Create a SMACH state machine
@@ -318,9 +320,7 @@ def main():
     sis = smach_ros.IntrospectionServer('server_name', fsm, '/SM_ROOT')
     #rospy.sleep(2)
     sis.start()
-    #rospy.sleep(2)
-
-
+    
     # Execute the state machine
     outcome = fsm.execute()
 
