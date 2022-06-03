@@ -277,6 +277,7 @@ def main():
     random_position_client = actionlib.SimpleActionClient("/go_to_point", ExperimentalRoboticsLab.msg.PositionAction)
     rospy.Subscriber('/go_to_point/result', ExperimentalRoboticsLab.msg.PositionActionResult, Navigation.arrived_to_the_point)
     investigate_client = rospy.ServiceProxy('/investigate', Investigate)
+    #mymoveit_client = actionlib.Simple
     #ask_solution_client = rospy.ServiceProxy('/ask_solution', TrySolution)
 
     random_client.wait_for_service()
@@ -318,7 +319,7 @@ def main():
 
      # Create and start the introspection server for visualization
     sis = smach_ros.IntrospectionServer('server_name', fsm, '/SM_ROOT')
-    #rospy.sleep(2)
+    
     sis.start()
     
     # Execute the state machine
