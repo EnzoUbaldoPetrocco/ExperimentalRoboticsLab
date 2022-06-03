@@ -277,7 +277,7 @@ def main():
     random_position_client = actionlib.SimpleActionClient("/go_to_point", ExperimentalRoboticsLab.msg.PositionAction)
     rospy.Subscriber('/go_to_point/result', ExperimentalRoboticsLab.msg.PositionActionResult, Navigation.arrived_to_the_point)
     investigate_client = rospy.ServiceProxy('/investigate', Investigate)
-    #mymoveit_client = actionlib.Simple
+    mymoveit_client = actionlib.SimpleActionClient("/")
     #ask_solution_client = rospy.ServiceProxy('/ask_solution', TrySolution)
 
     random_client.wait_for_service()

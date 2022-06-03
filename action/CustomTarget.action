@@ -1,0 +1,5 @@
+string pose
+---
+bool result
+---
+bool cancelled

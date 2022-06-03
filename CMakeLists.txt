@@ -78,6 +78,8 @@ find_package(catkin REQUIRED COMPONENTS
 add_action_files(
    FILES
    Position.action
+   CustomTarget.action
+   Hint.action
 #   Action2.action
  )
 
