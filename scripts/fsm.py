@@ -120,7 +120,10 @@ class Navigation(smach.State):
         and sends it to the navigation node, then it waits
         /param userdata ()
         """
-        global reached
+        global reached, mymoveit_client
+        hint_goal = ExperimentalRoboticsLab.msg.HintGoal()
+        hint_goal.pose = "home"
+        mymoveit_client.send_goal_and_wait(hint_goal)
         goal = Navigation.choosing_random_position()
         print("\nGoing to [" + str(goal.x) + "," + str(goal.y) + "] with orientation " +  str(goal.theta) + "\n")
         random_position_client.send_goal(goal)
@@ -270,19 +273,19 @@ def main():
         then it waits
         /param userdata ()
         """
-    global random_position_client, file_path, random_client, investigate_client, random_position_client#, ask_solution_client
+    global random_position_client, file_path, random_client, investigate_client, random_position_client, mymoveit_client
     rospy.init_node('fsm')
 
     random_client = rospy.ServiceProxy('/random_place', RandomPlace)
     random_position_client = actionlib.SimpleActionClient("/go_to_point", ExperimentalRoboticsLab.msg.PositionAction)
     rospy.Subscriber('/go_to_point/result', ExperimentalRoboticsLab.msg.PositionActionResult, Navigation.arrived_to_the_point)
     investigate_client = rospy.ServiceProxy('/investigate', Investigate)
-    mymoveit_client = actionlib.SimpleActionClient("/")
-    #ask_solution_client = rospy.ServiceProxy('/ask_solution', TrySolution)
+    mymoveit_client = actionlib.SimpleActionClient("/hint", ExperimentalRoboticsLab.msg.HintAction)
 
     random_client.wait_for_service()
     investigate_client.wait_for_service()
     random_position_client.wait_for_server()
+    mymoveit_client.wait_for_server()
     #ask_solution_client.wait_for_service()
     #rospy.sleep(1)
     # Create a SMACH state machine

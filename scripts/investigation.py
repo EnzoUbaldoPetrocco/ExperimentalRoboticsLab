@@ -412,45 +412,6 @@ def retrieve_consistent_hp():
             if i == j:
                 complete_hps.remove(i)
     return complete_hps
-## Retrieve hypothesis
-def retrieve_hypothesis(id):
-    """!
-    /retrieve_hypothesis function
-    The function retrieves an integer hypothesis with
-    a specific id
-    /param id (string)
-    /return hypothesis object ({id,where,what,who,tried})
-    """
-    object = {'id': '','where' : '', 'what': '', 'who': '' }
-    weap = get_weapons_with_id(id)
-    pla = get_places_with_id(id)
-    per = get_persons_with_id(id)
-    if len(weap)==1 and len(pla)==1 and len(per)==1:
-        object = {
-            'ID': id,
-            'where' : pla[0],
-            'what' : weap[0],
-            'who' : per[0],
-            'tried' : False
-        }
-    return object   
-## Create json hypothesis
-def create_json_hypothesis(id, file):
-    """!
-    /create_json_hypothesis function
-    Create the json hypothesis from the file
-    /param id (string)
-    /param file (file object)
-    /return file
-    """
-    for i in file['hypotheses']:
-        if i['ID'] == id:
-            return file
-    hp_object_to_append = retrieve_hypothesis(id)
-    hypotheses = file['hypotheses']
-    hypotheses.append(hp_object_to_append)
-    file['hypotheses'] = hypotheses
-    return file
 ## Investigate
 def investigate(msg):
     """!
@@ -512,6 +473,7 @@ def main():
     investigate_service = rospy.Service('/investigate', Investigate, investigate)
     oracle_hint_sub = rospy.Subscriber('/oracle_hint', ErlOracle, oracle_hint)
 
+    
 
     rospy.spin()
 

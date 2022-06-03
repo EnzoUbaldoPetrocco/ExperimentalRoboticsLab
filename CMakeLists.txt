@@ -71,6 +71,7 @@ find_package(catkin REQUIRED COMPONENTS
    RandomPlace.srv
    Oracle.srv 
    Marker.srv
+   Reasoner.srv
 #   Service2.srv
  )
 
@@ -151,6 +152,7 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/ExperimentalRoboticsLab_node.cpp)
 add_executable(simulation src/simulation.cpp)
+add_executable(simulation src/my_moveit.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -170,6 +172,10 @@ target_link_libraries(simulation
    ${catkin_LIBRARIES}
  )
 
+target_link_libraries(my_moveit
+   ${catkin_LIBRARIES}
+ )
+
 #############
 ## Install ##
 #############
@@ -181,7 +187,7 @@ target_link_libraries(simulation
 ## in contrast to setup.py, you can choose the destination
  catkin_install_python(PROGRAMS
    scripts/fsm.py scripts/navigation.py scripts/oracle.py scripts/investigation.py
-   scripts/random_place.py
+   scripts/random_place.py scripts/reasoner.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
 

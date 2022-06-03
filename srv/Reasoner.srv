@@ -1,0 +1,7 @@
+string func
+int32 id
+string type
+string value
+---
+bool result
+int32[] ids
