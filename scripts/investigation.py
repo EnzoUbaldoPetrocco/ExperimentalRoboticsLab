@@ -15,7 +15,6 @@
 #   /investigate (ExperimentalRoboticsLab.srv.Investigate)
 #
 # ServiceCline:<BR>
-#   /armor_client (Armor client is given through armor_api_scripts)
 #   /send_hint (ExperimentalRoboticsLab.srv.Hint)
 #
 # ActionServer:<BR>
@@ -34,6 +33,7 @@
 
 import rospy
 from ExperimentalRoboticsLab.srv import Hint
+from ExperimentalRoboticsLab.srv import Reasoner, ReasonerRequest
 from ExperimentalRoboticsLab.srv import Investigate, InvestigateResponse
 from ExperimentalRoboticsLab.msg import ErlOracle
 import json
@@ -48,11 +48,9 @@ ontology_path = package_directory+"cluedo_ontology.owl"
 src_directory = package_directory[:len(package_directory)-len("ExperimentalRoboticsLab")-1]
 armor_api_path = src_directory+ "armor_py_api/scripts/armor_api"
 sys.path.append(armor_api_path)
-from armor_client import ArmorClient
-#from armor_py_api.scripts.armor_api.armor_client import ArmorClient
 
 ## Global variables
-armor_client = None
+reasoner_client = None
 weapons = []
 persons = []
 places = []
@@ -239,42 +237,6 @@ def manage_add_hint_wrt_hypothesis(hyp_id):
     global hypotheses
     if check_hypothesis_not_exist(hyp_id):
         hypotheses.append(hyp_id)
-## Disjoint person in armor
-def disjoint_person(ind):
-    """!
-    /disjoint_person
-    The function tells armor that this ind is different
-    from any other ind of the same class
-    /param ind (armor ind object)
-    """
-    res = None
-    for i in persons:
-        res = armor_client.call("DISJOINT", "IND", "", [ind, i['value']])
-    return res
-## Disjoint weapon in armor
-def disjoint_weapon(ind):
-    """!
-    /disjoint_weapon function
-    The function tells armor that this ind is different
-    from any other ind of the same class
-    /param ind (armor ind object)
-    """
-    res = None
-    for i in weapons:
-        res = armor_client.call("DISJOINT", "IND", "", [ind, i['value']])
-    return res
-## Disjoint place in armor
-def disjoint_place(ind):
-    """!
-    /disjoint_weapon function
-    The function tells armor that this ind is different
-    from any other ind of the same class
-    /param ind (armor ind object)
-    """
-    res = None
-    for i in places:
-        res = armor_client.call("DISJOINT", "IND", "", [ind, i['value']])
-    return res
 ## Add person in armor
 def add_person(msg):
     """!
@@ -282,15 +244,18 @@ def add_person(msg):
     The function adds to armor the person defined in the message
     /param msg ({ID, value, key})
     """
+    global reasoner_client
     print(msg.ID)
     print(msg.value)
-    res = armor_client.call("ADD", "OBJECTPROP", "IND", ["who", str(msg.ID), msg.value])
+    req = ReasonerRequest()
+    req.func = "add"
+    req.id = msg.id
+    req.type = msg.type
+    req.value = msg.value
+    res = reasoner_client(req)
     if res == False:
         return False
-    res = armor_client.call("ADD", "IND", "CLASS", [msg.value, "PERSON"])
-    if res == False:
-        return False
-    res = disjoint_person(msg.value)
+    
     persons.append({
         'value':msg.value,
         'ID': msg.ID
@@ -303,15 +268,17 @@ def add_weapon(msg):
     The function adds to armor the weapon defined in the message
     /param msg ({id, value, key})
     """
+    global reasoner_client
     print(msg.ID)
     print(msg.value)
-    res = armor_client.call("ADD", "OBJECTPROP", "IND", ["what", str(msg.ID), msg.value])
+    req = ReasonerRequest()
+    req.func = "add"
+    req.id = msg.id
+    req.type = msg.type
+    req.value = msg.value
+    res = reasoner_client(req)
     if res == False:
         return False
-    res = armor_client.call("ADD", "IND", "CLASS", [msg.value, "WEAPON"])
-    if res == False:
-        return False
-    res = disjoint_weapon(msg.value)
     weapons.append({
         'value':msg.value,
         'ID': msg.ID
@@ -324,28 +291,22 @@ def add_place(msg):
     The function adds to armor the place defined in the message
     /param msg ({ID, value, key})
     """
+    global reasoner_client
     print(msg.ID)
     print(msg.value)
-    
-    res = armor_client.call("ADD", "OBJECTPROP", "IND", ["where", str(msg.ID), msg.value])
+    req = ReasonerRequest()
+    req.func = "add"
+    req.id = msg.id
+    req.type = msg.type
+    req.value = msg.value
+    res = reasoner_client(req)
     if res == False:
         return False
-    res = armor_client.call("ADD", "IND", "CLASS", [msg.value, "PLACE"])
-    if res == False:
-        return False
-    res = disjoint_place(msg.value)
     places.append({
         'value':msg.value,
         'ID': msg.ID
         })
     return res
-## Reason function
-def reason():
-    """!
-    /reason function
-    The function calls reason armor client function
-    """
-    armor_client.call("REASON", "", "", [])
 ## Add a new ind
 def add_hint(msg):
     """!
@@ -355,7 +316,6 @@ def add_hint(msg):
     """
     global weapons, persons, places
     manage_add_hint_wrt_hypothesis(msg.ID)
-    reason()
     if msg.ID<0 or msg.ID>6 or (not(check_key(msg.key))) or (not(check_values(msg.value))):
         return False
     if msg.key == "who":
@@ -370,7 +330,7 @@ def add_hint(msg):
         if check_weapon_exists(msg.value):
             return True
         return add_weapon(msg)
-    reason()
+    
     return True
 ## Query complete hypotheses   
 def query_hp_completeness():
@@ -379,8 +339,13 @@ def query_hp_completeness():
     The function retrieves a list of complete hypotheses
     /return list of complete hypotheses
     """
-    query = armor_client.call("QUERY", "IND", "CLASS", ['COMPLETED'])
-    queried = query.queried_objects
+    global reasoner_client
+    req = ReasonerRequest()
+    req.func = "query_complete"
+    res = reasoner_client(req)
+    if res == False:
+        return False
+    queried = res.ids
     return queried
 ## Query inconsistent hypotheses
 def query_hp_inconsistent():
@@ -389,8 +354,13 @@ def query_hp_inconsistent():
     The function retrieves a list of inconsistent hypotheses
     /return list of inconsistent hypotheses
     """
-    query = armor_client.call("QUERY", "IND", "CLASS", ['INCONSISTENT'])
-    queried = query.queried_objects
+    global reasoner_client
+    req = ReasonerRequest()
+    req.func = "query_inconsistent"
+    res = reasoner_client(req)
+    if res == False:
+        return False
+    queried = res.ids
     return queried
 ## Retrieve consistent hypothesis
 def retrieve_consistent_hp():
@@ -462,13 +432,9 @@ def main():
     where armor clients is initialized and also hint client
     and investigate service are initialized.
     """
-    global armor_client, hint_client
+    global  hint_client, reasoner_client
     rospy.init_node('investigation') 
-    armor_client = ArmorClient("client", "reference")
-    armor_client.utils.load_ref_from_file(ontology_path, "http://www.emarolab.it/cluedo-ontology",
-                                True, "PELLET", True)  # initializing with buffered manipulation and reasoning
-    armor_client.utils.mount_on_ref()
-    armor_client.utils.set_log_to_terminal(True)
+    reasoner_client = rospy.ServiceProxy("/reasoner", Reasoner)
     hint_client = rospy.ServiceProxy('/send_hint', Hint)
     investigate_service = rospy.Service('/investigate', Investigate, investigate)
     oracle_hint_sub = rospy.Subscriber('/oracle_hint', ErlOracle, oracle_hint)

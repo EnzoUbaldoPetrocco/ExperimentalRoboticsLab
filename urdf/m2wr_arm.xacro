@@ -13,7 +13,7 @@
    <xacro:macro name="link_wheel" params="name">
         <link name="${name}">
             <inertial>
-              <mass value="0.2"/>
+              <mass value="0.8"/>
               <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
               <inertia ixx="0.000526666666667" ixy="0" ixz="0" iyy="0.000526666666667" iyz="0" izz="0.001"/>
             </inertial>
@@ -50,21 +50,21 @@
     <pose>0 0 0.1 0 0 0</pose>
     
     <inertial>
-      <mass value="10"/>
+      <mass value="12"/>
       <origin rpy="0 0 0" xyz="0 0 0.1"/>
       <inertia ixx="0.0395416666667" ixy="0" ixz="0" iyy="0.106208333333" iyz="0" izz="0.106208333333"/>
     </inertial>
     
     <collision name="collision_chassis">
       <geometry>
-        <box size="0.5 0.3 0.07"/>
+        <box size="0.5 0.4 0.07"/>
       </geometry>
     </collision>
     
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <box size="0.5 0.3 0.07"/>
+        <box size="0.5 0.4 0.07"/>
       </geometry>
       <material name="blue"/>
     </visual>
@@ -98,8 +98,8 @@
 
   <xacro:link_wheel name="link_right_wheel" />
   <xacro:link_wheel name="link_left_wheel" />
-  <xacro:joint_wheel name="joint_right_wheel"  child="link_right_wheel"  origin_xyz="-0.05 -0.15 0"  />
-  <xacro:joint_wheel name="joint_left_wheel"   child="link_left_wheel"   origin_xyz="-0.05 0.15 0"  />
+  <xacro:joint_wheel name="joint_right_wheel"  child="link_right_wheel"  origin_xyz="-0.05 -0.22 0"  />
+  <xacro:joint_wheel name="joint_left_wheel"   child="link_left_wheel"   origin_xyz="-0.05 0.22 0"  />
 
 
 
@@ -107,8 +107,8 @@
    <link name="laser">
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0" />
-      <mass value="1.2" />
-      <xacro:cylinder_inertia mass="1" r="0.05" l="0.1" />
+      <mass value="1.25" />
+      <xacro:cylinder_inertia mass="1.2" r="0.05" l="0.1" />
     </inertial>
 
     <visual>
@@ -138,18 +138,18 @@
 
   <link name="arm_base_link">
   	<inertial>
-  		<mass value="0.35"/>
-  		<origin xyz="0 0 0.085" rpy="0 1.57 0" />
+  		<mass value="0.27"/>
+  		<origin xyz="0 0 0.06" rpy="0 1.57 0" />
   		<inertia ixx="0.0000416666667" ixy="0" ixz="0" iyy="0.0000416666667" iyz="0" izz="0.0000416666667"/>
   	</inertial>
   	<collision>
-  	  <origin xyz="0 0 0.088" rpy="0 1.57 0"/>
+  	  <origin xyz="0 0 0.06" rpy="0 1.57 0"/>
       <geometry>
         <box size="0.12 0.12 0.47"/>
       </geometry>
   	</collision>
   	<visual>
-  	  <origin xyz="0 0 0.085" rpy="0 1.57 0"/>
+  	  <origin xyz="0 0 0.06" rpy="0 1.57 0"/>
       <geometry>
         <box size="0.12 0.12 0.47"/>
       </geometry>
@@ -167,36 +167,6 @@
 
   <link name="arm_link_01">
   	<inertial>
-  		<mass value="0.045"/>
-  		<origin xyz="0 0 0" rpy="0 0 0" />
-  		<inertia ixx="0.000010279" ixy="0" ixz="0" iyy="0.000010279" iyz="0" izz="0.000007225"/>
-  	</inertial>
-  	<collision>
-  	  <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <cylinder radius="0.045" length="0.36"/>
-      </geometry>
-  	</collision>
-  	<visual>
-  	  <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <cylinder radius="0.045" length="0.36"/>
-      </geometry>
-      <material name="red" />
-  	</visual>
-  </link>
-
-  <joint name="arm_joint_01" type="revolute">
-  	<axis xyz="0 0 1"/>
-  	<limit effort="1000.0" lower="-6.28" upper="6.28" velocity="0.55"/>
-  	<origin rpy="0 1.57 0" xyz="0.28 0 0.1"/>
-  	<parent link="arm_base_link"/>
-  	<child link="arm_link_01"/>
-  </joint>
-
-
-    <link name="arm_link_02">
-  	<inertial>
   		<mass value="0.025"/>
   		<origin xyz="0 0 0" rpy="0 0 0" />
   		<inertia ixx="0.000010279" ixy="0" ixz="0" iyy="0.000010279" iyz="0" izz="0.000007225"/>
@@ -204,13 +174,43 @@
   	<collision>
   	  <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <cylinder radius="0.04" length="0.5"/>
+        <cylinder radius="0.045" length="0.33"/>
       </geometry>
   	</collision>
   	<visual>
   	  <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <cylinder radius="0.04" length="0.5"/>
+        <cylinder radius="0.045" length="0.33"/>
+      </geometry>
+      <material name="red" />
+  	</visual>
+  </link>
+
+  <joint name="arm_joint_01" type="revolute">
+  	<axis xyz="0 0 1"/>
+  	<limit effort="1000.0" lower="-6.28" upper="6.28" velocity="1"/>
+  	<origin rpy="0 1.57 0" xyz="0.18 0 0.05"/>
+  	<parent link="arm_base_link"/>
+  	<child link="arm_link_01"/>
+  </joint>
+
+
+    <link name="arm_link_02">
+  	<inertial>
+  		<mass value="0.015"/>
+  		<origin xyz="0 0 0" rpy="0 0 0" />
+  		<inertia ixx="0.000010279" ixy="0" ixz="0" iyy="0.000010279" iyz="0" izz="0.000007225"/>
+  	</inertial>
+  	<collision>
+  	  <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.04" length="0.2"/>
+      </geometry>
+  	</collision>
+  	<visual>
+  	  <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.04" length="0.2"/>
       </geometry>
       <material name="red" />
   	</visual>
@@ -218,28 +218,28 @@
 
   <joint name="arm_joint_02" type="revolute">
   	<axis xyz="0 0 1"/>
-  	<limit effort="1000.0" lower="-6.28" upper="6.28" velocity="0.4"/>
-  	<origin rpy="2 0 0" xyz="0 0.17 0.3"/>
+  	<limit effort="1000.0" lower="-6.28" upper="6.28" velocity="0.8"/>
+  	<origin rpy="2 0 0" xyz="0 0.08 0.2"/>
   	<parent link="arm_link_01"/>
   	<child link="arm_link_02"/>
   </joint>
 
       <link name="arm_link_03">
   	<inertial>
-  		<mass value="0.008"/>
-  		<origin xyz="0 0 0.32" rpy="0 0 0" />
+  		<mass value="0.004"/>
+  		<origin xyz="0 0 0.15" rpy="0 0 0" />
   		<inertia ixx="0.000010279" ixy="0" ixz="0" iyy="0.000010279" iyz="0" izz="0.000007225"/>
   	</inertial>
   	<collision>
-  	  <origin xyz="0 0 0.32" rpy="0 0 0"/>
+  	  <origin xyz="0 0 0.15" rpy="0 0 0"/>
       <geometry>
-        <cylinder radius="0.035" length="0.55"/>
+        <cylinder radius="0.035" length="0.35"/>
       </geometry>
   	</collision>
   	<visual>
-  	  <origin xyz="0 0 0.32" rpy="0 0 0"/>
+  	  <origin xyz="0 0 0.15" rpy="0 0 0"/>
       <geometry>
-        <cylinder radius="0.035" length="0.55"/>
+        <cylinder radius="0.035" length="0.35"/>
       </geometry>
       <material name="red" />
   	</visual>
@@ -247,15 +247,15 @@
 
   <joint name="arm_joint_03" type="revolute">
   	<axis xyz="0 0 1"/>
-  	<limit effort="1000.0" lower="-6.28" upper="6.28" velocity="0.4"/>
-  	<origin rpy="-1.57 0 0" xyz="0 0 -0.22"/>
+  	<limit effort="1000.0" lower="-6.28" upper="6.28" velocity="0.6"/>
+  	<origin rpy="-1.57 0 0" xyz="0 0 -0.12"/>
   	<parent link="arm_link_02"/>
   	<child link="arm_link_03"/>
   </joint>
 
     <link name="arm_link_04">
   	<inertial>
-  		<mass value="0.007"/>
+  		<mass value="0.002"/>
   		<origin xyz="0 0 0.047" rpy="0 0 0" />
   		<inertia ixx="0.000010279" ixy="0" ixz="0" iyy="0.000010279" iyz="0" izz="0.000007225"/>
   	</inertial>
@@ -276,8 +276,8 @@
 
   <joint name="arm_joint_04" type="revolute">
   	<axis xyz="1 0 0"/>
-  	<limit effort="1000.0" lower="-6.28" upper="6.28" velocity="0.77"/>
-  	<origin rpy="0 0 0" xyz="0 0 0.58"/>
+  	<limit effort="1000.0" lower="-6.28" upper="6.28" velocity="0.5"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.31"/>
   	<parent link="arm_link_03"/>
   	<child link="arm_link_04"/>
   </joint>
@@ -285,7 +285,7 @@
 
 <link name="cluedo_link">
   	<inertial>
-  		<mass value="0.007"/>
+  		<mass value="0.002"/>
   		<origin xyz="0 0 0" rpy="0 0 0" />
   		<inertia ixx="0.000010279" ixy="0" ixz="0" iyy="0.000010279" iyz="0" izz="0.000007225"/>
   	</inertial>
@@ -306,7 +306,7 @@
 
   <joint name="cluedo_joint" type="prismatic">
   	<axis xyz="1 0 0"/>
-  	<limit effort="1000.0" lower="-0.04" upper="0.035" velocity="6.6"/>
+  	<limit effort="1000.0" lower="-0.04" upper="0.035" velocity="1"/>
   	<origin rpy="0 0 0" xyz="0 0 0"/>
   	<parent link="arm_link_04"/>
   	<child link="cluedo_link"/>

@@ -73,12 +73,22 @@ from std_msgs.msg import *
 from nav_msgs.msg import *
 from move_base_msgs.msg import *
 from geometry_msgs.msg import *
+from actionlib import SimpleGoalState
 ## GLOBAL VARIABLES
 
 ## boolean global variable set to true when the robot reaches its target position
 reached = False
 ## random position client global variable
 random_position_client = None
+
+def move_arm_routine():
+    global mymoveit_client, cmd_pub
+    while mymoveit_client.get_state != SimpleGoalState.DONE:
+        velocity = Twist()
+        velocity.linear.x = 0
+        velocity.angular.z = 0
+        cmd_vel_pub.publish(velocity)
+        time.sleep(2)
 
 ## define state Navigation
 class Navigation(smach.State):
@@ -113,6 +123,7 @@ class Navigation(smach.State):
         position.theta = rnd_place.theta
         return position
 
+
     def execute(self, userdata):
         """!
         /execute state
@@ -123,7 +134,10 @@ class Navigation(smach.State):
         global reached, mymoveit_client
         hint_goal = ExperimentalRoboticsLab.msg.HintGoal()
         hint_goal.pose = "home"
-        mymoveit_client.send_goal_and_wait(hint_goal)
+        mymoveit_client.send_goal(hint_goal)
+        time.sleep(5)
+        move_arm_routine()
+        #mymoveit_client.wait_for_result()
         goal = Navigation.choosing_random_position()
         print("\nGoing to [" + str(goal.x) + "," + str(goal.y) + "] with orientation " +  str(goal.theta) + "\n")
         random_position_client.send_goal(goal)
@@ -273,7 +287,7 @@ def main():
         then it waits
         /param userdata ()
         """
-    global random_position_client, file_path, random_client, investigate_client, random_position_client, mymoveit_client
+    global random_position_client, file_path, random_client, investigate_client, random_position_client, mymoveit_client, cmd_vel_pub
     rospy.init_node('fsm')
 
     random_client = rospy.ServiceProxy('/random_place', RandomPlace)
@@ -282,6 +296,7 @@ def main():
     investigate_client = rospy.ServiceProxy('/investigate', Investigate)
     mymoveit_client = actionlib.SimpleActionClient("/hint", ExperimentalRoboticsLab.msg.HintAction)
 
+    cmd_vel_pub = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
     random_client.wait_for_service()
     investigate_client.wait_for_service()
     random_position_client.wait_for_server()

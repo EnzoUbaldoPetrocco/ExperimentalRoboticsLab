@@ -33,7 +33,7 @@
 ##
 
 import rospy
-from ExperimentalRoboticsLab.srv import ReasonerResponse
+from ExperimentalRoboticsLab.srv import ReasonerResponse, Reasoner
 
 class Hypothesis:
     def __init__(self, id="", person="", weapon="", place=""):
@@ -75,7 +75,7 @@ class Hypothesis:
     def add_person(self, person):
         self.people.append(person)
 
-class Reasoner:
+class ReasonerClass:
     def __init__(self):
         self.hints = []
         for i in range(6):
@@ -102,16 +102,26 @@ class Reasoner:
             if i.is_inconsistent():
                 res.append(i)
         return res
-            
+    
+    def query_completed(self):
+        res = []
+        for i in self.hints:
+            if i.is_completed():
+                res.append(i)
+        return res   
 
     def reasoner_clbk(self,msg):
-        #res = 
+        res = ReasonerResponse()
         if msg.func == "add":
             self.add_hint(msg.id, msg.value, msg.type)
         if msg.func == "query_inconsistent":
             inconsistent = self.query_inconsistent()
-            #res.ids = inconsistent
+            res.ids = inconsistent
+        if msg.func == "query_completed":
+            completed = self.query_completed()
+            res.ids = completed
 
+        
         
 
 
@@ -124,8 +134,10 @@ def main():
     and investigate service are initialized.
     """
     rospy.init_node('reasoner')
-    
+    reasoner = ReasonerClass()
+    reasoner_server = rospy.Service("/reasoner", Reasoner, reasoner.reasoner_clbk)
 
+        
     rospy.spin()
 
 if __name__ == '__main__':
