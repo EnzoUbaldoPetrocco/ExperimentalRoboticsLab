@@ -30,13 +30,14 @@
 # 
 # 
 ##
-
+from std_msgs.msg import *
 import rospy
 from ExperimentalRoboticsLab.srv import Hint
 from ExperimentalRoboticsLab.srv import Reasoner, ReasonerRequest
 from ExperimentalRoboticsLab.srv import Investigate, InvestigateResponse
 from ExperimentalRoboticsLab.msg import ErlOracle
-import json
+from geometry_msgs.msg import *
+from ExperimentalRoboticsLab.srv import Marker
 from os.path import dirname, realpath
 import sys
 # getting path to file
@@ -56,6 +57,7 @@ persons = []
 places = []
 hypotheses = []
 tried_hypotheses = []
+marker_received = []
 
 available_person = {"missScarlett", "colonelMustard", "mrsWhite", "mrGreen", "mrsPeacock", "profPlum"}
 available_weapon = {"candlestick", "dagger", "leadPipe", "revolver", "rope", "spanner"}
@@ -245,12 +247,11 @@ def add_person(msg):
     /param msg ({ID, value, key})
     """
     global reasoner_client
-    print(msg.ID)
-    print(msg.value)
+    print(msg)
     req = ReasonerRequest()
     req.func = "add"
-    req.id = msg.id
-    req.type = msg.type
+    req.id = msg.ID
+    req.type = "person"#msg.key
     req.value = msg.value
     res = reasoner_client(req)
     if res == False:
@@ -269,12 +270,11 @@ def add_weapon(msg):
     /param msg ({id, value, key})
     """
     global reasoner_client
-    print(msg.ID)
-    print(msg.value)
+    print(msg)
     req = ReasonerRequest()
     req.func = "add"
-    req.id = msg.id
-    req.type = msg.type
+    req.id = msg.ID
+    req.type = "weapon"#msg.key
     req.value = msg.value
     res = reasoner_client(req)
     if res == False:
@@ -292,12 +292,11 @@ def add_place(msg):
     /param msg ({ID, value, key})
     """
     global reasoner_client
-    print(msg.ID)
-    print(msg.value)
+    print(msg)
     req = ReasonerRequest()
     req.func = "add"
-    req.id = msg.id
-    req.type = msg.type
+    req.id = msg.ID
+    req.type ="place"#msg.key
     req.value = msg.value
     res = reasoner_client(req)
     if res == False:
@@ -400,7 +399,7 @@ def investigate(msg):
     for i in complete_hps:
         id = i.split('#')[1]
         id = id.split('>')[0]
-        print(id)
+        #print(id)
         #file_hypotheses = create_json_hypothesis(id, file_hypotheses)
         IDs.append(int(id))  
     if msg.investigate:
@@ -421,9 +420,22 @@ def oracle_hint(msg):
     /oracle hint function
     This function is a callback for get oracle hint
     """
-    print(msg)
+    #print(msg)
     add_hint(msg)
     return True
+## Acquire marker hint
+def acquired_marker_hint_clbk(markerId):
+    global marker_received
+    if markerId.data>40:
+        return
+    for i in marker_received:
+        if i == markerId.data:
+            return
+    print(markerId.data)
+    marker_received.append(markerId.data)
+    response = hint_gen_client(markerId.data)
+    #print(response.oracle_hint)
+    add_hint(response.oracle_hint)
 ## Main
 def main():
     """!
@@ -432,13 +444,14 @@ def main():
     where armor clients is initialized and also hint client
     and investigate service are initialized.
     """
-    global  hint_client, reasoner_client
+    global  hint_client, reasoner_client, hint_gen_client
     rospy.init_node('investigation') 
     reasoner_client = rospy.ServiceProxy("/reasoner", Reasoner)
     hint_client = rospy.ServiceProxy('/send_hint', Hint)
     investigate_service = rospy.Service('/investigate', Investigate, investigate)
     oracle_hint_sub = rospy.Subscriber('/oracle_hint', ErlOracle, oracle_hint)
-
+    hint_sub = rospy.Subscriber('/marker_id',Int32, acquired_marker_hint_clbk)
+    hint_gen_client = rospy.ServiceProxy("oracle_hint",Marker)
     
 
     rospy.spin()

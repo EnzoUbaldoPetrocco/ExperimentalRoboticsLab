@@ -63,7 +63,7 @@ import smach_ros
 import time
 from datetime import datetime
 from ExperimentalRoboticsLab.srv import RandomPlace
-from ExperimentalRoboticsLab.srv import Investigate
+from ExperimentalRoboticsLab.srv import Investigate, InvestigateRequest
 from ExperimentalRoboticsLab.srv import TrySolution
 import ExperimentalRoboticsLab.msg
 import ExperimentalRoboticsLab.msg._PositionAction
@@ -135,8 +135,9 @@ class Navigation(smach.State):
         hint_goal = ExperimentalRoboticsLab.msg.HintGoal()
         hint_goal.pose = "home"
         mymoveit_client.send_goal(hint_goal)
-        time.sleep(5)
-        move_arm_routine()
+        mymoveit_client.wait_for_result()
+        #time.sleep(5)
+        #move_arm_routine()
         #mymoveit_client.wait_for_result()
         goal = Navigation.choosing_random_position()
         print("\nGoing to [" + str(goal.x) + "," + str(goal.y) + "] with orientation " +  str(goal.theta) + "\n")
@@ -168,17 +169,36 @@ class Investigation(smach.State):
         /param userdata ()
         """
         #rospy.wait_for_service('/investigate')
-        global investigate_client
+        global investigate_client, mymoveit_client, cmd_vel_pub
+        hint_goal = ExperimentalRoboticsLab.msg.HintGoal()
+        
         print("\nInvestigating...\n")
-        res = investigate_client()
-        #consistent_hypotheses_string = rospy.get_param('consistent_hypotheses')
-        #consistent_hypotheses_file = json.loads(consistent_hypotheses_string)
-        #consistent_hypotheses = consistent_hypotheses_file['hypotheses']
-
-        #next_step = None
-        #shall_go = False
-        #for i in consistent_hypotheses:
-        #    shall_go = shall_go and i['tried']
+        hint_goal.pose = "check low first"
+        mymoveit_client.send_goal(hint_goal)
+        mymoveit_client.wait_for_result()
+        velocity = Twist()
+        velocity.linear.x = 0
+        velocity.angular.z = (2 * 3.14)/10
+        time.sleep(1)
+        cmd_vel_pub.publish(velocity)
+        time.sleep(9)
+        print('Looking around...')
+        hint_goal.pose = "check low second"
+        mymoveit_client.send_goal(hint_goal)
+        mymoveit_client.wait_for_result()
+        velocity.angular.z = (2 * 3.14)/10
+        cmd_vel_pub.publish(velocity)
+        time.sleep(8)
+        print('Looking around...')
+        hint_goal.pose = "check high first"
+        mymoveit_client.send_goal(hint_goal)
+        mymoveit_client.wait_for_result()
+        velocity.angular.z = (2 * 3.14)/10
+        cmd_vel_pub.publish(velocity)
+        time.sleep(8)
+        req = InvestigateRequest()
+        req.investigate = False
+        res = investigate_client(req)
         if len(res.IDs) == 0 :#or shall_go==True:
             next_step = 'navigation'
         else:
@@ -202,7 +222,7 @@ class GoToOracle(smach.State):
         """
         position = ExperimentalRoboticsLab.msg.PositionGoal()
         position.x = 0
-        position.y = 0
+        position.y = -1.0
         position.theta = 0
         return position
 
@@ -217,9 +237,8 @@ class GoToOracle(smach.State):
         print("\nI am going to speak with the oracle\n")
         goal = GoToOracle.position_of_the_oracle() 
         random_position_client.send_goal(goal)
-        while reached == False:
-            time.sleep(5)
-        reached = False
+        random_position_client.wait_for_result()
+        
         return 'assert'
 
 ## define state Assert
@@ -241,23 +260,13 @@ class Assert(smach.State):
         """
         global reached
         print("\nI am telling to the oracle my hypotheses\n")
-        consistent_hypotheses_string = rospy.get_param('consistent_hypotheses')
-        consistent_hypotheses_file = json.loads(consistent_hypotheses_string)
-        consistent_hypotheses = consistent_hypotheses_file['hypotheses']
-        if consistent_hypotheses == []:
-            return 'navigation'
-        #for i in consistent_hypotheses:
-            #print(i)
-            #end = ask_solution_client(i['id'], i['who'], i['where'], i['what'])
-            #print(end)
-            #if end.found == True and i['tried'] == False:
-            #    print("\nIt was " + i['who'] + " with a " + i["what"] + " in the " + i["where"] + "\n")
-            #    return 'finished'
-            #i['tried'] = True
-        print(consistent_hypotheses_file)
-        print("\n")
-        consistent_hypotheses_string = json.dumps(consistent_hypotheses_file)
-        rospy.set_param('consistent_hypotheses', consistent_hypotheses_string)
+        req = InvestigateRequest()
+        req.investigate = True
+        res = investigate_client(req)
+        oracle_res = oracle_client()
+        for i in res.IDs:
+            if i==oracle_res.ID:
+                return 'finished'
         return 'navigation'
         
 ## define state Finished
@@ -287,7 +296,7 @@ def main():
         then it waits
         /param userdata ()
         """
-    global random_position_client, file_path, random_client, investigate_client, random_position_client, mymoveit_client, cmd_vel_pub
+    global random_position_client, file_path, random_client, investigate_client, random_position_client, mymoveit_client, cmd_vel_pub, oracle_client
     rospy.init_node('fsm')
 
     random_client = rospy.ServiceProxy('/random_place', RandomPlace)
@@ -295,7 +304,7 @@ def main():
     rospy.Subscriber('/go_to_point/result', ExperimentalRoboticsLab.msg.PositionActionResult, Navigation.arrived_to_the_point)
     investigate_client = rospy.ServiceProxy('/investigate', Investigate)
     mymoveit_client = actionlib.SimpleActionClient("/hint", ExperimentalRoboticsLab.msg.HintAction)
-
+    oracle_client = rospy.ServiceProxy("/oracle_solution", Oracle)
     cmd_vel_pub = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
     random_client.wait_for_service()
     investigate_client.wait_for_service()

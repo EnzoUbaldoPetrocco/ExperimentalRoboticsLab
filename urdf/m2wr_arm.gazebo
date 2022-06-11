@@ -91,7 +91,7 @@
         </noise>
       </ray>
       <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
-        <topicName>m2wr/laser/scan</topicName>
+        <topicName>/scan</topicName>
         <frameName>laser</frameName>
       </plugin>
     </sensor>
@@ -161,8 +161,8 @@
       <camera name="head">
         <horizontal_fov>1.3962634</horizontal_fov>
         <image>
-          <width>800</width>
-          <height>800</height>
+          <width>2000</width>
+          <height>2000</height>
           <format>R8G8B8</format>
         </image>
         <clip>

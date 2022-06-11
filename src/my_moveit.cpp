@@ -118,11 +118,10 @@ void MyMoveIt::move_to_custom_pose(std::string str){
   group.setStartStateToCurrentState();
 	group.setNamedTarget(str);
   
-  group.setGoalOrientationTolerance(0.1);
-  group.setGoalPositionTolerance(0.1);
+  group.setGoalOrientationTolerance(0.01);
+  group.setGoalPositionTolerance(0.01);
 
-	group.move();  
-  sleep(1);
+	group.move(); 
 };
 /// Thanks to this function a user can tell to the robot the pose the cluedo_link must reach
 void MyMoveIt::move_to_the_pose(geometry_msgs::Pose pose){

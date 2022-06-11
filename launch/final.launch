@@ -2,6 +2,6 @@
 <launch>
 
 <node name="fsm" pkg ="ExperimentalRoboticsLab" type="fsm.py" output="screen" /> 
-<node name="marker_publisher" pkg ="aruco_ros" type="marker_publisher" args="/image:=/robot/camera1/image_raw" output="screen"/>
+<node name="marker_publisher" pkg ="aruco_ros" type="marker_publisher" args="/image:=/robot/camera1/image_raw" output="log"/>
 <!--node pkg="armor" type="execute" name="armor_service" args="it.emarolab.armor.ARMORMainService"/-->
 </launch>

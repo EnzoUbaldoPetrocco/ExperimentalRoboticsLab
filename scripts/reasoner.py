@@ -112,6 +112,8 @@ class ReasonerClass:
 
     def reasoner_clbk(self,msg):
         res = ReasonerResponse()
+        res.ids = []
+        res.result = False
         if msg.func == "add":
             self.add_hint(msg.id, msg.value, msg.type)
         if msg.func == "query_inconsistent":
@@ -120,6 +122,7 @@ class ReasonerClass:
         if msg.func == "query_completed":
             completed = self.query_completed()
             res.ids = completed
+        return res
 
         
         
