@@ -40,6 +40,8 @@ The third time find_hint node is executed, a complete hypothesis is found and it
 
 ## Installation and Running Procedure
 ### Installation
+In order to install this package you should have [Armor][https://github.com/EmaroLab/armor], but the package 'armor_py_api' must be replace with the one which can be found in the branch 'armor_api' of this repository.
+In order to not have problems with docker, replace: armor_api.armor_exceptions with armor_api anywhere in armor_api folder in armor_py_api.
 Two packages must be installed and built in order to run the code: [assignment2](https://github.com/EnzoUbaldoPetrocco/ExperimentalRoboticsLab/tree/assignment2) and [m2wr_moveit](https://github.com/EnzoUbaldoPetrocco/ExperimentalRoboticsLab/tree/m2wr_moveit).
 
 the entire package ExperimentalRoboticsLab download from assignment2 must be pasted in the workspace, while only the package m2wr_moveit package of m2wr_moveit branch must be pasted in the workspace.
