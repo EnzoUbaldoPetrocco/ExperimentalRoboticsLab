@@ -1,8 +1,8 @@
 # ExperimentalRoboticsLab
-This repository represents the assignment of Experimental Robotics Lab course
+This repository represents the third assignment of Experimental Robotics Lab course
 
 ## Introduction
-The assignment concerns a robot that has to move randomly in a Cluedo Environment, enter in the rooms, where it receives some hints. Through the hints the robot must reason and generate hypotheses which have to be consistent, must go to the oracle that knows which hypothesis is the truth and ask him. If the robot has guessed the hypothesis the robot won, else the robot continues to play.
+The assignment concerns a robot that has to move randomly in a Cluedo Environment, it enters in the rooms, where it receives some hints. Through the hints the robot must reason and generate hypotheses which have to be consistent, must go to the oracle that knows which hypothesis is the truth and ask him. If the robot has guessed the hypothesis the robot won, else the robot continues to play.
 
 ## Diagrams
 Component diagram:
@@ -22,12 +22,11 @@ Example of the working with a video:
 
 
 ## Installation
-In order to install this package you should have [Armor][https://github.com/EmaroLab/armor], but the package 'armor_py_api' must be replace with the one which can be found in the branch 'armor_api' of this repository.
-In order to not have problems with docker, replace: armor_api.armor_exceptions with armor_api anywhere in armor_api folder in armor_py_api.
-In order to launch the program:
+
+In order to launch the program, go into the ExperimentalRoboticsLab folder and write write in the terminal:
 
 ```
-roslaunch ExperimentalRoboticsLab basic.launch
+./short.sh
 ```
 
 

@@ -41,7 +41,8 @@ from ExperimentalRoboticsLab.srv import RandomPlace
 # a prexisting file) which contains this information
 places=[{'name' : 'Room1', 'x':-4 , 'y':-3, 'theta': 0 }, {'name' : 'Room2', 'x':-4 , 'y':2, 'theta': 0 },
 {'name' : 'Room3', 'x':-4 , 'y':7, 'theta': 0 }, {'name' : 'Room4', 'x':5 , 'y':-7, 'theta': 0 },
-{'name' : 'Room5', 'x':5 , 'y':-3,  'theta': 0 }, {'name' : 'Room6', 'x':5 , 'y':1, 'theta': 0 }]
+{'name' : 'Room5', 'x':5 , 'y':-3,  'theta': 0 }, {'name' : 'Room6', 'x':5 , 'y':1, 'theta': 0 },
+{'name' : 'Corridor1', 'x':4 , 'y':-1,  'theta': 0 }, {'name' : 'Corridor2', 'x':2 , 'y':-1, 'theta': 0 }]
 ## count of the sequence
 index = 0
 

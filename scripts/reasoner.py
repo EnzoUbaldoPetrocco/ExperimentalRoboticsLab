@@ -100,14 +100,14 @@ class ReasonerClass:
         res = []
         for i in self.hints:
             if i.is_inconsistent():
-                res.append(i)
+                res.append(i.id)
         return res
     
     def query_completed(self):
         res = []
         for i in self.hints:
             if i.is_completed():
-                res.append(i)
+                res.append(i.id)
         return res   
 
     def reasoner_clbk(self,msg):
@@ -122,6 +122,8 @@ class ReasonerClass:
         if msg.func == "query_completed":
             completed = self.query_completed()
             res.ids = completed
+        print("Reasoner response:")
+        print(res)
         return res
 
         

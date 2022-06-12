@@ -178,10 +178,9 @@ class Investigation(smach.State):
         mymoveit_client.wait_for_result()
         velocity = Twist()
         velocity.linear.x = 0
-        velocity.angular.z = (2 * 3.14)/10
-        time.sleep(1)
+        velocity.angular.z = (2 * 3.14)/8
         cmd_vel_pub.publish(velocity)
-        time.sleep(9)
+        time.sleep(10)
         print('Looking around...')
         hint_goal.pose = "check low second"
         mymoveit_client.send_goal(hint_goal)
