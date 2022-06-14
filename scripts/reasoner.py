@@ -60,7 +60,7 @@ class Hypothesis:
         if len(self.weapons)>0:
             return True
         return False
-    def is_complete(self):
+    def is_completed(self):
         if len(self.people)>0 and len(self.places)>0 and len(self.weapons)>0:
             return True
         return False

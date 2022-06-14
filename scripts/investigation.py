@@ -59,7 +59,7 @@ hypotheses = []
 tried_hypotheses = []
 marker_received = []
 
-available_person = {"missScarlett", "colonelMustard", "mrsWhite", "mrGreen", "mrsPeacock", "profPlum"}
+available_person = {"MissScarlett", "ColonelMustard", "MrsWhite", "MrGreen", "MrsPeacock", "ProfPlum"}
 available_weapon = {"candlestick", "dagger", "leadPipe", "revolver", "rope", "spanner"}
 available_place = {"conservatory", "lounge", "kitchen", "library", "hall", "study", "bathroom", "diningRoom", "billiardRoom"}
 available_key = {"who", "what", "where"}
@@ -340,7 +340,7 @@ def query_hp_completeness():
     """
     global reasoner_client
     req = ReasonerRequest()
-    req.func = "query_complete"
+    req.func = "query_completed"
     res = reasoner_client(req)
     if res == False:
         return False
@@ -397,11 +397,11 @@ def investigate(msg):
     if complete_hps == []:
         return []
     for i in complete_hps:
-        id = i.split('#')[1]
-        id = id.split('>')[0]
+        #id = i.split('#')[1]
+        #id = id.split('>')[0]
         #print(id)
         #file_hypotheses = create_json_hypothesis(id, file_hypotheses)
-        IDs.append(int(id))  
+        IDs.append(i)  
     if msg.investigate:
         for i in tried_hypotheses:
             for j in IDs:
@@ -428,13 +428,14 @@ def acquired_marker_hint_clbk(markerId):
     global marker_received
     if markerId.data>40:
         return
-    for i in marker_received:
-        if i == markerId.data:
-            return
-    print(markerId.data)
-    marker_received.append(markerId.data)
+    
     response = hint_gen_client(markerId.data)
-    #print(response.oracle_hint)
+    for i in marker_received:
+        if i == response.oracle_hint:
+            return
+    #print(markerId.data)
+    marker_received.append(response.oracle_hint)
+    print(response.oracle_hint)
     add_hint(response.oracle_hint)
 ## Main
 def main():
