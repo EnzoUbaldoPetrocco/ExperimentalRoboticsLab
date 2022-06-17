@@ -6,6 +6,6 @@ moveit_setup_assistant_config:
   SRDF:
     relative_path: config/m2wr.srdf
   CONFIG:
-    author_name: Enzo Ubaldo Petrocco
+    author_name: enzo ubaldo petrocco
     author_email: enzopetrocco@hotmail.it
-    generated_timestamp: 1652777923
+    generated_timestamp: 1655283674

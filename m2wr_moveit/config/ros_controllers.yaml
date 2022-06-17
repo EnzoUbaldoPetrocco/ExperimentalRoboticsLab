@@ -1,40 +1,40 @@
 arm_controller:
   type: effort_controllers/JointTrajectoryController
   joints:
+    - arm_base_to_base
     - arm_joint_01
     - arm_joint_02
     - arm_joint_03
     - arm_joint_04
-    - arm_base_to_base
     - cluedo_joint
   gains:
-    arm_joint_01:
-      p: 14
+    arm_base_to_base:
+      p: 50
       d: 0
       i: 0
+      i_clamp: 0
+    arm_joint_01:
+      p: 50
+      d: 0.02
+      i: 0.02
       i_clamp: 0
     arm_joint_02:
-      p: 14
-      d: 0
-      i: 0
+      p: 50
+      d: 0.01
+      i: 0.01
       i_clamp: 0
     arm_joint_03:
-      p: 14
-      d: 0
-      i: 0
+      p: 50
+      d: 0.01
+      i: 0.01
       i_clamp: 0
     arm_joint_04:
-      p: 14
+      p: 50
       d: 0
       i: 0
       i_clamp: 0
     cluedo_joint:
-      p: 14
-      d: 0
-      i: 0
-      i_clamp: 0
-    arm_base_to_base:
-      p: 14
+      p: 50
       d: 0
       i: 0
       i_clamp: 0
