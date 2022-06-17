@@ -58,6 +58,7 @@ places = []
 hypotheses = []
 tried_hypotheses = []
 marker_received = []
+markerIdReceived = []
 
 available_person = {"MissScarlett", "ColonelMustard", "MrsWhite", "MrGreen", "MrsPeacock", "ProfPlum"}
 available_weapon = {"candlestick", "dagger", "leadPipe", "revolver", "rope", "spanner"}
@@ -344,7 +345,10 @@ def query_hp_completeness():
     res = reasoner_client(req)
     if res == False:
         return False
-    queried = res.ids
+    #queried = res.ids
+    queried = []
+    for i in res.ids:
+        queried.append(i)
     return queried
 ## Query inconsistent hypotheses
 def query_hp_inconsistent():
@@ -397,10 +401,6 @@ def investigate(msg):
     if complete_hps == []:
         return []
     for i in complete_hps:
-        #id = i.split('#')[1]
-        #id = id.split('>')[0]
-        #print(id)
-        #file_hypotheses = create_json_hypothesis(id, file_hypotheses)
         IDs.append(i)  
     if msg.investigate:
         for i in tried_hypotheses:
@@ -425,15 +425,15 @@ def oracle_hint(msg):
     return True
 ## Acquire marker hint
 def acquired_marker_hint_clbk(markerId):
-    global marker_received
+    global marker_received, markerIdReceived
     if markerId.data>40:
         return
-    
     response = hint_gen_client(markerId.data)
     for i in marker_received:
         if i == response.oracle_hint:
             return
-    #print(markerId.data)
+    
+    
     marker_received.append(response.oracle_hint)
     print(response.oracle_hint)
     add_hint(response.oracle_hint)
@@ -452,7 +452,7 @@ def main():
     investigate_service = rospy.Service('/investigate', Investigate, investigate)
     oracle_hint_sub = rospy.Subscriber('/oracle_hint', ErlOracle, oracle_hint)
     hint_sub = rospy.Subscriber('/marker_id',Int32, acquired_marker_hint_clbk)
-    hint_gen_client = rospy.ServiceProxy("oracle_hint",Marker)
+    hint_gen_client = rospy.ServiceProxy("/oracle_hint",Marker)
     
 
     rospy.spin()

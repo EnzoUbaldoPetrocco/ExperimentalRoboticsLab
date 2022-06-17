@@ -178,25 +178,25 @@ class Investigation(smach.State):
         mymoveit_client.wait_for_result()
         velocity = Twist()
         velocity.linear.x = 0
-        velocity.angular.z = (2 * 3.14)/8
+        velocity.angular.z = (2 * 3.14)/7
         cmd_vel_pub.publish(velocity)
-        time.sleep(10)
-        print('Looking around...')
+        time.sleep(7)
+        '''print('Looking around...')
         hint_goal.pose = "check low second"
         mymoveit_client.send_goal(hint_goal)
         mymoveit_client.wait_for_result()
         velocity.angular.z = (2 * 3.14)/10
         cmd_vel_pub.publish(velocity)
-        time.sleep(8)
+        time.sleep(8)'''
         print('Looking around...')
         hint_goal.pose = "check high first"
         mymoveit_client.send_goal(hint_goal)
         mymoveit_client.wait_for_result()
-        velocity.angular.z = (2 * 3.14)/10
+        velocity.angular.z = (2 * 3.14)/7
         cmd_vel_pub.publish(velocity)
-        time.sleep(8)
+        time.sleep(7)
         req = InvestigateRequest()
-        req.investigate = False
+        req.investigate = True
         res = investigate_client(req)
         if len(res.IDs) == 0 :#or shall_go==True:
             next_step = 'navigation'
@@ -260,7 +260,7 @@ class Assert(smach.State):
         global reached
         print("\nI am telling to the oracle my hypotheses\n")
         req = InvestigateRequest()
-        req.investigate = True
+        req.investigate = False
         res = investigate_client(req)
         oracle_res = oracle_client()
         for i in res.IDs:
