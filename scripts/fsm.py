@@ -14,14 +14,17 @@
 # ServiceServer:<BR>
 #   
 #
-# ServiceCline:<BR>
+# ServiceClient:<BR>
 #   /random_place_service (ExperimentalRoboticsLab.srv.RandomPlace)
 #   /investigate (ExperimentalRoboticsLab.srv.Investigate)
-#   /ask_solution (ExperimentalRoboticsLab.srv.TrySolution)
+#   /oracle_solution (ExperimentalRoboticsLab.srv.Oracle)
 #
 # ActionServer:<BR>
 #   /go_to_point (ExperimentalRoboticsLab.action.PositionAction)
+#   /hint (ExperimentalRoboticsLab.action.HintAction)
 #
+# Publisher:<BR>
+#   /cmd_vel (Twist)
 #
 # Description:
 #
@@ -64,7 +67,6 @@ import time
 from datetime import datetime
 from ExperimentalRoboticsLab.srv import RandomPlace
 from ExperimentalRoboticsLab.srv import Investigate, InvestigateRequest
-from ExperimentalRoboticsLab.srv import TrySolution
 import ExperimentalRoboticsLab.msg
 import ExperimentalRoboticsLab.msg._PositionAction
 import json
@@ -74,27 +76,34 @@ from nav_msgs.msg import *
 from move_base_msgs.msg import *
 from geometry_msgs.msg import *
 from actionlib import SimpleGoalState
+from ExperimentalRoboticsLab.srv import HypDetails, HypDetailsRequest
 ## GLOBAL VARIABLES
-
+## correct hypothesis
+corr_id = -1
 ## boolean global variable set to true when the robot reaches its target position
 reached = False
 ## random position client global variable
 random_position_client = None
-
+## this function limit the robot in his position when it moves its arm
 def move_arm_routine():
-    global mymoveit_client, cmd_pub
+    """!
+        /init move arm routin
+        This function forces the velocities to zero in order to not
+        move the vehicle while the arm moves
+    """
+    global mymoveit_client, cmd_vel_pub
     while mymoveit_client.get_state != SimpleGoalState.DONE:
         velocity = Twist()
         velocity.linear.x = 0
         velocity.angular.z = 0
         cmd_vel_pub.publish(velocity)
-        time.sleep(2)
+        time.sleep(1)
 
 ## define state Navigation
 class Navigation(smach.State):
     def __init__(self):
         """!
-        /init function of Navigation class
+        /__init__ function of Navigation class
         It initialize the Navigation class
         """
         smach.State.__init__(self, 
@@ -112,7 +121,8 @@ class Navigation(smach.State):
     def choosing_random_position():
         """!
         /choosing_random_position
-        It calls /random_place_service in order to get a random destination
+        It calls /random_place_service in order to get a random destination among 
+        a set of predefined ones
         /param None
         """
         global random_client
@@ -136,25 +146,17 @@ class Navigation(smach.State):
         hint_goal.pose = "home"
         mymoveit_client.send_goal(hint_goal)
         mymoveit_client.wait_for_result()
-        #time.sleep(5)
-        #move_arm_routine()
-        #mymoveit_client.wait_for_result()
         goal = Navigation.choosing_random_position()
         print("\nGoing to [" + str(goal.x) + "," + str(goal.y) + "] with orientation " +  str(goal.theta) + "\n")
         random_position_client.send_goal(goal)
-        # function called when exiting from the node, it can be blacking
         random_position_client.wait_for_result()
-        #while reached == False:
-        #    time.sleep(2)
-        #reached = False
         return 'investigation'
     
-
 ## define state Investigation
 class Investigation(smach.State):
     def __init__(self):
         """!
-        /init function of Investigation class
+        /__init__ function of Investigation class
         It initialize the Investigation class
         """
         smach.State.__init__(self, 
@@ -163,12 +165,14 @@ class Investigation(smach.State):
     def execute(self, userdata):
         """!
         /execute state
-        It executes the Investigation state: it calls investigation 
-        node and check if it has to go to the oracle or go to get other
-        hints
+        It executes the Investigation state: the robot moves the arm 
+        until a certain position, then it turns around. This routine
+        is repeated twice, for low hints and for high hints.
+        If there are hypotheses there are not been asked to the oracle
+        it goes into the GoToOracle state, otherwise, it goes into 
+        Navigation state.
         /param userdata ()
         """
-        #rospy.wait_for_service('/investigate')
         global investigate_client, mymoveit_client, cmd_vel_pub
         hint_goal = ExperimentalRoboticsLab.msg.HintGoal()
         
@@ -181,14 +185,6 @@ class Investigation(smach.State):
         velocity.angular.z = (2 * 3.14)/7
         cmd_vel_pub.publish(velocity)
         time.sleep(7)
-        '''print('Looking around...')
-        hint_goal.pose = "check low second"
-        mymoveit_client.send_goal(hint_goal)
-        mymoveit_client.wait_for_result()
-        velocity.angular.z = (2 * 3.14)/10
-        cmd_vel_pub.publish(velocity)
-        time.sleep(8)'''
-        print('Looking around...')
         hint_goal.pose = "check high first"
         mymoveit_client.send_goal(hint_goal)
         mymoveit_client.wait_for_result()
@@ -198,7 +194,7 @@ class Investigation(smach.State):
         req = InvestigateRequest()
         req.investigate = True
         res = investigate_client(req)
-        if len(res.IDs) == 0 :#or shall_go==True:
+        if len(res.IDs) == 0 :
             next_step = 'navigation'
         else:
             next_step = 'go_to_oracle'
@@ -208,7 +204,7 @@ class Investigation(smach.State):
 class GoToOracle(smach.State):
     def __init__(self):
         """!
-        /init function of GoToOracle class
+        /__init__ function of GoToOracle class
         It initialize the GoToOracle class
         """
         smach.State.__init__(self, 
@@ -217,7 +213,7 @@ class GoToOracle(smach.State):
     def position_of_the_oracle():
         """!
         /position_of_the_oracle
-        It gives simply the position of the oracle (by default it is 0,0 with theta = 0)
+        It gives simply the position of the oracle (by default it is 0,-1 with theta = 0)
         """
         position = ExperimentalRoboticsLab.msg.PositionGoal()
         position.x = 0
@@ -244,7 +240,7 @@ class GoToOracle(smach.State):
 class Assert(smach.State):
     def __init__(self):
         """!
-        /init function of Assert class
+        /__init__ function of Assert class
         It initialize the Assert class
         """
         smach.State.__init__(self, 
@@ -257,7 +253,7 @@ class Assert(smach.State):
         and ask to the oracle if they are correct
         /param userdata ()
         """
-        global reached
+        global reached, corr_id
         print("\nI am telling to the oracle my hypotheses\n")
         req = InvestigateRequest()
         req.investigate = False
@@ -265,6 +261,7 @@ class Assert(smach.State):
         oracle_res = oracle_client()
         for i in res.IDs:
             if i==oracle_res.ID:
+                corr_id = i
                 return 'finished'
         return 'navigation'
         
@@ -272,7 +269,7 @@ class Assert(smach.State):
 class Finished(smach.State):
     def __init__(self):
         """!
-        /init function of Finished class
+        /__init__ function of Finished class
         It initialize the Finished class
         """
         smach.State.__init__(self, outcomes=['finish'])
@@ -283,10 +280,13 @@ class Finished(smach.State):
         It executes the Finished state: it states that the fsm is finished
         /param userdata ()
         """
+        hyp_det = HypDetailsRequest()
+        hyp_det.id = corr_id
+        res = hypdetails_client(hyp_det)
+        print('The Murderer is ' + res.who + 'with a ' + res.what + 'in the ' + res.where)
         print('\nCongratulations, you won')
         return 'finish'
-
-        
+   
 ## Main function
 def main():
     """!
@@ -295,7 +295,7 @@ def main():
         then it waits
         /param userdata ()
         """
-    global random_position_client, file_path, random_client, investigate_client, random_position_client, mymoveit_client, cmd_vel_pub, oracle_client
+    global random_position_client, random_client, investigate_client, random_position_client, mymoveit_client, cmd_vel_pub, oracle_client, hypdetails_client
     rospy.init_node('fsm')
 
     random_client = rospy.ServiceProxy('/random_place', RandomPlace)
@@ -304,14 +304,13 @@ def main():
     investigate_client = rospy.ServiceProxy('/investigate', Investigate)
     mymoveit_client = actionlib.SimpleActionClient("/hint", ExperimentalRoboticsLab.msg.HintAction)
     oracle_client = rospy.ServiceProxy("/oracle_solution", Oracle)
+    hypdetails_client = rospy.ServiceProxy('/hyp_details', HypDetails)
     cmd_vel_pub = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
     random_client.wait_for_service()
     investigate_client.wait_for_service()
     random_position_client.wait_for_server()
     mymoveit_client.wait_for_server()
-    #ask_solution_client.wait_for_service()
-    #rospy.sleep(1)
-    # Create a SMACH state machine
+
     fsm = smach.StateMachine(outcomes=['finish'])
 
     # Open the container
@@ -341,9 +340,7 @@ def main():
                                 }
                             )
         
-        
-
-     # Create and start the introspection server for visualization
+    # Create and start the introspection server for visualization
     sis = smach_ros.IntrospectionServer('server_name', fsm, '/SM_ROOT')
     
     sis.start()

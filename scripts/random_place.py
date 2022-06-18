@@ -12,20 +12,12 @@
 #   None
 #
 # ServiceServer:<BR>
-#   /random_place_service (ExperimentalRoboticsLab.srv.RandomPlace)
-#
-# ServiceCline:<BR>
-#   None
-#
-# ActionServer:<BR>
-#   None
-#
+#   /random_place (ExperimentalRoboticsLab.srv.RandomPlace)
 #
 # Description:
 #
-# random_place.py is a scripts that
-# simply generates a random place (x,y,theta),
-# which will become the new robot target.
+# random_place.py is a script that simply generates
+# a random sequence of rooms among selected ones.
 ##
 
 import rospy
@@ -51,8 +43,10 @@ index = 0
 def random_place(msg):
     """!
     /random_place callback
-    This callback simply select a random index,
-    using this it returns a Pose (x,y,theta)
+    This function returns the next position 
+    the robot must achieve. The sequence is in fact a
+    circular buffer, so if the robot does not achieve the 
+    investigation goal, it continues to try.
     """
     global index, places
     
@@ -71,16 +65,16 @@ def random_place(msg):
 def main():
     """!
     /main function
-    This function initialize the node and the 
-    random_place_service
+    This function initialize the node, the 
+    random_place_service, and the random sequence of rooms
     """
-    global actual_position, action_position, places, sequence_places, index
+    global  places, sequence_places, index
     rospy.init_node('random_place') 
     sequence_places = places
     index = 0
-    for i in range(15):
+    random.seed(datetime.now())
+    for i in range(20):
     ## Choosing random sequence, when the callback is called the sequence is performed
-        random.seed(datetime.now())
         index = random.randint(0,len(places)-1)
         temp_place = sequence_places[index]
         sequence_places.pop(index)

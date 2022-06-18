@@ -9,23 +9,22 @@
 # \details
 #
 # Publishes to:<BR>
-#   None
+#   /cmd_vel (geometry_msgs.msg.Twist)
 #
-# ServiceServer:<BR>
-#   None
-#
-# ServiceCline:<BR>
-#   None
+# Subscribes to:<BR>
+#   odom (geometry_msgs.msg.Odometry)
 #
 # ActionServer:<BR>
 #   /go_to_point (ExperimentalRoboticsLab.msg.PositionAction)
-#
+#   move_base (move_base_msgs.msg.MoveBaseAction)
 #
 # Description:
 #
 # navigation.py is a script which manages the navigation to a point of the robot
-# It starts from [0,0], then it goes for the point which has been asked to reached
-# when it gets this, it sets 'succeded' to the result
+# It starts from [0,-1], then it goes for the point which has been asked to reached
+# when it gets this, it sets 'succeded' to the result.
+# The algorithm used in this context is movebase algorithm, which 
+# params are store in the param folder
 ##
 
 import rospy
@@ -50,6 +49,7 @@ actual_position = Point()
 ## result is of type PositionResult
 result = ExperimentalRoboticsLab.msg.PositionResult()
 
+## calculate euler distance between two points
 def euler_dist(point_1,point_2):
 	"""
 	This function compute the euler distance between two points
@@ -57,7 +57,7 @@ def euler_dist(point_1,point_2):
 	distance = math.sqrt((point_2.x - point_1.x)**2 + (point_2.y - point_1.y) **2)
 	return distance
 
- 
+## get quaternion angles from euler angles
 def get_quaternion_from_euler(roll, pitch, yaw):
   """
   Convert an Euler angle to a quaternion.
@@ -79,8 +79,9 @@ def get_quaternion_from_euler(roll, pitch, yaw):
 def go_to_point(msg):
     """!
     /go_to_point callback
-    This callback simply waits proportionally to the 
-    euclidian distance between start and goal
+    This function calls move base algorithm for the implementation of the 
+    navigation part. It, then, waits for the odometry precision and sets
+    zero velocity to the robot.
     /param msg (PositionAction)
     """
     global actual_position, action_position, cmd_vel_pub, robot_pos, move_base_client
@@ -93,17 +94,13 @@ def go_to_point(msg):
     orientations = get_quaternion_from_euler(0,0,msg.theta)
     room_pos.goal.target_pose.pose.orientation.w = orientations[3]
     
-    #
     move_base_client.send_goal(room_pos.goal)
     reached = False
     while reached == False:
         distance = euler_dist(msg, robot_pos)
         if distance <= .15:
             reached = True
-            #since probably sherlock has no  perfectly reached the room
-            #cancel the goal
             move_base_client.cancel_all_goals()
-            #Stop Sherlock
             velocity = Twist()
             velocity.linear.x = 0
             velocity.angular.z = 0
@@ -116,7 +113,13 @@ def go_to_point(msg):
     actual_position.y = goal_pos.y
     action_position.set_succeeded(result)
 
+## odometry callback
 def odom_clbk(odom_msg):
+    """!
+    /odom_clbk callback
+    This function stores the last odometry position.
+    /param odom_msg (Odometry)
+    """
     global robot_pos
     robot_pos = odom_msg.pose.pose.position
 

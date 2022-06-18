@@ -13,18 +13,22 @@
 #
 # ServiceServer:<BR>
 #   /investigate (ExperimentalRoboticsLab.srv.Investigate)
+#   /hyp_details (ExperimentalRoboticsLab.srv.HypDetails)
+#   
 #
-# ServiceCline:<BR>
+# ServiceClient:<BR>
 #   /send_hint (ExperimentalRoboticsLab.srv.Hint)
+#   /reasoner (ExperimentalRoboticsLab.srv.Reasoner)
+#   
 #
-# ActionServer:<BR>
-#   None
-#
+# Subscriber:<BR>
+#   /marker_id (Int32)
+#   /oracle_hint (ExperimentalRoboticsLab.msg.ErlOracle)
 #
 # Description:
 #
 # investigate.py is a script which manages the communication between the
-# armor client and the robot. 
+# reasoner and the robot. 
 # It asks the oracle for a hint and then reason in order to get complete hypotheses,
 # if it get them, it send it to the node it asked for them
 # 
@@ -36,19 +40,10 @@ from ExperimentalRoboticsLab.srv import Hint
 from ExperimentalRoboticsLab.srv import Reasoner, ReasonerRequest
 from ExperimentalRoboticsLab.srv import Investigate, InvestigateResponse
 from ExperimentalRoboticsLab.msg import ErlOracle
+from ExperimentalRoboticsLab.srv import HypDetails , HypDetailsResponse
 from geometry_msgs.msg import *
 from ExperimentalRoboticsLab.srv import Marker
-from os.path import dirname, realpath
-import sys
-# getting path to file
-file_path = dirname(realpath(__file__))
-file_path_size = len(file_path)
-package_directory = file_path[:file_path_size-7]
-# cutting scripts part which contains 7 character and replacing it with cluedo_ontology.owl
-ontology_path = package_directory+"cluedo_ontology.owl"
-src_directory = package_directory[:len(package_directory)-len("ExperimentalRoboticsLab")-1]
-armor_api_path = src_directory+ "armor_py_api/scripts/armor_api"
-sys.path.append(armor_api_path)
+
 
 ## Global variables
 reasoner_client = None
@@ -58,7 +53,6 @@ places = []
 hypotheses = []
 tried_hypotheses = []
 marker_received = []
-markerIdReceived = []
 
 available_person = {"MissScarlett", "ColonelMustard", "MrsWhite", "MrGreen", "MrsPeacock", "ProfPlum"}
 available_weapon = {"candlestick", "dagger", "leadPipe", "revolver", "rope", "spanner"}
@@ -130,7 +124,7 @@ def check_key(value):
 ## Function that check if an weapon with the value given already exists
 def check_weapon_exists(w):
     """!
-        /def check_key function
+        /def check_weapon_exists function
         The function returns true if the value equal to
         an existing weapon value
         /param value (string)
@@ -145,7 +139,7 @@ def check_weapon_exists(w):
 ## Function that check if an person with the value given already exists
 def check_people_exists(p):
     """!
-        /def check_key function
+        /def check_people_exists function
         The function returns true if the value equal to
         an existing person value
         /param value (string)
@@ -160,7 +154,7 @@ def check_people_exists(p):
 ## Function that check if a place with the value given already exists
 def check_place_exists(p):
     """!
-        /def check_key function
+        /def check_place_exists function
         The function returns true if the value equal to
         an existing place value
         /param value (string)
@@ -233,7 +227,7 @@ def get_places_with_id(hyp_id):
 def manage_add_hint_wrt_hypothesis(hyp_id):
     """!
     /manage_add_hint_wrt_hypothesis function
-    if an hypothesis does not exists it appends the name
+    if a hypothesis does not exists it appends the name
     to the local list
     /param hyp_id (string)
     """
@@ -389,9 +383,10 @@ def retrieve_consistent_hp():
 def investigate(msg):
     """!
     /investigate callback
-    This function ask for a hint, add the hint to armor,
-    gets consistent hypotheses, adds consistent hypotheses which have
-    not been taken into account before and returns it to the client
+    This function gets consistent hypotheses, 
+    adds consistent hypotheses which have
+    not been taken into account before, if the msg.investigate
+    bool is True, and returns it to the client
     /param msg ()
     /returns True
     """
@@ -417,7 +412,7 @@ def investigate(msg):
 ## oracle hint callback
 def oracle_hint(msg):
     """!
-    /oracle hint function
+    /oracle_hint function
     This function is a callback for get oracle hint
     """
     #print(msg)
@@ -425,7 +420,11 @@ def oracle_hint(msg):
     return True
 ## Acquire marker hint
 def acquired_marker_hint_clbk(markerId):
-    global marker_received, markerIdReceived
+    """!
+    /acquired_marker_hint_clbk function
+    This function is a callback for get oracle hint
+    """
+    global marker_received
     if markerId.data>40:
         return
     response = hint_gen_client(markerId.data)
@@ -437,23 +436,37 @@ def acquired_marker_hint_clbk(markerId):
     marker_received.append(response.oracle_hint)
     print(response.oracle_hint)
     add_hint(response.oracle_hint)
+
+def get_hyp_details(msg):
+    """!
+    /get_hyp_details function
+    This function is a callback for get hypothesis
+    information
+    """
+    who = get_persons_with_id(msg.id)[0]
+    what = get_weapons_with_id(msg.id)[0]
+    where = get_places_with_id(msg.id)[0]
+    res = HypDetailsResponse()
+    res.who = who
+    res.what = what
+    res.where = where
+    return res
+
 ## Main
 def main():
     """!
     /main function
     The function represents the initialization of the node
-    where armor clients is initialized and also hint client
-    and investigate service are initialized.
+    where service client and servers are initialized.
     """
-    global  hint_client, reasoner_client, hint_gen_client
+    global   reasoner_client, hint_gen_client
     rospy.init_node('investigation') 
     reasoner_client = rospy.ServiceProxy("/reasoner", Reasoner)
-    hint_client = rospy.ServiceProxy('/send_hint', Hint)
     investigate_service = rospy.Service('/investigate', Investigate, investigate)
     oracle_hint_sub = rospy.Subscriber('/oracle_hint', ErlOracle, oracle_hint)
     hint_sub = rospy.Subscriber('/marker_id',Int32, acquired_marker_hint_clbk)
     hint_gen_client = rospy.ServiceProxy("/oracle_hint",Marker)
-    
+    get_hyp_info = rospy.Service('/hyp_details', HypDetails, get_hyp_details)
 
     rospy.spin()
 

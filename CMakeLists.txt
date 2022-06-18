@@ -72,6 +72,7 @@ find_package(catkin REQUIRED COMPONENTS
    Oracle.srv 
    Marker.srv
    Reasoner.srv
+   HypDetails.srv
 #   Service2.srv
  )
 
@@ -187,7 +188,7 @@ target_link_libraries(my_moveit
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
  catkin_install_python(PROGRAMS
-   scripts/fsm.py scripts/navigation.py scripts/oracle.py scripts/investigation.py
+   scripts/fsm.py scripts/navigation.py  scripts/investigation.py
    scripts/random_place.py scripts/reasoner.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
