@@ -1,5 +1,5 @@
 # ExperimentalRoboticsLab
-This repository represents the third assignment of Experimental Robotics Lab course
+This repository represents the third assignment of Experimental Robotics Lab course.
 
 ## Introduction
 The assignment concerns a robot that has to move randomly in a Cluedo Environment, it enters in the rooms, where it receives some hints. Through the hints the robot must reason and generate hypotheses which have to be consistent, must go to the oracle that knows which hypothesis is the truth and ask him. If the robot has guessed the hypothesis the robot won, else the robot continues to play.
@@ -19,9 +19,27 @@ Example of the working with a video:
 ![Video](https://unigeit-my.sharepoint.com/:f:/g/personal/s4530363_studenti_unige_it/Evgh67vVc89EnqRuW1RhmTUBw8b1sSGz_1oKpHSLzuI49g?e=etqFqy)
 
 
+## Installation and Running Procedure
+### Installation
+In order to install this package we have to be sure to have all the components.
+ROS environment is of course trivial, but it is needed also a particular package which is 'move_base', so make sure you have installed it.
+From this branch, copy ExperimentalRoboticsLab folder, and paste it into the workspace.
+Armor reasoner has been substitued by a custom reasoner, so that package is no more required.
+PDDL has been used nomore, so is valid same for it.
+MoveIt package has been changed together with robot description, so another branch has been added: ![m2wr_moveit2](https://github.com/EnzoUbaldoPetrocco/ExperimentalRoboticsLab/tree/m2wr_moveit2). From this branch, copy the folder 'm2wr_moveit' and paste it into the workspace.
+ArUco Ros package is used for marker detection. You can find a modified version in the branch: ![aruco_ros_package](https://github.com/EnzoUbaldoPetrocco/ExperimentalRoboticsLab/tree/aruco_ros_package). From this branch, copy the folder 'aruco_ros'  (note that there are two aruco_ros folder, the above-mentioned folder is the parent one), and paste it into the workspace. Compile the workspace with the command:
+```
+catkin_make -DCATKIN_WHITELIST_PACKAGES=""
+```
+The package is now ready.
 
 
-## Installation
+### Running Procedure
+After sourcing the terminal:
+
+```
+source bash.sh
+```
 
 In order to launch the program, go into the ExperimentalRoboticsLab folder and write write in the terminal:
 
@@ -29,7 +47,30 @@ In order to launch the program, go into the ExperimentalRoboticsLab folder and w
 ./short.sh
 ```
 
+The previous one was the recommended run procedure.
+But this is not the only one way, of course, single launch file can be launched in different terminals, in each of them you have to go into the folder: ExperimentalRoboticsLab and run:
 
+```
+source ros.sh 
+```
+Then the sequence, in each terminal:
+```
+roslaunch ExperimentalRoboticsLab simulation.launch 2>/dev/null
+```
+```
+roslaunch ExperimentalRoboticsLab assignment3_short.launch
+```
+```
+roslaunch ExperimentalRoboticsLab investigation.launch
+```
+```
+roslaunch ExperimentalRoboticsLab final.launch 2>/dev/null
+```
+```
+roslaunch ExperimentalRoboticsLab navigation.launch 2>/dev/null
+```
+
+You can get rid of the '2>/dev/null' if you want to see warnings.
 ## Assumptions, working hypotheses and environment
 
 ### System's features
