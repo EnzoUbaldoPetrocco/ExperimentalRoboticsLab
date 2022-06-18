@@ -39,8 +39,11 @@ Temporal diagram is an example of the most lucky case, where rosplan node initia
 The third time find_hint node is executed, a complete hypothesis is found and it is the exact one. 
 
 ## Installation and Running Procedure
+
 ### Installation
+ROS environment is considered trivial requirement.
 In order to install this package you should have [Armor][https://github.com/EmaroLab/armor], but the package 'armor_py_api' must be replace with the one which can be found in the branch 'armor_api' of this repository.
+In order to install the Armor package in the workspace, create a folder 'armor_api' in the workspace, copy the content of the branch 'armor_api' and paste it in the fore-mentioned folder.
 In order to not have problems with docker, replace: armor_api.armor_exceptions with armor_api anywhere in armor_api folder in armor_py_api.
 Two packages must be installed and built in order to run the code: [assignment2](https://github.com/EnzoUbaldoPetrocco/ExperimentalRoboticsLab/tree/assignment2) and [m2wr_moveit](https://github.com/EnzoUbaldoPetrocco/ExperimentalRoboticsLab/tree/m2wr_moveit).
 
@@ -57,7 +60,7 @@ In order to run the program, go inside the folder: ExperimentalRoboticsLab in th
 ```
 ./short.sh
 ```
-Some terminals will open. Don't care about warnings in the fourth terminal opened.
+Some terminals will open. 
 
 ## A Sample of the scenario
 ### Casual sample of navigation
@@ -66,7 +69,15 @@ Some terminals will open. Don't care about warnings in the fourth terminal opene
 ### Conclusion
 ![Screenshot from 2022-05-24 10-49-20](https://user-images.githubusercontent.com/48513075/169991240-0e46e07b-b97d-4378-bac8-82a8d652da37.png)
 
-## Working hypothesis and environment
+## Assumption, Working hypothesis and environment
+In this simulated environment, many assumptions have been made:
+- Motors can be as strong as will;
+- Exept for the 4 walls, there are no obstacles, so the robot can move freely in a known environment;
+- Odometry is perfectly known;
+- Hints position is known and reachable with a certain error;
+
+
+
 ### System's feature
 The system must play cluedo game in a simulated environment.
 System is capable of:
