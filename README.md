@@ -4,24 +4,38 @@ This repository represents the assignment of Experimental Robotics Lab course
 ## Introduction
 The assignment concerns a robot that has to move randomly in a Cluedo Environment, enter in the rooms, where it receives some hints. Through the hints the robot must reason and generate hypotheses which have to be consistent, must go to the oracle that knows which hypothesis is the truth and ask him. If the robot has guessed the hypothesis the robot won, else the robot continues to play.
 
+Docs are in the html folder, open index.html file.
+
 The following assignment is: [Assignment2](https://github.com/EnzoUbaldoPetrocco/ExperimentalRoboticsLab/tree/assignment2)
 
 ## Software Structure
+The software structure can be analized thanks to the following diagrams. Presented and explained below.
 
 ### Component diagram:
 
 ![Component diagram](https://user-images.githubusercontent.com/48513075/142313128-79114576-d12c-440f-b708-89f265e6ec3d.jpg)
+
+- SMACH component: this component is used as State Machine manager. It implements the infrastructure of a State Machine and, in theory, also the visualization part of it.
+- FSM component: this component actually implements the State Machine. So every node is a version of the finite state machine applied into the problem. This component is a sort of brain of the robot, it controls his behavior.
+- Navigation component: this component is responsible for the navigation part of the robot. Navigation is simulated, it only waits for a time proportional to the distance.
+- Random Place component: this component is responsible for a the implementation of a service that selects a random room where to go.
+- Ros Parameter Server component:  this component manages the parameters like oracle parameters and robot parameters (As explained below, it is not standarly correct).
+- Investigation component: this component is responsible for Armor communication, it implements the robot reasoning part.
+- Oracle component: this component simulates oracle duties. Among its duties there are: hint generation, correct hypothesis selection, oracle consulting.
+- Armor component: this component is responsible for the reasoning part.
 
 
 ### Sequence diagram:
 
 ![Sequence diagram](https://user-images.githubusercontent.com/48513075/142313898-8d2a956a-f888-4b72-b59d-f9262063f341.jpg)
 
+The sequence diagram describes a possible sequence of actions of the program.
+It always starts from the Oracle component that stores the parameters and that calls the Finite State Machine which has to start.
+Then the FSM asks to the Random Place to give it a location, sends it to the Navigation component which performs a simulation of the navigation. After a while the fsm asks for Investigation node to investigate, which asks to armor if there is a consistent hypothesis after adding the hint received when the robot arrived to the location. The procedure repeats in order to make who watch understand that it is a repeated sequence of action. Then at a certain point, FSM components asks to the Oracle if an hypothesis is the correct one and the game finishes.
+
 ## Video
 Example of the working with a video:
 ![Video](https://github.com/EnzoUbaldoPetrocco/ExperimentalRoboticsLab/tree/main/video)
-
-
 
 
 ## Installation
@@ -78,6 +92,7 @@ Note that some specifications/characteristics of the system are:
 - Rooms are mapped as specific Pose (x,y,theta);
 - Robot is a point;
 - The usage of json file as a way of exchanging information is not a proper way of passing information among nodes. But since the file does not change continously, it may be considered a weak limitation in terms of performance.
+- Ros Parameter Server is not used properly, this method is not efficient and also not standardly correct, a better method must be implemented.
 
 ### Possible improvements
 Many possible improvements can be achieved: 
