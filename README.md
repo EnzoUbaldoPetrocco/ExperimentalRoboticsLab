@@ -75,7 +75,8 @@ In this simulated environment, many assumptions have been made:
 - Exept for the 4 walls, there are no obstacles, so the robot can move freely in a known environment;
 - Odometry is perfectly known;
 - Hints position is known and reachable with a certain error;
-
+- Hints are well formed, or, if they are sent in a wrong way it is a 'known' wrong way. There is no possibility for them to be used even if they are not completely right;
+- Robot is not self-collidable;
 
 
 ### System's feature
