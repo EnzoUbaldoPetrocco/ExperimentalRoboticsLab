@@ -34,7 +34,7 @@ Here below there is the flowchart explaining how the planning part works.
 ![flowchart drawio](https://user-images.githubusercontent.com/48513075/167388758-dde170b4-af95-4ef7-be8d-07c60f2e1a5d.png)
 
 #### Temporal Diagram
-![TemporalDiagram drawio](https://user-images.githubusercontent.com/48513075/168557788-1fb6998d-a01f-48ce-9d5a-d9242645b80d.png)
+![temporalDiagram drawio](https://user-images.githubusercontent.com/48513075/174475568-f29e4fac-93d1-4722-b3f4-5fa4f517e0fa.png)
 Temporal diagram is an example of the most lucky case, where rosplan node initialize the plan, the robot navigates until a waypoint, a hint is found, but there is no complet hypothesis, so a new plan is dispatched thanks to rosplan node. This happend two times.
 The third time find_hint node is executed, a complete hypothesis is found and it is the exact one. 
 
