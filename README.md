@@ -106,7 +106,19 @@ System in general is characterized also by:
 - Replanning and ROSPlan are not efficient, also, sometimes it fails. Maybe the finite state machine is faster. On the contrary ROSPlan is more flexible;
 - Random waypoint approach may produce the same waypoint;
 - User Interface may help in start and restart the game.
-- Optimizations can be done: planner could use a function in order to know if at least 3 hints must be found before asking the reasoner.
+
+### Possible improvements
+Improvements are divided in the following way: optimizations and realism. 
+#### Optimization
+In this case optimization means: improvement in performance.
+- Robot motors can be optimized in order to be as fast and stable as possible;
+- Trajectory control could help the robot to perform a unique movement;
+- PDDL plan could take into account position and orientatio of the navigation in order to perform plan that are not random, but efficient;
+- Planner could use a function in order to know if at least 3 hints must be found before asking to the reasoner.
+#### Realism
+- Environment laks of obstacles, for navigation and for arm movements;
+- A real investigation process should not involve 4 static positions, but unknown random positions;
+- Map is never known or well known initially, so a SLAM algorithm should be implemented.
 
 
 ## Authors and contacts
