@@ -26,6 +26,25 @@ Example of the working with a video:
 ## Installation
 In order to install this package you should have [Armor][https://github.com/EmaroLab/armor], but the package 'armor_py_api' must be replace with the one which can be found in the branch 'armor_api' of this repository.
 In order to not have problems with docker, replace: armor_api.armor_exceptions with armor_api anywhere in armor_api folder in armor_py_api.
+
+In order to compile the workspace you have to source setup.bash, from your workspace:
+
+```
+source devel/setup.bash
+
+```
+
+Then you have to compile it:
+
+```
+catkin_make
+```
+
+Now the packages are ready.
+
+## Running Procedure
+Every time you want to launch the program you have to source the terminal as explained in the previous chapter.
+
 In order to launch the program:
 
 ```
