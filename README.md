@@ -6,13 +6,14 @@ The assignment concerns a robot that has to move randomly in a Cluedo Environmen
 
 The following assignment is: [Assignment2](https://github.com/EnzoUbaldoPetrocco/ExperimentalRoboticsLab/tree/assignment2)
 
-## Diagrams
-Component diagram:
+## Software Structure
+
+### Component diagram:
 
 ![Component diagram](https://user-images.githubusercontent.com/48513075/142313128-79114576-d12c-440f-b708-89f265e6ec3d.jpg)
 
 
-Sequence diagram:
+### Sequence diagram:
 
 ![Sequence diagram](https://user-images.githubusercontent.com/48513075/142313898-8d2a956a-f888-4b72-b59d-f9262063f341.jpg)
 
