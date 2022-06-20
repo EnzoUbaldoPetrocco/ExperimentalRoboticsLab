@@ -5,14 +5,21 @@ This repository represents the third assignment of Experimental Robotics Lab cou
 The assignment concerns a robot that has to move randomly in a Cluedo Environment, it enters in the rooms, where it receives some hints. Through the hints the robot must reason and generate hypotheses which have to be consistent, must go to the oracle that knows which hypothesis is the truth and ask him. If the robot has guessed the hypothesis the robot won, else the robot continues to play.
 
 ## System Architecture
+System architecture is presented in two ways: component diagram and temporal diagram.
+
 ### Component diagram
 
 ![Component Diagram](https://user-images.githubusercontent.com/48513075/174617451-fa774280-29b3-43e3-a6c4-1100e7938c0d.png)
 
+List of components:
+- SMACH component: this component is used as State Machine manager. It implements the infrastructure of a State Machine and, in theory, also the visualization part of it;
+- FSM component: this component actually implements the State Machine. So every node is a version of the finite state machine applied into the problem. This component is a sort of brain of the robot, it controls his behavior. FSM is composed by 5 states, each of them is 'Navigation', 'Investigation', 'GoToOracle', 'Assert' and 'Finished'.
+    - Navigation: this node will call RandomPlace Service in order to get a random position. After that, it uses the Navigation component, which will call MoveBase algorithm. 
+- 
 
-### Sequence diagram
+### Temporal diagram
 
-![Sequence Diagram](https://user-images.githubusercontent.com/48513075/174621803-e305ab2b-4d11-4a16-b95a-07f886faf7e8.png)
+![Temporal Diagram](https://user-images.githubusercontent.com/48513075/174621803-e305ab2b-4d11-4a16-b95a-07f886faf7e8.png)
 
 
 ## Video
