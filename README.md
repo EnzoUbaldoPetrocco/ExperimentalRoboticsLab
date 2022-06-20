@@ -10,10 +10,10 @@ The assignment concerns a robot that has to move randomly in a Cluedo Environmen
 ![Component Diagram](https://user-images.githubusercontent.com/48513075/174617451-fa774280-29b3-43e3-a6c4-1100e7938c0d.png)
 
 
-
 ### Sequence diagram
 
-![Sequence diagram](https://user-images.githubusercontent.com/48513075/142313898-8d2a956a-f888-4b72-b59d-f9262063f341.jpg)
+![Sequence Diagram](https://user-images.githubusercontent.com/48513075/174621803-e305ab2b-4d11-4a16-b95a-07f886faf7e8.png)
+
 
 ## Video
 Example of the working with a video:
