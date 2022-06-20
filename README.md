@@ -4,13 +4,14 @@ This repository represents the third assignment of Experimental Robotics Lab cou
 ## Introduction
 The assignment concerns a robot that has to move randomly in a Cluedo Environment, it enters in the rooms, where it receives some hints. Through the hints the robot must reason and generate hypotheses which have to be consistent, must go to the oracle that knows which hypothesis is the truth and ask him. If the robot has guessed the hypothesis the robot won, else the robot continues to play.
 
-## Diagrams
-Component diagram:
+## System Architecture
+### Component diagram
 
-![Component diagram](https://user-images.githubusercontent.com/48513075/142313128-79114576-d12c-440f-b708-89f265e6ec3d.jpg)
+![Component Diagram](https://user-images.githubusercontent.com/48513075/174617451-fa774280-29b3-43e3-a6c4-1100e7938c0d.png)
 
 
-Sequence diagram:
+
+### Sequence diagram
 
 ![Sequence diagram](https://user-images.githubusercontent.com/48513075/142313898-8d2a956a-f888-4b72-b59d-f9262063f341.jpg)
 
@@ -85,6 +86,8 @@ Given that, the system has:
 
 Note that some specifications/characteristics of the system are:
 - An hypothesis is considered 'consistent' if it is not 'inconsistent' and is 'complete';
+- An hypothesis is considered 'inconsistent' if a field has more than one value;
+- An hypothesis is considered 'complete' if every field has at least one value;
 - The list of the possible hypotheses has been written in a json format, which has a high readability and can be managed also by hand;
 - In order to increase performances hints sent are registered (in json format), in order to not send hints already sent;
 - Consistent hypotheses are saved in a file in order to know what hypotheses can be asked to the oracle, it is saved also if an hypothesis has been asked to the oracle. This system may appear a bit redundant, since a message with the new complete hypothesis could be used. But in fact this redundancy can be useful in order to keep track to the previous hypotheses and in order to increase flexibility (maybe one could want to receive many hints for a room, in this case the message mechanism does not work anymore, this in fact is more flexible).
