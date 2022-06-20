@@ -74,7 +74,7 @@ cluedo_joint_position_controller
   <!-- start RViz -->
 <node name="rviz" pkg="rviz" type="rviz" args="-d $(find ExperimentalRoboticsLab)/config/sim.rviz" /> 
 
-  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="log"
 	args="-urdf -model m2wr_arm -param robot_description -z 0.05"/> 
 
 </launch>

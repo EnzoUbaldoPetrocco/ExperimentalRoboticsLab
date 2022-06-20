@@ -3,6 +3,5 @@
 
 <node pkg="armor" type="execute" name="armor_service" args="it.emarolab.armor.ARMORMainService"/>
 
-<node name="investigation" pkg="ExperimentalRoboticsLab" type="investigation.py" output="screen"/>
 
 </launch>

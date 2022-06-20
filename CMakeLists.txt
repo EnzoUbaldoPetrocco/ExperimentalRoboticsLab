@@ -69,6 +69,7 @@ add_service_files(
    Hint.srv
    Investigate.srv
    Position.srv
+   HypDetails.srv
 #   Service2.srv
  )
 

@@ -14,7 +14,7 @@
 # ServiceServer:<BR>
 #   /investigate (ExperimentalRoboticsLab.srv.Investigate)
 #
-# ServiceCline:<BR>
+# ServiceClient:<BR>
 #   /armor_client (Armor client is given through armor_api_scripts)
 #   /send_hint (ExperimentalRoboticsLab.srv.Hint)
 #
@@ -281,8 +281,7 @@ def add_person(msg):
     The function adds to armor the person defined in the message
     /param msg ({ID, value, key})
     """
-    print(msg.ID)
-    print(msg.value)
+    print("Maybe it was " + msg.value)
     res = armor_client.call("ADD", "OBJECTPROP", "IND", ["who", str(msg.ID), msg.value])
     if res == False:
         return False
@@ -302,8 +301,7 @@ def add_weapon(msg):
     The function adds to armor the weapon defined in the message
     /param msg ({id, value, key})
     """
-    print(msg.ID)
-    print(msg.value)
+    print("Maybe with a " + msg.value)
     res = armor_client.call("ADD", "OBJECTPROP", "IND", ["what", str(msg.ID), msg.value])
     if res == False:
         return False
@@ -323,9 +321,7 @@ def add_place(msg):
     The function adds to armor the place defined in the message
     /param msg ({ID, value, key})
     """
-    print(msg.ID)
-    print(msg.value)
-    
+    print("Maybe in the " + msg.value)
     res = armor_client.call("ADD", "OBJECTPROP", "IND", ["where", str(msg.ID), msg.value])
     if res == False:
         return False
@@ -468,7 +464,6 @@ def investigate(msg):
     for i in complete_hps:
         id = i.split('#')[1]
         id = id.split('>')[0]
-        print(id)
         IDs.append(int(id))  
     if msg.investigate:
         for i in tried_hypotheses:
@@ -478,7 +473,6 @@ def investigate(msg):
         for i in IDs:
             tried_hypotheses.append(i)
     res = InvestigateResponse(IDs)
-    print(res)
     return res
 ## oracle hint callback
 def oracle_hint(msg):
@@ -486,7 +480,6 @@ def oracle_hint(msg):
     /oracle hint function
     This function is a callback for get oracle hint
     """
-    print(msg)
     add_hint(msg)
     return True
 ## Main
@@ -499,7 +492,7 @@ def main():
     """
     global armor_client, hint_client
     rospy.init_node('investigation') 
-    armor_client = ArmorClient("client", "reference")
+    armor_client = ArmorClient("client", "reference", timeout=50)
     armor_client.utils.load_ref_from_file(ontology_path, "http://www.emarolab.it/cluedo-ontology",
                                 True, "PELLET", True)  # initializing with buffered manipulation and reasoning
     armor_client.utils.mount_on_ref()

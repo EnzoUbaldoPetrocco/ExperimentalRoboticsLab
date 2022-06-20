@@ -35,12 +35,14 @@
 #include <ExperimentalRoboticsLab/Investigate.h>
 #include <ExperimentalRoboticsLab/Replan.h>
 #include <ExperimentalRoboticsLab/Oracle.h>
+#include <ExperimentalRoboticsLab/HypDetails.h>
 
 
 // Global Variables
 ros::Publisher replan_pub;
 ros::ServiceClient investigate_client;
 ros::ServiceClient oracle_client;
+ros::ServiceClient hypothesis_client;
 
 /// NavigationActionInterface PDDL Navigation Action implementation 
 namespace KCL_rosplan {
@@ -63,8 +65,6 @@ namespace KCL_rosplan {
     
     //ROS_INFO("Investigation generated ID: (%i) ", srv.response.IDs[0]);
     if(srv.response.IDs.size() > 0 ){
-      ROS_INFO("before disaster?");
-      //Here i ask to the oracle if an ID is correct
       ExperimentalRoboticsLab::Oracle or_srv;
       oracle_client.call(or_srv);
       ROS_INFO("Real ID: (%i) ", or_srv.response.ID);
@@ -72,7 +72,10 @@ namespace KCL_rosplan {
       for(int i=0;i<srv.response.IDs.size();i++){
         if(srv.response.IDs[i]==or_srv.response.ID){
           ROS_INFO("Action (%s) performed: completed!", msg->name.c_str());
-          
+          ExperimentalRoboticsLab::HypDetails hyp_det;
+          hyp_det.request.id = srv.response.IDs[i];
+          hypothesis_client.call(hyp_det);
+          std::cout << "It was " << hyp_det.response.who << "in the " << hyp_det.response.where << "with a " << hyp_det.response.what << std::endl;
           std::cout << "You won " << std::endl;
           return true;
         }
@@ -109,6 +112,7 @@ KCL_rosplan::OracleActionInterface my_aci(nh);
 replan_pub = nh.advertise<ExperimentalRoboticsLab::Replan>("/replan", 100 );
 investigate_client = nh.serviceClient<ExperimentalRoboticsLab::Investigate>("/investigate");
 oracle_client = nh.serviceClient<ExperimentalRoboticsLab::Oracle>("/oracle_solution");
+hypothesis_client = nh.serviceClient<ExperimentalRoboticsLab::HypDetails>("/hypothesis_details");
 my_aci.runActionInterface();
 return 0;
 }
