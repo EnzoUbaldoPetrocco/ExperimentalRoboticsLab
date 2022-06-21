@@ -3,18 +3,43 @@ This repository represents the third assignment of Experimental Robotics Lab cou
 
 ## Introduction
 The assignment concerns a robot that has to move randomly in a Cluedo Environment, it enters in the rooms, where it receives some hints. Through the hints the robot must reason and generate hypotheses which have to be consistent, must go to the oracle that knows which hypothesis is the truth and ask him. If the robot has guessed the hypothesis the robot won, else the robot continues to play.
+The rooms are:
+- x:-4 , y:-3;
+- x:-4 , y:2;
+- x:-4 , y:7;
+- x:5 , y:-7;
+- x:5 , y:-3,;
+- x:5 , y:1;
+
+Then I added some other reference points, call corridors:
+- x:-1 , y:6;
+- x:0 , y:-4;
+- x:-3 , y:-2;
+- x:1 , y:-7;
+
+Note that: 
+- A **consistent** hypothesis is a hypothesis which is not inconsistent and is complete.
+- A **complete** hypothesis is a hypothesis which has at least one value for each field.
+- A **inconsistent** hypothesis is a hypothesis which has more than one value in at least one field.
 
 ## System Architecture
 System architecture is presented in two ways: component diagram and temporal diagram.
 
 ### Component diagram
 
-![Component Diagram](https://user-images.githubusercontent.com/48513075/174617451-fa774280-29b3-43e3-a6c4-1100e7938c0d.png)
+![Component Diagram](https://user-images.githubusercontent.com/48513075/174858144-dfdfbf52-9c6d-47c9-8612-23cdec851025.png)
 
 List of components:
 - SMACH component: this component is used as State Machine manager. It implements the infrastructure of a State Machine and, in theory, also the visualization part of it;
 - FSM component: this component actually implements the State Machine. So every node is a version of the finite state machine applied into the problem. This component is a sort of brain of the robot, it controls his behavior. FSM is composed by 5 states, each of them is 'Navigation', 'Investigation', 'GoToOracle', 'Assert' and 'Finished'.
-    - Navigation: this node will call RandomPlace Service in order to get a random position. After that, it uses the Navigation component, which will call MoveBase algorithm. 
+    - Navigation: this state will call RandomPlace Service in order to get a random position. After that, it uses the Navigation component, which will call MoveBase algorithm.
+    - Investigation: this state will first call MyMoveIt component in order the robot to reach a precise pose called 'check low first', then it turns until it make an angle of 360°, then it does the same with the pose 'check high first'. In theory with this method, thanks to the width and height of the image camera, every hints can be found. Note that some rooms, called corridors, are added to the list in order to be sure the robot will discover all the hints.
+    - GoToOracle: this state simply calls MoveBase in order to reache GoToOracle position: (0,-1).
+    - Assert: this node calls Investigate component in order to get the consistent hypotheses. These hypotheses are compared with the true one given by the Oracle.
+    - Finished: this state formulates the famous Cluedo Game final sentence and tells you that you have won.
+- Navigation component: this component will use RandomPlace service, given by FSM component, in order to get the 2D pose of the robot and then calls MoveBase component in order to manage Navigation part. When the robot arrives to the point it stops the robot motion.
+- RandomPlace component: this component uses the list of the possible target rooms and generates a sequence of them. Note that, thanks to an index, this sequence is in fact a circular buffer, so that the robot could continue to navigate to the rooms as much as one want.
+- MoveBase component: this component is represented by the algorithm MoveBase. You can look to a better explaining of how it works ![here](http://wiki.ros.org/move_base).
 - 
 
 ### Temporal diagram
