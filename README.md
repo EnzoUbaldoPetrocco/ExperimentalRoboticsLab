@@ -40,7 +40,11 @@ List of components:
 - Navigation component: this component will use RandomPlace service, given by FSM component, in order to get the 2D pose of the robot and then calls MoveBase component in order to manage Navigation part. When the robot arrives to the point it stops the robot motion.
 - RandomPlace component: this component uses the list of the possible target rooms and generates a sequence of them. Note that, thanks to an index, this sequence is in fact a circular buffer, so that the robot could continue to navigate to the rooms as much as one want.
 - MoveBase component: this component is represented by the algorithm MoveBase. You can look to a better explaining of how it works [here](http://wiki.ros.org/move_base).
-- 
+- Investigation component: this component is the interface between the Reasoner and the rest of the world. This component manages the operations between hints received and the reasoning about them. Also it is useful in the conversion from the marker id to the hint id.
+- Reasoner component: this component is an *ad* *hoc* reasoner. This means you cannot upload an ontology, but it is useful only in this case.
+- Simulation component: this component is the component given by professors in order to setup the environment. This component gives the solution of the game, gives an hint given a marker id and places markers and walls around, in the simulation environment.
+- MyMoveIt component: this component uses MoveIt package in order to perform *arm* movements. Custom pose and General pose are implemented. 
+- MoveIt component: this component uses motion-planning in order to effectively perform *arm* movements. You can visit their website [here](https://moveit.ros.org/).
 
 ### Temporal diagram
 
