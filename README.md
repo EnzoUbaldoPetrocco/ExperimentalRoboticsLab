@@ -39,7 +39,7 @@ List of components:
     - Finished: this state formulates the famous Cluedo Game final sentence and tells you that you have won.
 - Navigation component: this component will use RandomPlace service, given by FSM component, in order to get the 2D pose of the robot and then calls MoveBase component in order to manage Navigation part. When the robot arrives to the point it stops the robot motion.
 - RandomPlace component: this component uses the list of the possible target rooms and generates a sequence of them. Note that, thanks to an index, this sequence is in fact a circular buffer, so that the robot could continue to navigate to the rooms as much as one want.
-- MoveBase component: this component is represented by the algorithm MoveBase. You can look to a better explaining of how it works ![here](http://wiki.ros.org/move_base).
+- MoveBase component: this component is represented by the algorithm MoveBase. You can look to a better explaining of how it works [here](http://wiki.ros.org/move_base).
 - 
 
 ### Temporal diagram
@@ -59,8 +59,8 @@ ROS environment is of course trivial, but it is needed also a particular package
 From this branch, copy ExperimentalRoboticsLab folder, and paste it into the workspace.
 Armor reasoner has been substitued by a custom reasoner, so that package is no more required.
 PDDL has been used nomore, so is valid same for it.
-MoveIt package has been changed together with robot description, so another branch has been added: ![m2wr_moveit2](https://github.com/EnzoUbaldoPetrocco/ExperimentalRoboticsLab/tree/m2wr_moveit2). From this branch, copy the folder 'm2wr_moveit' and paste it into the workspace.
-ArUco Ros package is used for marker detection. You can find a modified version in the branch: ![aruco_ros_package](https://github.com/EnzoUbaldoPetrocco/ExperimentalRoboticsLab/tree/aruco_ros_package). From this branch, copy the folder 'aruco_ros'  (note that there are two aruco_ros folder, the above-mentioned folder is the parent one), and paste it into the workspace. Compile the workspace with the command:
+MoveIt package has been changed together with robot description, so another branch has been added: [m2wr_moveit2](https://github.com/EnzoUbaldoPetrocco/ExperimentalRoboticsLab/tree/m2wr_moveit2). From this branch, copy the folder 'm2wr_moveit' and paste it into the workspace.
+ArUco Ros package is used for marker detection. You can find a modified version in the branch: [aruco_ros_package](https://github.com/EnzoUbaldoPetrocco/ExperimentalRoboticsLab/tree/aruco_ros_package). From this branch, copy the folder 'aruco_ros'  (note that there are two aruco_ros folder, the above-mentioned folder is the parent one), and paste it into the workspace. Compile the workspace with the command:
 ```
 catkin_make -DCATKIN_WHITELIST_PACKAGES=""
 ```
