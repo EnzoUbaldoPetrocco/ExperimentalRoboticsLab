@@ -113,20 +113,7 @@ You can get rid of the '2>/dev/null' if you want to see warnings.
 ### System's features
 The system is capable of simulating an environment, with some limitations, where the robot has to reach a position and receives hints which will let him to reason on them and arriving to some solutions (aka consistent hypotheses). 
 One solution is the right one and can be revealed when the robots arrives to the oracle and ask for the right solution.
-Given that, the system has:
-- a state machine, which organizes the robot's work;
-- a navigation simulation, which manages the navigation part. Up to now it is very simple, but can be modified in order to become a real navigation system;
-- a investigation node, which has to communicate with the 'reasoner' (in this case armor, but the node can be of course substituted at will);
-- an oracle has been provided, so that you can ask him for the right solution and for hints;
-- a random place node which gives the random targets.
-
-Note that some specifications/characteristics of the system are:
-- An hypothesis is considered 'consistent' if it is not 'inconsistent' and is 'complete';
-- An hypothesis is considered 'inconsistent' if a field has more than one value;
-- An hypothesis is considered 'complete' if every field has at least one value;
-- The list of the possible hypotheses has been written in a json format, which has a high readability and can be managed also by hand;
-- In order to increase performances hints sent are registered (in json format), in order to not send hints already sent;
-- Consistent hypotheses are saved in a file in order to know what hypotheses can be asked to the oracle, it is saved also if an hypothesis has been asked to the oracle. This system may appear a bit redundant, since a message with the new complete hypothesis could be used. But in fact this redundancy can be useful in order to keep track to the previous hypotheses and in order to increase flexibility (maybe one could want to receive many hints for a room, in this case the message mechanism does not work anymore, this in fact is more flexible).
+The environment is represented by a static map, where we have many rooms; this conformation introduces static obstacles, so that a path planning algorithm should take into account also static obstacles. MoveBase algorithm has been chosen in order to overcome this problem, this problem 
 
 ### System's limitations
 - Navigation is simulated, the robot waits proportionally to the 'distance'. As distance angle is not taken into account;
