@@ -36,6 +36,7 @@ import rospy
 from ExperimentalRoboticsLab.srv import Hint
 from ExperimentalRoboticsLab.srv import Investigate, InvestigateResponse
 from ExperimentalRoboticsLab.msg import ErlOracle
+from ExperimentalRoboticsLab.srv import HypDetails, HypDetailsResponse
 from os.path import dirname, realpath
 import sys
 # getting path to file
@@ -482,6 +483,22 @@ def oracle_hint(msg):
     """
     add_hint(msg)
     return True
+
+def tell_final_sentence(msg):
+    """!
+    /tell_final_sentence callback
+    This callback is a callback for getting final values
+    """
+    weapons = get_weapons_with_id(msg.id)
+    people = get_persons_with_id(msg.id)
+    places = get_places_with_id(msg.id)
+
+    res = HypDetailsResponse()
+    res.who = people[0]
+    res.where = places[0]
+    res.what = weapons[0]
+
+    return res
 ## Main
 def main():
     """!
@@ -500,7 +517,7 @@ def main():
     hint_client = rospy.ServiceProxy('/send_hint', Hint)
     investigate_service = rospy.Service('/investigate', Investigate, investigate)
     oracle_hint_sub = rospy.Subscriber('/oracle_hint', ErlOracle, oracle_hint)
-
+    final_sentence_client = rospy.Service('/hypothesis_details', HypDetails, tell_final_sentence)
 
     rospy.spin()
 

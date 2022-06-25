@@ -48,11 +48,11 @@ pub_ = None
 yaw_precision_ = math.pi / 9  # +/- 20 degree allowed
 yaw_precision_2_ = math.pi / 90  # +/- 2 degree allowed
 dist_precision_ = 0.08
-kp_a = -2.7
-kp_d = 0.75
-ub_a = 0.65
-lb_a = -0.65
-ub_d = 0.66
+kp_a = -2.6
+kp_d = 0.7
+ub_a = 0.6
+lb_a = -0.6
+ub_d = 0.6
 
 action=None
 
