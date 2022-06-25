@@ -39,16 +39,16 @@
     </group_state>
     <group_state name="marker_under" group="arm">
         <joint name="arm_base_to_base" value="0.0354"/>
-        <joint name="arm_joint_01" value="-2.0471"/>
-        <joint name="arm_joint_02" value="-2.1859"/>
+        <joint name="arm_joint_01" value="-1.8389"/>
+        <joint name="arm_joint_02" value="-2.0471"/>
         <joint name="arm_joint_03" value="-2"/>
         <joint name="arm_joint_04" value="1"/>
         <joint name="cluedo_joint" value="0"/>
     </group_state>
     <group_state name="marker_upper" group="arm">
         <joint name="arm_base_to_base" value="0.1803"/>
-        <joint name="arm_joint_01" value="-2.0471"/>
-        <joint name="arm_joint_02" value="-1.7695"/>
+        <joint name="arm_joint_01" value="-1.7695"/>
+        <joint name="arm_joint_02" value="-1.5613"/>
         <joint name="arm_joint_03" value="-2"/>
         <joint name="arm_joint_04" value="1"/>
         <joint name="cluedo_joint" value="0"/>
