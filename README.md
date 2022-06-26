@@ -51,9 +51,16 @@ List of components:
 ![Temporal Diagram](https://user-images.githubusercontent.com/48513075/174621803-e305ab2b-4d11-4a16-b95a-07f886faf7e8.png)
 
 
-## Video
-Example of the working with a video:
-[Video](https://unigeit-my.sharepoint.com/:f:/g/personal/s4530363_studenti_unige_it/Evgh67vVc89EnqRuW1RhmTUBw8b1sSGz_1oKpHSLzuI49g?e=etqFqy)
+## A Sample of the Scenario
+Example of the scenario with a video:
+[Video](https://github.com/EnzoUbaldoPetrocco/ExperimentalRoboticsLab/tree/assignment3/video)
+
+### Casual Sampling of the scenario
+A casual sampling of Gazebo environment is:
+![Gazebo](https://user-images.githubusercontent.com/48513075/175826764-1ccb5537-6cc3-47a4-bdb2-90784b98ebfe.png)
+A casual sampling of RViz environment is:
+![RViz](https://user-images.githubusercontent.com/48513075/175826773-acabb95e-d512-4eba-a394-ed7806b6e504.png)
+
 
 
 ## Installation and Running Procedure
@@ -84,7 +91,7 @@ In order to launch the program, go into the ExperimentalRoboticsLab folder and w
 ./short.sh
 ```
 
-The previous one was the recommended run procedure.
+The previous one was the recommended running procedure.
 But this is not the only one way, of course, single launch file can be launched in different terminals, in each of them you have to go into the folder: ExperimentalRoboticsLab and run:
 
 ```
