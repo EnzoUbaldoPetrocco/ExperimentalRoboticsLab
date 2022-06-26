@@ -68,6 +68,8 @@ In order to run the program, go inside the folder: ExperimentalRoboticsLab in th
 Some terminals will open. 
 
 ## A Sample of the scenario
+An entire video of the scenario can be found at the following [link](https://github.com/EnzoUbaldoPetrocco/ExperimentalRoboticsLab/tree/assignment2/video).
+
 ### Casual sample of navigation
 ![Screenshot from 2022-05-19 18-11-47](https://user-images.githubusercontent.com/48513075/169991482-2209fea6-8db1-460b-a9a2-2a48daf17d91.png)
 
