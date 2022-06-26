@@ -45,11 +45,17 @@ List of components:
 - Simulation component: this component is the component given by professors in order to setup the environment. This component gives the solution of the game, gives an hint given a marker id and places markers and walls around, in the simulation environment.
 - MyMoveIt component: this component uses MoveIt package in order to perform *arm* movements. Custom pose and General pose are implemented. 
 - MoveIt component: this component uses motion-planning in order to effectively perform *arm* movements. You can visit their website [here](https://moveit.ros.org/).
+- Rviz/Gazebo component: even I've put this components together their are in fact two different component. They are used also in the previous assignments, here they are mentioned for precision sake. In Gazebo there are the walls that build the environment given by professor. RViz is used for visualizing the path planning, moveit planning and camera.
 
 ### Temporal diagram
+Let's consider a lucky case:
+![Temporal Diagram](https://user-images.githubusercontent.com/48513075/175829077-e84ad055-0e60-46b2-8370-8470fb6d9c95.png)
 
-![Temporal Diagram](https://user-images.githubusercontent.com/48513075/174621803-e305ab2b-4d11-4a16-b95a-07f886faf7e8.png)
-
+This temporal diagram shows a lucky case where the investigation is short.
+In this example the robot goes to a location where it finds some hints, during the travel and during the investigation phase.
+After completed this phase, the robot has not found a consistent hypothesis.
+So it must go to another destination, where it starts investing. After this investigation phase, the robot has found a consistent hypothesis. So it goes to the oracle for asking if it is the correct hypothesis.
+Luckily it is the correct hypothesis so the game finished.
 
 ## A Sample of the Scenario
 Example of the scenario with a video:
@@ -136,7 +142,7 @@ Many possible improvements can be achieved:
 - navigation could be simulated using a 'real' environment, the rooms can be mapped into a system like Gazebo or Rviz, and a robot type could be selected in order to actually navigate in an environment. Note that, if it has to be done, navigation must be replaced with a state machine, a planning algorithm must be selected and these depend also on the previous point (if the room is mapped like a Pose or as an area);
 - Hints could be considered as hints without an ID which indicates the corresponding hypothesis: even if the specifications indicate the contrary, at the expense of an exponential growth in terms of complexity, hints can be part of multiple hypotheses. This change must involve also the oracle, due to this reason an improvement can be found: telling if an hint in a hypothesis is right or wrong for every hint in a hypothesis. If this is done, of course consistent_hypotheses file becomes crucial for what said in the previous paragraph
 - Another improvement could be the physical search of hints in the room, the robot could search for Qrcode for example in a room, and they can be considered as hints. Or alternatively, 'physical object' could be placed in the room and revealed thanks to object recognition paradigms;
-- The investiganti node could be splitted in two parts: one for treating with a general reasoner, one for treating to armor in particular, this could increase modularity and flexibility.
+- The investiganting node could be splitted in two parts: one for treating with a general reasoner, one for treating to armor in particular, this could increase modularity and flexibility.
 
 ## Author
 The author of this repository is [Enzo Ubaldo Petrocco](https://github.com/EnzoUbaldoPetrocco/ExperimentalRoboticsLab): i'm a student of robotics engineering in the University of Genova (s4530363); if you have some issues please contact me:
