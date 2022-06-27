@@ -125,6 +125,14 @@ roslaunch ExperimentalRoboticsLab navigation.launch 2>/dev/null
 You can get rid of the '2>/dev/null' if you want to see warnings.
 ## Assumptions, working hypotheses and environment
 
+### Assumptions
+- Motors can be strong as will;
+- Camera can assume the desired properties;
+- Odometry is perfectly known;
+- Rooms are large enough to maneouver the robot in its space;
+- Robot is not self-collidable;
+- Walls are static objects;
+
 ### System's features
 The system is capable of simulating an environment, with some limitations, where the robot has to reach a position and receives hints which will let him to reason on them and arriving to some solutions (aka consistent hypotheses).
 Hints can be found anywhere in the environment, on floor or on top walls. 
@@ -144,11 +152,21 @@ Here below are presented some system's limitations:
     - Camera width must be enough to compensate some error in the investigation;
     - It is a slow mechanical process;
 - There are no dynamic obstacles in this environment. It could be a right way of testing the environment, since it is a more precise approximation of reality;
+- Navigation is not very fast, arm introduces an imbalance part of the robot;
+- Random waypoint navigation does not perform very well, an approach which takes into account the waypoint relative position and navigation time would be better;
+- User Interface may help in start and restart the game.
 
 
 ### Possible improvements
+Improvements are divided in the following way: optimizations and realism.
+#### Optimization
 - Ros Controllers could be trajectory ones. They would simplify investigation phase;
-- Reasoner could be a trade off of the two, in order to be more flexible;
+- Reasoner could be a trade off of the Armor general one and my custom solution, in order to be more flexible, but faster and safe;
+- Motors can be optimized in order to be as fast and stable as possible;
+#### Realism
+- Environment lacks of obstacles for arm movements;
+- Dynamic objects must be introduced;
+
 
 ## Author
 The author of this repository is [Enzo Ubaldo Petrocco](https://github.com/EnzoUbaldoPetrocco/ExperimentalRoboticsLab): i'm a student of robotics engineering in the University of Genova (s4530363); if you have some issues please contact me:
