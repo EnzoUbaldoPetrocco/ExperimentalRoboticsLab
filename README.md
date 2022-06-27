@@ -22,6 +22,8 @@ Note that:
 - A **complete** hypothesis is a hypothesis which has at least one value for each field.
 - A **inconsistent** hypothesis is a hypothesis which has more than one value in at least one field.
 
+Previous assignment can be found here: [Assignment2](https://github.com/EnzoUbaldoPetrocco/ExperimentalRoboticsLab/tree/assignment2)
+
 ## System Architecture
 System architecture is presented in two ways: component diagram and temporal diagram.
 
@@ -124,25 +126,29 @@ You can get rid of the '2>/dev/null' if you want to see warnings.
 ## Assumptions, working hypotheses and environment
 
 ### System's features
-The system is capable of simulating an environment, with some limitations, where the robot has to reach a position and receives hints which will let him to reason on them and arriving to some solutions (aka consistent hypotheses). 
+The system is capable of simulating an environment, with some limitations, where the robot has to reach a position and receives hints which will let him to reason on them and arriving to some solutions (aka consistent hypotheses).
+Hints can be found anywhere in the environment, on floor or on top walls. 
 One solution is the right one and can be revealed when the robots arrives to the oracle and ask for the right solution.
-The environment is represented by a static map, where we have many rooms; this conformation introduces static obstacles, so that a path planning algorithm should take into account also static obstacles. MoveBase algorithm has been chosen in order to overcome this problem, this problem 
+The environment is represented by a static map, where we have many rooms; this conformation introduces static obstacles, so that a path planning algorithm should take into account also static obstacles. MoveBase algorithm has been chosen in order to overcome this problem, in addition MoveBase is also used for dynamic obstacles, but in this context it is not necessary.
+MoveIt package has not been changed so much. Only Ros Controllers have been changed a bit in order to adapt to the new robot description. In fact the robot has been changed because of chassis dimensions, which were a bit bigger than what needed for stabilization of the robot. This is also due to the fact that robot arm has been shortened, which has been possible because of the fact that a pose was no more needed, but only a camera view was necessary. Due to this fact and thanks to the camera height and width, investigation is possible only assuming two poses and turning around.
+Even if environment morphology is not known by the robot, some points are given as rooms. But to be sure that with my method, all hints are found, it is necessary that all the area is covered, so more points are added to the list of possible destination.
+In the investigation phase, the only reason when it reaches the end of the investigation, this is, in my opinion, a correct trade off. Let's suppose we have reasoned every hints added, if a consistent hypothesis is found, then it could be the right one or not. If it is the right one and we reason, we speed up the process, but it is a very lucky case. In every other situation, we should change the paradigm and store the information about the last position and we should go back to that position, wasting time. In fact investigation phase is less time demanding than navigation one.
+Let's note that, differently from the previous assignment Armor has been substituded with a custom reasoner. This has been done because of the setup of ArmorClient: even if in the previous assignments a timeout has been set up in order to not fail the connection between ArmorClient and ArmorServer, this technique does not guarantee that the connection will always succeed. In particular when we have other computing demanding programs, the connection could not be as fast as necessary, causing a system failure (which is not suitable in a system which must be safe).
+
 
 ### System's limitations
-- Navigation is simulated, the robot waits proportionally to the 'distance'. As distance angle is not taken into account;
-- Hints are always given with an hypothesis ID, which they belong to;
-- The correct hypothesis has been selected randomly by the oracle among preselected consistent hypotheses;
-- Rooms are mapped as specific Pose (x,y,theta);
-- Robot is a point;
-- The usage of json file as a way of exchanging information is not a proper way of passing information among nodes. But since the file does not change continously, it may be considered a weak limitation in terms of performance.
+Here below are presented some system's limitations:
+- Reasoner is not flexible, Armor solution had this property, but my custom reasoner not;
+- Ros Controllers have not been set up using a Ziegler–Nichols or algorithms of that sort, but using trial and error. Even if they are better than previous assignment in performance;
+- In order to complete an investigation phase, a full turn is performed twice, base on time, not on the angle formed. This lead to two different limitations:
+    - Camera width must be enough to compensate some error in the investigation;
+    - It is a slow mechanical process;
+- There are no dynamic obstacles in this environment. It could be a right way of testing the environment, since it is a more precise approximation of reality;
+
 
 ### Possible improvements
-Many possible improvements can be achieved: 
-- a room could be mapped as an area, so that the robot is in a room when in fact is in it;
-- navigation could be simulated using a 'real' environment, the rooms can be mapped into a system like Gazebo or Rviz, and a robot type could be selected in order to actually navigate in an environment. Note that, if it has to be done, navigation must be replaced with a state machine, a planning algorithm must be selected and these depend also on the previous point (if the room is mapped like a Pose or as an area);
-- Hints could be considered as hints without an ID which indicates the corresponding hypothesis: even if the specifications indicate the contrary, at the expense of an exponential growth in terms of complexity, hints can be part of multiple hypotheses. This change must involve also the oracle, due to this reason an improvement can be found: telling if an hint in a hypothesis is right or wrong for every hint in a hypothesis. If this is done, of course consistent_hypotheses file becomes crucial for what said in the previous paragraph
-- Another improvement could be the physical search of hints in the room, the robot could search for Qrcode for example in a room, and they can be considered as hints. Or alternatively, 'physical object' could be placed in the room and revealed thanks to object recognition paradigms;
-- The investiganting node could be splitted in two parts: one for treating with a general reasoner, one for treating to armor in particular, this could increase modularity and flexibility.
+- Ros Controllers could be trajectory ones. They would simplify investigation phase;
+- Reasoner could be a trade off of the two, in order to be more flexible;
 
 ## Author
 The author of this repository is [Enzo Ubaldo Petrocco](https://github.com/EnzoUbaldoPetrocco/ExperimentalRoboticsLab): i'm a student of robotics engineering in the University of Genova (s4530363); if you have some issues please contact me:
