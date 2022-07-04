@@ -1,0 +1,103 @@
+\hypertarget{classreasoner_1_1_reasoner_class}{}\doxysection{reasoner.\+Reasoner\+Class Class Reference}
+\label{classreasoner_1_1_reasoner_class}\index{reasoner.ReasonerClass@{reasoner.ReasonerClass}}
+
+
+\mbox{\hyperlink{classreasoner_1_1_reasoner_class}{Reasoner\+Class}} class.  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classreasoner_1_1_reasoner_class_ae30983a7c867b4e717d4fd3cd372a4e2}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\begin{DoxyCompactList}\small\item\em /\+\_\+\+\_\+init\+\_\+\+\_\+ function of \mbox{\hyperlink{classreasoner_1_1_reasoner_class}{Reasoner\+Class}} class. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classreasoner_1_1_reasoner_class_a5622d03adf1322593e8dc7936264bc89}{add\+\_\+hint}} (self, id, value, type)
+\begin{DoxyCompactList}\small\item\em add hint function \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classreasoner_1_1_reasoner_class_ab89c08f7152c0110a18fbac08a86b1ae}{query\+\_\+inconsistent}} (self)
+\begin{DoxyCompactList}\small\item\em wuery inconsistent hypotheses \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classreasoner_1_1_reasoner_class_adbcc5838a96be2d11f05a92547296ed4}{query\+\_\+completed}} (self)
+\begin{DoxyCompactList}\small\item\em query complete hypotheses \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classreasoner_1_1_reasoner_class_a60e9a310e34b922ed519cca73b206b0f}{reasoner\+\_\+clbk}} (self, msg)
+\begin{DoxyCompactList}\small\item\em reasoner callback \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classreasoner_1_1_reasoner_class_afb14a48df08dae9962b37ff31315f81c}{hints}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{classreasoner_1_1_reasoner_class}{Reasoner\+Class}} class. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classreasoner_1_1_reasoner_class_ae30983a7c867b4e717d4fd3cd372a4e2}\label{classreasoner_1_1_reasoner_class_ae30983a7c867b4e717d4fd3cd372a4e2}} 
+\index{reasoner.ReasonerClass@{reasoner.ReasonerClass}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!reasoner.ReasonerClass@{reasoner.ReasonerClass}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def reasoner.\+Reasoner\+Class.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+/\+\_\+\+\_\+init\+\_\+\+\_\+ function of \mbox{\hyperlink{classreasoner_1_1_reasoner_class}{Reasoner\+Class}} class. 
+
+This function initialize the \mbox{\hyperlink{classreasoner_1_1_reasoner_class}{Reasoner\+Class}} class, it creates a list of six Hypotheses since the possible hypotheses in this program are six. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classreasoner_1_1_reasoner_class_a5622d03adf1322593e8dc7936264bc89}\label{classreasoner_1_1_reasoner_class_a5622d03adf1322593e8dc7936264bc89}} 
+\index{reasoner.ReasonerClass@{reasoner.ReasonerClass}!add\_hint@{add\_hint}}
+\index{add\_hint@{add\_hint}!reasoner.ReasonerClass@{reasoner.ReasonerClass}}
+\doxysubsubsection{\texorpdfstring{add\_hint()}{add\_hint()}}
+{\footnotesize\ttfamily def reasoner.\+Reasoner\+Class.\+add\+\_\+hint (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{id,  }\item[{}]{value,  }\item[{}]{type }\end{DoxyParamCaption})}
+
+
+
+add hint function 
+
+/add\+\_\+hint function of \mbox{\hyperlink{classreasoner_1_1_reasoner_class}{Reasoner\+Class}} class. This function adds an hint in the respective \mbox{\hyperlink{classreasoner_1_1_hypothesis}{Hypothesis}}. Note that an hint could be a weapon, a place or a person. So for every hint type it has been created a custom function. /param id (int) /param value (string) /param type (string) \mbox{\Hypertarget{classreasoner_1_1_reasoner_class_adbcc5838a96be2d11f05a92547296ed4}\label{classreasoner_1_1_reasoner_class_adbcc5838a96be2d11f05a92547296ed4}} 
+\index{reasoner.ReasonerClass@{reasoner.ReasonerClass}!query\_completed@{query\_completed}}
+\index{query\_completed@{query\_completed}!reasoner.ReasonerClass@{reasoner.ReasonerClass}}
+\doxysubsubsection{\texorpdfstring{query\_completed()}{query\_completed()}}
+{\footnotesize\ttfamily def reasoner.\+Reasoner\+Class.\+query\+\_\+completed (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+query complete hypotheses 
+
+/query\+\_\+completed function of \mbox{\hyperlink{classreasoner_1_1_reasoner_class}{Reasoner\+Class}} class. This function queries complete hypotheses of the Hypotheses list. \mbox{\Hypertarget{classreasoner_1_1_reasoner_class_ab89c08f7152c0110a18fbac08a86b1ae}\label{classreasoner_1_1_reasoner_class_ab89c08f7152c0110a18fbac08a86b1ae}} 
+\index{reasoner.ReasonerClass@{reasoner.ReasonerClass}!query\_inconsistent@{query\_inconsistent}}
+\index{query\_inconsistent@{query\_inconsistent}!reasoner.ReasonerClass@{reasoner.ReasonerClass}}
+\doxysubsubsection{\texorpdfstring{query\_inconsistent()}{query\_inconsistent()}}
+{\footnotesize\ttfamily def reasoner.\+Reasoner\+Class.\+query\+\_\+inconsistent (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+wuery inconsistent hypotheses 
+
+/query\+\_\+inconsistent function of \mbox{\hyperlink{classreasoner_1_1_reasoner_class}{Reasoner\+Class}} class. This function retrieves the inconsistent hypotheses among the Hypotheses list. \mbox{\Hypertarget{classreasoner_1_1_reasoner_class_a60e9a310e34b922ed519cca73b206b0f}\label{classreasoner_1_1_reasoner_class_a60e9a310e34b922ed519cca73b206b0f}} 
+\index{reasoner.ReasonerClass@{reasoner.ReasonerClass}!reasoner\_clbk@{reasoner\_clbk}}
+\index{reasoner\_clbk@{reasoner\_clbk}!reasoner.ReasonerClass@{reasoner.ReasonerClass}}
+\doxysubsubsection{\texorpdfstring{reasoner\_clbk()}{reasoner\_clbk()}}
+{\footnotesize\ttfamily def reasoner.\+Reasoner\+Class.\+reasoner\+\_\+clbk (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{msg }\end{DoxyParamCaption})}
+
+
+
+reasoner callback 
+
+/reasoner\+\_\+clbk function of \mbox{\hyperlink{classreasoner_1_1_reasoner_class}{Reasoner\+Class}} class. This function manages the action that can be performed by the reasoner. Among them we have\+:
+\begin{DoxyItemize}
+\item add\+: it adds a hint to an \mbox{\hyperlink{classreasoner_1_1_hypothesis}{Hypothesis}};
+\item query\+\_\+inconsistent\+: it queries inconsistent \mbox{\hyperlink{classreasoner_1_1_hypothesis}{Hypothesis}}
+\item query\+\_\+completed\+: it queries completed \mbox{\hyperlink{classreasoner_1_1_hypothesis}{Hypothesis}} /param msg (Reasoner\+Request) /return res (Reasoner\+Response) 
+\end{DoxyItemize}
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classreasoner_1_1_reasoner_class_afb14a48df08dae9962b37ff31315f81c}\label{classreasoner_1_1_reasoner_class_afb14a48df08dae9962b37ff31315f81c}} 
+\index{reasoner.ReasonerClass@{reasoner.ReasonerClass}!hints@{hints}}
+\index{hints@{hints}!reasoner.ReasonerClass@{reasoner.ReasonerClass}}
+\doxysubsubsection{\texorpdfstring{hints}{hints}}
+{\footnotesize\ttfamily reasoner.\+Reasoner\+Class.\+hints}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+scripts/\mbox{\hyperlink{reasoner_8py}{reasoner.\+py}}\end{DoxyCompactItemize}

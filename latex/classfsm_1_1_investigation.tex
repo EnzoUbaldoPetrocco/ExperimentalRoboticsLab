@@ -1,0 +1,68 @@
+\hypertarget{classfsm_1_1_investigation}{}\doxysection{fsm.\+Investigation Class Reference}
+\label{classfsm_1_1_investigation}\index{fsm.Investigation@{fsm.Investigation}}
+
+
+define state \mbox{\hyperlink{classfsm_1_1_investigation}{Investigation}}  
+
+
+
+
+Inheritance diagram for fsm.\+Investigation\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=182pt]{classfsm_1_1_investigation__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for fsm.\+Investigation\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=182pt]{classfsm_1_1_investigation__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classfsm_1_1_investigation_a780e58e296500530cdffab32a6e4651c}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\begin{DoxyCompactList}\small\item\em /\+\_\+\+\_\+init\+\_\+\+\_\+ function of \mbox{\hyperlink{classfsm_1_1_investigation}{Investigation}} class It initialize the \mbox{\hyperlink{classfsm_1_1_investigation}{Investigation}} class \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classfsm_1_1_investigation_a4a51ab84068a577d2a33ec67c393f23d}{execute}} (self, userdata)
+\begin{DoxyCompactList}\small\item\em /execute state It executes the \mbox{\hyperlink{classfsm_1_1_investigation}{Investigation}} state\+: the robot moves the arm until a certain position, then it turns around. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+define state \mbox{\hyperlink{classfsm_1_1_investigation}{Investigation}} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfsm_1_1_investigation_a780e58e296500530cdffab32a6e4651c}\label{classfsm_1_1_investigation_a780e58e296500530cdffab32a6e4651c}} 
+\index{fsm.Investigation@{fsm.Investigation}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!fsm.Investigation@{fsm.Investigation}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def fsm.\+Investigation.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+/\+\_\+\+\_\+init\+\_\+\+\_\+ function of \mbox{\hyperlink{classfsm_1_1_investigation}{Investigation}} class It initialize the \mbox{\hyperlink{classfsm_1_1_investigation}{Investigation}} class 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfsm_1_1_investigation_a4a51ab84068a577d2a33ec67c393f23d}\label{classfsm_1_1_investigation_a4a51ab84068a577d2a33ec67c393f23d}} 
+\index{fsm.Investigation@{fsm.Investigation}!execute@{execute}}
+\index{execute@{execute}!fsm.Investigation@{fsm.Investigation}}
+\doxysubsubsection{\texorpdfstring{execute()}{execute()}}
+{\footnotesize\ttfamily def fsm.\+Investigation.\+execute (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{userdata }\end{DoxyParamCaption})}
+
+
+
+/execute state It executes the \mbox{\hyperlink{classfsm_1_1_investigation}{Investigation}} state\+: the robot moves the arm until a certain position, then it turns around. 
+
+This routine is repeated twice, for low hints and for high hints. If there are hypotheses there are not been asked to the oracle it goes into the \mbox{\hyperlink{classfsm_1_1_go_to_oracle}{Go\+To\+Oracle}} state, otherwise, it goes into \mbox{\hyperlink{classfsm_1_1_navigation}{Navigation}} state. /param userdata () 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+scripts/\mbox{\hyperlink{fsm_8py}{fsm.\+py}}\end{DoxyCompactItemize}

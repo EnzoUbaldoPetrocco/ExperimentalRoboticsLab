@@ -1,0 +1,126 @@
+\hypertarget{class_my_move_it}{}\doxysection{My\+Move\+It Class Reference}
+\label{class_my_move_it}\index{MyMoveIt@{MyMoveIt}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_my_move_it_ae3b42efbcda726347d5e0dc3271749ed}{My\+Move\+It}} (ros\+::\+Node\+Handle \mbox{\hyperlink{class_my_move_it_a2905714612f338cb6677b19e802da292}{nh}})
+\begin{DoxyCompactList}\small\item\em methods \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_my_move_it_ad3f114bb0b0dd924451db550a0855909}{move\+\_\+to\+\_\+the\+\_\+pose}} (geometry\+\_\+msgs\+::\+Pose pose)
+\begin{DoxyCompactList}\small\item\em Thanks to this function a user can tell to the robot the pose the cluedo\+\_\+link must reach. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_my_move_it_af4da0dec5a0a0ff0dbea38f7da3cbca4}{move\+\_\+to\+\_\+custom\+\_\+pose}} (std\+::string str)
+\begin{DoxyCompactList}\small\item\em This function implements the custom arm pose management. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_my_move_it_ae20d87a5e6b292629faf4c8e75815319}{hint\+\_\+found}} (const Experimental\+Robotics\+Lab\+::\+Erl\+Oracle\+::\+Const\+Ptr \&msg)
+\begin{DoxyCompactList}\small\item\em When the hint is found, a boolean variable is set to true. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_my_move_it_ad4e2f113276af7e0f1464ea480ee7d4a}{custom\+\_\+pose\+\_\+clbk}} (const Experimental\+Robotics\+Lab\+::\+Custom\+Target\+Goal\+Const\+Ptr \&msg)
+\item 
+void \mbox{\hyperlink{class_my_move_it_a9b89cda8a383e7cfd73fd4409714fb5d}{find\+\_\+hint}} (const Experimental\+Robotics\+Lab\+::\+Hint\+Goal\+Const\+Ptr \&msg)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_my_move_it_a918dba9b964896aea2dc399304eaf9d6}{found}}
+\begin{DoxyCompactList}\small\item\em members \end{DoxyCompactList}\item 
+actionlib\+::\+Simple\+Action\+Server$<$ Experimental\+Robotics\+Lab\+::\+Hint\+Action $>$ \mbox{\hyperlink{class_my_move_it_acbf77f197bf58493207bccb7f74a62db}{sub\+\_\+find\+\_\+hint}}
+\item 
+actionlib\+::\+Simple\+Action\+Server$<$ Experimental\+Robotics\+Lab\+::\+Custom\+Target\+Action $>$ \mbox{\hyperlink{class_my_move_it_aa3f296d159c51e57aed548a4c39ece10}{sub\+\_\+custom\+\_\+pose}}
+\item 
+ros\+::\+Node\+Handle \mbox{\hyperlink{class_my_move_it_a2905714612f338cb6677b19e802da292}{nh}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{class_my_move_it}{My\+Move\+It}} is the class that implements the interface between moveit and the game implementation. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_my_move_it_ae3b42efbcda726347d5e0dc3271749ed}\label{class_my_move_it_ae3b42efbcda726347d5e0dc3271749ed}} 
+\index{MyMoveIt@{MyMoveIt}!MyMoveIt@{MyMoveIt}}
+\index{MyMoveIt@{MyMoveIt}!MyMoveIt@{MyMoveIt}}
+\doxysubsubsection{\texorpdfstring{MyMoveIt()}{MyMoveIt()}}
+{\footnotesize\ttfamily My\+Move\+It\+::\+My\+Move\+It (\begin{DoxyParamCaption}\item[{ros\+::\+Node\+Handle}]{nh }\end{DoxyParamCaption})}
+
+
+
+methods 
+
+Constructor of the class, where it initialize the subscriber to the actions, and the essential for moveit. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_my_move_it_ad4e2f113276af7e0f1464ea480ee7d4a}\label{class_my_move_it_ad4e2f113276af7e0f1464ea480ee7d4a}} 
+\index{MyMoveIt@{MyMoveIt}!custom\_pose\_clbk@{custom\_pose\_clbk}}
+\index{custom\_pose\_clbk@{custom\_pose\_clbk}!MyMoveIt@{MyMoveIt}}
+\doxysubsubsection{\texorpdfstring{custom\_pose\_clbk()}{custom\_pose\_clbk()}}
+{\footnotesize\ttfamily void My\+Move\+It\+::custom\+\_\+pose\+\_\+clbk (\begin{DoxyParamCaption}\item[{const Experimental\+Robotics\+Lab\+::\+Custom\+Target\+Goal\+Const\+Ptr \&}]{msg }\end{DoxyParamCaption})}
+
+This is simply a callback for using the function move\+\_\+to\+\_\+custom\+\_\+pose. Since it is not trivial this function is used, then it has been preferred to discouple them. ~\newline
+ \mbox{\Hypertarget{class_my_move_it_a9b89cda8a383e7cfd73fd4409714fb5d}\label{class_my_move_it_a9b89cda8a383e7cfd73fd4409714fb5d}} 
+\index{MyMoveIt@{MyMoveIt}!find\_hint@{find\_hint}}
+\index{find\_hint@{find\_hint}!MyMoveIt@{MyMoveIt}}
+\doxysubsubsection{\texorpdfstring{find\_hint()}{find\_hint()}}
+{\footnotesize\ttfamily void My\+Move\+It\+::find\+\_\+hint (\begin{DoxyParamCaption}\item[{const Experimental\+Robotics\+Lab\+::\+Hint\+Goal\+Const\+Ptr \&}]{msg }\end{DoxyParamCaption})}
+
+This is simply a callback for using the function move\+\_\+to\+\_\+custom\+\_\+pose. Since it is not trivial this function is used, then it has been preferred to discouple them. If the hint is found, the action succeed. \mbox{\Hypertarget{class_my_move_it_ae20d87a5e6b292629faf4c8e75815319}\label{class_my_move_it_ae20d87a5e6b292629faf4c8e75815319}} 
+\index{MyMoveIt@{MyMoveIt}!hint\_found@{hint\_found}}
+\index{hint\_found@{hint\_found}!MyMoveIt@{MyMoveIt}}
+\doxysubsubsection{\texorpdfstring{hint\_found()}{hint\_found()}}
+{\footnotesize\ttfamily void My\+Move\+It\+::hint\+\_\+found (\begin{DoxyParamCaption}\item[{const Experimental\+Robotics\+Lab\+::\+Erl\+Oracle\+::\+Const\+Ptr \&}]{msg }\end{DoxyParamCaption})}
+
+
+
+When the hint is found, a boolean variable is set to true. 
+
+\mbox{\Hypertarget{class_my_move_it_af4da0dec5a0a0ff0dbea38f7da3cbca4}\label{class_my_move_it_af4da0dec5a0a0ff0dbea38f7da3cbca4}} 
+\index{MyMoveIt@{MyMoveIt}!move\_to\_custom\_pose@{move\_to\_custom\_pose}}
+\index{move\_to\_custom\_pose@{move\_to\_custom\_pose}!MyMoveIt@{MyMoveIt}}
+\doxysubsubsection{\texorpdfstring{move\_to\_custom\_pose()}{move\_to\_custom\_pose()}}
+{\footnotesize\ttfamily void My\+Move\+It\+::move\+\_\+to\+\_\+custom\+\_\+pose (\begin{DoxyParamCaption}\item[{std\+::string}]{str }\end{DoxyParamCaption})}
+
+
+
+This function implements the custom arm pose management. 
+
+\mbox{\Hypertarget{class_my_move_it_ad3f114bb0b0dd924451db550a0855909}\label{class_my_move_it_ad3f114bb0b0dd924451db550a0855909}} 
+\index{MyMoveIt@{MyMoveIt}!move\_to\_the\_pose@{move\_to\_the\_pose}}
+\index{move\_to\_the\_pose@{move\_to\_the\_pose}!MyMoveIt@{MyMoveIt}}
+\doxysubsubsection{\texorpdfstring{move\_to\_the\_pose()}{move\_to\_the\_pose()}}
+{\footnotesize\ttfamily void My\+Move\+It\+::move\+\_\+to\+\_\+the\+\_\+pose (\begin{DoxyParamCaption}\item[{geometry\+\_\+msgs\+::\+Pose}]{pose }\end{DoxyParamCaption})}
+
+
+
+Thanks to this function a user can tell to the robot the pose the cluedo\+\_\+link must reach. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_my_move_it_a918dba9b964896aea2dc399304eaf9d6}\label{class_my_move_it_a918dba9b964896aea2dc399304eaf9d6}} 
+\index{MyMoveIt@{MyMoveIt}!found@{found}}
+\index{found@{found}!MyMoveIt@{MyMoveIt}}
+\doxysubsubsection{\texorpdfstring{found}{found}}
+{\footnotesize\ttfamily bool My\+Move\+It\+::found}
+
+
+
+members 
+
+\mbox{\Hypertarget{class_my_move_it_a2905714612f338cb6677b19e802da292}\label{class_my_move_it_a2905714612f338cb6677b19e802da292}} 
+\index{MyMoveIt@{MyMoveIt}!nh@{nh}}
+\index{nh@{nh}!MyMoveIt@{MyMoveIt}}
+\doxysubsubsection{\texorpdfstring{nh}{nh}}
+{\footnotesize\ttfamily ros\+::\+Node\+Handle My\+Move\+It\+::nh}
+
+\mbox{\Hypertarget{class_my_move_it_aa3f296d159c51e57aed548a4c39ece10}\label{class_my_move_it_aa3f296d159c51e57aed548a4c39ece10}} 
+\index{MyMoveIt@{MyMoveIt}!sub\_custom\_pose@{sub\_custom\_pose}}
+\index{sub\_custom\_pose@{sub\_custom\_pose}!MyMoveIt@{MyMoveIt}}
+\doxysubsubsection{\texorpdfstring{sub\_custom\_pose}{sub\_custom\_pose}}
+{\footnotesize\ttfamily actionlib\+::\+Simple\+Action\+Server$<$Experimental\+Robotics\+Lab\+::\+Custom\+Target\+Action$>$ My\+Move\+It\+::sub\+\_\+custom\+\_\+pose}
+
+\mbox{\Hypertarget{class_my_move_it_acbf77f197bf58493207bccb7f74a62db}\label{class_my_move_it_acbf77f197bf58493207bccb7f74a62db}} 
+\index{MyMoveIt@{MyMoveIt}!sub\_find\_hint@{sub\_find\_hint}}
+\index{sub\_find\_hint@{sub\_find\_hint}!MyMoveIt@{MyMoveIt}}
+\doxysubsubsection{\texorpdfstring{sub\_find\_hint}{sub\_find\_hint}}
+{\footnotesize\ttfamily actionlib\+::\+Simple\+Action\+Server$<$Experimental\+Robotics\+Lab\+::\+Hint\+Action$>$ My\+Move\+It\+::sub\+\_\+find\+\_\+hint}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{my__moveit_8cpp}{my\+\_\+moveit.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,87 @@
+\hypertarget{namespacefsm}{}\doxysection{fsm Namespace Reference}
+\label{namespacefsm}\index{fsm@{fsm}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classfsm_1_1_assert}{Assert}}
+\begin{DoxyCompactList}\small\item\em define state \mbox{\hyperlink{classfsm_1_1_assert}{Assert}} \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfsm_1_1_finished}{Finished}}
+\begin{DoxyCompactList}\small\item\em define state \mbox{\hyperlink{classfsm_1_1_finished}{Finished}} \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfsm_1_1_go_to_oracle}{Go\+To\+Oracle}}
+\begin{DoxyCompactList}\small\item\em define state \mbox{\hyperlink{classfsm_1_1_go_to_oracle}{Go\+To\+Oracle}} \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfsm_1_1_investigation}{Investigation}}
+\begin{DoxyCompactList}\small\item\em define state \mbox{\hyperlink{classfsm_1_1_investigation}{Investigation}} \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfsm_1_1_navigation}{Navigation}}
+\begin{DoxyCompactList}\small\item\em define state \mbox{\hyperlink{classfsm_1_1_navigation}{Navigation}} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacefsm_a6b8b8ec6d3f338b9e945c31499db2017}{move\+\_\+arm\+\_\+routine}} ()
+\begin{DoxyCompactList}\small\item\em this function limit the robot in his position when it moves its arm \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacefsm_a973dbd0b67087a3e7a64abd7ae573b99}{main}} ()
+\begin{DoxyCompactList}\small\item\em Main function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{namespacefsm_aa0402b215d9f4cf3111dcec736cf8ed2}{corr\+\_\+id}} = -\/1
+\begin{DoxyCompactList}\small\item\em G\+L\+O\+B\+AL V\+A\+R\+I\+A\+B\+L\+ES correct hypothesis. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespacefsm_a24492f7db534c7f5bebfd32ed71e421e}{reached}} = False
+\begin{DoxyCompactList}\small\item\em boolean global variable set to true when the robot reaches its target position \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefsm_a933982c418899135b0d6dd78b8e20e23}{random\+\_\+position\+\_\+client}} = None
+\begin{DoxyCompactList}\small\item\em random position client global variable \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacefsm_a973dbd0b67087a3e7a64abd7ae573b99}\label{namespacefsm_a973dbd0b67087a3e7a64abd7ae573b99}} 
+\index{fsm@{fsm}!main@{main}}
+\index{main@{main}!fsm@{fsm}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily def fsm.\+main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Main function. 
+
+/main function It initialize the node fsm, then the clients and actions needed, also the fsm with smach then it waits /param userdata () \mbox{\Hypertarget{namespacefsm_a6b8b8ec6d3f338b9e945c31499db2017}\label{namespacefsm_a6b8b8ec6d3f338b9e945c31499db2017}} 
+\index{fsm@{fsm}!move\_arm\_routine@{move\_arm\_routine}}
+\index{move\_arm\_routine@{move\_arm\_routine}!fsm@{fsm}}
+\doxysubsubsection{\texorpdfstring{move\_arm\_routine()}{move\_arm\_routine()}}
+{\footnotesize\ttfamily def fsm.\+move\+\_\+arm\+\_\+routine (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+this function limit the robot in his position when it moves its arm 
+
+/init move arm routin This function forces the velocities to zero in order to not move the vehicle while the arm moves 
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespacefsm_aa0402b215d9f4cf3111dcec736cf8ed2}\label{namespacefsm_aa0402b215d9f4cf3111dcec736cf8ed2}} 
+\index{fsm@{fsm}!corr\_id@{corr\_id}}
+\index{corr\_id@{corr\_id}!fsm@{fsm}}
+\doxysubsubsection{\texorpdfstring{corr\_id}{corr\_id}}
+{\footnotesize\ttfamily int fsm.\+corr\+\_\+id = -\/1}
+
+
+
+G\+L\+O\+B\+AL V\+A\+R\+I\+A\+B\+L\+ES correct hypothesis. 
+
+\mbox{\Hypertarget{namespacefsm_a933982c418899135b0d6dd78b8e20e23}\label{namespacefsm_a933982c418899135b0d6dd78b8e20e23}} 
+\index{fsm@{fsm}!random\_position\_client@{random\_position\_client}}
+\index{random\_position\_client@{random\_position\_client}!fsm@{fsm}}
+\doxysubsubsection{\texorpdfstring{random\_position\_client}{random\_position\_client}}
+{\footnotesize\ttfamily fsm.\+random\+\_\+position\+\_\+client = None}
+
+
+
+random position client global variable 
+
+\mbox{\Hypertarget{namespacefsm_a24492f7db534c7f5bebfd32ed71e421e}\label{namespacefsm_a24492f7db534c7f5bebfd32ed71e421e}} 
+\index{fsm@{fsm}!reached@{reached}}
+\index{reached@{reached}!fsm@{fsm}}
+\doxysubsubsection{\texorpdfstring{reached}{reached}}
+{\footnotesize\ttfamily bool fsm.\+reached = False}
+
+
+
+boolean global variable set to true when the robot reaches its target position 
+

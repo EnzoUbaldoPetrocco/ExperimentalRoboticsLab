@@ -1,0 +1,132 @@
+\hypertarget{namespacenavigation}{}\doxysection{navigation Namespace Reference}
+\label{namespacenavigation}\index{navigation@{navigation}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacenavigation_acb52722423b9804c4f2269c35e0a008d}{euler\+\_\+dist}} (point\+\_\+1, point\+\_\+2)
+\begin{DoxyCompactList}\small\item\em calculate euler distance between two points \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacenavigation_a724631aa7f050ea34019d021987d3622}{get\+\_\+quaternion\+\_\+from\+\_\+euler}} (roll, pitch, yaw)
+\begin{DoxyCompactList}\small\item\em get quaternion angles from euler angles \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacenavigation_aba234077c7f54bdf95c0df14b1d686a8}{go\+\_\+to\+\_\+point}} (msg)
+\begin{DoxyCompactList}\small\item\em go\+\_\+to\+\_\+point callback \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacenavigation_a5a3f95cb32a670be229e46389f9e8a08}{odom\+\_\+clbk}} (odom\+\_\+msg)
+\begin{DoxyCompactList}\small\item\em odometry callback \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacenavigation_adfeea2d88010c2eae7785005d83833f8}{main}} ()
+\begin{DoxyCompactList}\small\item\em main function \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacenavigation_a11fe5e991fb0b6396a653b7441632e4e}{goal\+\_\+pos}} = Point()
+\begin{DoxyCompactList}\small\item\em goal positions are mapped as Points \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacenavigation_a5e099a018c747d54c3ab523b70f8980e}{robot\+\_\+pos}} = Point()
+\begin{DoxyCompactList}\small\item\em robot position \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacenavigation_a846d592bf9da856132e5204e36289fb3}{actual\+\_\+position}} = Point()
+\begin{DoxyCompactList}\small\item\em actual position is mapped as a point \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacenavigation_adc623e60ce461873487f64ec8b54a410}{result}} = Experimental\+Robotics\+Lab.\+msg.\+Position\+Result()
+\begin{DoxyCompactList}\small\item\em result is of type Position\+Result \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacenavigation_acb52722423b9804c4f2269c35e0a008d}\label{namespacenavigation_acb52722423b9804c4f2269c35e0a008d}} 
+\index{navigation@{navigation}!euler\_dist@{euler\_dist}}
+\index{euler\_dist@{euler\_dist}!navigation@{navigation}}
+\doxysubsubsection{\texorpdfstring{euler\_dist()}{euler\_dist()}}
+{\footnotesize\ttfamily def navigation.\+euler\+\_\+dist (\begin{DoxyParamCaption}\item[{}]{point\+\_\+1,  }\item[{}]{point\+\_\+2 }\end{DoxyParamCaption})}
+
+
+
+calculate euler distance between two points 
+
+\begin{DoxyVerb}This function compute the euler distance between two points
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacenavigation_a724631aa7f050ea34019d021987d3622}\label{namespacenavigation_a724631aa7f050ea34019d021987d3622}} 
+\index{navigation@{navigation}!get\_quaternion\_from\_euler@{get\_quaternion\_from\_euler}}
+\index{get\_quaternion\_from\_euler@{get\_quaternion\_from\_euler}!navigation@{navigation}}
+\doxysubsubsection{\texorpdfstring{get\_quaternion\_from\_euler()}{get\_quaternion\_from\_euler()}}
+{\footnotesize\ttfamily def navigation.\+get\+\_\+quaternion\+\_\+from\+\_\+euler (\begin{DoxyParamCaption}\item[{}]{roll,  }\item[{}]{pitch,  }\item[{}]{yaw }\end{DoxyParamCaption})}
+
+
+
+get quaternion angles from euler angles 
+
+\begin{DoxyVerb}Convert an Euler angle to a quaternion.
+ 
+  /param roll: The roll (rotation around x-axis) angle in radians.
+  /param pitch: The pitch (rotation around y-axis) angle in radians.
+  /param yaw: The yaw (rotation around z-axis) angle in radians.
+ 
+  /return qx, qy, qz, qw: The orientation in quaternion [x,y,z,w] format
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacenavigation_aba234077c7f54bdf95c0df14b1d686a8}\label{namespacenavigation_aba234077c7f54bdf95c0df14b1d686a8}} 
+\index{navigation@{navigation}!go\_to\_point@{go\_to\_point}}
+\index{go\_to\_point@{go\_to\_point}!navigation@{navigation}}
+\doxysubsubsection{\texorpdfstring{go\_to\_point()}{go\_to\_point()}}
+{\footnotesize\ttfamily def navigation.\+go\+\_\+to\+\_\+point (\begin{DoxyParamCaption}\item[{}]{msg }\end{DoxyParamCaption})}
+
+
+
+go\+\_\+to\+\_\+point callback 
+
+/go\+\_\+to\+\_\+point callback This function calls move base algorithm for the implementation of the navigation part. It, then, waits for the odometry precision and sets zero velocity to the robot. /param msg (Position\+Action) \mbox{\Hypertarget{namespacenavigation_adfeea2d88010c2eae7785005d83833f8}\label{namespacenavigation_adfeea2d88010c2eae7785005d83833f8}} 
+\index{navigation@{navigation}!main@{main}}
+\index{main@{main}!navigation@{navigation}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily def navigation.\+main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+main function 
+
+/main function This function initialize the node, the simple action server /go\+\_\+to\+\_\+point and the initial position \mbox{\Hypertarget{namespacenavigation_a5a3f95cb32a670be229e46389f9e8a08}\label{namespacenavigation_a5a3f95cb32a670be229e46389f9e8a08}} 
+\index{navigation@{navigation}!odom\_clbk@{odom\_clbk}}
+\index{odom\_clbk@{odom\_clbk}!navigation@{navigation}}
+\doxysubsubsection{\texorpdfstring{odom\_clbk()}{odom\_clbk()}}
+{\footnotesize\ttfamily def navigation.\+odom\+\_\+clbk (\begin{DoxyParamCaption}\item[{}]{odom\+\_\+msg }\end{DoxyParamCaption})}
+
+
+
+odometry callback 
+
+/odom\+\_\+clbk callback This function stores the last odometry position. /param odom\+\_\+msg (Odometry) 
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespacenavigation_a846d592bf9da856132e5204e36289fb3}\label{namespacenavigation_a846d592bf9da856132e5204e36289fb3}} 
+\index{navigation@{navigation}!actual\_position@{actual\_position}}
+\index{actual\_position@{actual\_position}!navigation@{navigation}}
+\doxysubsubsection{\texorpdfstring{actual\_position}{actual\_position}}
+{\footnotesize\ttfamily navigation.\+actual\+\_\+position = Point()}
+
+
+
+actual position is mapped as a point 
+
+\mbox{\Hypertarget{namespacenavigation_a11fe5e991fb0b6396a653b7441632e4e}\label{namespacenavigation_a11fe5e991fb0b6396a653b7441632e4e}} 
+\index{navigation@{navigation}!goal\_pos@{goal\_pos}}
+\index{goal\_pos@{goal\_pos}!navigation@{navigation}}
+\doxysubsubsection{\texorpdfstring{goal\_pos}{goal\_pos}}
+{\footnotesize\ttfamily navigation.\+goal\+\_\+pos = Point()}
+
+
+
+goal positions are mapped as Points 
+
+\mbox{\Hypertarget{namespacenavigation_adc623e60ce461873487f64ec8b54a410}\label{namespacenavigation_adc623e60ce461873487f64ec8b54a410}} 
+\index{navigation@{navigation}!result@{result}}
+\index{result@{result}!navigation@{navigation}}
+\doxysubsubsection{\texorpdfstring{result}{result}}
+{\footnotesize\ttfamily navigation.\+result = Experimental\+Robotics\+Lab.\+msg.\+Position\+Result()}
+
+
+
+result is of type Position\+Result 
+
+\mbox{\Hypertarget{namespacenavigation_a5e099a018c747d54c3ab523b70f8980e}\label{namespacenavigation_a5e099a018c747d54c3ab523b70f8980e}} 
+\index{navigation@{navigation}!robot\_pos@{robot\_pos}}
+\index{robot\_pos@{robot\_pos}!navigation@{navigation}}
+\doxysubsubsection{\texorpdfstring{robot\_pos}{robot\_pos}}
+{\footnotesize\ttfamily navigation.\+robot\+\_\+pos = Point()}
+
+
+
+robot position 
+

@@ -1,0 +1,72 @@
+\hypertarget{namespacerandom__place}{}\doxysection{random\+\_\+place Namespace Reference}
+\label{namespacerandom__place}\index{random\_place@{random\_place}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacerandom__place_a544210ddf15412a8f9550e9b26719155}{random\+\_\+place}} (msg)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{namespacerandom__place}{random\+\_\+place}} \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacerandom__place_a1518007fcda1b8e9c5622820536e5d64}{main}} ()
+\begin{DoxyCompactList}\small\item\em main \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+list \mbox{\hyperlink{namespacerandom__place_a449d96e62a5d42275ea28199d39cd7ae}{places}}
+\begin{DoxyCompactList}\small\item\em Physical description of the possible places Note that this is not decoupled from the function itself. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{namespacerandom__place_a5f87578d6bf1777e965ad222dd1ef370}{index}} = 0
+\begin{DoxyCompactList}\small\item\em count of the sequence \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacerandom__place_a1518007fcda1b8e9c5622820536e5d64}\label{namespacerandom__place_a1518007fcda1b8e9c5622820536e5d64}} 
+\index{random\_place@{random\_place}!main@{main}}
+\index{main@{main}!random\_place@{random\_place}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily def random\+\_\+place.\+main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+main 
+
+/main function This function initialize the node, the random\+\_\+place\+\_\+service, and the random sequence of rooms \mbox{\Hypertarget{namespacerandom__place_a544210ddf15412a8f9550e9b26719155}\label{namespacerandom__place_a544210ddf15412a8f9550e9b26719155}} 
+\index{random\_place@{random\_place}!random\_place@{random\_place}}
+\index{random\_place@{random\_place}!random\_place@{random\_place}}
+\doxysubsubsection{\texorpdfstring{random\_place()}{random\_place()}}
+{\footnotesize\ttfamily def random\+\_\+place.\+random\+\_\+place (\begin{DoxyParamCaption}\item[{}]{msg }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{namespacerandom__place}{random\+\_\+place}} 
+
+/random\+\_\+place callback This function returns the next position the robot must achieve. The sequence is in fact a circular buffer, so if the robot does not achieve the investigation goal, it continues to try. 
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespacerandom__place_a5f87578d6bf1777e965ad222dd1ef370}\label{namespacerandom__place_a5f87578d6bf1777e965ad222dd1ef370}} 
+\index{random\_place@{random\_place}!index@{index}}
+\index{index@{index}!random\_place@{random\_place}}
+\doxysubsubsection{\texorpdfstring{index}{index}}
+{\footnotesize\ttfamily int random\+\_\+place.\+index = 0}
+
+
+
+count of the sequence 
+
+\mbox{\Hypertarget{namespacerandom__place_a449d96e62a5d42275ea28199d39cd7ae}\label{namespacerandom__place_a449d96e62a5d42275ea28199d39cd7ae}} 
+\index{random\_place@{random\_place}!places@{places}}
+\index{places@{places}!random\_place@{random\_place}}
+\doxysubsubsection{\texorpdfstring{places}{places}}
+{\footnotesize\ttfamily list random\+\_\+place.\+places}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 = [\{\textcolor{stringliteral}{'name'} : \textcolor{stringliteral}{'Room1'}, \textcolor{stringliteral}{'x'}:-\/4 , \textcolor{stringliteral}{'y'}:-\/3, \textcolor{stringliteral}{'theta'}: 0 \}, \{\textcolor{stringliteral}{'name'} : \textcolor{stringliteral}{'Room2'}, \textcolor{stringliteral}{'x'}:-\/4 , \textcolor{stringliteral}{'y'}:2, \textcolor{stringliteral}{'theta'}: 0 \},}
+\DoxyCodeLine{2 \{\textcolor{stringliteral}{'name'} : \textcolor{stringliteral}{'Room3'}, \textcolor{stringliteral}{'x'}:-\/4 , \textcolor{stringliteral}{'y'}:7, \textcolor{stringliteral}{'theta'}: 0 \}, \{\textcolor{stringliteral}{'name'} : \textcolor{stringliteral}{'Room4'}, \textcolor{stringliteral}{'x'}:5 , \textcolor{stringliteral}{'y'}:-\/7, \textcolor{stringliteral}{'theta'}: 0 \},}
+\DoxyCodeLine{3 \{\textcolor{stringliteral}{'name'} : \textcolor{stringliteral}{'Room5'}, \textcolor{stringliteral}{'x'}:5 , \textcolor{stringliteral}{'y'}:-\/3,  \textcolor{stringliteral}{'theta'}: 0 \}, \{\textcolor{stringliteral}{'name'} : \textcolor{stringliteral}{'Room6'}, \textcolor{stringliteral}{'x'}:5 , \textcolor{stringliteral}{'y'}:1, \textcolor{stringliteral}{'theta'}: 0 \},}
+\DoxyCodeLine{4 \{\textcolor{stringliteral}{'name'} : \textcolor{stringliteral}{'Corridor1'}, \textcolor{stringliteral}{'x'}:-\/1 , \textcolor{stringliteral}{'y'}:6,  \textcolor{stringliteral}{'theta'}: 0 \}, \{\textcolor{stringliteral}{'name'} : \textcolor{stringliteral}{'Corridor2'}, \textcolor{stringliteral}{'x'}:0 , \textcolor{stringliteral}{'y'}:-\/4, \textcolor{stringliteral}{'theta'}: 0 \},}
+\DoxyCodeLine{5 \{\textcolor{stringliteral}{'name'} : \textcolor{stringliteral}{'Corridor3'}, \textcolor{stringliteral}{'x'}:-\/3 , \textcolor{stringliteral}{'y'}:-\/2, \textcolor{stringliteral}{'theta'}: 0 \}, \{\textcolor{stringliteral}{'name'} : \textcolor{stringliteral}{'Corridor4'}, \textcolor{stringliteral}{'x'}:1 , \textcolor{stringliteral}{'y'}:-\/7, \textcolor{stringliteral}{'theta'}: 0 \}]}
+
+\end{DoxyCode}
+
+
+Physical description of the possible places Note that this is not decoupled from the function itself. 
+
+This mechanisms could be better implemented simply using another file (also a prexisting file) which contains this information 

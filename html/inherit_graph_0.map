@@ -1,0 +1,8 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" title=" " alt="" coords="5,107,61,133"/>
+<area shape="rect" id="node2" href="$classfsm_1_1_assert.html" title="define state Assert" alt="" coords="131,5,223,32"/>
+<area shape="rect" id="node3" href="$classfsm_1_1_finished.html" title="define state Finished" alt="" coords="125,56,229,83"/>
+<area shape="rect" id="node4" href="$classfsm_1_1_go_to_oracle.html" title="define state GoToOracle" alt="" coords="115,107,240,133"/>
+<area shape="rect" id="node5" href="$classfsm_1_1_investigation.html" title="define state Investigation" alt="" coords="109,157,245,184"/>
+<area shape="rect" id="node6" href="$classfsm_1_1_navigation.html" title="define state Navigation" alt="" coords="116,208,239,235"/>
+</map>

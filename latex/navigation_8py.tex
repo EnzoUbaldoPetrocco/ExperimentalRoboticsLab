@@ -1,0 +1,64 @@
+\hypertarget{navigation_8py}{}\doxysection{scripts/navigation.py File Reference}
+\label{navigation_8py}\index{scripts/navigation.py@{scripts/navigation.py}}
+
+
+node implementing the navigation part of the robot  
+
+
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacenavigation}{navigation}}
+\item 
+ \mbox{\hyperlink{namespace_experimental_robotics_lab}{Experimental\+Robotics\+Lab}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacenavigation_acb52722423b9804c4f2269c35e0a008d}{navigation.\+euler\+\_\+dist}} (point\+\_\+1, point\+\_\+2)
+\begin{DoxyCompactList}\small\item\em calculate euler distance between two points \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacenavigation_a724631aa7f050ea34019d021987d3622}{navigation.\+get\+\_\+quaternion\+\_\+from\+\_\+euler}} (roll, pitch, yaw)
+\begin{DoxyCompactList}\small\item\em get quaternion angles from euler angles \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacenavigation_aba234077c7f54bdf95c0df14b1d686a8}{navigation.\+go\+\_\+to\+\_\+point}} (msg)
+\begin{DoxyCompactList}\small\item\em go\+\_\+to\+\_\+point callback \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacenavigation_a5a3f95cb32a670be229e46389f9e8a08}{navigation.\+odom\+\_\+clbk}} (odom\+\_\+msg)
+\begin{DoxyCompactList}\small\item\em odometry callback \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacenavigation_adfeea2d88010c2eae7785005d83833f8}{navigation.\+main}} ()
+\begin{DoxyCompactList}\small\item\em main function \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacenavigation_a11fe5e991fb0b6396a653b7441632e4e}{navigation.\+goal\+\_\+pos}} = Point()
+\begin{DoxyCompactList}\small\item\em goal positions are mapped as Points \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacenavigation_a5e099a018c747d54c3ab523b70f8980e}{navigation.\+robot\+\_\+pos}} = Point()
+\begin{DoxyCompactList}\small\item\em robot position \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacenavigation_a846d592bf9da856132e5204e36289fb3}{navigation.\+actual\+\_\+position}} = Point()
+\begin{DoxyCompactList}\small\item\em actual position is mapped as a point \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacenavigation_adc623e60ce461873487f64ec8b54a410}{navigation.\+result}} = Experimental\+Robotics\+Lab.\+msg.\+Position\+Result()
+\begin{DoxyCompactList}\small\item\em result is of type Position\+Result \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+node implementing the navigation part of the robot 
+
+\begin{DoxyAuthor}{Author}
+Enzo Ubaldo Petrocco 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+November 2021
+\end{DoxyDate}
+Publishes to\+:~\newline
+ /cmd\+\_\+vel (geometry\+\_\+msgs.\+msg.\+Twist)
+
+Subscribes to\+:~\newline
+ odom (geometry\+\_\+msgs.\+msg.\+Odometry)
+
+Action\+Server\+:~\newline
+ /go\+\_\+to\+\_\+point (Experimental\+Robotics\+Lab.\+msg.\+Position\+Action) move\+\_\+base (move\+\_\+base\+\_\+msgs.\+msg.\+Move\+Base\+Action)
+
+Description\+:
+
+\mbox{\hyperlink{navigation_8py}{navigation.\+py}} is a script which manages the navigation to a point of the robot It starts from \mbox{[}0,-\/1\mbox{]}, then it goes for the point which has been asked to reached when it gets this, it sets \textquotesingle{}succeded\textquotesingle{} to the result. The algorithm used in this context is movebase algorithm, which params are store in the param folder 

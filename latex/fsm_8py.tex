@@ -1,0 +1,91 @@
+\hypertarget{fsm_8py}{}\doxysection{scripts/fsm.py File Reference}
+\label{fsm_8py}\index{scripts/fsm.py@{scripts/fsm.py}}
+
+
+node implementing the finite state machined  
+
+
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classfsm_1_1_navigation}{fsm.\+Navigation}}
+\begin{DoxyCompactList}\small\item\em define state \mbox{\hyperlink{classfsm_1_1_navigation}{Navigation}} \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfsm_1_1_investigation}{fsm.\+Investigation}}
+\begin{DoxyCompactList}\small\item\em define state \mbox{\hyperlink{classfsm_1_1_investigation}{Investigation}} \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfsm_1_1_go_to_oracle}{fsm.\+Go\+To\+Oracle}}
+\begin{DoxyCompactList}\small\item\em define state \mbox{\hyperlink{classfsm_1_1_go_to_oracle}{Go\+To\+Oracle}} \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfsm_1_1_assert}{fsm.\+Assert}}
+\begin{DoxyCompactList}\small\item\em define state \mbox{\hyperlink{classfsm_1_1_assert}{Assert}} \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfsm_1_1_finished}{fsm.\+Finished}}
+\begin{DoxyCompactList}\small\item\em define state \mbox{\hyperlink{classfsm_1_1_finished}{Finished}} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacefsm}{fsm}}
+\item 
+ \mbox{\hyperlink{namespace_experimental_robotics_lab}{Experimental\+Robotics\+Lab}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacefsm_a6b8b8ec6d3f338b9e945c31499db2017}{fsm.\+move\+\_\+arm\+\_\+routine}} ()
+\begin{DoxyCompactList}\small\item\em this function limit the robot in his position when it moves its arm \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacefsm_a973dbd0b67087a3e7a64abd7ae573b99}{fsm.\+main}} ()
+\begin{DoxyCompactList}\small\item\em Main function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{namespacefsm_aa0402b215d9f4cf3111dcec736cf8ed2}{fsm.\+corr\+\_\+id}} = -\/1
+\begin{DoxyCompactList}\small\item\em G\+L\+O\+B\+AL V\+A\+R\+I\+A\+B\+L\+ES correct hypothesis. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespacefsm_a24492f7db534c7f5bebfd32ed71e421e}{fsm.\+reached}} = False
+\begin{DoxyCompactList}\small\item\em boolean global variable set to true when the robot reaches its target position \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefsm_a933982c418899135b0d6dd78b8e20e23}{fsm.\+random\+\_\+position\+\_\+client}} = None
+\begin{DoxyCompactList}\small\item\em random position client global variable \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+node implementing the finite state machined 
+
+\begin{DoxyAuthor}{Author}
+Enzo Ubaldo Petrocco 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+November 2021
+\end{DoxyDate}
+Publishes to\+:~\newline
+ None
+
+Service\+Server\+:~\newline
+
+
+Service\+Client\+:~\newline
+ /random\+\_\+place\+\_\+service (Experimental\+Robotics\+Lab.\+srv.\+Random\+Place) /investigate (Experimental\+Robotics\+Lab.\+srv.\+Investigate) /oracle\+\_\+solution (Experimental\+Robotics\+Lab.\+srv.\+Oracle)
+
+Action\+Server\+:~\newline
+ /go\+\_\+to\+\_\+point (Experimental\+Robotics\+Lab.\+action.\+Position\+Action) /hint (Experimental\+Robotics\+Lab.\+action.\+Hint\+Action)
+
+Publisher\+:~\newline
+ /cmd\+\_\+vel (Twist)
+
+Description\+:
+
+\mbox{\hyperlink{fsm_8py}{fsm.\+py}} is a script which manages a state machine which represents the actions that a robot must do in order to play Cluedo in a fictitious environment. The F\+SM has 5 states\+: Navigation\+: the robot navigates through an environment thanks to the random position which has been given by a custom service, possible outcomes are\+:
+\begin{DoxyItemize}
+\item investigation
+\item navigation Investigation\+: the robot investigates thanks to armor client, in order to know if there is a consistent hypothesis, possible outcomes are\+:
+\item navigation
+\item investigation
+\item go\+\_\+to\+\_\+oracle Go\+To\+Oracle\+: the robot goes to the oracle; even if in this implementation the only outcome is assert, in theory the possible outcomes are\+:
+\item navigation
+\item investigation
+\item go\+\_\+to\+\_\+oracle\+\_\+
+\item assert Assert\+: the robot asks if among the consistent hypotheses it has there is the correct one, possible outcomes are\+:
+\item navigation
+\item investigation
+\item go\+\_\+to\+\_\+oracle
+\item assert
+\item finished Finished\+: the robot has won 
+\end{DoxyItemize}

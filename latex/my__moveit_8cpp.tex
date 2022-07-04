@@ -1,0 +1,88 @@
+\hypertarget{my__moveit_8cpp}{}\doxysection{src/my\+\_\+moveit.cpp File Reference}
+\label{my__moveit_8cpp}\index{src/my\_moveit.cpp@{src/my\_moveit.cpp}}
+
+
+move arm node  
+
+
+{\ttfamily \#include $<$ros/ros.\+h$>$}\newline
+{\ttfamily \#include $<$moveit/move\+\_\+group\+\_\+interface/move\+\_\+group\+\_\+interface.\+h$>$}\newline
+{\ttfamily \#include $<$moveit/robot\+\_\+model\+\_\+loader/robot\+\_\+model\+\_\+loader.\+h$>$}\newline
+{\ttfamily \#include $<$moveit/robot\+\_\+model/robot\+\_\+model.\+h$>$}\newline
+{\ttfamily \#include $<$moveit/robot\+\_\+state/robot\+\_\+state.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$Experimental\+Robotics\+Lab/\+Erl\+Oracle.\+h$>$}\newline
+{\ttfamily \#include $<$Experimental\+Robotics\+Lab/\+Find\+Hint.\+h$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$actionlib/server/simple\+\_\+action\+\_\+server.\+h$>$}\newline
+{\ttfamily \#include $<$Experimental\+Robotics\+Lab/\+Hint\+Action.\+h$>$}\newline
+{\ttfamily \#include $<$Experimental\+Robotics\+Lab/\+Hint\+Action\+Result.\+h$>$}\newline
+{\ttfamily \#include $<$Experimental\+Robotics\+Lab/\+Custom\+Target\+Action.\+h$>$}\newline
+{\ttfamily \#include $<$Experimental\+Robotics\+Lab/\+Custom\+Target\+Action\+Result.\+h$>$}\newline
+Include dependency graph for my\+\_\+moveit.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{my__moveit_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_my_move_it}{My\+Move\+It}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{my__moveit_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em Main function where a subscriber to the oracle hint, the node, nodehandle and servers are initialized. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ Experimental\+Robotics\+Lab\+::\+Erl\+Oracle $>$ \mbox{\hyperlink{my__moveit_8cpp_ab485263a4be14e88d5e1ba6fd4521786}{oracle\+\_\+msgs}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+move arm node 
+
+\begin{DoxyAuthor}{Author}
+Enzo Ubaldo Petrocco 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+15/05/2022
+\end{DoxyDate}
+Action\+Server \+: ~\newline
+ /hint Action\+Server \+: ~\newline
+ /custom\+\_\+pose Subscriber\+: ~\newline
+ /oracle\+\_\+hint
+
+Description \+: This node manages the actual arm movement in order to reach a custom pose, or to reach a given pose 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{my__moveit_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{my__moveit_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{my\_moveit.cpp@{my\_moveit.cpp}!main@{main}}
+\index{main@{main}!my\_moveit.cpp@{my\_moveit.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Main function where a subscriber to the oracle hint, the node, nodehandle and servers are initialized. 
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{my__moveit_8cpp_ab485263a4be14e88d5e1ba6fd4521786}\label{my__moveit_8cpp_ab485263a4be14e88d5e1ba6fd4521786}} 
+\index{my\_moveit.cpp@{my\_moveit.cpp}!oracle\_msgs@{oracle\_msgs}}
+\index{oracle\_msgs@{oracle\_msgs}!my\_moveit.cpp@{my\_moveit.cpp}}
+\doxysubsubsection{\texorpdfstring{oracle\_msgs}{oracle\_msgs}}
+{\footnotesize\ttfamily std\+::vector$<$Experimental\+Robotics\+Lab\+::\+Erl\+Oracle$>$ oracle\+\_\+msgs}
+
